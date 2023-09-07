@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane id="topMainPane" stylesheets="@../css/FileView.css" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.fileApp.Controller.FileViewCtl">
+   <HBox id="titleBar" fx:id="titleBar" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="14.0" maxHeight="-Infinity"
+         maxWidth="290.0" minHeight="-Infinity" minWidth="290.0" nodeOrientation="LEFT_TO_RIGHT"
+         onDragDone="#dragBarDone" onMouseDragged="#dragBar" onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+         prefHeight="40.0" prefWidth="290.0" spacing="10.0" stylesheets="@../css/FileView.css"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <cursor>
+         <Cursor fx:constant="DEFAULT"/>
+      </cursor>
+      <Label fx:id="fileIcon" prefHeight="25.0" prefWidth="806.0"
+             stylesheets="@../../systemFileApp/SystemFileApp.css" text="文件" HBox.hgrow="ALWAYS">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../res/file.png"/>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="15.0"/>
+         </padding>
+      </Label>
+      <Button id="barIcon" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#minimizeStage"
+              prefHeight="35.0" prefWidth="35.0">
+         <graphic>
+            <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                       preserveRatio="true">
+               <effect>
+                  <DropShadow/>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT"/>
+               </cursor>
+               <Image url="@../../../img/minimize0.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="emptyBarIcon" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false"
+              prefHeight="0.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow/>
+               </effect>
+               <Image url="@../../../img/squares.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" layoutX="774.0" layoutY="15.0"
+              mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <DropShadow/>
+               </effect>
+               <Image url="@../../../img/close0.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+   </HBox>
+   <AnchorPane id="contentPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
+               AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
+      <Pane id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
+         <VBox id="contentPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
+            <MenuBar fx:id="Bar" prefHeight="40.0" prefWidth="600.0">
+               <Menu fx:id="fileMenu" mnemonicParsing="false" text="文件">
+                  <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
+                  <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
+                  <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
+               </Menu>
+               <Menu mnemonicParsing="false" text="文字">
+                  <Menu mnemonicParsing="false" text="字体">
+                     <MenuItem mnemonicParsing="false" text="黑体"/>
+                     <MenuItem mnemonicParsing="false" text="宋体"/>
+                     <MenuItem mnemonicParsing="false" text="楷体"/>
+                     <MenuItem mnemonicParsing="false" text="微软雅黑"/>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="大小">
+                     <MenuItem mnemonicParsing="false" text="12px"/>
+                     <MenuItem mnemonicParsing="false" text="16px"/>
+                     <MenuItem mnemonicParsing="false" text="20px"/>
+                     <MenuItem mnemonicParsing="false" text="24px"/>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="颜色">
+                     <MenuItem mnemonicParsing="false" text="灰色"/>
+                     <MenuItem mnemonicParsing="false" text="黑色"/>
+                     <MenuItem mnemonicParsing="false" text="红色"/>
+                     <MenuItem mnemonicParsing="false" text="蓝色"/>
+                  </Menu>
+               </Menu>
+            </MenuBar>
+            <TextArea id="contentField" fx:id="contentField" prefHeight="482.0" prefWidth="600.0"
+                      style="-fx-border-color: #f3f3f3;" stylesheets="@../css/FileView.css" wrapText="true">
+               <font>
+                  <Font size="16.0"/>
+               </font>
+            </TextArea>
+         </VBox>
+      </Pane>
+   </AnchorPane>
+</AnchorPane>

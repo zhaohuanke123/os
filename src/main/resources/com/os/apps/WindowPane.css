@@ -1,0 +1,125 @@
+#mainPane {
+    -fx-background-color: rgba(103, 157, 238, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 8 8 8 8;
+    -fx-background-radius: 8 8 8 8;
+
+}
+
+#topMainPane {
+    -fx-background-color: rgba(103, 157, 238, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 8 8 8 8;
+    -fx-border-radius: 8 8 8 8;
+}
+
+#pane {
+    -fx-background-color: rgba(103, 157, 238, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 8 8 0 0;
+    -fx-background-radius: 8 8 0 0;
+
+}
+
+#contentPane {
+    -fx-background-color: rgba(103, 157, 238, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 8 8 8 8;
+    -fx-background-radius: 8 8 8 8;
+}
+
+#titleBar {
+    -fx-background-color: rgb(103, 157, 238);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+
+    -fx-border-radius: 8 8 0 0;
+    -fx-background-radius: 8 8 0 0;
+}
+
+#titleBarL {
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-background-color: transparent;
+
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+
+    -fx-border-radius: 8 0 0 0;
+    -fx-background-radius: 8 0 0 0;
+
+}
+
+#titleBarR {
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-background-color: transparent;
+
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+
+    -fx-border-radius: 0 8 0 0;
+    -fx-background-radius: 0 8 0 0;
+}
+
+
+#tabLabel {
+    -fx-background-color: transparent;
+    -fx-min-height: 5em;
+    -fx-max-height: 5em;
+    -fx-min-width: 10em;
+    -fx-max-width: 10em;
+}
+
+#barIcon {
+    -fx-background-color: transparent;
+    -fx-max-height: 35;
+    -fx-max-width: 35;
+    -fx-min-height: 35;
+    -fx-min-width: 35;
+    -fx-background-radius: 8;
+
+}
+
+#barIcon:hover {
+    -fx-background-color: #E5E7EB;
+    -fx-background-radius: 8;
+    -fx-max-height: 35;
+    -fx-max-width: 35;
+    -fx-min-height: 35;
+    -fx-min-width: 35;
+    -fx-opacity: 0.6;
+
+}
+
+#barIcon:pressed {
+    -fx-background-color: #E5E7EB;
+    -fx-background-radius: 8;
+    -fx-max-height: 35;
+    -fx-max-width: 35;
+    -fx-min-height: 35;
+    -fx-min-width: 35;
+    -fx-opacity: 0.8;
+}
+
+
+#emptyBarIcon {
+    -fx-background-color: transparent;
+    -fx-max-height: 35;
+    -fx-max-width: 35;
+    -fx-min-height: 35;
+    -fx-min-width: 35;
+    -fx-background-radius: 8;
+
+}
+
+#emptyBarIcon:hover {
+    /*-fx-background-color:#E5E7EB;*/
+    /*-fx-background-radius: 12;*/
+    /*-fx-max-height: 35;*/
+    /*-fx-max-width: 35;*/
+    /*-fx-min-height: 35;*/
+    /*-fx-min-width: 35;*/
+}
+
+

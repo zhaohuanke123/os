@@ -1,0 +1,126 @@
+package com.os.apps.fileApp.Controller;
+
+import com.os.apps.fileApp.app.MainUI;
+import com.os.apps.fileApp.app.TipWindow;
+import com.os.utils.fileSystem.Disk;
+import com.os.utils.fileSystem.Folder;
+import com.os.utils.fileSystem.Path;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class DelViewCtl {
+   public HBox titleBar;
+    @FXML
+   private Button yes;
+   @FXML
+   private Button no;
+   @FXML
+   private Text text;
+   double xOffset = 0.0;
+   double yOffset = 0.0;
+   Stage stage;
+   private Disk block;
+   private String tipString;
+
+   @FXML
+   void closeStage(MouseEvent event) {
+      this.stage.close();
+   }
+
+   @FXML
+   void minimizeStage(MouseEvent event) {
+      this.stage.setIconified(true);
+   }
+
+   @FXML
+   void pressBar(MouseEvent event) {
+      this.xOffset = event.getSceneX();
+      this.yOffset = event.getSceneY();
+   }
+
+   @FXML
+   void dragBar(MouseEvent event) {
+      this.stage.setX(event.getScreenX() - this.xOffset);
+      this.stage.setY(event.getScreenY() - this.yOffset);
+//      this.stage.setOpacity(0.800000011920929);
+   }
+
+   @FXML
+   void dragBarDone(DragEvent event) {
+      this.stage.setOpacity(1.0);
+   }
+
+   @FXML
+   void releaseBar(MouseEvent event) {
+      this.stage.setOpacity(1.0);
+   }
+
+   public void init(final Stage stage, final MainUI mainView, String tipString, final Disk block) {
+      this.stage = stage;
+      this.text.setText(tipString);
+      this.block = block;
+      this.yes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         public void handle(MouseEvent event) {
+            stage.close();
+            Path thisPath = null;
+            if (block.getObject() instanceof Folder) {
+               thisPath = ((Folder)block.getObject()).getPath();
+            }
+
+            MainUI var10000 = mainView;
+            int res = MainUI.fat.delete(block);
+            if (res == 0) {
+               mainView.removeNode(mainView.getRecentNode(), thisPath);
+
+               try {
+                  DelViewCtl.this.tipOpen("删除文件夹成功");
+               } catch (Exception var8) {
+                  var8.printStackTrace();
+               }
+            } else if (res == 1) {
+               try {
+                  DelViewCtl.this.tipOpen("删除文件成功");
+               } catch (Exception var7) {
+                  var7.printStackTrace();
+               }
+            } else if (res == 2) {
+               try {
+                  DelViewCtl.this.tipOpen("文件夹不为空");
+               } catch (Exception var6) {
+                  var6.printStackTrace();
+               }
+            } else {
+               try {
+                  DelViewCtl.this.tipOpen("文件未关闭");
+               } catch (Exception var5) {
+                  var5.printStackTrace();
+               }
+            }
+
+            mainView.flowPane.getChildren().removeAll(mainView.flowPane.getChildren());
+            MainUI var10001 = mainView;
+            mainView.addIcon(MainUI.fat.getBlockList(mainView.recentPath), mainView.recentPath);
+         }
+      });
+      this.no.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         public void handle(MouseEvent event) {
+            stage.close();
+         }
+      });
+   }
+
+   public void tipOpen(String tipString) throws Exception {
+      Stage stage = new Stage();
+      TipWindow tipWindow = new TipWindow(tipString);
+      tipWindow.start(stage);
+      stage.setAlwaysOnTop(true);
+      stage.setIconified(false);
+      stage.toFront();
+   }
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="topMainPane" stylesheets="@../css/DelView.css" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.fileApp.Controller.LoadViewCtl">
+   <HBox id="titleBar" fx:id="titleBar" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity"
+         minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onDragDone="#dragBarDone"
+         onMouseDragged="#dragBar" onMousePressed="#pressBar" onMouseReleased="#releaseBar" prefHeight="40.0"
+         prefWidth="342.0" spacing="10.0" stylesheets="@../css/LoadView.css" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <cursor>
+         <Cursor fx:constant="DEFAULT"/>
+      </cursor>
+      <Label nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="240.0" stylesheets="@../css/DelView.css"
+             text="载入数据" HBox.hgrow="ALWAYS">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../res/tip.png"/>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="15.0"/>
+         </padding>
+         <opaqueInsets>
+            <Insets/>
+         </opaqueInsets>
+      </Label>
+      <Button id="barIcon" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#minimizeStage"
+              prefHeight="35.0" prefWidth="35.0">
+         <graphic>
+            <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                       preserveRatio="true">
+               <effect>
+                  <DropShadow/>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT"/>
+               </cursor>
+               <Image url="@../../../img/minimize0.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="emptyBarIcon" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false"
+              prefHeight="0.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow/>
+               </effect>
+               <Image url="@../../../img/squares.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" layoutX="774.0" layoutY="15.0"
+              mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <DropShadow/>
+               </effect>
+               <Image url="@../../../img/close0.png"/>
+            </ImageView>
+         </graphic>
+      </Button>
+   </HBox>
+   <AnchorPane id="contentPane" layoutX="8.0" layoutY="47.0" prefHeight="241.0" prefWidth="324.0"
+               stylesheets="@../css/DelView.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
+               AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+      <Button fx:id="yes" layoutX="70.0" layoutY="151.0" mnemonicParsing="false" onAction="#yesBtn" prefHeight="34.0"
+              prefWidth="68.0" text="确认" AnchorPane.leftAnchor="60.0">
+         <font>
+            <Font size="18.0"/>
+         </font>
+      </Button>
+      <Button fx:id="no" layoutX="205.0" layoutY="151.0" mnemonicParsing="false" onAction="#noBtn" prefHeight="34.0"
+              prefWidth="68.0" text="取消" AnchorPane.rightAnchor="59.39999999999998">
+         <font>
+            <Font size="18.0"/>
+         </font>
+      </Button>
+      <Text layoutX="11.0" layoutY="79.0" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="是否读取已有的数据？" textAlignment="CENTER" wrappingWidth="309.0402374267578"
+            AnchorPane.topAnchor="54.625">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Text>
+   </AnchorPane>
+</AnchorPane>

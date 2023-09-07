@@ -1,0 +1,122 @@
+/**************************************************面板设计*******************************************************/
+@import "../WindowPane.css";
+
+/**************************************************面板设计*******************************************************/
+
+
+#text1 {
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+
+    -fx-font-size: 2em; /* 12 */
+    -fx-text-fill: black;
+
+}
+
+#text2 {
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+
+    -fx-font-size: 1em; /* 12 */
+    /*-fx-text-fill: #828282;*/
+    -fx-text-fill: black;
+
+}
+
+#pcbInBox {
+    -fx-background-color: #60A5FA;
+    /*-fx-border-color: #1D4ED8;*/
+}
+
+#pcbInBox0 {
+    -fx-background-color: #E5E7EB;
+    /*-fx-border-color: #1D4ED8;*/
+    -fx-border-color: White;
+
+}
+
+
+#pcbInBox1 {
+    -fx-background-color: #34d399;
+    /*-fx-border-color: #1D4ED8;*/
+    -fx-border-color: white;
+
+}
+
+#pcbInBox2 {
+    -fx-background-color: #60A5FA;
+    /*-fx-border-color: #1D4ED8;*/
+    -fx-border-color: white;
+
+}
+
+#pcbInBox3 {
+    -fx-background-color: #fcd34d;
+    /*-fx-border-color: #1D4ED8;*/
+    -fx-border-color: white;
+
+}
+
+#memoryInBox {
+    -fx-background-color: #10B981;
+    /*-fx-border-color: #047857;*/
+}
+
+#memoryInBox1 {
+    -fx-background-color: #10B981;
+    /*-fx-border-color: white;*/
+}
+
+
+#deviceInBox {
+    -fx-background-color: #F472B6;
+    /*-fx-border-color:#BE185D ;*/
+}
+
+#deviceInBox1 {
+    -fx-background-color: #F472B6;
+    -fx-border-color: white;
+}
+
+
+#diskInBox {
+    -fx-background-color: #A78BFA;
+    /*-fx-border-color: #6D28D9;*/
+}
+
+#diskInBox1 {
+    -fx-background-color: #A78BFA;
+    /*-fx-border-color: #6D28D9;*/
+}
+
+
+#emptyBox {
+    -fx-background-color: White;
+}
+
+#memoryOutBox {
+    -fx-background-color: White;
+    -fx-border-color: #047857;
+}
+
+#diskOutBox {
+    -fx-background-color: White;
+    -fx-border-color: #6D28D9;
+}
+
+
+#deviceOutBox {
+    -fx-background-color: White;
+    -fx-border-color: #BE185D;
+}
+
+#pcbOutBox {
+    -fx-background-color: White;
+    -fx-border-color: #1D4ED8;
+}

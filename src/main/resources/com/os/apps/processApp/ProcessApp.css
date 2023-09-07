@@ -1,0 +1,81 @@
+/**************************************************面板设计*******************************************************/
+@import "../WindowPane.css";
+
+/**************************************************面板设计*******************************************************/
+
+
+.button {
+    -fx-border-width: 0;
+    -fx-background-radius: 12;
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1em; /* 12 */
+    -fx-border-radius: 12;
+    /*-fx-text-fill: #828282;*/
+}
+
+.tool-bar {
+    /*-fx-border-color: black;*/
+    -fx-background-color: /*transparent,aliceblue;*/ rgba(255, 255, 255, 1);
+    -fx-background-radius: 22px;
+    -fx-border-radius: 15px;
+
+}
+
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    /*-fx-background-color: derive;*/
+    -fx-stroke: transparent;
+    -fx-size: 30;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-row-cell:filled:hover {
+
+    -fx-size: 30;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 30;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column {
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER
+
+}
+
+
+/*#right .text{*/
+/*    -fx-fill : red;*/
+/*}*/
+
+#right .table-column {
+    -fx-background-color: lightblue;
+}
+
+#not-right .table-column:even {
+    -fx-background-color: white;
+}
+
+#not-right .table-column:odd {
+    /*-fx-background-color:LightBase;*/
+}
+
+/*#not-right .text{*/
+/*    -fx-fill : black;*/
+/*}*/
+
