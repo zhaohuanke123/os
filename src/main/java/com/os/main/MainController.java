@@ -432,7 +432,7 @@ public class MainController {
                 helpApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/helpApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getStackTrace());
+                System.out.println(Arrays.toString(var7.getStackTrace()));
             }
         }
 
@@ -470,7 +470,7 @@ public class MainController {
                 occupancyApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/occupancyApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getStackTrace());
+                System.out.println(Arrays.toString(var7.getStackTrace()));
             }
         }
 
@@ -512,7 +512,7 @@ public class MainController {
                 processApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/processApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getStackTrace());
+                System.out.println(Arrays.toString(var7.getStackTrace()));
             }
         }
 

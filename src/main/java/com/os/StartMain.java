@@ -1,6 +1,5 @@
 package com.os;
 
-import com.os.apps.fileApp.app.FileView;
 import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.main.MainWindow;
