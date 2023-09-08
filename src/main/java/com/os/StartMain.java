@@ -22,9 +22,3 @@ class StartOccupancy {
         OccupancyApp.main(args);
     }
 }
-
-class StartFileApp {
-    public static void main(String[] args) {
-        FileView.main(args);
-    }
-}

@@ -29,7 +29,6 @@ public class BaseController {
     void dragBar(MouseEvent event) {
         this.stage.setX(event.getScreenX() - this.xOffset);
         this.stage.setY(event.getScreenY() - this.yOffset);
-//        this.stage.setOpacity(0.800000011920929);
     }
 
     @FXML

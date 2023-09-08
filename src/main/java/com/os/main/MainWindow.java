@@ -20,7 +20,7 @@ public class MainWindow extends Application {
       } else {
          FXMLLoader fxmlLoader = new FXMLLoader();
          fxmlLoader.setLocation(location);
-         Parent root = (Parent)fxmlLoader.load();
+         Parent root = fxmlLoader.load();
          primaryStage.setTitle("os");
          Scene MainScene = new Scene(root);
          primaryStage.setScene(MainScene);

@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="topMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="443.0" prefWidth="798.0" stylesheets="@HelpApp.css" xmlns="http://javafx.com/javafx/8.0.171"
+            prefHeight="443.0" prefWidth="798.0" stylesheets="@HelpApp.css" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.helpApp.HelpAppController">
     <opaqueInsets>
         <Insets/>

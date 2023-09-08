@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
 
@@ -188,7 +189,7 @@ public class MainController {
                 try {
                     MainController.this.fileAppOpen();
                 } catch (Exception var3) {
-                    System.out.println(var3.getMessage());
+                    System.out.println(Arrays.toString(var3.getStackTrace()));
                 }
             }
 
@@ -431,7 +432,7 @@ public class MainController {
                 helpApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/helpApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getMessage());
+                System.out.println(var7.getStackTrace());
             }
         }
 
@@ -469,7 +470,7 @@ public class MainController {
                 occupancyApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/occupancyApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getMessage());
+                System.out.println(var7.getStackTrace());
             }
         }
 
@@ -511,7 +512,7 @@ public class MainController {
                 processApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/processApp", stage));
             } catch (IOException var7) {
-                System.out.println(var7.getMessage());
+                System.out.println(var7.getStackTrace());
             }
         }
 
@@ -549,7 +550,7 @@ public class MainController {
                 systemFileApp.start(stage);
                 stageList.add(new StageRecord("com/os/apps/systemFileApp", stage));
             } catch (IOException var8) {
-                System.out.println(var8.getMessage());
+                System.out.println(Arrays.toString(var8.getStackTrace()));
             }
         }
 
