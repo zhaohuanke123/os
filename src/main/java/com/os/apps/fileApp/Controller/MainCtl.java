@@ -5,12 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MainCtl extends BaseFileController{
-    public HBox titleBar;
+    public BorderPane titleBar;
     @FXML
     private HBox toolBar;
     @FXML
