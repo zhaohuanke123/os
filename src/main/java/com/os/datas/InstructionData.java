@@ -1,12 +1,12 @@
 package com.os.datas;
 
+import com.os.utils.process.Instruction;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import com.os.utils.process.Instruction;
 
 public class InstructionData {
    public int which = -1;
-   private StringProperty instruction = new SimpleStringProperty();
+   private final StringProperty instruction = new SimpleStringProperty();
 
    public String getInstruction() {
       return this.instruction.get();

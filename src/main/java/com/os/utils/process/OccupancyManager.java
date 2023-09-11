@@ -38,7 +38,7 @@ public class OccupancyManager {
          System.out.println("pcb剩余个数：" + freePcbList.size());
 
          try {
-            int pcb = (Integer)freePcbList.remove(0);
+            int pcb = freePcbList.remove(0);
             return pcb;
          } catch (Exception var1) {
             System.out.println("pcb剩余个数：0");
@@ -93,7 +93,7 @@ public class OccupancyManager {
 
    public static void retrievePcb(int num) {
       for(int i = 0; i < freePcbList.size(); ++i) {
-         if (num == (Integer)freePcbList.get(i)) {
+         if (num == freePcbList.get(i)) {
          }
       }
 

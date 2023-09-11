@@ -1,13 +1,13 @@
 package com.os.datas;
 
+import com.os.utils.process.ExecutableFile;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import com.os.utils.process.ExecutableFile;
 
 public class ExecutableFileData {
-   private StringProperty fileName = new SimpleStringProperty();
+   private final StringProperty fileName = new SimpleStringProperty();
    ExecutableFile executableFile;
-   private int id;
+   private final int id;
 
    public ExecutableFileData(ExecutableFile executableFile) {
       this.id = executableFile.id;

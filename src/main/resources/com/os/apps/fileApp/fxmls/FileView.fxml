@@ -17,7 +17,7 @@
       <left>
          <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
                prefWidth="134.0" stylesheets="@../css/FileView.css" BorderPane.alignment="CENTER">
-            <Label fx:id="fileIcon" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="帮助"
+            <Label fx:id="fileIcon" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="文件"
                    HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">

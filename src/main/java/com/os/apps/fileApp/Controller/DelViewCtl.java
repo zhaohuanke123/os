@@ -1,5 +1,6 @@
 package com.os.apps.fileApp.Controller;
 
+import com.os.apps.BaseController;
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.Disk;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.util.Arrays;
 
-public class DelViewCtl extends BaseFileController{
+public class DelViewCtl extends BaseController {
     public BorderPane titleBar;
     public Label titleBarL;
     public HBox titleBarR;
@@ -29,7 +30,7 @@ public class DelViewCtl extends BaseFileController{
     private String tipString;
 
     public void init(final Stage stage, final MainUI mainView, String tipString, final Disk block) {
-        this.stage = stage;
+        super.init(stage);
         this.text.setText(tipString);
         this.block = block;
 

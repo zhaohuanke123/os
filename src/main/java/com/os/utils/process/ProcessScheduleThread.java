@@ -1,12 +1,12 @@
 package com.os.utils.process;
 
+import javafx.scene.control.CheckBox;
+
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
-
-import javafx.scene.control.CheckBox;
 
 public class ProcessScheduleThread extends Thread {
    public static Vector<ExecutableFile> executableFileList;
@@ -88,7 +88,7 @@ public class ProcessScheduleThread extends Thread {
 
                try {
 //                  sleep(ProcessManager.slice / ProcessManager.speed);
-                  TimeUnit.MILLISECONDS.sleep((long)(ProcessManager.slice / ProcessManager.speed));
+                  TimeUnit.MILLISECONDS.sleep(ProcessManager.slice / ProcessManager.speed);
                } catch (InterruptedException var4) {
                   System.out.println(var4.getMessage());
                }

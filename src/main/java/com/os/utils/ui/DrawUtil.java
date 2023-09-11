@@ -9,7 +9,7 @@ public class DrawUtil {
    private boolean isRight;
    private boolean isBottomRight;
    private boolean isBottom;
-   private int RESIZE_WIDTH = 10;
+   private final int RESIZE_WIDTH = 10;
    private double MIN_WIDTH = 1000.0;
    private double MIN_HEIGHT = 580.0;
 

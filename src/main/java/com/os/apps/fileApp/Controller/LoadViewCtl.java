@@ -1,5 +1,6 @@
 package com.os.apps.fileApp.Controller;
 
+import com.os.apps.BaseController;
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.FAT;
@@ -8,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class LoadViewCtl extends BaseFileController {
+public class LoadViewCtl extends BaseController {
     public BorderPane titleBar;
     @FXML
     private Button yes;
@@ -24,7 +24,7 @@ public class LoadViewCtl extends BaseFileController {
     private Button no;
 
     @FXML
-    void closeStage(MouseEvent event) {
+    protected void closeStage(MouseEvent event) {
         File log = new File("./data");
         FileWriter fileWriter = null;
 
@@ -40,10 +40,6 @@ public class LoadViewCtl extends BaseFileController {
 
         new FAT();
         this.stage.close();
-    }
-
-    public void init(Stage stage) {
-        this.stage = stage;
     }
 
     public void tipOpen(String tipString) throws Exception {

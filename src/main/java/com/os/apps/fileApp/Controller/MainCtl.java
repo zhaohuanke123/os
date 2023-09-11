@@ -1,5 +1,6 @@
 package com.os.apps.fileApp.Controller;
 
+import com.os.apps.BaseController;
 import com.os.apps.fileApp.app.MainUI;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -8,9 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
-public class MainCtl extends BaseFileController{
+public class MainCtl extends BaseController {
     public BorderPane titleBar;
     @FXML
     private HBox toolBar;
@@ -33,12 +33,8 @@ public class MainCtl extends BaseFileController{
     @FXML
     private TableColumn<?, ?> filePath;
 
-    public void init(Stage stage) {
-        this.stage = stage;
-    }
-
     @FXML
-    void closeStage(MouseEvent event) {
+    protected void closeStage(MouseEvent event) {
         MainUI.saveData();
         this.stage.close();
     }

@@ -1,13 +1,13 @@
 package com.os.apps.fileApp.Controller;
 
+import com.os.apps.BaseController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-public class PropertyCtl extends BaseFileController{
+public class PropertyCtl extends BaseController {
     public BorderPane titleBar;
    public Label propertyIcon;
    public Button yes;
@@ -20,8 +20,4 @@ public class PropertyCtl extends BaseFileController{
    public Label time;
    public TextField na;
    public Button no;
-
-   public void init(Stage stage) {
-      this.stage = stage;
-   }
 }

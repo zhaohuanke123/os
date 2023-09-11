@@ -1,18 +1,18 @@
 package com.os.datas;
 
+import com.os.utils.process.Process;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;
-import com.os.utils.process.Process;
 
 public class ProcessDetailData {
-    private StringProperty processName = new SimpleStringProperty();
-    private StringProperty processState = new SimpleStringProperty();
-    private StringProperty whichFile = new SimpleStringProperty();
-    private StringProperty havedDevice = new SimpleStringProperty();
-    private StringProperty havedMemory = new SimpleStringProperty();
-    private StringProperty havedPid = new SimpleStringProperty();
-    private StringProperty result = new SimpleStringProperty();
+    private final StringProperty processName = new SimpleStringProperty();
+    private final StringProperty processState = new SimpleStringProperty();
+    private final StringProperty whichFile = new SimpleStringProperty();
+    private final StringProperty havedDevice = new SimpleStringProperty();
+    private final StringProperty havedMemory = new SimpleStringProperty();
+    private final StringProperty havedPid = new SimpleStringProperty();
+    private final StringProperty result = new SimpleStringProperty();
     private ProgressBar progressBar = new ProgressBar();
 
     public String getProcessName() {

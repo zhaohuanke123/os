@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-
-<?import javafx.scene.layout.BorderPane?>
 <AnchorPane id="topMainPane"
             stylesheets="@../css/DelView.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
@@ -24,7 +19,7 @@
       <left>
          <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
                prefWidth="134.0" stylesheets="@../css/DelView.css" BorderPane.alignment="CENTER">
-            <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="帮助"
+            <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="删除"
                    HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
