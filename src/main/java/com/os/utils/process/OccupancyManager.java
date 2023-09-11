@@ -7,7 +7,7 @@ public class OccupancyManager {
    public static int[] aDevice = new int[2];
    public static int[] bDevice = new int[3];
    public static int[] cDevice = new int[3];
-   public static Vector<Integer> freePcbList = new Vector();
+   public static Vector<Integer> freePcbList = new Vector<>();
 
    public static void init() {
       int i;
@@ -38,8 +38,7 @@ public class OccupancyManager {
          System.out.println("pcb剩余个数：" + freePcbList.size());
 
          try {
-            int pcb = freePcbList.remove(0);
-            return pcb;
+             return freePcbList.remove(0);
          } catch (Exception var1) {
             System.out.println("pcb剩余个数：0");
             return -1;
@@ -61,15 +60,13 @@ public class OccupancyManager {
 
          if (series == num) {
             int start = i - series + 1;
-            int end = i;
 
-            for(int j = start; j <= end; ++j) {
+             for(int j = start; j <= i; ++j) {
                allMemory[j] = 1;
             }
 
-            System.out.println("分配内存:" + start + " " + end);
-            MemoryArea memoryArea = new MemoryArea(start, end);
-            return memoryArea;
+            System.out.println("分配内存:" + start + " " + i);
+             return new MemoryArea(start, i);
          }
       }
 
@@ -92,10 +89,11 @@ public class OccupancyManager {
    }
 
    public static void retrievePcb(int num) {
-      for(int i = 0; i < freePcbList.size(); ++i) {
-         if (num == freePcbList.get(i)) {
-         }
-      }
+       for (Integer integer : freePcbList) {
+           if (num == integer) {
+              int a = 0;
+           }
+       }
 
       freePcbList.add(num);
    }
