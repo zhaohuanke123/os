@@ -623,7 +623,7 @@ public class MainUI {
 
          }
       } catch (IOException var15) {
-         System.out.println(var15.getStackTrace());
+         System.out.println(Arrays.toString(var15.getStackTrace()));
       }
 
    }
