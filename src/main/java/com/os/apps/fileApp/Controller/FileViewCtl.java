@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FileViewCtl {
+public class FileViewCtl extends BaseFileController{
     public HBox titleBar;
     public Label fileIcon;
     public MenuBar menuBar;
@@ -21,11 +21,8 @@ public class FileViewCtl {
     public MenuItem save_close;
     public MenuItem closeItem;
     public TextArea contentField;
-    Stage stage;
     Disk block;
     File file;
-    double xOffset;
-    double yOffset;
 
     public void init(File file, Stage stage, Disk block) {
         this.file = file;
@@ -38,33 +35,5 @@ public class FileViewCtl {
         FileView.maps.remove(this.file);
         FAT.removeOpenedFile(this.block);
         this.stage.close();
-    }
-
-    @FXML
-    void minimizeStage(MouseEvent event) {
-        this.stage.setIconified(true);
-    }
-
-    @FXML
-    void pressBar(MouseEvent event) {
-        this.xOffset = event.getSceneX();
-        this.yOffset = event.getSceneY();
-    }
-
-    @FXML
-    void dragBar(MouseEvent event) {
-        this.stage.setX(event.getScreenX() - this.xOffset);
-        this.stage.setY(event.getScreenY() - this.yOffset);
-//        this.stage.setOpacity(0.800000011920929);
-    }
-
-    @FXML
-    void dragBarDone(DragEvent event) {
-        this.stage.setOpacity(1.0);
-    }
-
-    @FXML
-    void releaseBar(MouseEvent event) {
-        this.stage.setOpacity(1.0);
     }
 }

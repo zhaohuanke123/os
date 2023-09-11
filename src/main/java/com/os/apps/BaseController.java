@@ -16,13 +16,19 @@ public class BaseController {
     protected double yOffset = 0.0;
 
     @FXML
-    protected void  closeStage(MouseEvent event) {
+    protected void closeStage(MouseEvent event) {
         this.stage.close();
     }
 
     @FXML
     void minimizeStage(MouseEvent event) {
         this.stage.setIconified(true);
+    }
+
+    @FXML
+    void pressBar(MouseEvent event) {
+        this.xOffset = event.getSceneX();
+        this.yOffset = event.getSceneY();
     }
 
     @FXML
@@ -37,18 +43,12 @@ public class BaseController {
     }
 
     @FXML
-    void pressBar(MouseEvent event) {
-        this.xOffset = event.getSceneX();
-        this.yOffset = event.getSceneY();
-    }
-
-    @FXML
     void releaseBar(MouseEvent event) {
         this.stage.setOpacity(1.0);
     }
 
     @FXML
-    void resizeStage(MouseEvent event) {
+    void  resizeStage(MouseEvent event) {
         if (this.haveResize) {
             this.haveResize = false;
             if (!this.isMax) {
