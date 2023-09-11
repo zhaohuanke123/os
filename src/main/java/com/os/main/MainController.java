@@ -345,12 +345,12 @@ public class MainController {
         setButtonSize(this.occupancyButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
         setButtonImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
 
-        setButtonSize(this.helpButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
-        setButtonSize(this.minimizeButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
-        setButtonSize(this.closeButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
+        setButtonSize(this.helpButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setButtonImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setButtonSize(this.minimizeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setButtonImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setButtonSize(this.closeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setButtonImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
         setButtonSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
         setButtonImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
 
