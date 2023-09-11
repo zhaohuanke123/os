@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class TipWindow extends Application {
-   String tipString = "";
+   String tipString;
 
    public static void main(String[] args) {
       launch(args);
