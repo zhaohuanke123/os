@@ -7,6 +7,8 @@ import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -14,7 +16,9 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 
 public class DelViewCtl extends BaseFileController{
-    public HBox titleBar;
+    public BorderPane titleBar;
+    public Label titleBarL;
+    public HBox titleBarR;
     @FXML
     private Button yes;
     @FXML

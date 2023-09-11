@@ -12,75 +12,82 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.BorderPane?>
 <AnchorPane id="topMainPane"
             stylesheets="@../css/DelView.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.apps.fileApp.Controller.DelViewCtl">
-   <HBox id="titleBar" fx:id="titleBar" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity"
-         minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onDragDone="#dragBarDone"
-         onMouseDragged="#dragBar" onMousePressed="#pressBar" onMouseReleased="#releaseBar" prefHeight="40.0"
-         prefWidth="342.0" spacing="10.0"
-         stylesheets="@../css/DelView.css"
-         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <opaqueInsets>
-         <Insets/>
-      </opaqueInsets>
-      <cursor>
-         <Cursor fx:constant="DEFAULT"/>
-      </cursor>
-      <Label nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="240.0"
-             stylesheets="@../css/DelView.css"
-             text="删除" HBox.hgrow="ALWAYS">
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../res/tip.png"/>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="15.0"/>
-         </padding>
-         <opaqueInsets>
-            <Insets/>
-         </opaqueInsets>
-      </Label>
-      <Button id="barIcon" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#minimizeStage"
-              prefHeight="35.0" prefWidth="35.0">
-         <graphic>
-            <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true"
-                       preserveRatio="true">
-               <effect>
-                  <DropShadow/>
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT"/>
-               </cursor>
-               <Image url="@../../../img/minimize0.png"/>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="emptyBarIcon" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false"
-              prefHeight="0.0">
-         <graphic>
-            <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <effect>
-                  <InnerShadow/>
-               </effect>
-               <Image url="@../../../img/squares.png"/>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" layoutX="774.0" layoutY="15.0"
-              mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
-         <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <effect>
-                  <DropShadow/>
-               </effect>
-               <Image url="@../../../img/close0.png"/>
-            </ImageView>
-         </graphic>
-      </Button>
-   </HBox>
+   <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/DelView.css"
+               onDragDone="#dragBarDone" onMouseDragged="#dragBar"
+               onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <left>
+         <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
+               prefWidth="134.0" stylesheets="@../css/DelView.css" BorderPane.alignment="CENTER">
+            <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="帮助"
+                   HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../res/tip.png"/>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0"/>
+               </padding>
+            </Label>
+         </HBox>
+      </left>
+      <right>
+         <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
+               maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+               spacing="10.0" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+               <Insets/>
+            </opaqueInsets>
+            <cursor>
+               <Cursor fx:constant="DEFAULT"/>
+            </cursor>
+            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                    mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
+               <graphic>
+                  <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
+                             pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow/>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT"/>
+                     </cursor>
+                     <Image url="@../../../img/minimize0.png"/>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                    mnemonicParsing="false"  prefHeight="0.0">
+               <graphic>
+                  <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                             preserveRatio="true">
+                     <effect>
+                        <InnerShadow/>
+                     </effect>
+                     <Image url="@../../../img/squares.png"/>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
+                    layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow/>
+                     </effect>
+                     <Image url="@../../../img/close.png"/>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </HBox>
+      </right>
+   </BorderPane>
    <AnchorPane id="contentPane" layoutX="8.0" layoutY="47.0" prefHeight="241.0" prefWidth="324.0"
                stylesheets="@../css/DelView.css"
                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"

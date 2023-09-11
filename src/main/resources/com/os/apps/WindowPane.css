@@ -40,7 +40,7 @@
 }
 
 #titleBarL {
-    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: transparent;
     -fx-background-color: transparent;
 
     -fx-max-height: 40;
@@ -52,7 +52,7 @@
 }
 
 #titleBarR {
-    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: transparent;
     -fx-background-color: transparent;
 
     -fx-max-height: 40;
