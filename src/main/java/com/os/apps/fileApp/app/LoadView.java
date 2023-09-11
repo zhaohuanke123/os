@@ -58,7 +58,6 @@ public class LoadView {
 
       if (MainUI.clearFlag) {
          File log = new File("./data");
-//         fileLoader = null;
 
          try {
             FileWriter fileWriter = new FileWriter(String.valueOf(log));
