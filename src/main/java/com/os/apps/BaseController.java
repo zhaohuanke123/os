@@ -15,6 +15,10 @@ public class BaseController {
     protected double xOffset = 0.0;
     protected double yOffset = 0.0;
 
+    public void init(Stage stage) {
+        this.stage = stage;
+    }
+
     @FXML
     protected void closeStage(MouseEvent event) {
         this.stage.close();
@@ -48,7 +52,7 @@ public class BaseController {
     }
 
     @FXML
-    void  resizeStage(MouseEvent event) {
+    void resizeStage(MouseEvent event) {
         if (this.haveResize) {
             this.haveResize = false;
             if (!this.isMax) {

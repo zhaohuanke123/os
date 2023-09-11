@@ -25,8 +25,8 @@ public class FileViewCtl extends BaseFileController{
     File file;
 
     public void init(File file, Stage stage, Disk block) {
-        this.file = file;
         this.stage = stage;
+        this.file = file;
         this.block = block;
     }
 

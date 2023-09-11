@@ -24,7 +24,8 @@ public class HelpAppController extends BaseController{
     private TabPane tabPane;
 
     public void init(Stage stage) {
-        this.stage = stage;
+        super.init(stage);
+
         DrawUtil drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
         stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(HelpAppController.this::adaptWindow));

@@ -48,7 +48,8 @@ public class OccupancyAppController extends BaseController{
    private HBox pcbBox2;
 
    public void init(Stage stage) {
-      this.stage = stage;
+      super.init(stage);
+
       VBox[] boxes1 = new VBox[]{this.memoryBox1, this.diskBox1, this.deviceBox1, this.pcbBox1};
       Button[] textButtons = new Button[]{this.memoryText, this.diskText, this.deviceText, this.pcbText};
       HBox[] boxes2 = new HBox[]{this.memoryBox2, this.diskBox2, this.deviceBox2, this.pcbBox2};

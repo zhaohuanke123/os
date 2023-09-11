@@ -164,20 +164,21 @@ public class ProcessAppController extends BaseController {
     }
 
     public void init(Stage stage) {
-        this.stage = stage;
+        super.init(stage);
+
         this.showSelect(this.showNow);
         this.signSelect(this.signRunning);
         this.createSelect(this.continueButton);
         this.speedSelect(this.speed1Button);
-        this.processName.setCellValueFactory(new PropertyValueFactory("processName"));
-        this.processState.setCellValueFactory(new PropertyValueFactory("processState"));
-        this.whichFile.setCellValueFactory(new PropertyValueFactory("whichFile"));
-        this.havedDevice.setCellValueFactory(new PropertyValueFactory("havedDevice"));
-        this.havedMemory.setCellValueFactory(new PropertyValueFactory("havedMemory"));
-        this.havedPid.setCellValueFactory(new PropertyValueFactory("havedPid"));
-        this.result.setCellValueFactory(new PropertyValueFactory("result"));
-        this.progressBar.setCellValueFactory(new PropertyValueFactory("progressBar"));
-        this.instruction.setCellValueFactory(new PropertyValueFactory("instruction"));
+        this.processName.setCellValueFactory(new PropertyValueFactory<>("processName"));
+        this.processState.setCellValueFactory(new PropertyValueFactory<>("processState"));
+        this.whichFile.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
+        this.havedDevice.setCellValueFactory(new PropertyValueFactory<>("havedDevice"));
+        this.havedMemory.setCellValueFactory(new PropertyValueFactory<>("havedMemory"));
+        this.havedPid.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
+        this.result.setCellValueFactory(new PropertyValueFactory<>("result"));
+        this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
+        this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
         UIThread.processTable = (TableView<ProcessDetailData>) this.processTable;
         UIThread.nowProcessTable = (TableView<InstructionData>) this.nowProcessTable;
         UIThread.nowProcessName = this.nowProcessName;

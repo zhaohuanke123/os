@@ -3,6 +3,7 @@ package com.os.apps.fileApp.Controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.fileApp.app.TipWindow;
@@ -15,15 +16,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class LoadViewCtl {
+public class LoadViewCtl extends BaseFileController {
     public HBox titleBar;
     @FXML
     private Button yes;
     @FXML
     private Button no;
-    double xOffset = 0.0;
-    double yOffset = 0.0;
-    Stage stage;
 
     @FXML
     void closeStage(MouseEvent event) {
@@ -37,39 +35,11 @@ public class LoadViewCtl {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException var5) {
-            var5.printStackTrace();
+            System.out.println(Arrays.toString(var5.getStackTrace()));
         }
 
         new FAT();
         this.stage.close();
-    }
-
-    @FXML
-    void minimizeStage(MouseEvent event) {
-        this.stage.setIconified(true);
-    }
-
-    @FXML
-    void pressBar(MouseEvent event) {
-        this.xOffset = event.getSceneX();
-        this.yOffset = event.getSceneY();
-    }
-
-    @FXML
-    void dragBar(MouseEvent event) {
-        this.stage.setX(event.getScreenX() - this.xOffset);
-        this.stage.setY(event.getScreenY() - this.yOffset);
-//        this.stage.setOpacity(0.800000011920929);
-    }
-
-    @FXML
-    void dragBarDone(DragEvent event) {
-        this.stage.setOpacity(1.0);
-    }
-
-    @FXML
-    void releaseBar(MouseEvent event) {
-        this.stage.setOpacity(1.0);
     }
 
     public void init(Stage stage) {

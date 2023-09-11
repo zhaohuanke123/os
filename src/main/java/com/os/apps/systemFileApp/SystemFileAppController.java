@@ -50,7 +50,8 @@ public class SystemFileAppController extends BaseController {
    }
 
    public void init(Stage stage) {
-      this.stage = stage;
+      super.init(stage);
+
       executableFileList = ProcessManager.executableFileList;
       this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
       this.fileDetail.setCellValueFactory(new PropertyValueFactory<>("instruction"));

@@ -25,6 +25,6 @@ class StartHelpApp {
 
 class StartOccupancy {
     public static void main(String[] args) {
-        OccupancyApp.main(args);
+        OccupancyApp.launch(args);
     }
 }
