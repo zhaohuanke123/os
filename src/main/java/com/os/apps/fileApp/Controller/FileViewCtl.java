@@ -8,11 +8,12 @@ import com.os.utils.fileSystem.File;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FileViewCtl extends BaseFileController{
-    public HBox titleBar;
+    public BorderPane titleBar;
     public Label fileIcon;
     public MenuBar menuBar;
     public Menu fileMenu;
