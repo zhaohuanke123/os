@@ -46,7 +46,7 @@ public class OccupancyAppController extends BaseController{
    private HBox diskBox2;
    @FXML
    private HBox pcbBox2;
-
+   @Override
    public void init(Stage stage) {
       super.init(stage);
 

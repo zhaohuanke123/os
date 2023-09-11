@@ -22,7 +22,7 @@ public class HelpAppController extends BaseController{
     private HBox toolBar;
     @FXML
     private TabPane tabPane;
-
+    @Override
     public void init(Stage stage) {
         super.init(stage);
 

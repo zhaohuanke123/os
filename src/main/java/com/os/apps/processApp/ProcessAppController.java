@@ -162,7 +162,7 @@ public class ProcessAppController extends BaseController {
         System.out.println(radioButton.getId() + "被选中");
         radioButton.setSelected(true);
     }
-
+    @Override
     public void init(Stage stage) {
         super.init(stage);
 

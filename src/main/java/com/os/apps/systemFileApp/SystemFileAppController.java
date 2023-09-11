@@ -48,7 +48,7 @@ public class SystemFileAppController extends BaseController {
       int i = Integer.parseInt(s);
       this.updateFileDetailTable(i);
    }
-
+   @Override
    public void init(Stage stage) {
       super.init(stage);
 

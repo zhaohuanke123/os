@@ -35,11 +35,11 @@ public class BaseApp extends Application {
             location = this.getClass().getResource(IconPath);
             stage.getIcons().add(new Image(String.valueOf(location)));
             stage.setResizable(false);
-            appController.init(stage);
             scene.setFill(Color.TRANSPARENT);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
             stage.setOnCloseRequest(event -> System.exit(0));
+            appController.init(stage);
             appController.adaptWindow();
         }
     }
