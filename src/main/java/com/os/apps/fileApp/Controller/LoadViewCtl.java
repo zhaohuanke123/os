@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class LoadViewCtl extends BaseFileController {
-    public HBox titleBar;
+    public BorderPane titleBar;
     @FXML
     private Button yes;
     @FXML
