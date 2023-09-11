@@ -367,9 +367,9 @@ public class MainController {
         this.tipBox.setMinHeight(1.5 * this.appWidth);
         this.tipBox.setMaxHeight(1.5 * this.appWidth);
         this.tipBox.setPrefHeight(1.5 * this.appWidth);
-        this.tipBox.setMaxWidth(this.closeButton.getWidth() * 6.0);
-        this.tipBox.setMinWidth(this.closeButton.getWidth() * 6.0);
-        this.tipBox.setPrefWidth(this.closeButton.getWidth() * 6.0);
+        this.tipBox.setMaxWidth(this.timeBox.getWidth() * 1.8);
+        this.tipBox.setMinWidth(this.timeBox.getWidth() * 1.8);
+        this.tipBox.setPrefWidth(this.timeBox.getWidth() * 1.8);
         this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
         this.timeBox.setMinHeight(1.5 * this.appWidth);
