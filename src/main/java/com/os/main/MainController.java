@@ -25,6 +25,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -141,12 +142,15 @@ public class MainController {
         this.appWidth = this.scene.getHeight() / 15.0;
         this.sceneWidth = this.scene.getWidth();
         this.sceneHeight = this.scene.getHeight();
+
+        //
         this.background.setLayoutX(0.0);
         this.background.setLayoutY(0.0);
         this.background.fitWidthProperty().bind(this.scene.widthProperty());
         this.background.fitHeightProperty().bind(this.scene.heightProperty());
         this.background.setPreserveRatio(false);
         this.background.setVisible(true);
+        //
 
         this.executableFileButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
@@ -195,8 +199,10 @@ public class MainController {
 
         });
 
-        Button[] buttons = new Button[]{this.executableFileButton, this.fileManagerButton,
-                this.processButton, this.occupancyButton, this.helpButton};
+        Button[] buttons = new Button[]{this.executableFileButton,
+                this.fileManagerButton, this.processButton,
+                this.occupancyButton, this.helpButton};
+
         Tooltip tooltip = new Tooltip("系统文件表");
         tooltip.setStyle("-fx-font-size: 12");
         this.executableFileButton.setTooltip(tooltip);
@@ -226,24 +232,27 @@ public class MainController {
         UIThread.stageList = stageList;
     }
 
+    /**
+     * 返回桌面
+     */
     public void toDesk() {
         if (this.haveChanged) {
             this.haveChanged = false;
+
             if (!this.isTop) {
                 this.primaryStage.toFront();
 
-                int i;
-                Stage stage1;
-                for (i = 0; i < stageList.size(); ++i) {
-                    stage1 = stageList.get(i).stage;
+                for (StageRecord stageRecord : stageList) {
+                    Stage stage1 = stageRecord.stage;
                     if (stage1 != null && stage1.isShowing()) {
                         stage1.setIconified(true);
                     }
                 }
 
                 if (MainUI.fileAppAdditionStageList != null) {
-                    for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                        stage1 = MainUI.fileAppAdditionStageList.get(i);
+                    for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
+                        Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
+
                         if (stage1 != null && !stage1.isShowing()) {
                             MainUI.fileAppAdditionStageList.remove(stage1);
                         } else {
@@ -254,18 +263,17 @@ public class MainController {
                     }
                 }
             } else {
-                int i;
-                Stage stage1;
-                for (i = 0; i < stageList.size(); ++i) {
-                    stage1 = stageList.get(i).stage;
+                for (StageRecord stageRecord : stageList) {
+                    Stage stage1 = stageRecord.stage;
                     if (stage1 != null && stage1.isShowing()) {
                         stage1.setIconified(false);
                     }
                 }
 
                 if (MainUI.fileAppAdditionStageList != null) {
-                    for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                        stage1 = MainUI.fileAppAdditionStageList.get(i);
+                    for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
+                        Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
+
                         if (stage1 != null && !stage1.isShowing()) {
                             MainUI.fileAppAdditionStageList.remove(stage1);
                         } else {
@@ -297,14 +305,14 @@ public class MainController {
         this.uiThreadInit();
     }
 
-    private void setButtonSize(Button button, double width, double height) {
+    private void setCompSize(Button button, double width, double height) {
         button.setPrefSize(width, height);
         button.setMinSize(width, height);
         button.setMaxSize(width, height);
         button.resize(width, height);
     }
 
-    private void setButtonImageViewSize(ImageView button, double width, double height) {
+    private void setImageViewSize(ImageView button, double width, double height) {
         button.setFitWidth(width);
         button.setFitHeight(height);
     }
@@ -336,23 +344,23 @@ public class MainController {
         this.buttonBarBackGround.setEffect(gaussianBlur);
         // ------------------------------------------------------------
 
-        setButtonSize(this.executableFileButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.executableFileButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.fileManagerButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.processButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.occupancyButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.executableFileButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.executableFileButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.fileManagerButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.processButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.occupancyButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
 
-        setButtonSize(this.helpButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.minimizeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.closeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setButtonSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
-        setButtonImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
+        setCompSize(this.helpButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.minimizeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.closeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
+        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
+        setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
 
         this.appBox.setMinHeight(1.5 * this.appWidth);
         this.appBox.setMaxHeight(1.5 * this.appWidth);
