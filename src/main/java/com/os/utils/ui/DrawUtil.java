@@ -16,15 +16,9 @@ public class DrawUtil {
    public void addDrawFunc(Stage stage, Node root) {
       this.MIN_WIDTH = stage.getMinWidth();
       this.MIN_HEIGHT = stage.getMinHeight();
-      root.setOnMouseDragReleased((event) -> {
-         SetMouseEvent(stage, root, event);
-      });
-      root.setOnMouseReleased((event) -> {
-         SetMouseEvent(stage, root, event);
-      });
-      root.setOnMouseMoved((event) -> {
-         SetMouseEvent(stage, root, event);
-      });
+      root.setOnMouseDragReleased((event) -> SetMouseEvent(stage, root, event));
+      root.setOnMouseReleased((event) -> SetMouseEvent(stage, root, event));
+      root.setOnMouseMoved((event) -> SetMouseEvent(stage, root, event));
       root.setOnMouseDragged((event) -> {
          double x = event.getSceneX();
          double y = event.getSceneY();
