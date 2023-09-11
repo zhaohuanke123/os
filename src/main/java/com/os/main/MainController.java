@@ -321,26 +321,26 @@ public class MainController {
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
         System.out.println("MainWindow:" + this.MainWindow.getWidth() + "," + this.MainWindow.getHeight());
         // 初始化任务栏
-        this.buttonBar.setMaxHeight(1.5 * this.appWidth);
-        this.buttonBar.setMinHeight(1.5 * this.appWidth);
-        this.buttonBar.setPrefHeight(1.5 * this.appWidth);
+        this.buttonBar.setMaxHeight(1.3 * this.appWidth);
+        this.buttonBar.setMinHeight(1.3 * this.appWidth);
+        this.buttonBar.setPrefHeight(1.3 * this.appWidth);
         this.buttonBar.setMaxWidth(this.sceneWidth);
         this.buttonBar.setMinWidth(this.sceneWidth);
         this.buttonBar.setPrefWidth(this.sceneWidth);
         this.buttonBar.setLayoutX(0);
-        this.buttonBar.setLayoutY(this.sceneHeight - 1.4 * this.appWidth);
+        this.buttonBar.setLayoutY(this.sceneHeight - 1.3 * this.appWidth);
 
         // 初始化任务栏背景
-        this.buttonBarBackGround.setMinHeight(1.5 * this.appWidth);
-        this.buttonBarBackGround.setMaxHeight(1.5 * this.appWidth);
-        this.buttonBarBackGround.setPrefHeight(1.5 * this.appWidth);
+        this.buttonBarBackGround.setMinHeight(1.2 * this.appWidth);
+        this.buttonBarBackGround.setMaxHeight(1.2 * this.appWidth);
+        this.buttonBarBackGround.setPrefHeight(1.2 * this.appWidth);
         this.buttonBarBackGround.setMinWidth(this.sceneWidth);
         this.buttonBarBackGround.setMaxWidth(this.sceneWidth);
         this.buttonBarBackGround.setPrefWidth(this.sceneWidth);
         this.buttonBarBackGround.setLayoutX(0);
-        this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1.4 * this.appWidth);
+        this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1.2 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
-        gaussianBlur.setRadius(16.0D);
+        gaussianBlur.setRadius(8.0D);
         this.buttonBarBackGround.setEffect(gaussianBlur);
         // ------------------------------------------------------------
 
