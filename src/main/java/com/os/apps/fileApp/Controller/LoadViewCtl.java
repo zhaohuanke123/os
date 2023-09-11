@@ -1,20 +1,19 @@
 package com.os.apps.fileApp.Controller;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
-
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.FAT;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class LoadViewCtl extends BaseFileController {
     public HBox titleBar;

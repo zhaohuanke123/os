@@ -1,6 +1,5 @@
 package com.os.apps;
 
-import com.os.apps.helpApp.HelpAppController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

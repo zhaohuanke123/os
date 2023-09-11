@@ -1,20 +1,17 @@
 package com.os.apps.occupancyApp;
 
 import com.os.apps.BaseController;
+import com.os.utils.ui.DrawUtil;
+import com.os.utils.ui.UIThread;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import com.os.utils.ui.DrawUtil;
-import com.os.utils.ui.UIThread;
 
 public class OccupancyAppController extends BaseController{
     public Label titleBarL;
