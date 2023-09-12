@@ -41,7 +41,7 @@
                <Cursor fx:constant="DEFAULT"/>
             </cursor>
             <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
+                    mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
                <graphic>
                   <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                              pickOnBounds="true" preserveRatio="true">
