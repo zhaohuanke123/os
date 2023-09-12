@@ -92,26 +92,6 @@
                   <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
                   <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
                </Menu>
-               <Menu mnemonicParsing="false" text="文字">
-                  <Menu mnemonicParsing="false" text="字体">
-                     <MenuItem mnemonicParsing="false" text="黑体"/>
-                     <MenuItem mnemonicParsing="false" text="宋体"/>
-                     <MenuItem mnemonicParsing="false" text="楷体"/>
-                     <MenuItem mnemonicParsing="false" text="微软雅黑"/>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="大小">
-                     <MenuItem mnemonicParsing="false" text="12px"/>
-                     <MenuItem mnemonicParsing="false" text="16px"/>
-                     <MenuItem mnemonicParsing="false" text="20px"/>
-                     <MenuItem mnemonicParsing="false" text="24px"/>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="颜色">
-                     <MenuItem mnemonicParsing="false" text="灰色"/>
-                     <MenuItem mnemonicParsing="false" text="黑色"/>
-                     <MenuItem mnemonicParsing="false" text="红色"/>
-                     <MenuItem mnemonicParsing="false" text="蓝色"/>
-                  </Menu>
-               </Menu>
             </MenuBar>
             <TextArea id="contentField" fx:id="contentField" prefHeight="482.0" prefWidth="600.0"
                        stylesheets="@../css/FileView.css" wrapText="true">

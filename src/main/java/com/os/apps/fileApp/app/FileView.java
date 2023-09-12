@@ -75,7 +75,6 @@ public class FileView extends Application {
 
         MenuBar Bar = (MenuBar) this.root.lookup("#Bar");
         Menu fileMenu = Bar.getMenus().get(0);
-        Menu wordMenu = Bar.getMenus().get(1);
         this.saveItem = fileMenu.getItems().get(0);
         URL location = getClass().getResource("/com/os/apps/fileApp/res/save.png");
         this.saveItem.setGraphic(new ImageView(String.valueOf(location)));
@@ -94,89 +93,24 @@ public class FileView extends Application {
 
         });
         this.save_close = fileMenu.getItems().get(1);
-        URL location1 = getClass().getResource("/com/os/apps/fileApp/res/save.png");
+        location = getClass().getResource("/com/os/apps/fileApp/res/save.png");
         this.save_close.setGraphic(new ImageView(String.valueOf(location)));
         ((ImageView) this.save_close.getGraphic()).setFitWidth(15.0);
         ((ImageView) this.save_close.getGraphic()).setFitHeight(15.0);
         this.save_close.setOnAction((ActionEvent) -> {
             this.newContent = this.contentField.getText();
             this.saveContent(this.newContent);
-            FAT var10000 = MainUI.fat;
             FAT.removeOpenedFile(this.block);
             this.stage.close();
         });
         this.closeItem = fileMenu.getItems().get(2);
-        URL location2 = getClass().getResource("/com/os/apps/fileApp/res/close.png");
+        location = getClass().getResource("/com/os/apps/fileApp/res/close.png");
         this.closeItem.setGraphic(new ImageView(String.valueOf(location)));
         ((ImageView) this.closeItem.getGraphic()).setFitWidth(15.0);
         ((ImageView) this.closeItem.getGraphic()).setFitHeight(15.0);
         this.closeItem.setOnAction((ActionEvent) -> {
-            FAT var10000 = MainUI.fat;
             FAT.removeOpenedFile(this.block);
             this.stage.close();
-        });
-        Menu typeMenu = (Menu) wordMenu.getItems().get(0);
-        Menu sizeMenu = (Menu) wordMenu.getItems().get(1);
-        Menu colorMenu = (Menu) wordMenu.getItems().get(2);
-        this.color1 = colorMenu.getItems().get(0);
-        this.color2 = colorMenu.getItems().get(1);
-        this.color3 = colorMenu.getItems().get(2);
-        this.color4 = colorMenu.getItems().get(3);
-        this.color1.setOnAction((ActionEvent) -> {
-            this.color = "-fx-text-fill:#7f7f7f;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.color2.setOnAction((ActionEvent) -> {
-            this.color = "-fx-text-fill:black;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.color3.setOnAction((ActionEvent) -> {
-            this.color = "-fx-text-fill:#f91717;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.color4.setOnAction((ActionEvent) -> {
-            this.color = "-fx-text-fill:#00a2e8;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.size1 = sizeMenu.getItems().get(0);
-        this.size2 = sizeMenu.getItems().get(1);
-        this.size3 = sizeMenu.getItems().get(2);
-        this.size4 = sizeMenu.getItems().get(3);
-        this.size1.setOnAction((ActionEvent) -> {
-            this.size = "-fx-font-size: 12px;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.size2.setOnAction((ActionEvent) -> {
-            this.size = "-fx-font-size: 16px;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.size3.setOnAction((ActionEvent) -> {
-            this.size = "-fx-font-size: 20px;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.size4.setOnAction((ActionEvent) -> {
-            this.size = "-fx-font-size: 24px;";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.type1 = typeMenu.getItems().get(0);
-        this.type2 = typeMenu.getItems().get(1);
-        this.type3 = typeMenu.getItems().get(2);
-        this.type4 = typeMenu.getItems().get(3);
-        this.type1.setOnAction((ActionEvent) -> {
-            this.font = "-fx-font-family: 'SimHei';";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.type2.setOnAction((ActionEvent) -> {
-            this.font = "-fx-font-family: 'NSimSun';";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.type3.setOnAction((ActionEvent) -> {
-            this.font = "-fx-font-family: 'KaiTi';";
-            this.contentField.setStyle(this.color + this.size + this.font);
-        });
-        this.type4.setOnAction((ActionEvent) -> {
-            this.font = "-fx-font-family: 'Microsoft YaHei';";
-            this.contentField.setStyle(this.color + this.size + this.font);
         });
         Scene scene = new Scene(this.root);
         this.stage.setScene(scene);
