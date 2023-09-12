@@ -82,7 +82,7 @@
          </HBox>
       </right>
    </BorderPane>
-   <TabPane fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+   <TabPane  fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
             tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">

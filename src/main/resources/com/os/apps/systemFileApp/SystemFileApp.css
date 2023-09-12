@@ -17,11 +17,9 @@
 }
 
 .table-row-cell:filled:hover {
-
     -fx-size: 30;
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
-
 
 }
 
@@ -35,6 +33,10 @@
 }
 
 .table-view .table-column {
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 8 8 0 0;
+    -fx-background-radius: 8 8 0 0;
+
     -fx-text-alignment: center;
     -fx-alignment: CENTER
 

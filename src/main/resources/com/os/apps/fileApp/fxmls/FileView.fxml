@@ -81,7 +81,7 @@
          </HBox>
       </right>
    </BorderPane>
-   <AnchorPane id="contentPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
+   <AnchorPane id="mainPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
                AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
       <Pane id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">

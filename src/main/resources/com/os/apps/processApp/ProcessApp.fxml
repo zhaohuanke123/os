@@ -26,79 +26,79 @@
         <Insets/>
     </opaqueInsets>
     <BorderPane fx:id="titleBar" layoutX="40.0" layoutY="40.0" stylesheets="@ProcessApp.css"
-                                  onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-                                  onMousePressed="#pressBar" onMouseReleased="#releaseBar"
-                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-    <left>
-        <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="134.0"
-              stylesheets="@../helpApp/HelpApp.css" BorderPane.alignment="CENTER">
-            <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
-                   text="进程管理器" HBox.hgrow="ALWAYS">
-                <graphic>
-                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../../img/process.png"/>
-                    </ImageView>
-                </graphic>
-                <padding>
-                    <Insets left="15.0"/>
-                </padding>
-            </Label>
-        </HBox>
-    </left>
-    <right>
-        <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-              maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
-              spacing="10.0" BorderPane.alignment="CENTER">
-            <opaqueInsets>
-                <Insets/>
-            </opaqueInsets>
-            <cursor>
-                <Cursor fx:constant="DEFAULT"/>
-            </cursor>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
-                <graphic>
-                    <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
-                               pickOnBounds="true" preserveRatio="true">
-                        <effect>
-                            <DropShadow/>
-                        </effect>
-                        <cursor>
-                            <Cursor fx:constant="DEFAULT"/>
-                        </cursor>
-                        <Image url="@../../img/minimize0.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0">
-                <graphic>
-                    <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
-                               preserveRatio="true">
-                        <effect>
-                            <InnerShadow/>
-                        </effect>
-                        <Image url="@../../img/squares.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
-                    layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
-                <graphic>
-                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                        <effect>
-                            <DropShadow/>
-                        </effect>
-                        <Image url="@../../img/close0.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
-        </HBox>
-    </right>
-</BorderPane>
+                onDragDone="#dragBarDone" onMouseDragged="#dragBar"
+                onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <left>
+            <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="134.0"
+                  stylesheets="@../helpApp/HelpApp.css" BorderPane.alignment="CENTER">
+                <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
+                       text="进程管理器" HBox.hgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../../img/process.png"/>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="15.0"/>
+                    </padding>
+                </Label>
+            </HBox>
+        </left>
+        <right>
+            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+                  spacing="10.0" BorderPane.alignment="CENTER">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <cursor>
+                    <Cursor fx:constant="DEFAULT"/>
+                </cursor>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
+                    <graphic>
+                        <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT"/>
+                            </cursor>
+                            <Image url="@../../img/minimize0.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0">
+                    <graphic>
+                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <effect>
+                                <InnerShadow/>
+                            </effect>
+                            <Image url="@../../img/squares.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
+                        layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
+                    <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
+                            <Image url="@../../img/close0.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </right>
+    </BorderPane>
     <AnchorPane fx:id="mainPane" layoutX="10.0" layoutY="47.0" stylesheets="@ProcessApp.css"
                 minHeight="0.0" minWidth="0.0" prefHeight="437.0"
-                prefWidth="1008.0"  AnchorPane.bottomAnchor="5.0"
+                prefWidth="1008.0" AnchorPane.bottomAnchor="5.0"
                 AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="46.0">
         <TableView fx:id="processTable" layoutX="31.0" layoutY="83.0" nodeOrientation="LEFT_TO_RIGHT"
                    prefHeight="321.0" prefWidth="725.0" stylesheets="@ProcessApp.css" AnchorPane.bottomAnchor="30.0"
