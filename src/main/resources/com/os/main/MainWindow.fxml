@@ -24,8 +24,8 @@
         <HBox id="appBox" fx:id="appBox" alignment="CENTER" layoutX="247.0" layoutY="13.0" prefHeight="84.0"
               prefWidth="392.0" stylesheets="@MainWindow.css">
 
-            <!-- 查看可执行文件按钮  -->
-            <Button id="appButton" fx:id="executableFileButton" alignment="CENTER" contentDisplay="CENTER"
+            <!-- 查看系统文件按钮  -->
+            <Button id="appButton" fx:id="systemFileButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
                     stylesheets="@MainWindow.css">
                 <graphic>
@@ -56,7 +56,7 @@
                 </graphic>
             </Button>
 
-            <!--  设备管理器按钮-->
+            <!--  占用管理器按钮-->
             <Button id="appButton" fx:id="occupancyButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="55.0"
                     stylesheets="@MainWindow.css">
