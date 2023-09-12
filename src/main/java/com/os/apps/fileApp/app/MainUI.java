@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.*;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -81,7 +82,8 @@ public class MainUI {
       new LoadView();
       Scene scene;
       primaryStage.setResizable(false);
-      primaryStage.getIcons().add(new Image("com/os/apps/fileApp/res/ico.png"));
+      URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
+      primaryStage.getIcons().add(new Image(String.valueOf(location)));
       primaryStage.setTitle("磁盘文件管理系统");
       scene = new Scene(this.root);
       scene.setFill(Color.TRANSPARENT);
@@ -236,7 +238,8 @@ public class MainUI {
    }
 
    private void initTreeView() {
-      this.rootNode = new TreeItem<>("C:", new ImageView("com/os/apps/fileApp/res/disk.png"));
+      URL location = this.getClass().getResource("/com/os/apps/fileApp/res/disk.png");
+      this.rootNode = new TreeItem<>("C:", new ImageView(String.valueOf(location)));
       ((ImageView)this.rootNode.getGraphic()).setFitWidth(20.0);
       ((ImageView)this.rootNode.getGraphic()).setFitHeight(20.0);
       this.rootNode.setExpanded(true);
@@ -269,7 +272,8 @@ public class MainUI {
    private TreeItem<String> addNode(TreeItem<String> parentNode, Path newPath) {
       String pathName = newPath.getPathName();
       String value = pathName.substring(pathName.lastIndexOf(92) + 1);
-      TreeItem<String> newNode = new TreeItem<>(value, new ImageView("com/os/apps/fileApp/res/node.png"));
+       URL location = this.getClass().getResource("/com/os/apps/fileApp/res/node.png");
+      TreeItem<String> newNode = new TreeItem<>(value, new ImageView(String.valueOf(location)));
       newNode.setExpanded(true);
       this.pathMap.put(newPath, newNode);
       ((ImageView) newNode.getGraphic()).setFitWidth(15.0);
@@ -296,14 +300,16 @@ public class MainUI {
                nName = nName.substring(0, 4) + "..";
             }
 
-            this.icons[i] = new Label(nName, new ImageView("com/os/apps/fileApp/res/folder.png"));
+            URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
+            this.icons[i] = new Label(nName, new ImageView(String.valueOf(location)));
          } else {
             nName = ((File) bList.get(i).getObject()).getFileName();
             if (nName.length() > 4) {
                nName = nName.substring(0, 4) + "..";
             }
 
-            this.icons[i] = new Label(nName, new ImageView("com/os/apps/fileApp/res/file.png"));
+            URL location = this.getClass().getResource("/com/os/apps/fileApp/res/file.png");
+            this.icons[i] = new Label(nName, new ImageView(String.valueOf(location)));
          }
           this.icons[i].setPrefSize(100.0, 100.0);
           this.icons[i].setMinSize(100.0, 100.0);
