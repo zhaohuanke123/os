@@ -27,7 +27,6 @@ public class DelViewCtl extends BaseController {
     @FXML
     private Text text;
     private Disk block;
-    private String tipString;
 
     public void init(final Stage stage, final MainUI mainView, String tipString, final Disk block) {
         super.init(stage);

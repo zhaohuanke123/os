@@ -10,17 +10,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FileViewCtl extends BaseController {
     public BorderPane titleBar;
-    public Label fileIcon;
+    public Label title;
     public MenuBar menuBar;
     public Menu fileMenu;
     public MenuItem saveItem;
     public MenuItem save_close;
     public MenuItem closeItem;
     public TextArea contentField;
+    public HBox titleBarL;
     Disk block;
     File file;
 

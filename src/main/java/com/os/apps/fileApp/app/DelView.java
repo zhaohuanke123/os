@@ -36,7 +36,7 @@ public class DelView extends Application {
         this.tipString = msg;
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
         URL location = this.getClass().getResource("/com/os/apps/fileApp/fxmls/delView.fxml");
         if (location == null) {
             System.out.println("null");
@@ -44,18 +44,23 @@ public class DelView extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(location);
             Parent root = fxmlLoader.load();
-            primaryStage.setTitle("删除");
+            stage.setTitle("删除");
+
             Scene MainScene = new Scene(root);
-            primaryStage.setScene(MainScene);
-            Scene scene = primaryStage.getScene();
+            stage.setScene(MainScene);
+
+            Scene scene = stage.getScene();
             DelViewCtl delViewCtl = fxmlLoader.getController();
+
             location = this.getClass().getResource("/com/os/apps/fileApp/res/tip.png");
-            primaryStage.getIcons().add(new Image(String.valueOf(location)));
+            stage.getIcons().add(new Image(String.valueOf(location)));
+
+            stage.setResizable(false);
             scene.setFill(Color.TRANSPARENT);
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
-            primaryStage.show();
-            delViewCtl.init(primaryStage, this.mainView, this.tipString, this.block);
-            primaryStage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            stage.show();
+            delViewCtl.init(stage, this.mainView, this.tipString, this.block);
         }
     }
 }

@@ -93,6 +93,7 @@ public class MainUI {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         this.recentPath = "C:";
+
         primaryStage.setOnCloseRequest((e) -> {
             try {
                 ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("data"));
@@ -121,6 +122,7 @@ public class MainUI {
             }
 
         });
+
         this.loadData();
         FAT.closeAll();
         this.menuInit();

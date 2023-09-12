@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class SystemFileAppController extends BaseController {
-    public AnchorPane mainPane;
-    public Label titleBarL;
-    public HBox titleBarR;
     @FXML
     private AnchorPane topMainPane;
     @FXML

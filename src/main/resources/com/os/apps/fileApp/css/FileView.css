@@ -3,7 +3,7 @@
 
 /**************************************************面板设计*******************************************************/
 
-#Bar {
+#menuBar {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-effect: null;

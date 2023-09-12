@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -18,15 +19,14 @@ import java.util.Arrays;
 
 public class LoadViewCtl extends BaseController {
     public BorderPane titleBar;
-    @FXML
-    private Button yes;
-    @FXML
-    private Button no;
+    public HBox titleBarR;
+    public Button no;
+    public Button yes;
 
     @FXML
     protected void closeStage(MouseEvent event) {
         File log = new File("./data");
-        FileWriter fileWriter = null;
+        FileWriter fileWriter;
 
         try {
             fileWriter = new FileWriter(String.valueOf(log));
