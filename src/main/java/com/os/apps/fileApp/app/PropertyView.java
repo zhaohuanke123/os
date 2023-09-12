@@ -29,22 +29,13 @@ public class PropertyView extends Application {
     private String oldName;
     private String location;
     private Stage stage;
-    private TextField nameField;
-    private Label typeField;
-    private Label locField;
-    private Label spaceField;
-    private Label timeField;
-    private Button okBtn;
-    private Button cancelBtn;
-    private Button applyBtn;
-    private RadioButton checkRead;
-    private RadioButton checkWrite;
     private final ToggleGroup toggleGroup = new ToggleGroup();
-    private Image ico;
-    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/PropertyView.fxml"));
+    FXMLLoader fxmlLoader;
+    PropertyCtl propertyCtl;
     private final Parent root;
 
     public PropertyView(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap, Stage stage) throws IOException {
+        fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/PropertyView.fxml"));
         this.root = this.fxmlLoader.load();
         this.block = block;
         this.icon = icon;
@@ -53,87 +44,79 @@ public class PropertyView extends Application {
     }
 
     private void showView() {
-        this.nameField = (TextField) this.root.lookup("#na");
-        this.typeField = (Label) this.root.lookup("#type");
-        this.locField = (Label) this.root.lookup("#loc");
-        this.spaceField = (Label) this.root.lookup("#space");
-        this.timeField = (Label) this.root.lookup("#time");
-        this.okBtn = (Button) this.root.lookup("#yes");
-        this.cancelBtn = (Button) this.root.lookup("#no");
-        this.applyBtn = (Button) this.root.lookup("#apply");
-        this.checkRead = (RadioButton) this.root.lookup("#read");
-        this.checkRead.setToggleGroup(this.toggleGroup);
-        this.checkRead.setUserData(0);
-        this.checkWrite = (RadioButton) this.root.lookup("#write");
-        this.checkWrite.setToggleGroup(this.toggleGroup);
-        this.checkWrite.setUserData(1);
-        this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> this.applyBtn.setDisable(false));
-        Label icon = (Label) this.root.lookup("#propertyIcon");
-        ImageView imageView;
+        propertyCtl = this.fxmlLoader.getController();
+
+        propertyCtl.checkRead.setToggleGroup(this.toggleGroup);
+        propertyCtl.checkRead.setUserData(0);
+        propertyCtl.checkWrite.setToggleGroup(this.toggleGroup);
+        propertyCtl.checkWrite.setUserData(1);
+        this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> propertyCtl.applyButton.setDisable(false));
+
+        Image ico;
         if (this.block.getObject() instanceof Folder) {
             Folder folder = (Folder) this.block.getObject();
-            this.nameField.setText(folder.getFolderName());
-            this.typeField.setText(folder.getType());
-            this.locField.setText(folder.getLocation());
-            this.spaceField.setText(folder.getSpace());
-            this.timeField.setText(folder.getCreateTime());
+            propertyCtl.textField.setText(folder.getFolderName());
+            propertyCtl.typeField.setText(folder.getType());
+            propertyCtl.locField.setText(folder.getLocation());
+            propertyCtl.spaceField.setText(folder.getSpace());
+            propertyCtl.timeField.setText(folder.getCreateTime());
             this.oldName = folder.getFolderName();
             this.location = folder.getLocation();
-            this.checkRead.setDisable(true);
-            this.checkWrite.setDisable(true);
+            propertyCtl.checkRead.setDisable(true);
+            propertyCtl.checkWrite.setDisable(true);
             URL location = getClass().getResource("/com/os/apps/fileApp/res/folder.png");
-            this.ico = new Image(String.valueOf(location));
+            ico = new Image(String.valueOf(location));
         } else {
             File file = (File) this.block.getObject();
-            this.nameField.setText(file.getFileName());
-            this.typeField.setText(file.getType());
-            this.locField.setText(file.getLocation());
-            this.spaceField.setText(file.getSpace());
-            this.timeField.setText(file.getCreateTime());
+            propertyCtl.textField.setText(file.getFileName());
+            propertyCtl.typeField.setText(file.getType());
+            propertyCtl.locField.setText(file.getLocation());
+            propertyCtl.spaceField.setText(file.getSpace());
+            propertyCtl.timeField.setText(file.getCreateTime());
             this.oldName = file.getFileName();
             this.location = file.getLocation();
-            this.toggleGroup.selectToggle(file.getFlag() == 0 ? this.checkRead : this.checkWrite);
+            this.toggleGroup.selectToggle(file.getFlag() == 0 ? propertyCtl.checkRead : propertyCtl.checkWrite);
             URL location = getClass().getResource("/com/os/apps/fileApp/res/file.png");
-            this.ico = new Image(String.valueOf(location));
+            ico = new Image(String.valueOf(location));
         }
-        imageView = new ImageView(this.ico);
+
+        ImageView imageView = new ImageView(ico);
         imageView.setFitWidth(25.0);
         imageView.setFitHeight(25.0);
-        icon.setGraphic(imageView);
+        propertyCtl.propertyIcon.setGraphic(imageView);
 
-        this.okBtn.setOnMouseEntered(event -> PropertyView.this.okBtn.setStyle("-fx-background-color: #808080;"));
-        this.okBtn.setOnMouseExited(event -> PropertyView.this.okBtn.setStyle("-fx-background-color: #d3d3d3;"));
-        this.cancelBtn.setOnMouseEntered(event -> PropertyView.this.cancelBtn.setStyle("-fx-background-color: #808080;"));
-        this.cancelBtn.setOnMouseExited(event -> PropertyView.this.cancelBtn.setStyle("-fx-background-color: #d3d3d3;"));
-        this.applyBtn.setOnMouseEntered(event -> PropertyView.this.applyBtn.setStyle("-fx-background-color: #808080;"));
-        this.applyBtn.setOnMouseExited(event -> PropertyView.this.applyBtn.setStyle("-fx-background-color: #d3d3d3;"));
-        this.nameField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> this.applyBtn.setDisable(false));
+//        propertyCtl.acceptButton.setOnMouseEntered(event -> propertyCtl.acceptButton.setStyle("-fx-background-color: #808080;"));
+//        propertyCtl.acceptButton.setOnMouseExited(event -> propertyCtl.acceptButton.setStyle("-fx-background-color: #d3d3d3;"));
+//        propertyCtl.cancelButton.setOnMouseEntered(event -> propertyCtl.cancelButton.setStyle("-fx-background-color: #808080;"));
+//        propertyCtl.cancelButton.setOnMouseExited(event -> propertyCtl.cancelButton.setStyle("-fx-background-color: #d3d3d3;"));
+//        propertyCtl.applyButton.setOnMouseEntered(event -> propertyCtl.applyButton.setStyle("-fx-background-color: #808080;"));
+//        propertyCtl.applyButton.setOnMouseExited(event -> propertyCtl.applyButton.setStyle("-fx-background-color: #d3d3d3;"));
+        propertyCtl.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> propertyCtl.applyButton.setDisable(false));
+
         this.buttonOnAction();
         Scene scene = new Scene(this.root);
         this.stage = new Stage();
         MainUI.fileAppAdditionStageList.add(this.stage);
         scene.setFill(Color.TRANSPARENT);
         this.stage.initStyle(StageStyle.TRANSPARENT);
-        PropertyCtl propertyCtl = this.fxmlLoader.getController();
         propertyCtl.init(this.stage);
         this.stage.setScene(scene);
         this.stage.setTitle("属性");
         this.stage.setResizable(false);
-        this.stage.getIcons().add(this.ico);
+        this.stage.getIcons().add(ico);
         this.stage.setAlwaysOnTop(true);
         this.stage.show();
     }
 
     private void buttonOnAction() {
-        this.applyBtn.setOnAction((ActionEvent) -> {
-            String newName = this.nameField.getText();
+        propertyCtl.applyButton.setOnAction((ActionEvent) -> {
+            String newName = propertyCtl.textField.getText();
             String regEx = "[$./]";
             Pattern p = Pattern.compile(regEx);
             boolean m = p.matcher(newName).find();
             if (!this.oldName.equals(newName)) {
                 if (m) {
                     try {
-                        System.out.println(m);
                         MainUI.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
                     } catch (Exception var9) {
@@ -148,14 +131,7 @@ public class PropertyView extends Application {
                         System.out.println(var8.getMessage());
                     }
                 } else {
-                    if (this.block.getObject() instanceof Folder) {
-                        Folder thisFolder = (Folder) this.block.getObject();
-                        thisFolder.setFolderName(newName);
-                        this.pathMap.get(thisFolder.getPath()).setValue(newName);
-                        this.reLoc(this.location, this.location, this.oldName, newName, thisFolder);
-                    } else {
-                        ((File) this.block.getObject()).setFileName(newName);
-                    }
+                    setNewName(newName);
 
                     this.oldName = newName;
                     this.icon.setText(newName);
@@ -165,22 +141,20 @@ public class PropertyView extends Application {
             if (this.block.getObject() instanceof File) {
                 File thisFile = (File) this.block.getObject();
                 int newFlag = this.toggleGroup.getSelectedToggle().getUserData().hashCode();
-                System.out.println(this.toggleGroup.getSelectedToggle().getUserData());
                 thisFile.setFlag(newFlag);
             }
 
-            this.applyBtn.setDisable(true);
+            propertyCtl.applyButton.setDisable(true);
         });
-        this.cancelBtn.setOnAction((ActionEvent) -> this.stage.close());
-        this.okBtn.setOnAction((ActionEvent) -> {
-            String newName = this.nameField.getText();
+        propertyCtl.cancelButton.setOnAction((ActionEvent) -> this.stage.close());
+        propertyCtl.acceptButton.setOnAction((ActionEvent) -> {
+            String newName = propertyCtl.textField.getText();
             String regEx = "[$./]";
             Pattern p = Pattern.compile(regEx);
             boolean m = p.matcher(newName).find();
             if (!this.oldName.equals(newName)) {
                 if (m) {
                     try {
-                        System.out.println(m);
                         MainUI.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
                     } catch (Exception var9) {
@@ -195,14 +169,7 @@ public class PropertyView extends Application {
                         System.out.println(var8.getMessage());
                     }
                 } else {
-                    if (this.block.getObject() instanceof Folder) {
-                        Folder thisFolder = (Folder) this.block.getObject();
-                        thisFolder.setFolderName(newName);
-                        this.pathMap.get(thisFolder.getPath()).setValue(newName);
-                        this.reLoc(this.location, this.location, this.oldName, newName, thisFolder);
-                    } else {
-                        ((File) this.block.getObject()).setFileName(newName);
-                    }
+                    setNewName(newName);
 
                     this.icon.setText(newName);
                 }
@@ -216,6 +183,17 @@ public class PropertyView extends Application {
 
             this.stage.close();
         });
+    }
+
+    private void setNewName(String newName) {
+        if (this.block.getObject() instanceof Folder) {
+            Folder thisFolder = (Folder) this.block.getObject();
+            thisFolder.setFolderName(newName);
+            this.pathMap.get(thisFolder.getPath()).setValue(newName);
+            this.reLoc(this.location, this.location, this.oldName, newName, thisFolder);
+        } else {
+            ((File) this.block.getObject()).setFileName(newName);
+        }
     }
 
     private void reLoc(String oldP, String newP, String oldN, String newN, Folder folder) {

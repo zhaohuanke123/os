@@ -9,3 +9,48 @@
     /*-fx-border-radius: 0 0 12 12 ;*/
     /*-fx-background-radius: 0 0  12 12;*/
 }
+
+.text-field {
+    -fx-background-color: rgba(53, 89, 119, 0.3);
+    -fx-border-color: transparent;
+}
+
+.text-field .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.text-field .scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.text-field .scroll-pane .content {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+
+#bButton {
+    -fx-background-color: rgba(53, 89, 119, 0.4);
+    -fx-border-color: rgba(53, 89, 119, 0.2);
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+    -fx-background-insets: 0;
+}
+
+#bButton:hover {
+    -fx-background-color: rgba(53, 89, 119, 0.6);
+    -fx-border-color: rgba(53, 89, 119, 0.5);
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+    -fx-background-insets: 0;
+}
+
+#bButton:pressed {
+    -fx-background-color: rgba(53, 89, 119, 0.6);
+    -fx-border-color: rgba(53, 89, 119, 0.5);
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+    -fx-background-insets: 0;
+}
