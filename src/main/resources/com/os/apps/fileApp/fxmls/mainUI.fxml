@@ -11,175 +11,178 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane id="topMainPane" stylesheets="@../css/FileApp.css" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.fileApp.Controller.MainCtl">
-   <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/FileApp.css"
-               onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-               onMousePressed="#pressBar" onMouseReleased="#releaseBar"
-               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <left>
-         <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
-               prefWidth="134.0" stylesheets="@../css/FileApp.css" BorderPane.alignment="CENTER">
-            <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="文件管理器"
-                   HBox.hgrow="ALWAYS">
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../res/folder.png"/>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="15.0"/>
-               </padding>
-            </Label>
-         </HBox>
-      </left>
-      <right>
-         <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
-               spacing="10.0" BorderPane.alignment="CENTER">
-            <opaqueInsets>
-               <Insets/>
-            </opaqueInsets>
-            <cursor>
-               <Cursor fx:constant="DEFAULT"/>
-            </cursor>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
-               <graphic>
-                  <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
-                             pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <DropShadow/>
-                     </effect>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT"/>
-                     </cursor>
-                     <Image url="@../../../img/minimize0.png"/>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false"  prefHeight="0.0">
-               <graphic>
-                  <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
-                             preserveRatio="true">
-                     <effect>
-                        <InnerShadow/>
-                     </effect>
-                     <Image url="@../../../img/squares.png"/>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
-                    layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
-               <graphic>
-                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <DropShadow/>
-                     </effect>
-                     <Image url="@../../../img/close.png"/>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </HBox>
-      </right>
-   </BorderPane>
-   <TabPane  fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
-            tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
-      <Tab text="文件管理">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0">
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                  prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <HBox prefHeight="30.0" prefWidth="900.0" stylesheets="@../css/FileApp.css">
-                  <Label id="recentPath" prefHeight="33.0" prefWidth="67.0" text="当前路径:"
-                         textAlignment="CENTER">
-                     <font>
-                        <Font name="Segue UI Symbol" size="14.0"/>
-                     </font>
-                     <HBox.margin>
-                        <Insets left="250.0"/>
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="currentPath" prefHeight="24.0" prefWidth="504.0"
-                         style="-fx-border-radius: 5; -fx-border-color: #3686f1;" text="C:">
-                     <font>
-                        <Font name="Bell MT" size="16.0"/>
-                     </font>
-                     <padding>
-                        <Insets left="5.0"/>
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="5.0" top="5.0"/>
-                     </HBox.margin>
-                  </Label>
-               </HBox>
-               <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     prefHeight="503.0" prefWidth="900.0">
-                  <VBox.margin>
-                     <Insets bottom="5.0"/>
-                  </VBox.margin>
-                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="473.0"
-                        prefWidth="899.0" spacing="2.0">
-                     <HBox.margin>
-                        <Insets bottom="5.0"/>
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="5.0"/>
-                     </padding>
-                     <TreeView fx:id="treeView" maxHeight="-Infinity" maxWidth="-Infinity"
-                               minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0"
-                               prefWidth="244.0" stylesheets="@../css/FileApp.css">
-                        <HBox.margin>
-                           <Insets left="5.0"/>
-                        </HBox.margin>
-                     </TreeView>
-                     <FlowPane fx:id="flowPane" maxHeight="-Infinity" maxWidth="-Infinity"
-                               minHeight="-Infinity" minWidth="-Infinity"
-                               nodeOrientation="LEFT_TO_RIGHT" prefHeight="507.0" prefWidth="644.0"
-                               rowValignment="TOP" stylesheets="@../css/FileApp.css">
-                        <HBox.margin>
-                           <Insets right="5.0"/>
-                        </HBox.margin>
-                     </FlowPane>
-                  </HBox>
-               </HBox>
-            </VBox>
-         </AnchorPane>
-      </Tab>
-      <Tab fx:id="chartTab" text="磁盘使用情况">
-         <Pane prefHeight="200.0" prefWidth="200.0">
-            <HBox layoutX="6.0" layoutY="5.0" prefHeight="534.0" prefWidth="888.0">
-               <HBox prefHeight="570.0" prefWidth="600.0" style="-fx-background-color: #e1fcfd;">
-                  <PieChart fx:id="pie" prefHeight="500.0" prefWidth="452.0" startAngle="50.3"/>
-               </HBox>
-               <VBox fillWidth="false" prefHeight="570.0" prefWidth="600.0">
-                  <TableView fx:id="diskTable" prefHeight="300.0" prefWidth="453.0">
-                     <columns>
-                        <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="磁盘块"/>
-                        <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="索引"/>
-                        <TableColumn prefWidth="85.0" resizable="false" sortable="false" text="类型"/>
-                        <TableColumn prefWidth="159.199951171875" resizable="false" sortable="false"
-                                     text="内容"/>
-                     </columns>
-                  </TableView>
-                  <TableView fx:id="openFile" prefHeight="270.0" prefWidth="451.0">
-                     <columns>
-                        <TableColumn prefWidth="62.13329774141312" resizable="false" sortable="false"
-                                     text="文件名"/>
-                        <TableColumn prefWidth="70.66668701171875" resizable="false" sortable="false"
-                                     text="打开方式"/>
-                        <TableColumn prefWidth="68.0" resizable="false" sortable="false"
-                                     text="起始盘块"/>
-                        <TableColumn prefWidth="65.60005187988281" resizable="false" sortable="false"
-                                     text="文件长度"/>
-                        <TableColumn fx:id="filePath" prefWidth="179.2000732421875" resizable="false"
-                                     sortable="false" text="文件路径"/>
-                     </columns>
-                  </TableView>
-               </VBox>
+    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/FileApp.css"
+                onDragDone="#dragBarDone" onMouseDragged="#dragBar"
+                onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <left>
+            <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
+                  prefWidth="134.0" stylesheets="@../css/FileApp.css" BorderPane.alignment="CENTER">
+                <Label fx:id="titleBarL" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
+                       text="文件管理器"
+                       HBox.hgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../res/folder.png"/>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="15.0"/>
+                    </padding>
+                </Label>
             </HBox>
-         </Pane>
-      </Tab>
-   </TabPane>
+        </left>
+        <right>
+            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+                  spacing="10.0" BorderPane.alignment="CENTER">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <cursor>
+                    <Cursor fx:constant="DEFAULT"/>
+                </cursor>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
+                    <graphic>
+                        <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT"/>
+                            </cursor>
+                            <Image url="@../../../img/minimize0.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" prefHeight="0.0">
+                    <graphic>
+                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <effect>
+                                <InnerShadow/>
+                            </effect>
+                            <Image url="@../../../img/squares.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
+                        layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
+                    <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
+                            <Image url="@../../../img/close.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </right>
+    </BorderPane>
+
+    <TabPane fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+             minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
+             tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
+             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+        <Tab id="tab" text="文件管理">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0">
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                      prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <HBox prefHeight="30.0" prefWidth="900.0" stylesheets="@../css/FileApp.css">
+
+                        <Label id="recentPath" prefHeight="33.0" prefWidth="67.0" text="当前路径:"
+                               textAlignment="CENTER">
+                            <font>
+                                <Font name="Segue UI Symbol" size="14.0"/>
+                            </font>
+                            <HBox.margin>
+                                <Insets left="250.0"/>
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="currentPath" prefHeight="24.0" prefWidth="504.0"
+                               text="C:">
+                            <font>
+                                <Font name="Bell MT" size="16.0"/>
+                            </font>
+                            <padding>
+                                <Insets left="5.0"/>
+                            </padding>
+                            <HBox.margin>
+                                <Insets bottom="5.0" top="5.0"/>
+                            </HBox.margin>
+                        </Label>
+                    </HBox>
+                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                          prefHeight="503.0" prefWidth="900.0">
+                        <VBox.margin>
+                            <Insets bottom="5.0"/>
+                        </VBox.margin>
+                        <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="473.0"
+                              prefWidth="899.0" spacing="2.0">
+                            <HBox.margin>
+                                <Insets bottom="5.0"/>
+                            </HBox.margin>
+                            <padding>
+                                <Insets bottom="5.0"/>
+                            </padding>
+                            <TreeView fx:id="treeView" maxHeight="-Infinity" maxWidth="-Infinity"
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0"
+                                      prefWidth="244.0" stylesheets="@../css/FileApp.css">
+                                <HBox.margin>
+                                    <Insets left="5.0"/>
+                                </HBox.margin>
+                            </TreeView>
+                            <FlowPane fx:id="flowPane" maxHeight="-Infinity" maxWidth="-Infinity"
+                                      minHeight="-Infinity" minWidth="-Infinity"
+                                      nodeOrientation="LEFT_TO_RIGHT" prefHeight="507.0" prefWidth="644.0"
+                                      rowValignment="TOP" stylesheets="@../css/FileApp.css">
+                                <HBox.margin>
+                                    <Insets right="5.0"/>
+                                </HBox.margin>
+                            </FlowPane>
+                        </HBox>
+                    </HBox>
+                </VBox>
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="chartTab" text="磁盘使用情况">
+            <Pane prefHeight="200.0" prefWidth="200.0">
+                <HBox layoutX="6.0" layoutY="5.0" prefHeight="534.0" prefWidth="888.0">
+                    <HBox prefHeight="570.0" prefWidth="600.0" style="-fx-background-color: #e1fcfd;">
+                        <PieChart fx:id="pie" prefHeight="500.0" prefWidth="452.0" startAngle="50.3"/>
+                    </HBox>
+                    <VBox fillWidth="false" prefHeight="570.0" prefWidth="600.0">
+                        <TableView fx:id="diskTable" prefHeight="300.0" prefWidth="453.0">
+                            <columns>
+                                <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="磁盘块"/>
+                                <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="索引"/>
+                                <TableColumn prefWidth="85.0" resizable="false" sortable="false" text="类型"/>
+                                <TableColumn prefWidth="159.199951171875" resizable="false" sortable="false"
+                                             text="内容"/>
+                            </columns>
+                        </TableView>
+                        <TableView fx:id="openFile" prefHeight="270.0" prefWidth="451.0">
+                            <columns>
+                                <TableColumn prefWidth="62.13329774141312" resizable="false" sortable="false"
+                                             text="文件名"/>
+                                <TableColumn prefWidth="70.66668701171875" resizable="false" sortable="false"
+                                             text="打开方式"/>
+                                <TableColumn prefWidth="68.0" resizable="false" sortable="false"
+                                             text="起始盘块"/>
+                                <TableColumn prefWidth="65.60005187988281" resizable="false" sortable="false"
+                                             text="文件长度"/>
+                                <TableColumn fx:id="filePath" prefWidth="179.2000732421875" resizable="false"
+                                             sortable="false" text="文件路径"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </HBox>
+            </Pane>
+        </Tab>
+    </TabPane>
 </AnchorPane>
