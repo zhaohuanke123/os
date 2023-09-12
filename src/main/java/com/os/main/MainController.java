@@ -232,9 +232,7 @@ public class MainController {
         UIThread.stageList = stageList;
     }
 
-    /**
-     * 返回桌面
-     */
+    // 返回桌面
     public void toDesk() {
         if (this.haveChanged) {
             this.haveChanged = false;
@@ -385,207 +383,246 @@ public class MainController {
         System.out.println(this.tipBox.getWidth() + " " + this.tipBox.getHeight());
     }
 
+    // 打开文件管理器
+    public void fileAppOpen() throws Exception {
+        // 窗口名称
+        String stageName = "com/os/apps/fileApp";
+
+        // 检查窗口是否已存在
+        Stage stage = checkStage(stageName);
+
+        // 如果窗口存在但未显示，将其移除
+        if (stage != null && !stage.isShowing()) removeStage(stageName);
+
+        // 再次检查窗口是否存在
+        stage = checkStage(stageName);
+
+        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
+        if (stage == null) {
+            stage = new Stage();
+            new MainUI(stage);
+            stageList.add(new StageRecord(stageName, stage));
+        }
+
+        // 如果窗口已显示，将其显示在最前面
+        if (stage.isShowing()) stage.show();
+
+        // 设置窗口始终位于其他窗口之上
+        stage.setAlwaysOnTop(true);
+        // 将窗口从最小化状态还原
+        stage.setIconified(false);
+        // 将窗口置于最前
+        stage.toFront();
+
+        // 更新窗口列表中的信息
+        updateStageList(stageName);
+
+        // 设置文件管理器按钮的下划线效果，并修改其样式
+        this.fileManagerButton.setUnderline(true);
+        this.fileManagerButton.setStyle("-fx-background-color: transparent, aliceblue;\n-fx-background-radius: 12;\n-fx-text-fill: black;\n-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+    }
+
+    // 打开帮助界面
+    public void helpAppOpen() {
+        // 窗口名称
+        String stageName = "com/os/apps/helpApp";
+
+        // 检查窗口是否已存在
+        Stage stage = checkStage(stageName);
+
+        // 如果窗口存在但未显示，将其移除
+        if (stage != null && !stage.isShowing()) removeStage(stageName);
+
+        // 创建 HelpApp 实例
+        HelpApp helpApp = new HelpApp();
+
+        // 再次检查窗口是否存在
+        stage = checkStage(stageName);
+
+        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
+        if (stage == null) {
+            try {
+                stage = new Stage();
+
+                // 设置窗口的尺寸限制
+                stage.setMinHeight(550.0);
+                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
+                stage.setMinWidth(800.0);
+                stage.setMaxWidth(this.primaryStage.getWidth());
+                stage.setHeight(550.0);
+                stage.setWidth(800.0);
+
+                // 使用 HelpApp 实例初始化新窗口
+                helpApp.start(stage);
+
+                // 将新窗口记录添加到窗口列表
+                stageList.add(new StageRecord(stageName, stage));
+            } catch (IOException e) {
+                e.getStackTrace();
+            }
+        }
+
+        // 如果窗口已显示，将其显示在最前面
+        if (stage.isShowing()) stage.show();
+
+        // 设置窗口始终位于其他窗口之上
+        stage.setAlwaysOnTop(true);
+        // 将窗口从最小化状态还原
+        stage.setIconified(false);
+        // 将窗口置于最前
+        stage.toFront();
+
+        // 更新窗口列表中的信息
+        updateStageList(stageName);
+
+        // 设置帮助界面按钮的下划线效果，并修改其样式
+        this.helpButton.setUnderline(true);
+        this.helpButton.setStyle("-fx-background-color: transparent,aliceblue;\n-fx-background-radius:20;\n-fx-text-fill: black;\n-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+    }
+
+    public void occupancyAppOpen() {
+//        Stage stage = checkStage("com/os/apps/occupancyApp");
+//        if (stage != null && !stage.isShowing()) {
+//            removeStage("com/os/apps/occupancyApp");
+//        }
+//
+//        OccupancyApp occupancyApp = new OccupancyApp();
+//        stage = checkStage("com/os/apps/occupancyApp");
+//        if (stage == null) {
+//            try {
+//                stage = new Stage();
+////                double ratioW = this.primaryStage.getWidth() / 1920.0;
+////                double ratioH = this.primaryStage.getHeight() / 1080.0;
+//                stage.setMinHeight(530.0);
+//                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
+//                stage.setMinWidth(1000.0);
+//                stage.setMaxWidth(this.primaryStage.getWidth());
+//                stage.setWidth(1000.0);
+//                stage.setHeight(530.0);
+//                occupancyApp.start(stage);
+//                stageList.add(new StageRecord("com/os/apps/occupancyApp", stage));
+//            } catch (IOException var7) {
+//                System.out.println(Arrays.toString(var7.getStackTrace()));
+//            }
+//        }
+//
+//        if (stage.isShowing()) {
+//            stage.show();
+//        }
+//
+//        stage.setOnCloseRequest(event -> {
+//            MainController.this.occupancyButton.setUnderline(false);
+//            MainController.this.occupancyButton.setStyle("");
+//        });
+//        stage.setAlwaysOnTop(true);
+//        stage.setIconified(false);
+//        stage.toFront();
+//        updateStageList("com/os/apps/occupancyApp");
+//        this.occupancyButton.setUnderline(true);
+//        this.occupancyButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+    }
+
+    public void processAppOpen() {
+//        Stage stage = checkStage("com/os/apps/processApp");
+//        if (stage != null && !stage.isShowing()) {
+//            removeStage("com/os/apps/processApp");
+//        }
+//
+//        ProcessApp processApp = new ProcessApp();
+//        stage = checkStage("com/os/apps/processApp");
+//        if (stage == null) {
+//            try {
+//                stage = new Stage();
+////                double ratioW = this.primaryStage.getWidth() / 1920.0;
+////                double ratioH = this.primaryStage.getHeight() / 1080.0;
+//                stage.setMinHeight(500.0);
+//                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
+//                stage.setMinWidth(1100.0);
+//                stage.setMaxWidth(this.primaryStage.getWidth());
+//                stage.setWidth(1100.0);
+//                stage.setHeight(500.0);
+//                processApp.start(stage);
+//                stageList.add(new StageRecord("com/os/apps/processApp", stage));
+//            } catch (IOException var7) {
+//                System.out.println(Arrays.toString(var7.getStackTrace()));
+//            }
+//        }
+//
+//        if (stage.isShowing()) {
+//            stage.show();
+//        }
+//
+//        stage.setAlwaysOnTop(true);
+//        stage.setIconified(false);
+//        stage.toFront();
+//        updateStageList("com/os/apps/processApp");
+//        this.processButton.setUnderline(true);
+//        this.processButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+    }
+
+    public void executableFileAppOpen() {
+//        Stage executableFileStage = checkStage("com/os/apps/systemFileApp");
+//        if (executableFileStage != null && !executableFileStage.isShowing()) {
+//            removeStage("com/os/apps/systemFileApp");
+//        }
+//
+//        SystemFileApp systemFileApp = new SystemFileApp();
+//        Stage stage = checkStage("com/os/apps/systemFileApp");
+//        if (stage == null) {
+//            try {
+//                stage = new Stage();
+////                double ratioW = this.primaryStage.getWidth() / 1920.0;
+////                double ratioH = this.primaryStage.getHeight() / 1080.0;
+//                stage.setMinHeight(500.0);
+//                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
+//                stage.setMinWidth(500.0);
+//                stage.setMaxWidth(this.primaryStage.getWidth());
+//                stage.setWidth(500.0);
+//                stage.setHeight(500.0);
+//                systemFileApp.start(stage);
+//                stageList.add(new StageRecord("com/os/apps/systemFileApp", stage));
+//            } catch (IOException var8) {
+//                System.out.println(Arrays.toString(var8.getStackTrace()));
+//            }
+//        }
+//
+//        if (stage.isShowing()) {
+//            stage.show();
+//        }
+//
+//        stage.setAlwaysOnTop(true);
+//        stage.setIconified(false);
+//        stage.toFront();
+//        updateStageList("com/os/apps/systemFileApp");
+//        this.executableFileButton.setUnderline(true);
+//        this.executableFileButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+    }
+
+    // 检查窗口是否已存在
+    public static Stage checkStage(String name) {
+        for (StageRecord stageRecord : stageList) {
+            // 如果窗口的名称与传入的名称相匹配，返回该窗口对象
+            if (stageRecord.name.equals(name)) {
+                return stageRecord.stage;
+            }
+        }
+        return null;
+    }
+
+    // 移除指定窗口
     public static void removeStage(String name) {
         for (int i = stageList.size() - 1; i >= 0; --i) {
+            // 如果窗口的名称与传入的名称相匹配，移除该窗口记录
             if (stageList.get(i).name.equals(name)) {
                 stageList.remove(i);
             }
         }
     }
 
-    public void fileAppOpen() throws Exception {
-        Stage stage = checkStage("com/os/apps/fileApp");
-        if (stage != null && !stage.isShowing()) {
-            removeStage("com/os/apps/fileApp");
-        }
-
-        stage = checkStage("com/os/apps/fileApp");
-        if (stage == null) {
-            stage = new Stage();
-            new MainUI(stage);
-            stageList.add(new StageRecord("com/os/apps/fileApp", stage));
-        }
-
-        if (stage.isShowing()) {
-            stage.show();
-        }
-
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
-        updateStageList("com/os/apps/fileApp");
-        this.fileManagerButton.setUnderline(true);
-        this.fileManagerButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
-    }
-
-    public void helpAppOpen() {
-        Stage stage = checkStage("com/os/apps/helpApp");
-        if (stage != null && !stage.isShowing()) {
-            removeStage("com/os/apps/helpApp");
-        }
-
-        HelpApp helpApp = new HelpApp();
-        stage = checkStage("com/os/apps/helpApp");
-        if (stage == null) {
-            try {
-                stage = new Stage();
-//                double ratioW = this.primaryStage.getWidth() / 1920.0;
-//                double ratioH = this.primaryStage.getHeight() / 1080.0;
-                stage.setMinHeight(550.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(800.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setWidth(800.0);
-                stage.setHeight(550.0);
-                helpApp.start(stage);
-                stageList.add(new StageRecord("com/os/apps/helpApp", stage));
-            } catch (IOException var7) {
-                System.out.println(Arrays.toString(var7.getStackTrace()));
-            }
-        }
-
-        if (stage.isShowing()) {
-            stage.show();
-        }
-
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
-        updateStageList("com/os/apps/helpApp");
-        this.helpButton.setUnderline(true);
-        this.helpButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius:20;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
-    }
-
-    public void occupancyAppOpen() {
-        Stage stage = checkStage("com/os/apps/occupancyApp");
-        if (stage != null && !stage.isShowing()) {
-            removeStage("com/os/apps/occupancyApp");
-        }
-
-        OccupancyApp occupancyApp = new OccupancyApp();
-        stage = checkStage("com/os/apps/occupancyApp");
-        if (stage == null) {
-            try {
-                stage = new Stage();
-//                double ratioW = this.primaryStage.getWidth() / 1920.0;
-//                double ratioH = this.primaryStage.getHeight() / 1080.0;
-                stage.setMinHeight(530.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(1000.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setWidth(1000.0);
-                stage.setHeight(530.0);
-                occupancyApp.start(stage);
-                stageList.add(new StageRecord("com/os/apps/occupancyApp", stage));
-            } catch (IOException var7) {
-                System.out.println(Arrays.toString(var7.getStackTrace()));
-            }
-        }
-
-        if (stage.isShowing()) {
-            stage.show();
-        }
-
-        stage.setOnCloseRequest(event -> {
-            MainController.this.occupancyButton.setUnderline(false);
-            MainController.this.occupancyButton.setStyle("");
-        });
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
-        updateStageList("com/os/apps/occupancyApp");
-        this.occupancyButton.setUnderline(true);
-        this.occupancyButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
-    }
-
-    public void processAppOpen() {
-        Stage stage = checkStage("com/os/apps/processApp");
-        if (stage != null && !stage.isShowing()) {
-            removeStage("com/os/apps/processApp");
-        }
-
-        ProcessApp processApp = new ProcessApp();
-        stage = checkStage("com/os/apps/processApp");
-        if (stage == null) {
-            try {
-                stage = new Stage();
-//                double ratioW = this.primaryStage.getWidth() / 1920.0;
-//                double ratioH = this.primaryStage.getHeight() / 1080.0;
-                stage.setMinHeight(500.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(1100.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setWidth(1100.0);
-                stage.setHeight(500.0);
-                processApp.start(stage);
-                stageList.add(new StageRecord("com/os/apps/processApp", stage));
-            } catch (IOException var7) {
-                System.out.println(Arrays.toString(var7.getStackTrace()));
-            }
-        }
-
-        if (stage.isShowing()) {
-            stage.show();
-        }
-
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
-        updateStageList("com/os/apps/processApp");
-        this.processButton.setUnderline(true);
-        this.processButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
-    }
-
-    public void executableFileAppOpen() {
-        Stage executableFileStage = checkStage("com/os/apps/systemFileApp");
-        if (executableFileStage != null && !executableFileStage.isShowing()) {
-            removeStage("com/os/apps/systemFileApp");
-        }
-
-        SystemFileApp systemFileApp = new SystemFileApp();
-        Stage stage = checkStage("com/os/apps/systemFileApp");
-        if (stage == null) {
-            try {
-                stage = new Stage();
-//                double ratioW = this.primaryStage.getWidth() / 1920.0;
-//                double ratioH = this.primaryStage.getHeight() / 1080.0;
-                stage.setMinHeight(500.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(500.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setWidth(500.0);
-                stage.setHeight(500.0);
-                systemFileApp.start(stage);
-                stageList.add(new StageRecord("com/os/apps/systemFileApp", stage));
-            } catch (IOException var8) {
-                System.out.println(Arrays.toString(var8.getStackTrace()));
-            }
-        }
-
-        if (stage.isShowing()) {
-            stage.show();
-        }
-
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
-        updateStageList("com/os/apps/systemFileApp");
-        this.executableFileButton.setUnderline(true);
-        this.executableFileButton.setStyle("    -fx-background-color: transparent,     aliceblue;\n    -fx-background-radius: 12;\n    -fx-text-fill: black;\n    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
-    }
-
-    public static Stage checkStage(String name) {
-        for (StageRecord stageRecord : stageList) {
-            if (stageRecord.name.equals(name)) {
-                return stageRecord.stage;
-            }
-        }
-
-        return null;
-    }
-
+    // 更新窗口列表中的信息
     public static void updateStageList(String name) {
         for (int i = 0; i < stageList.size(); ++i) {
+            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
             if (stageList.get(i).name.equals(name)) {
                 StageRecord stageRecord = stageList.get(i);
                 stageList.remove(stageRecord);
@@ -593,7 +630,6 @@ public class MainController {
                 return;
             }
         }
-
     }
 
     public void timeInit() {

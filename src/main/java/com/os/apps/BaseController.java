@@ -7,74 +7,92 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class BaseController {
-    protected boolean haveResize = true;
-    protected boolean isMax = false;
-    protected Stage stage;
-    @FXML
-    protected BorderPane titleBar;
-    protected double xOffset = 0.0;
-    protected double yOffset = 0.0;
+    protected boolean haveResize = true;  // 是否允许窗口调整大小
+    protected boolean isMax = false;  // 窗口是否已最大化
+    protected Stage stage;  // 窗口对象
+    protected double xOffset = 0.0;  // 鼠标拖动时的X偏移
+    protected double yOffset = 0.0;  // 鼠标拖动时的Y偏移
 
+    @FXML
+    protected BorderPane titleBar;  // 标题栏界面组件
+
+    // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {
         this.stage = stage;
     }
 
+    // 关闭窗口
     @FXML
-    protected void closeStage(MouseEvent event) {
+    protected void closeStage() {
         this.stage.close();
     }
 
+    // 最小化窗口
     @FXML
-    void minimizeStage(MouseEvent event) {
+    void minimizeStage() {
         this.stage.setIconified(true);
     }
 
+    // 记录鼠标按下时的X坐标和Y坐标
     @FXML
     void pressBar(MouseEvent event) {
         this.xOffset = event.getSceneX();
         this.yOffset = event.getSceneY();
     }
 
+    // 根据鼠标拖动的距离，移动窗口
     @FXML
     void dragBar(MouseEvent event) {
         this.stage.setX(event.getScreenX() - this.xOffset);
         this.stage.setY(event.getScreenY() - this.yOffset);
     }
 
+    // 拖动完成后恢复窗口不透明度
     @FXML
-    void dragBarDone(DragEvent event) {
+    void dragBarDone() {
         this.stage.setOpacity(1.0);
     }
 
+    // 鼠标释放后恢复窗口不透明度
     @FXML
-    void releaseBar(MouseEvent event) {
+    void releaseBar() {
         this.stage.setOpacity(1.0);
     }
 
+    // 调整窗口大小按钮的点击事件处理方法
     @FXML
-    void resizeStage(MouseEvent event) {
-        if (this.haveResize) {
-            this.haveResize = false;
-            if (!this.isMax) {
-                this.stage.setWidth(this.stage.getMaxWidth());
-                this.stage.setHeight(this.stage.getMaxHeight());
-            } else {
-                this.stage.setWidth(this.stage.getMinWidth());
-                this.stage.setHeight(this.stage.getMinHeight());
-            }
-            this.stage.setX(0.0);
-            this.stage.setY(0.0);
-            this.adaptWindow();
+    void resizeStage() {
+        // 如果窗口大小不能调整，直接返回
+        if (!this.haveResize) return;
 
-            this.isMax = !this.isMax;
-            this.haveResize = true;
+        // 设置无法改变窗口大小
+        this.haveResize = false;
+
+        if (!this.isMax) {
+            // 如果窗口没有最大化，则最大化窗口
+            this.stage.setWidth(this.stage.getMaxWidth());
+            this.stage.setHeight(this.stage.getMaxHeight());
+        } else {
+            // 如果窗口已经最大化，则还原窗口
+            this.stage.setWidth(this.stage.getMinWidth());
+            this.stage.setHeight(this.stage.getMinHeight());
         }
+
+        // 调整窗口布局
+        this.stage.setX(0.0);
+        this.stage.setY(0.0);
+        this.adaptWindow();
+
+        // 改变窗口是否最大化的记录
+        this.isMax = !this.isMax;
+
+        // 恢复窗口大小可以改变
+        this.haveResize = true;
     }
 
+    // 调整窗口布局的方法
     public void adaptWindow() {
         double sw = this.stage.getWidth();
-        double sh = this.stage.getHeight();
-        double w = 50.0 * sw / 1920.0;
         this.titleBar.setPrefWidth(sw);
         this.titleBar.setMaxWidth(sw);
         this.titleBar.setMinWidth(sw);

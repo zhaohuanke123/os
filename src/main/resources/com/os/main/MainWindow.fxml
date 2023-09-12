@@ -16,15 +16,15 @@
     </ImageView>
 
     <!--   用于模糊背景-->
-    <Pane id="buttonBarBackGround" fx:id="buttonBarBackGround" stylesheets="@MainWindow.css">
-    </Pane>
+    <Pane id="buttonBarBackGround" fx:id="buttonBarBackGround" stylesheets="@MainWindow.css"/>
+
     <!-- 任务栏 buttonBar -->
     <Pane id="buttonBar" fx:id="buttonBar" layoutX="-1.0" layoutY="464.0" prefHeight="105.0" prefWidth="1035.0"
           stylesheets="@MainWindow.css">
         <HBox id="appBox" fx:id="appBox" alignment="CENTER" layoutX="247.0" layoutY="13.0" prefHeight="84.0"
               prefWidth="392.0" stylesheets="@MainWindow.css">
 
-            <!-- 查看可执行文件 的按钮组件  -->
+            <!-- 查看可执行文件按钮  -->
             <Button id="appButton" fx:id="executableFileButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
                     stylesheets="@MainWindow.css">
@@ -35,7 +35,7 @@
                 </graphic>
             </Button>
 
-            <!--  文件管理器 的按钮组件 -->
+            <!--  文件管理器按钮 -->
             <Button id="appButton" fx:id="fileManagerButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
                     stylesheets="@MainWindow.css">
@@ -114,6 +114,7 @@
                 <Button id="timeButton2" fx:id="timeButton2" mnemonicParsing="false" stylesheets="@MainWindow.css"
                         text="Button"/>
             </VBox>
+
             <!-- 返回桌面按钮-->
             <Button id="deskButton" fx:id="deskButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" stylesheets="@MainWindow.css">
