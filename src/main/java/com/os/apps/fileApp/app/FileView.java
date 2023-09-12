@@ -7,6 +7,7 @@ import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +77,8 @@ public class FileView extends Application {
         Menu fileMenu = Bar.getMenus().get(0);
         Menu wordMenu = Bar.getMenus().get(1);
         this.saveItem = fileMenu.getItems().get(0);
-        this.saveItem.setGraphic(new ImageView("com/os/apps/fileApp/res/save.png"));
+        URL location = getClass().getResource("/com/os/apps/fileApp/res/save.png");
+        this.saveItem.setGraphic(new ImageView(String.valueOf(location)));
         ((ImageView) this.saveItem.getGraphic()).setFitWidth(15.0);
         ((ImageView) this.saveItem.getGraphic()).setFitHeight(15.0);
         this.saveItem.setOnAction((ActionEvent) -> {
@@ -92,7 +94,8 @@ public class FileView extends Application {
 
         });
         this.save_close = fileMenu.getItems().get(1);
-        this.save_close.setGraphic(new ImageView("com/os/apps/fileApp/res/save.png"));
+        URL location1 = getClass().getResource("/com/os/apps/fileApp/res/save.png");
+        this.save_close.setGraphic(new ImageView(String.valueOf(location)));
         ((ImageView) this.save_close.getGraphic()).setFitWidth(15.0);
         ((ImageView) this.save_close.getGraphic()).setFitHeight(15.0);
         this.save_close.setOnAction((ActionEvent) -> {
@@ -103,7 +106,8 @@ public class FileView extends Application {
             this.stage.close();
         });
         this.closeItem = fileMenu.getItems().get(2);
-        this.closeItem.setGraphic(new ImageView("com/os/apps/fileApp/res/close.png"));
+        URL location2 = getClass().getResource("/com/os/apps/fileApp/res/close.png");
+        this.closeItem.setGraphic(new ImageView(String.valueOf(location)));
         ((ImageView) this.closeItem.getGraphic()).setFitWidth(15.0);
         ((ImageView) this.closeItem.getGraphic()).setFitHeight(15.0);
         this.closeItem.setOnAction((ActionEvent) -> {
@@ -178,7 +182,8 @@ public class FileView extends Application {
         this.stage.setScene(scene);
         this.stage.setTitle(this.file.getFileName());
         this.stage.titleProperty().bind(this.file.fileNamePProperty());
-        this.stage.getIcons().add(new Image("com/os/apps/fileApp/res/file.png"));
+        URL location3 = getClass().getResource("/com/os/apps/fileApp/res/file.png");
+        this.stage.getIcons().add(new Image(String.valueOf(location)));
         MainUI.fileAppAdditionStageList.add(this.stage);
         scene.setFill(Color.TRANSPARENT);
         this.stage.initStyle(StageStyle.TRANSPARENT);

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -80,7 +81,8 @@ public class PropertyView extends Application {
             this.location = folder.getLocation();
             this.checkRead.setDisable(true);
             this.checkWrite.setDisable(true);
-            this.ico = new Image("com/os/apps/fileApp/res/folder.png");
+            URL location = getClass().getResource("/com/os/apps/fileApp/res/folder.png");
+            this.ico = new Image(String.valueOf(location));
         } else {
             File file = (File) this.block.getObject();
             this.nameField.setText(file.getFileName());
@@ -91,7 +93,8 @@ public class PropertyView extends Application {
             this.oldName = file.getFileName();
             this.location = file.getLocation();
             this.toggleGroup.selectToggle(file.getFlag() == 0 ? this.checkRead : this.checkWrite);
-            this.ico = new Image("com/os/apps/fileApp/res/file.png");
+            URL location = getClass().getResource("/com/os/apps/fileApp/res/file.png");
+            this.ico = new Image(String.valueOf(location));
         }
         imageView = new ImageView(this.ico);
         imageView.setFitWidth(25.0);
