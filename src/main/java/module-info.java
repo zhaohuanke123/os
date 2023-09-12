@@ -1,6 +1,5 @@
 module os {
     requires javafx.fxml;
-    requires javafx.graphics;
     requires javafx.controls;
 
     opens com.os.apps to javafx.fxml;
