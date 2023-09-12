@@ -92,7 +92,7 @@
       <Button fx:id="no" layoutX="244.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
               text="取消"/>
       <Text fx:id="text" layoutX="11.0" layoutY="19.0" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="对对对对对对多" wrappingWidth="309.0402374267578"
+            text="无无无无" wrappingWidth="309.0402374267578"
             AnchorPane.topAnchor="7.0"/>
    </AnchorPane>
 </AnchorPane>

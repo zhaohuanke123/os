@@ -332,7 +332,8 @@ public class MainUI {
 
                 Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
                 Tooltip.install(MainUI.this.flowPane, new Tooltip(thisBlock.getObject().toString()));
-                ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0.5);");
+                ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0.5); " +
+                        "-fx-background-radius: 12;");
             });
             this.icons[i].setOnMouseExited(event -> {
                 Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);

@@ -86,7 +86,7 @@
       <Pane id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
          <VBox id="contentPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
-            <MenuBar fx:id="Bar" prefHeight="40.0" prefWidth="600.0">
+            <MenuBar id="Bar" prefHeight="40.0" prefWidth="600.0">
                <Menu fx:id="fileMenu" mnemonicParsing="false" text="文件">
                   <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
                   <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
@@ -114,7 +114,7 @@
                </Menu>
             </MenuBar>
             <TextArea id="contentField" fx:id="contentField" prefHeight="482.0" prefWidth="600.0"
-                      style="-fx-border-color: #f3f3f3;" stylesheets="@../css/FileView.css" wrapText="true">
+                       stylesheets="@../css/FileView.css" wrapText="true">
                <font>
                   <Font size="16.0"/>
                </font>
