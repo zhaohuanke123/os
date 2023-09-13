@@ -15,14 +15,6 @@ public class ProcessDetailData {
     private final StringProperty result = new SimpleStringProperty();
     private ProgressBar progressBar = new ProgressBar();
 
-    public String getProcessName() {
-        return this.processName.get();
-    }
-
-    public StringProperty processNameProperty() {
-        return this.processName;
-    }
-
     public void setProcessName(String processName) {
         this.processName.set(processName);
     }
@@ -31,76 +23,28 @@ public class ProcessDetailData {
         return this.processState.get();
     }
 
-    public StringProperty processStateProperty() {
-        return this.processState;
-    }
-
     public void setProcessState(String processState) {
         this.processState.set(processState);
-    }
-
-    public String getWhichFile() {
-        return this.whichFile.get();
-    }
-
-    public StringProperty whichFileProperty() {
-        return this.whichFile;
     }
 
     public void setWhichFile(String whichFile) {
         this.whichFile.set(whichFile);
     }
 
-    public String getHavedDevice() {
-        return this.havedDevice.get();
-    }
-
-    public StringProperty havedDeviceProperty() {
-        return this.havedDevice;
-    }
-
     public void setHavedDevice(String havedDevice) {
         this.havedDevice.set(havedDevice);
-    }
-
-    public String getHavedPid() {
-        return this.havedPid.get();
-    }
-
-    public StringProperty havedPidProperty() {
-        return this.havedPid;
     }
 
     public void setHavedPid(String havedPid) {
         this.havedPid.set(havedPid);
     }
 
-    public String getResult() {
-        return this.result.get();
-    }
-
-    public StringProperty resultProperty() {
-        return this.result;
-    }
-
     public void setResult(String result) {
         this.result.set(result);
     }
 
-    public ProgressBar getProgressBar() {
-        return this.progressBar;
-    }
-
     public void setProgressBar(ProgressBar progressBar) {
         this.progressBar = progressBar;
-    }
-
-    public String getHavedMemory() {
-        return this.havedMemory.get();
-    }
-
-    public StringProperty havedMemoryProperty() {
-        return this.havedMemory;
     }
 
     public void setHavedMemory(String havedMemory) {
