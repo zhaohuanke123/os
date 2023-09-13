@@ -1,9 +1,10 @@
 package com.os.apps.occupancyApp;
 
 import com.os.apps.BaseController;
+import com.os.utils.fileSystem.FAT;
+import com.os.utils.process.OccupancyManager;
 import com.os.utils.ui.DrawUtil;
 import com.os.utils.ui.UIThread;
-import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,36 +15,25 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class OccupancyAppController extends BaseController {
+    //region [FXML comp variables]
     public Label titleBarL;
     public HBox titleBarR;
     public AnchorPane mainPane;
-    @FXML
-    private AnchorPane topMainPane;
-    @FXML
-    private Button memoryText;
-    @FXML
-    private Button diskText;
-    @FXML
-    private Button pcbText;
-    @FXML
-    private Button deviceText;
-    @FXML
-    private VBox diskBox1;
-    @FXML
-    private VBox memoryBox1;
-    @FXML
-    private VBox deviceBox1;
-    @FXML
-    private VBox pcbBox1;
-    @FXML
-    private HBox memoryBox2;
-    @FXML
-    private HBox deviceBox2;
-    @FXML
-    private HBox diskBox2;
-    @FXML
-    private HBox pcbBox2;
+    public AnchorPane topMainPane;
+    public Button memoryText;
+    public Button diskText;
+    public Button pcbText;
+    public Button deviceText;
+    public VBox diskBox1;
+    public VBox memoryBox1;
+    public VBox deviceBox1;
+    public VBox pcbBox1;
+    public HBox memoryBox2;
+    public HBox deviceBox2;
+    public HBox diskBox2;
+    public HBox pcbBox2;
 
+    //endregion
     @Override
     public void init(Stage stage) {
         super.init(stage);
@@ -56,22 +46,25 @@ public class OccupancyAppController extends BaseController {
         double width;
         double percent;
         Region region;
-        for (int i = 0; i < 512; ++i) {
+
+        for (int i = 0; i < OccupancyManager.MEMORY_SIZE; ++i) {
             height = boxes2[0].getHeight();
             width = boxes2[0].getWidth();
-            percent = 0.00185546875;
+
             region = new Region();
+            percent = (1.0 / OccupancyManager.MEMORY_SIZE);
             region.setPrefSize(percent * width, height);
             region.setMinSize(percent * width, height);
             region.setMaxSize(percent * width, height);
             this.memoryBox2.getChildren().add(region);
         }
 
-        for (int i = 0; i < 256; ++i) {
+        for (int i = 0; i < FAT.DISK_NUM; ++i) {
             height = boxes2[1].getHeight();
             width = boxes2[1].getWidth();
-            percent = 0.0037109375;
+
             region = new Region();
+            percent = (1.0 / FAT.DISK_NUM);
             region.setPrefSize(percent * width, height);
             region.setMinSize(percent * width, height);
             region.setMaxSize(percent * width, height);
@@ -79,10 +72,10 @@ public class OccupancyAppController extends BaseController {
         }
 
         Label label;
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < OccupancyManager.All_DEVICE_SIZE; ++i) {
             height = boxes2[2].getHeight();
-            width = boxes2[3].getWidth();
-            percent = 0.12375;
+            width = boxes2[2].getWidth();
+
             label = new Label();
             label.setId("emptyBox");
             if (i <= 1) {
@@ -93,23 +86,25 @@ public class OccupancyAppController extends BaseController {
                 label.setText("C");
             }
 
-            label.setPrefSize(percent * width, 0.9 * height);
-            label.setMinSize(percent * width, 0.9 * height);
-            label.setMaxSize(percent * width, 0.9 * height);
+            percent = (1.0 / OccupancyManager.All_DEVICE_SIZE);
+            label.setPrefSize(percent * width, height);
+            label.setMinSize(percent * width, height);
+            label.setMaxSize(percent * width, height);
             label.setAlignment(Pos.CENTER);
             this.deviceBox2.getChildren().add(label);
         }
 
-        for (int i = 0; i < 10; ++i) {
-            height = boxes2[2].getHeight();
+        for (int i = 0; i < OccupancyManager.PCB_SIZE; ++i) {
+            height = boxes2[3].getHeight();
             width = boxes2[3].getWidth();
-            percent = 0.099;
             label = new Label();
             label.setId("emptyBox");
             label.setText(i + "");
-            label.setPrefSize(percent * width, 0.9 * height);
-            label.setMinSize(percent * width, 0.9 * height);
-            label.setMaxSize(percent * width, 0.9 * height);
+
+            percent = (1.0 / OccupancyManager.PCB_SIZE);
+            label.setPrefSize(percent * width, height);
+            label.setMinSize(percent * width, height);
+            label.setMaxSize(percent * width, height);
             label.setAlignment(Pos.CENTER);
             this.pcbBox2.getChildren().add(label);
         }

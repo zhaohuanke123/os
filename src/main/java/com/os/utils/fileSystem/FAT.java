@@ -2,6 +2,7 @@ package com.os.utils.fileSystem;
 
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.fileApp.app.TipWindow;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -16,665 +17,656 @@ import javafx.stage.Stage;
 import com.os.utils.process.ProcessManager;
 
 public class FAT implements Serializable {
-   private static final long serialVersionUID = 1L;
-   private Disk[] disks;
-   private static ObservableList<File> openedFiles;
-   private final Folder c;
-   private final Path rootPath = new Path("C:", null);
-   private List<Path> paths;
+    private static final long serialVersionUID = 1L;
+    public static final int DISK_NUM = 256;
+    private static ObservableList<File> openedFiles;
+    private Disk[] disks;
+    private final Folder c;
+    private final Path rootPath = new Path("C:", null);
+    private List<Path> paths;
 
-   public FAT() {
-      File f1 = new File("FAT", null, 0, null);
-      this.disks = new Disk[256];
-      this.disks[0] = new Disk(0, 1, "文件", f1);
-      this.disks[0].setBegin(true);
-      this.disks[1] = new Disk(1, -1, "文件", f1);
-      this.c = new Folder("C:", "root", 2, null);
-      this.disks[2] = new Disk(2, -1, "root", this.c);
-      this.disks[2].setBegin(true);
+    public FAT() {
+        File f1 = new File("FAT", null, 0, null);
+        this.disks = new Disk[DISK_NUM];
+        this.disks[0] = new Disk(0, 1, "文件", f1);
+        this.disks[0].setBegin(true);
+        this.disks[1] = new Disk(1, -1, "文件", f1);
+        this.c = new Folder("C:", "root", 2, null);
+        this.disks[2] = new Disk(2, -1, "root", this.c);
+        this.disks[2].setBegin(true);
 
-      int i;
-      for(i = 3; i < 3 + ProcessManager.executableFileList.size(); ++i) {
-         ExecutableFile f = ProcessManager.executableFileList.get(i - 3);
-         this.disks[i] = new Disk(i, -1, "可执行文件", f);
-         this.disks[i].allocBlock(-1, "可执行文件", f, true);
-         this.disks[i].setBegin(true);
-      }
+        int i;
+        for (i = 3; i < 3 + ProcessManager.executableFileList.size(); ++i) {
+            ExecutableFile f = ProcessManager.executableFileList.get(i - 3);
+            this.disks[i] = new Disk(i, -1, "可执行文件", f);
+            this.disks[i].allocBlock(-1, "可执行文件", f, true);
+            this.disks[i].setBegin(true);
+        }
 
-      for(i = 3 + ProcessManager.executableFileList.size(); i < 256; ++i) {
-         this.disks[i] = new Disk(i, 0, "空", null);
-      }
+        for (i = 3 + ProcessManager.executableFileList.size(); i < 256; ++i) {
+            this.disks[i] = new Disk(i, 0, "空", null);
+        }
 
-      openedFiles = FXCollections.observableArrayList(new ArrayList<>());
-      this.paths = new ArrayList<>();
-      this.paths.add(this.rootPath);
-      this.c.setPath(this.rootPath);
-   }
+        openedFiles = FXCollections.observableArrayList(new ArrayList<>());
+        this.paths = new ArrayList<>();
+        this.paths.add(this.rootPath);
+        this.c.setPath(this.rootPath);
+    }
 
-   public void addOpenedFile(Disk block) {
-      File thisFile = (File)block.getObject();
-      openedFiles.add(thisFile);
-      thisFile.setOpened(true);
-   }
+    public void addOpenedFile(Disk block) {
+        File thisFile = (File) block.getObject();
+        openedFiles.add(thisFile);
+        thisFile.setOpened(true);
+    }
 
-   public static void removeOpenedFile(Disk block) {
-      File thisFile = (File)block.getObject();
+    public static void removeOpenedFile(Disk block) {
+        File thisFile = (File) block.getObject();
 
-      for(int i = 0; i < openedFiles.size(); ++i) {
-         if (openedFiles.get(i) == thisFile) {
-            openedFiles.remove(i);
-            thisFile.setOpened(false);
-            break;
-         }
-      }
-
-   }
-
-   public static void closeAll() {
-      if (openedFiles != null) {
-         for(int i = 0; i < openedFiles.size(); ++i) {
-            openedFiles.get(i).setOpened(false);
-            openedFiles.remove(i);
-         }
-      }
-
-   }
-
-   public boolean isOpenedFile(Disk block) {
-      return !(block.getObject() instanceof Folder) && ((File) block.getObject()).isOpened();
-   }
-
-   public void tipOpen(String tipString) throws Exception {
-      Stage stage = new Stage();
-      TipWindow tipWindow = new TipWindow(tipString);
-      tipWindow.start(stage);
-      stage.setAlwaysOnTop(true);
-      stage.setIconified(false);
-      stage.toFront();
-   }
-
-   public int createFolder(String path) {
-      String folderName;
-      boolean canName = true;
-      int index = 1;
-
-      int num;
-      Folder parent;
-      do {
-         folderName = "文件夹";
-         canName = true;
-         folderName = folderName + index;
-
-         for(num = 3 + ProcessManager.executableFileList.size(); num < this.disks.length; ++num) {
-            if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件夹")) {
-               parent = (Folder)this.disks[num].getObject();
-               if (path.equals(parent.getLocation()) && folderName.equals(parent.getFolderName())) {
-                  canName = false;
-               }
+        for (int i = 0; i < openedFiles.size(); ++i) {
+            if (openedFiles.get(i) == thisFile) {
+                openedFiles.remove(i);
+                thisFile.setOpened(false);
+                break;
             }
-         }
+        }
 
-         ++index;
-      } while(!canName);
+    }
 
-      num = this.searchEmptyDiskBlock();
-      if (num == -1) {
-         return -1;
-      } else {
-         parent = this.getFolder(path);
-         if (path.equals("C:")) {
-            parent.setCatalogNum(parent.getCatalogNum() + 1);
-         } else {
-            parent.setCatalogNum(parent.getCatalogNum() + 1);
-            int countBlock;
-//            int countBlock;
-            if (parent.getCatalogNum() % 8 == 0) {
-               countBlock = parent.getCatalogNum() / 8;
+    public static void closeAll() {
+        if (openedFiles != null) {
+            for (int i = openedFiles.size() - 1; i >= 0; --i) {
+                openedFiles.get(i).setOpened(false);
+                openedFiles.remove(i);
+            }
+        }
+
+    }
+
+    public boolean isOpenedFile(Disk block) {
+        return !(block.getObject() instanceof Folder) &&
+                ((File) block.getObject()).isOpened();
+    }
+
+    public void tipOpen(String tipString) throws Exception {
+        Stage stage = new Stage();
+        TipWindow tipWindow = new TipWindow(tipString);
+        tipWindow.start(stage);
+        stage.setAlwaysOnTop(true);
+        stage.setIconified(false);
+        stage.toFront();
+    }
+
+    public int createFolder(String path) {
+        String folderName;
+        boolean canName;
+        int index = 1;
+
+        int num;
+        Folder parent;
+        do {
+            folderName = "文件夹";
+            canName = true;
+            folderName = folderName + index;
+
+            for (num = 3 + ProcessManager.executableFileList.size(); num < this.disks.length; ++num) {
+                if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件夹")) {
+                    parent = (Folder) this.disks[num].getObject();
+                    if (path.equals(parent.getLocation()) && folderName.equals(parent.getFolderName())) {
+                        canName = false;
+                    }
+                }
+            }
+
+            ++index;
+        } while (!canName);
+
+        num = this.searchEmptyDiskBlock();
+        if (num == -1) {
+            return -1;
+        } else {
+            parent = this.getFolder(path);
+            if (path.equals("C:")) {
+                parent.setCatalogNum(parent.getCatalogNum() + 1);
             } else {
-               countBlock = parent.getCatalogNum() / 8 + 1;
+                parent.setCatalogNum(parent.getCatalogNum() + 1);
+
+                int countBlock;
+                if (parent.getCatalogNum() % 8 == 0) {
+                    countBlock = parent.getCatalogNum() / 8;
+                } else {
+                    countBlock = parent.getCatalogNum() / 8 + 1;
+                }
+
+                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
-            this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
-         }
-
-         num = this.searchEmptyDiskBlock();
-         Folder newFolder = new Folder(folderName, path, num, parent);
-         if (parent instanceof Folder) {
+            num = this.searchEmptyDiskBlock();
+            Folder newFolder = new Folder(folderName, path, num, parent);
             parent.addChildren(newFolder);
-         }
 
-         this.disks[num].allocBlock(-1, "文件夹", newFolder, true);
-         Path parentPath = this.getPath(path);
-         Path thisPath = new Path(path + "\\" + folderName, parentPath);
-         if (parentPath != null) {
-            parentPath.addChildren(thisPath);
-         }
-
-         this.paths.add(thisPath);
-         newFolder.setPath(thisPath);
-         return num;
-      }
-   }
-
-   public int createFile(String path) {
-      String fileName = null;
-      boolean canName = true;
-      int index = 1;
-
-      int num;
-      do {
-         fileName = "文件";
-         canName = true;
-         fileName = fileName + index;
-
-         for(num = 3; num < this.disks.length; ++num) {
-            if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件")) {
-               File file = (File)this.disks[num].getObject();
-               if (path.equals(file.getLocation()) && fileName.equals(file.getFileName())) {
-                  canName = false;
-               }
-            }
-         }
-
-         ++index;
-      } while(!canName);
-
-      num = this.searchEmptyDiskBlock();
-      if (num == -1) {
-         return -1;
-      } else {
-         Folder parent = this.getFolder(path);
-         System.out.println("pp" + parent.getDiskNum());
-         parent.setCatalogNum(parent.getCatalogNum() + 1);
-         if (!path.equals("C:")) {
-            int countBlock = 0;
-//            int countBlock;
-            if (parent.getCatalogNum() % 8 == 0) {
-               countBlock = parent.getCatalogNum() / 8;
-            } else {
-               countBlock = parent.getCatalogNum() / 8 + 1;
+            this.disks[num].allocBlock(-1, "文件夹", newFolder, true);
+            Path parentPath = this.getPath(path);
+            Path thisPath = new Path(path + "\\" + folderName, parentPath);
+            if (parentPath != null) {
+                parentPath.addChildren(thisPath);
             }
 
-            this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
-         }
+            this.paths.add(thisPath);
+            newFolder.setPath(thisPath);
+            return num;
+        }
+    }
 
-         System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getFolderName());
-         num = this.searchEmptyDiskBlock();
-         File file = new File(fileName, path, num, parent);
-         file.setFlag(1);
-         if (MainUI.copyFlag) {
-            file.setContent(MainUI.copyFile.getContent());
-            boolean canName1 = true;
-            index = 1;
+    public int createFile(String path) {
+        String fileName;
+        boolean canName;
+        int index = 1;
 
-            int newLength;
-            do {
-               fileName = MainUI.copyFile.getFileName();
-               canName1 = true;
-               fileName = fileName + index;
+        int num;
+        do {
+            fileName = "文件";
+            canName = true;
+            fileName = fileName + index;
 
-               for(newLength = 3 + ProcessManager.executableFileList.size(); newLength < this.disks.length; ++newLength) {
-                  if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
-                     File file1 = (File)this.disks[newLength].getObject();
-                     if (path.equals(file1.getLocation()) && fileName.equals(file1.getFileName())) {
-                        canName1 = false;
-                        break;
-                     }
-                  }
-               }
-
-               ++index;
-            } while(!canName1);
-
-            file.setFileName(fileName);
-            newLength = MainUI.copyFile.getContent().length();
-            int blockCount = blocksCount(newLength);
-            file.setLength(blockCount);
-            file.setContent(MainUI.copyFile.getContent());
-            file.setSize(getSize(newLength));
-            if (file.hasParent()) {
-               Folder parent1 = file.getParent();
-               parent1.setSize(getFolderSize(parent1));
-
-               while(parent1.hasParent()) {
-                  parent1 = parent1.getParent();
-                  parent1.setSize(getFolderSize(parent1));
-               }
+            for (num = 3; num < this.disks.length; ++num) {
+                if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件")) {
+                    File file = (File) this.disks[num].getObject();
+                    if (path.equals(file.getLocation()) && fileName.equals(file.getFileName())) {
+                        canName = false;
+                    }
+                }
             }
 
-            if (MainUI.moveFlag) {
-               boolean canName2 = true;
-               index = 1;
+            ++index;
+        } while (!canName);
 
-               while(true) {
-                  fileName = MainUI.copyFile.getFileName();
-                  canName2 = true;
-                  fileName = fileName + index;
+        num = this.searchEmptyDiskBlock();
+        if (num == -1) {
+            return -1;
+        } else {
+            Folder parent = this.getFolder(path);
+            System.out.println("pp" + parent.getDiskNum());
+            parent.setCatalogNum(parent.getCatalogNum() + 1);
+            if (!path.equals("C:")) {
+                int countBlock;
+                if (parent.getCatalogNum() % 8 == 0) {
+                    countBlock = parent.getCatalogNum() / 8;
+                } else {
+                    countBlock = parent.getCatalogNum() / 8 + 1;
+                }
 
-                  for(int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-                     if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
-                        File file2 = (File)this.disks[i].getObject();
-                        if (path.equals(file2.getLocation()) && fileName.equals(file2.getFileName())) {
-                           canName2 = false;
-                           break;
+                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
+            }
+
+            System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getFolderName());
+            num = this.searchEmptyDiskBlock();
+            File file = new File(fileName, path, num, parent);
+            file.setFlag(1);
+            if (MainUI.copyFlag) {
+                file.setContent(MainUI.copyFile.getContent());
+                boolean canName1;
+                index = 1;
+
+                int newLength;
+                do {
+                    fileName = MainUI.copyFile.getFileName();
+                    canName1 = true;
+                    fileName = fileName + index;
+
+                    for (newLength = 3 + ProcessManager.executableFileList.size(); newLength < this.disks.length; ++newLength) {
+                        if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
+                            File file1 = (File) this.disks[newLength].getObject();
+                            if (path.equals(file1.getLocation()) && fileName.equals(file1.getFileName())) {
+                                canName1 = false;
+                                break;
+                            }
                         }
-                     }
-                  }
+                    }
 
-                  ++index;
-                  if (canName2) {
-                     file.setFileName(fileName);
-                     break;
-                  }
-               }
+                    ++index;
+                } while (!canName1);
+
+                file.setFileName(fileName);
+                newLength = MainUI.copyFile.getContent().length();
+                int blockCount = blocksCount(newLength);
+                file.setLength(blockCount);
+                file.setContent(MainUI.copyFile.getContent());
+                file.setSize(getSize(newLength));
+                if (file.hasParent()) {
+                    Folder parent1 = file.getParent();
+                    parent1.setSize(getFolderSize(parent1));
+
+                    while (parent1.hasParent()) {
+                        parent1 = parent1.getParent();
+                        parent1.setSize(getFolderSize(parent1));
+                    }
+                }
+
+                if (MainUI.moveFlag) {
+                    boolean canName2;
+                    index = 1;
+
+                    while (true) {
+                        fileName = MainUI.copyFile.getFileName();
+                        canName2 = true;
+                        fileName = fileName + index;
+
+                        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+                            if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
+                                File file2 = (File) this.disks[i].getObject();
+                                if (path.equals(file2.getLocation()) && fileName.equals(file2.getFileName())) {
+                                    canName2 = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        ++index;
+                        if (canName2) {
+                            file.setFileName(fileName);
+                            break;
+                        }
+                    }
+                }
+
+                this.reallocBlocks(blockCount, MainUI.copyBlock);
             }
 
-            this.reallocBlocks(blockCount, MainUI.copyBlock);
-         }
-
-         if (parent instanceof Folder) {
             parent.addChildren(file);
-         }
 
-         this.disks[num].allocBlock(-1, "文件", file, true);
-         return num;
-      }
-   }
+            this.disks[num].allocBlock(-1, "文件", file, true);
+            return num;
+        }
+    }
 
-   public int searchEmptyDiskBlock() {
-      for(int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-         if (this.disks[i].isFree()) {
-            return i;
-         }
-      }
+    public int searchEmptyDiskBlock() {
+        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+            if (this.disks[i].isFree()) {
+                return i;
+            }
+        }
 
-      return -1;
-   }
+        return -1;
+    }
 
-   public int freeBlocksCount() {
-      int n = 0;
+    public int freeBlocksCount() {
+        int n = 0;
 
-       for (Disk disk : this.disks) {
-           if (disk.isFree()) {
-               ++n;
-           }
-       }
+        for (Disk disk : this.disks) {
+            if (disk.isFree()) {
+                ++n;
+            }
+        }
 
-      return n;
-   }
+        return n;
+    }
 
-   public boolean reallocBlocks(int num, Disk block) {
-      File thisFile = (File)block.getObject();
-      int begin = thisFile.getDiskNum();
-      int index = this.disks[begin].getIndex();
+    public boolean reallocBlocks(int num, Disk block) {
+        File thisFile = (File) block.getObject();
+        int begin = thisFile.getDiskNum();
+        int index = this.disks[begin].getIndex();
 
-      int oldNum;
-      for(oldNum = 1; index != -1; index = this.disks[index].getIndex()) {
-         ++oldNum;
-         if (this.disks[index].getIndex() == -1) {
-            begin = index;
-         }
-      }
+        int oldNum;
+        for (oldNum = 1; index != -1; index = this.disks[index].getIndex()) {
+            ++oldNum;
+            if (this.disks[index].getIndex() == -1) {
+                begin = index;
+            }
+        }
 
-      int end;
-      int next;
-      int i;
-      if (num > oldNum) {
-         end = num - oldNum;
-         if (this.freeBlocksCount() < end) {
-            return false;
-         }
+        int end;
+        int next;
+        int i;
+        if (num > oldNum) {
+            end = num - oldNum;
+            if (this.freeBlocksCount() < end) {
+                return false;
+            }
 
-         next = this.searchEmptyDiskBlock();
-         this.disks[begin].setIndex(next);
-
-         for(i = 1; i <= end; ++i) {
             next = this.searchEmptyDiskBlock();
-            if (i == end) {
-               this.disks[next].allocBlock(-1, "文件", thisFile, false);
-            } else {
-               this.disks[next].allocBlock(-1, "文件", thisFile, false);
-               int space2 = this.searchEmptyDiskBlock();
-               this.disks[next].setIndex(space2);
+            this.disks[begin].setIndex(next);
+
+            for (i = 1; i <= end; ++i) {
+                next = this.searchEmptyDiskBlock();
+                this.disks[next].allocBlock(-1, "文件", thisFile, false);
+                if (i != end) {
+                    int space2 = this.searchEmptyDiskBlock();
+                    this.disks[next].setIndex(space2);
+                }
+
+                System.out.println(thisFile);
+            }
+        } else if (num < oldNum) {
+            for (end = thisFile.getDiskNum(); num > 1; --num) {
+                end = this.disks[end].getIndex();
             }
 
-            System.out.println(thisFile);
-         }
-      } else if (num < oldNum) {
-         for(end = thisFile.getDiskNum(); num > 1; --num) {
-            end = this.disks[end].getIndex();
-         }
+            for (i = this.disks[end].getIndex(); i != -1; i = next) {
+                next = this.disks[i].getIndex();
+                this.disks[i].clearBlock();
+            }
 
-         for(i = this.disks[end].getIndex(); i != -1; i = next) {
-            next = this.disks[i].getIndex();
-            this.disks[i].clearBlock();
-         }
+            this.disks[end].setIndex(-1);
+        }
 
-         this.disks[end].setIndex(-1);
-      }
+        thisFile.setLength(num);
+        return true;
+    }
 
-      thisFile.setLength(num);
-      return true;
-   }
+    public boolean reallocFolderBlocks(int num, Disk block) {
+        Folder thisFolder = (Folder) block.getObject();
+        int begin = thisFolder.getDiskNum();
+        int index = this.disks[begin].getIndex();
 
-   public boolean reallocFolderBlocks(int num, Disk block) {
-      Folder thisFolder = (Folder)block.getObject();
-      int begin = thisFolder.getDiskNum();
-      int index = this.disks[begin].getIndex();
+        int oldNum;
+        for (oldNum = 1; index != -1; index = this.disks[index].getIndex()) {
+            ++oldNum;
+            if (this.disks[index].getIndex() == -1) {
+                begin = index;
+            }
+        }
 
-      int oldNum;
-      for(oldNum = 1; index != -1; index = this.disks[index].getIndex()) {
-         ++oldNum;
-         if (this.disks[index].getIndex() == -1) {
-            begin = index;
-         }
-      }
+        int end;
+        int next;
+        int i;
+        if (num > oldNum) {
+            end = num - oldNum;
+            if (this.freeBlocksCount() < end) {
+                return false;
+            }
 
-      int end;
-      int next;
-      int i;
-      if (num > oldNum) {
-         end = num - oldNum;
-         if (this.freeBlocksCount() < end) {
-            return false;
-         }
-
-         next = this.searchEmptyDiskBlock();
-         this.disks[begin].setIndex(next);
-
-         for(i = 1; i <= end; ++i) {
             next = this.searchEmptyDiskBlock();
-            if (i == end) {
-               this.disks[next].allocBlock(-1, "文件夹", thisFolder, false);
+            this.disks[begin].setIndex(next);
+
+            for (i = 1; i <= end; ++i) {
+                next = this.searchEmptyDiskBlock();
+                this.disks[next].allocBlock(-1, "文件夹", thisFolder, false);
+                if (i != end) {
+                    int space2 = this.searchEmptyDiskBlock();
+                    this.disks[next].setIndex(space2);
+                }
+
+                System.out.println(thisFolder);
+            }
+        } else if (num < oldNum) {
+            for (end = thisFolder.getDiskNum(); num > 1; --num) {
+                end = this.disks[end].getIndex();
+            }
+
+            for (i = this.disks[end].getIndex(); i != -1; i = next) {
+                next = this.disks[i].getIndex();
+                this.disks[i].clearBlock();
+            }
+
+            this.disks[end].setIndex(-1);
+        }
+
+        return true;
+    }
+
+    public List<Folder> getFolders(String path) {
+        List<Folder> list = new ArrayList<>();
+
+        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+            if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof Folder && ((Folder) this.disks[i].getObject()).getLocation().equals(path)) {
+                list.add((Folder) this.disks[i].getObject());
+            }
+        }
+
+        return list;
+    }
+
+    public List<Disk> getBlockList(String path) {
+        List<Disk> List = new ArrayList<>();
+
+        int n;
+        for (n = 3 + ProcessManager.executableFileList.size(); n < this.disks.length; ++n) {
+            if (!this.disks[n].isFree() && this.disks[n].getObject() instanceof Folder && ((Folder) this.disks[n].getObject()).getLocation().equals(path) && this.disks[n].isBegin()) {
+                List.add(this.disks[n]);
+            }
+        }
+
+        n = 0;
+
+        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+            if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && ((File) this.disks[i].getObject()).getLocation().equals(path) && this.disks[i].isBegin()) {
+                List.add(this.disks[i]);
+                ++n;
+            }
+        }
+
+        System.out.println("file-length:" + n);
+        return List;
+    }
+
+    public Folder getFolder(String path) {
+        if (path.equals("C:")) {
+            return this.c;
+        } else {
+            int split = path.lastIndexOf(92);
+            String location = path.substring(0, split);
+            String folderName = path.substring(split + 1);
+            List<Folder> folders = this.getFolders(location);
+            Iterator<Folder> var6 = folders.iterator();
+
+            Folder folder;
+            do {
+                if (!var6.hasNext()) {
+                    return null;
+                }
+
+                folder = var6.next();
+            } while (!folder.getFolderName().equals(folderName));
+
+            return folder;
+        }
+    }
+
+    public Path getPath(String path) {
+        var var2 = this.paths.iterator();
+
+        Path p;
+        do {
+            if (!var2.hasNext()) {
+                return null;
+            }
+
+            p = var2.next();
+        } while (!p.getPathName().equals(path));
+
+        return p;
+    }
+
+    public int delete(Disk block) {
+        int i;
+        if (block.getObject() instanceof File) {
+            if (this.isOpenedFile(block)) {
+                return 3;
             } else {
-               this.disks[next].allocBlock(-1, "文件夹", thisFolder, false);
-               int space2 = this.searchEmptyDiskBlock();
-               this.disks[next].setIndex(space2);
+                File thisFile = (File) block.getObject();
+                Folder parent = thisFile.getParent();
+                if (parent != null) {
+                    parent.setCatalogNum(parent.getCatalogNum() - 1);
+                    if (parent.getCatalogNum() % 8 == 0) {
+                        i = parent.getCatalogNum() / 8;
+                    } else {
+                        i = parent.getCatalogNum() / 8 + 1;
+                    }
+
+                    this.reallocFolderBlocks(i, this.disks[parent.getDiskNum()]);
+                    parent.removeChildren(thisFile);
+                    parent.setSize(getFolderSize(parent));
+
+                    while (parent.hasParent()) {
+                        parent = parent.getParent();
+                        parent.setSize(getFolderSize(parent));
+                    }
+                }
+
+                for (i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+                    if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
+                        this.disks[i].clearBlock();
+                    }
+                }
+
+                return 1;
+            }
+        } else {
+            String folderPath = ((Folder) block.getObject()).getLocation() + "\\" + ((Folder) block.getObject()).getFolderName();
+            int index = 0;
+
+            for (i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+                if (!this.disks[i].isFree()) {
+                    Object obj = this.disks[i].getObject();
+                    if (this.disks[i].getType().equals("文件夹")) {
+                        if (((Folder) obj).getLocation().equals(folderPath)) {
+                            return 2;
+                        }
+                    } else if (((File) obj).getLocation().equals(folderPath)) {
+                        return 2;
+                    }
+
+                    if (this.disks[i].getType().equals("文件夹") && this.disks[i].getObject().equals(block.getObject())) {
+                        index = i;
+                    }
+                }
             }
 
-            System.out.println(thisFolder);
-         }
-      } else if (num < oldNum) {
-         for(end = thisFolder.getDiskNum(); num > 1; --num) {
-            end = this.disks[end].getIndex();
-         }
-
-         for(i = this.disks[end].getIndex(); i != -1; i = next) {
-            next = this.disks[i].getIndex();
-            this.disks[i].clearBlock();
-         }
-
-         this.disks[end].setIndex(-1);
-      }
-
-      return true;
-   }
-
-   public List<Folder> getFolders(String path) {
-      List<Folder> list = new ArrayList<>();
-
-      for(int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-         if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof Folder && ((Folder) this.disks[i].getObject()).getLocation().equals(path)) {
-            list.add((Folder)this.disks[i].getObject());
-         }
-      }
-
-      return list;
-   }
-
-   public List<Disk> getBlockList(String path) {
-      List<Disk> List = new ArrayList();
-
-      int n;
-      for(n = 3 + ProcessManager.executableFileList.size(); n < this.disks.length; ++n) {
-         if (!this.disks[n].isFree() && this.disks[n].getObject() instanceof Folder && ((Folder) this.disks[n].getObject()).getLocation().equals(path) && this.disks[n].isBegin()) {
-            List.add(this.disks[n]);
-         }
-      }
-
-      n = 0;
-
-      for(int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-         if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && ((File) this.disks[i].getObject()).getLocation().equals(path) && this.disks[i].isBegin()) {
-            List.add(this.disks[i]);
-            ++n;
-         }
-      }
-
-      System.out.println("file-length:" + n);
-      return List;
-   }
-
-   public Folder getFolder(String path) {
-      if (path.equals("C:")) {
-         return this.c;
-      } else {
-         int split = path.lastIndexOf(92);
-         String location = path.substring(0, split);
-         String folderName = path.substring(split + 1);
-         List<Folder> folders = this.getFolders(location);
-         Iterator<Folder> var6 = folders.iterator();
-
-         Folder folder;
-         do {
-            if (!var6.hasNext()) {
-               return null;
-            }
-
-            folder = var6.next();
-         } while(!folder.getFolderName().equals(folderName));
-
-         return folder;
-      }
-   }
-
-   public Path getPath(String path) {
-      Iterator var2 = this.paths.iterator();
-
-      Path p;
-      do {
-         if (!var2.hasNext()) {
-            return null;
-         }
-
-         p = (Path)var2.next();
-      } while(!p.getPathName().equals(path));
-
-      return p;
-   }
-
-   public int delete(Disk block) {
-      int i;
-      if (block.getObject() instanceof File) {
-         if (this.isOpenedFile(block)) {
-            return 3;
-         } else {
-            File thisFile = (File)block.getObject();
-            Folder parent = thisFile.getParent();
-            if (parent instanceof Folder) {
-               parent.setCatalogNum(parent.getCatalogNum() - 1);
-//               int countBlock = false;
-               if (parent.getCatalogNum() % 8 == 0) {
-                  i = parent.getCatalogNum() / 8;
-               } else {
-                  i = parent.getCatalogNum() / 8 + 1;
-               }
-
-               this.reallocFolderBlocks(i, this.disks[parent.getDiskNum()]);
-               parent.removeChildren(thisFile);
-               parent.setSize(getFolderSize(parent));
-
-               while(parent.hasParent()) {
-                  parent = parent.getParent();
-                  parent.setSize(getFolderSize(parent));
-               }
-            }
-
-            for(i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-               if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
-                  this.disks[i].clearBlock();
-               }
-            }
-
-            return 1;
-         }
-      } else {
-         String folderPath = ((Folder)block.getObject()).getLocation() + "\\" + ((Folder)block.getObject()).getFolderName();
-         int index = 0;
-
-         for(i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-            if (!this.disks[i].isFree()) {
-               Object obj = this.disks[i].getObject();
-               if (this.disks[i].getType().equals("文件夹")) {
-                  if (((Folder)obj).getLocation().equals(folderPath)) {
-                     return 2;
-                  }
-               } else if (((File)obj).getLocation().equals(folderPath)) {
-                  return 2;
-               }
-
-               if (this.disks[i].getType().equals("文件夹") && this.disks[i].getObject().equals(block.getObject())) {
-                  index = i;
-               }
-            }
-         }
-
-         Folder thisFolder = (Folder)block.getObject();
-         Folder parent = thisFolder.getParent();
-         if (parent != null) {
-            parent.removeChildren(thisFolder);
-            parent.setSize(getFolderSize(parent));
-            parent.setCatalogNum(parent.getCatalogNum() - 1);
+            Folder thisFolder = (Folder) block.getObject();
+            Folder parent = thisFolder.getParent();
+            if (parent != null) {
+                parent.removeChildren(thisFolder);
+                parent.setSize(getFolderSize(parent));
+                parent.setCatalogNum(parent.getCatalogNum() - 1);
 //            int countBlock = false;
-            int countBlock;
-            if (parent.getCatalogNum() % 8 == 0) {
-               countBlock = parent.getCatalogNum() / 8;
-            } else {
-               countBlock = parent.getCatalogNum() / 8 + 1;
+                int countBlock;
+                if (parent.getCatalogNum() % 8 == 0) {
+                    countBlock = parent.getCatalogNum() / 8;
+                } else {
+                    countBlock = parent.getCatalogNum() / 8 + 1;
+                }
+
+                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
-            this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
-         }
+            this.paths.remove(this.getPath(folderPath));
+            this.disks[index].clearBlock();
+            return 0;
+        }
+    }
 
-         this.paths.remove(this.getPath(folderPath));
-         this.disks[index].clearBlock();
-         return 0;
-      }
-   }
+    public Disk[] getDiskBlocks() {
+        return this.disks;
+    }
 
-   public Disk[] getDiskBlocks() {
-      return this.disks;
-   }
+    public void setDiskBlocks(Disk[] disks) {
+        this.disks = disks;
+    }
 
-   public void setDiskBlocks(Disk[] disks) {
-      this.disks = disks;
-   }
+    public Disk getBlock(int index) {
+        return this.disks[index];
+    }
 
-   public Disk getBlock(int index) {
-      return this.disks[index];
-   }
+    public ObservableList<File> getOpenedFiles() {
+        return openedFiles;
+    }
 
-   public ObservableList<File> getOpenedFiles() {
-      return openedFiles;
-   }
+    public void setOpenedFiles(ObservableList<File> openFiles) {
+        openedFiles = openFiles;
+    }
 
-   public void setOpenedFiles(ObservableList<File> openFiles) {
-      openedFiles = openFiles;
-   }
+    public List<Path> getPaths() {
+        return this.paths;
+    }
 
-   public List<Path> getPaths() {
-      return this.paths;
-   }
+    public void setPaths(List<Path> paths) {
+        this.paths = paths;
+    }
 
-   public void setPaths(List<Path> paths) {
-      this.paths = paths;
-   }
+    public void addPath(Path path) {
+        this.paths.add(path);
+    }
 
-   public void addPath(Path path) {
-      this.paths.add(path);
-   }
+    public void removePath(Path path) {
+        this.paths.remove(path);
+        if (path.hasParent()) {
+            path.getParent().removeChildren(path);
+        }
 
-   public void removePath(Path path) {
-      this.paths.remove(path);
-      if (path.hasParent()) {
-         path.getParent().removeChildren(path);
-      }
+    }
 
-   }
+    public void replacePath(Path oldPath, String newName) {
+        oldPath.setPathName(newName);
+    }
 
-   public void replacePath(Path oldPath, String newName) {
-      oldPath.setPathName(newName);
-   }
+    public boolean hasPath(Path path) {
+        Iterator<Path> var2 = this.paths.iterator();
 
-   public boolean hasPath(Path path) {
-      Iterator<Path> var2 = this.paths.iterator();
+        Path p;
+        do {
+            if (!var2.hasNext()) {
+                return false;
+            }
 
-      Path p;
-      do {
-         if (!var2.hasNext()) {
-            return false;
-         }
+            p = var2.next();
+        } while (!p.equals(path));
 
-         p = var2.next();
-      } while(!p.equals(path));
+        return true;
+    }
 
-      return true;
-   }
+    public boolean hasName(String path, String name) {
+        Folder thisFolder = this.getFolder(path);
+        var var4 = thisFolder.getChildren().iterator();
 
-   public boolean hasName(String path, String name) {
-      Folder thisFolder = this.getFolder(path);
-      Iterator var4 = thisFolder.getChildren().iterator();
+        Object child;
+        do {
+            if (!var4.hasNext()) {
+                return false;
+            }
 
-      Object child;
-      do {
-         if (!var4.hasNext()) {
-            return false;
-         }
+            child = var4.next();
+        } while (!child.toString().equals(name));
 
-         child = var4.next();
-      } while(!child.toString().equals(name));
+        return true;
+    }
 
-      return true;
-   }
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        openedFiles = FXCollections.observableArrayList(new ArrayList<>());
+    }
 
-   private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-      s.defaultReadObject();
-      openedFiles = FXCollections.observableArrayList(new ArrayList<>());
-   }
+    public static double getSize(int length) {
+        return Double.parseDouble(String.valueOf(length));
+    }
 
-   public static double getSize(int length) {
-      return Double.parseDouble(String.valueOf(length));
-   }
+    public static double getFolderSize(Folder folder) {
+        List<Object> children = folder.getChildren();
+        double size = 0.0;
 
-   public static double getFolderSize(Folder folder) {
-      List<Object> children = folder.getChildren();
-      double size = 0.0;
+        for (Object child : children) {
+            if (child instanceof File) {
+                size += ((File) child).getSize();
+            } else {
+                size += getFolderSize((Folder) child);
+            }
+        }
 
-       for (Object child : children) {
-           if (child instanceof File) {
-               size += ((File) child).getSize();
-           } else {
-               size += getFolderSize((Folder) child);
-           }
-       }
+        return Double.parseDouble(String.valueOf(size));
+    }
 
-      return Double.parseDouble(String.valueOf(size));
-   }
+    public static int blocksCount(int length) {
+        if (length <= 64) {
+            return 1;
+        } else {
+            int n;
+            if (length % 64 == 0) {
+                n = length / 64;
+            } else {
+                n = length / 64;
+                ++n;
+            }
 
-   public static int blocksCount(int length) {
-      if (length <= 64) {
-         return 1;
-      } else {
-//         int n = false;
-         int n;
-         if (length % 64 == 0) {
-            n = length / 64;
-         } else {
-            n = length / 64;
-            ++n;
-         }
-
-         return n;
-      }
-   }
+            return n;
+        }
+    }
 }

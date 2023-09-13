@@ -186,6 +186,8 @@
                   prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
             <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER" layoutY="307.0" prefHeight="70.0"
                   prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
+
+
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34d399" height="11.0" layoutX="526.0" layoutY="329.0"
                        stroke="BLACK" strokeType="INSIDE" width="15.0"/>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="309.0" prefHeight="15.0"
