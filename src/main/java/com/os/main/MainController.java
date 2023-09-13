@@ -80,7 +80,7 @@ public class MainController {
             "-fx-background-color: transparent,aliceblue;" +
                     "-fx-background-radius: 12;" +
                     "-fx-text-fill: black;" +
-                    "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );";
+                    "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
 
     @FXML
     void closeWindow(MouseEvent event) {
@@ -124,23 +124,23 @@ public class MainController {
     }
 
     public void adaptWindow() {
+        //
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
 
-        System.out.println("MainWindow:" + this.MainWindow.getWidth() + "," + this.MainWindow.getHeight());
         // 初始化任务栏
         CompSet.SetCompSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
-        // 初始化任务栏背景 ------------------------------------------------------------
+        // 初始化任务栏背景
         CompSet.SetCompSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
         this.buttonBarBackGround.setLayoutX(0);
         this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8.0D);
         this.buttonBarBackGround.setEffect(gaussianBlur);
-        // ------------------------------------------------------------
 
+        //
         setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
@@ -150,26 +150,27 @@ public class MainController {
         setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
+        //
         setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
+        setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
         setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
+        //
         CompSet.SetCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
-        System.out.println(this.appBox.getWidth() + " " + this.appBox.getHeight());
 
+        //
         CompSet.SetCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
-        this.tipBox.setLayoutX(this.sceneWidth - 1.3 * this.tipBox.getWidth());
+        this.tipBox.setLayoutX(this.sceneWidth - 1 * this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
-
-        System.out.println(this.tipBox.getWidth() + " " + this.tipBox.getHeight());
     }
+
     // 返回桌面
     public void toDesk() {
         if (this.haveChanged) {
