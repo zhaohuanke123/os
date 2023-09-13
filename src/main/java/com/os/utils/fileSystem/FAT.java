@@ -559,6 +559,22 @@ public class FAT implements Serializable {
         return this.disks;
     }
 
+    public int checkNumOfFreeDisk() {
+        int num = 0;
+
+        for (Disk disk : this.disks) {
+            if (disk.isFree()) {
+                ++num;
+            }
+        }
+
+        return num;
+    }
+
+    public int checkNumOfBusyDisk() {
+        return DISK_NUM - checkNumOfFreeDisk();
+    }
+
     public void setDiskBlocks(Disk[] disks) {
         this.disks = disks;
     }

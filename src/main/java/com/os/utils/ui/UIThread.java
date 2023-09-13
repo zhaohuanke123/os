@@ -14,6 +14,8 @@ import com.os.utils.process.*;
 import com.os.utils.process.Process;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableRow;
@@ -93,107 +95,67 @@ public class UIThread extends Thread {
     public void occupancyTextUpdate() {
         if (textButtons != null) {
             Platform.runLater(() -> {
-                int num = 0;
-                int allx = OccupancyManager.allMemory.length;
-
-                for (int ix = 0; ix < allx; ++ix) {
-                    if (OccupancyManager.allMemory[ix] == 1) {
-                        ++num;
-                    }
-                }
-
-                double percent = (double) num / (double) allx * 100.0;
+                int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
+                double percent = (double) numOfBusyMemory / (double) OccupancyManager.allMemory.length * 100.0;
                 String result = String.format("%.2f", percent);
-                UIThread.textButtons[0].setText(num + "B/" + allx + "B(" + result + "%)");
-                int i;
+                UIThread.textButtons[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
+
                 if (MainUI.fat != null) {
-                    num = 0;
-                    int all = 256;
+                    int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
 
-                    for (i = 0; i < 256; ++i) {
-                        if (MainUI.fat.getDiskBlocks()[i].getIndex() != 0) {
-                            ++num;
-                        }
-                    }
-
-                    percent = (double) num / (double) all * 100.0;
+                    percent = (double) numOfBusyDisk / (double) FAT.DISK_NUM * 100.0;
                     result = String.format("%.2f", percent);
-                    UIThread.textButtons[1].setText(num + "/" + all + "(" + result + "%)");
+                    UIThread.textButtons[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
                 }
 
-                num = OccupancyManager.getBusyDeviceNum();
-                allx = OccupancyManager.All_DEVICE_SIZE;
-                percent = (double) num / (double) allx * 100.0;
+                int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
+                percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE * 100.0;
+                result = String.format("%.2f", percent);
+                UIThread.textButtons[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
 
+                int numOfBusyPcb = 10 - OccupancyManager.freePcbList.size();
+                int pcbSize = OccupancyManager.PCB_SIZE;
+                percent = (double) numOfBusyPcb / (double) pcbSize * 100.0;
                 result = String.format("%.2f", percent);
-                UIThread.textButtons[2].setText(num + "/" + allx + "(" + result + "%)");
-                num = 10 - OccupancyManager.freePcbList.size();
-                int all_xx = OccupancyManager.PCB_SIZE;
-                percent = (double) num / (double) all_xx * 100.0;
-                result = String.format("%.2f", percent);
-                UIThread.textButtons[3].setText(num + "/" + all_xx + "(" + result + "%)");
+                UIThread.textButtons[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
             });
         }
     }
 
     public void occupancyBoxes1Update() {
         if (boxes1 != null) {
-            int num = 0;
-            int all = OccupancyManager.allMemory.length;
-
-            for (int i = 0; i < all; ++i) {
-                if (OccupancyManager.allMemory[i] == 1) {
-                    ++num;
-                }
-            }
+            int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
 
             double height = boxes1[0].getHeight() - 2.0;
             double width = boxes1[0].getWidth() - 2.0;
             Region region = (Region) boxes1[0].getChildren().get(0);
-            double percent = (double) num / (double) all;
-            region.setPrefSize(width, percent * height);
-            region.setMinSize(width, percent * height);
-            region.setMaxSize(width, percent * height);
-            int i;
+            double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
+            CompSet.SetRegionSize(region, width, percent * height);
+
             if (MainUI.fat != null) {
-                num = 0;
-
-                for (i = 0; i < 256; ++i) {
-                    if (MainUI.fat.getDiskBlocks()[i].getIndex() != 0) {
-                        ++num;
-                    }
-                }
-
-                System.out.println("usedNum:" + num);
+                int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
                 height = boxes1[1].getHeight() - 2.0;
                 width = boxes1[1].getWidth() - 2.0;
+                percent = (double) numOfBusyDisk / 256.0;
                 region = (Region) boxes1[1].getChildren().get(0);
-                percent = (double) num / 256.0;
-                region.setPrefSize(width, percent * height);
-                region.setMinSize(width, percent * height);
-                region.setMaxSize(width, percent * height);
+                CompSet.SetRegionSize(region, width, percent * height);
+
+                System.out.println("BusyDiskNum:" + numOfBusyDisk);
             }
 
-            num = OccupancyManager.getBusyDeviceNum();
-            all = OccupancyManager.All_DEVICE_SIZE;
-            percent = (double) num / (double) all;
-
+            int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
             height = boxes1[2].getHeight() - 2.0;
             width = boxes1[2].getWidth() - 2.0;
+            percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE;
             region = (Region) boxes1[2].getChildren().get(0);
-            region.setPrefSize(width, percent * height);
-            region.setMinSize(width, percent * height);
-            region.setMaxSize(width, percent * height);
-            num = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
+            CompSet.SetRegionSize(region, width, percent * height);
 
-            all = OccupancyManager.PCB_SIZE;
-            percent = (double) num / (double) all;
+            int numOfBusyPcb = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
             height = boxes1[3].getHeight() - 2.0;
             width = boxes1[3].getWidth() - 2.0;
+            percent = (double) numOfBusyPcb / (double) OccupancyManager.PCB_SIZE;
             region = (Region) boxes1[3].getChildren().get(0);
-            region.setPrefSize(width, percent * height);
-            region.setMinSize(width, percent * height);
-            region.setMaxSize(width, percent * height);
+            CompSet.SetRegionSize(region, width, percent * height);
         }
     }
 
@@ -409,6 +371,7 @@ public class UIThread extends Thread {
             });
         }
     }
+
     //endregion
     public void run() {
         do {

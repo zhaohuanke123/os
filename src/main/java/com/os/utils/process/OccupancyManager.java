@@ -97,6 +97,20 @@ public class OccupancyManager {
         }
     }
 
+    public static int getNumOfFreeMemory() {
+        int num = 0;
+
+        for (int memory : allMemory)
+            if (memory == 0)
+                num++;
+
+        return num;
+    }
+
+    public static int getNumOfBusyMemory() {
+        return MEMORY_SIZE - getNumOfFreeMemory();
+    }
+
     public static int applyDevice(int device) {
         if (device == 0) {
             for (int i = 0; i < aDevice.length; i++) {
