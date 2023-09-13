@@ -8,6 +8,14 @@ public class InstructionData {
    public int which = -1;
    private final StringProperty instruction = new SimpleStringProperty();
 
+   public String getInstruction() {
+      return this.instruction.get();
+   }
+
+   public StringProperty instructionProperty() {
+      return this.instruction;
+   }
+
    public void setInstruction(String instruction) {
       this.instruction.set(instruction);
    }

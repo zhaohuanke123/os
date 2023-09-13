@@ -19,6 +19,14 @@ public class ExecutableFileData {
       return this.id + "";
    }
 
+   public String getFileName() {
+      return this.fileName.get();
+   }
+
+   public StringProperty fileNameProperty() {
+      return this.fileName;
+   }
+
    public void setFileName(String fileName) {
       this.fileName.set(fileName);
    }
