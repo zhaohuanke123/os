@@ -3,6 +3,7 @@ package com.os.apps.occupancyApp;
 import com.os.apps.BaseController;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
+import com.os.utils.ui.CompSet;
 import com.os.utils.ui.DrawUtil;
 import com.os.utils.ui.UIThread;
 import javafx.geometry.Pos;
@@ -53,9 +54,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / OccupancyManager.MEMORY_SIZE);
-            region.setPrefSize(percent * width, height);
-            region.setMinSize(percent * width, height);
-            region.setMaxSize(percent * width, height);
+            CompSet.SetCompSize(region, percent * width, height);
             this.memoryBox2.getChildren().add(region);
         }
 
@@ -65,9 +64,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / FAT.DISK_NUM);
-            region.setPrefSize(percent * width, height);
-            region.setMinSize(percent * width, height);
-            region.setMaxSize(percent * width, height);
+            CompSet.SetCompSize(region, percent * width, height);
             this.diskBox2.getChildren().add(region);
         }
 

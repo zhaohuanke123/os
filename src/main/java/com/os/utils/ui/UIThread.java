@@ -14,8 +14,6 @@ import com.os.utils.process.*;
 import com.os.utils.process.Process;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableRow;
@@ -130,7 +128,7 @@ public class UIThread extends Thread {
             double width = boxes1[0].getWidth() - 2.0;
             Region region = (Region) boxes1[0].getChildren().get(0);
             double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
-            CompSet.SetRegionSize(region, width, percent * height);
+            CompSet.SetCompSize(region, width, percent * height);
 
             if (MainUI.fat != null) {
                 int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
@@ -138,7 +136,7 @@ public class UIThread extends Thread {
                 width = boxes1[1].getWidth() - 2.0;
                 percent = (double) numOfBusyDisk / 256.0;
                 region = (Region) boxes1[1].getChildren().get(0);
-                CompSet.SetRegionSize(region, width, percent * height);
+                CompSet.SetCompSize(region, width, percent * height);
 
                 System.out.println("BusyDiskNum:" + numOfBusyDisk);
             }
@@ -148,14 +146,14 @@ public class UIThread extends Thread {
             width = boxes1[2].getWidth() - 2.0;
             percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE;
             region = (Region) boxes1[2].getChildren().get(0);
-            CompSet.SetRegionSize(region, width, percent * height);
+            CompSet.SetCompSize(region, width, percent * height);
 
             int numOfBusyPcb = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
             height = boxes1[3].getHeight() - 2.0;
             width = boxes1[3].getWidth() - 2.0;
             percent = (double) numOfBusyPcb / (double) OccupancyManager.PCB_SIZE;
             region = (Region) boxes1[3].getChildren().get(0);
-            CompSet.SetRegionSize(region, width, percent * height);
+            CompSet.SetCompSize(region, width, percent * height);
         }
     }
 
@@ -358,16 +356,15 @@ public class UIThread extends Thread {
 
     public void timeUpdate() {
         if (timeButton1 != null && timeButton2 != null) {
-            Date date = new Date();
-            final String hour = String.format("%tH", date);
-            final String minute = String.format("%tM", date);
-            String second = String.format("%tS", date);
-            final String year = String.format("%ty", date);
-            final String month = String.format("%tm", date);
-            final String day = String.format("%td", date);
             Platform.runLater(() -> {
-                UIThread.timeButton1.setText(hour + ":" + minute + ":" + second);
-                UIThread.timeButton2.setText("20" + year + "/" + month + "/" + day);
+                Date date = new Date();
+                UIThread.timeButton1.setText(
+                        String.format("%tH", date) + ":" +
+                                String.format("%tM", date) + ":" +
+                                String.format("%tS", date));
+                UIThread.timeButton2.setText("20" + String.format("%ty", date) + "/" +
+                        String.format("%tm", date) + "/" +
+                        String.format("%td", date));
             });
         }
     }

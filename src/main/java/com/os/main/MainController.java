@@ -9,6 +9,7 @@ import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
+import com.os.utils.ui.CompSet;
 import com.os.utils.ui.StageRecord;
 import com.os.utils.ui.UIThread;
 import javafx.application.Platform;
@@ -77,9 +78,9 @@ public class MainController {
     boolean haveChanged = true;
     private final String buttonStyle =
             "-fx-background-color: transparent,aliceblue;" +
-            "-fx-background-radius: 12;" +
-            "-fx-text-fill: black;" +
-            "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );";
+                    "-fx-background-radius: 12;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );";
 
     @FXML
     void closeWindow(MouseEvent event) {
@@ -293,7 +294,6 @@ public class MainController {
         button.setPrefSize(width, height);
         button.setMinSize(width, height);
         button.setMaxSize(width, height);
-        button.resize(width, height);
     }
 
     // 设置图像视图的宽度和高度
@@ -304,24 +304,15 @@ public class MainController {
 
     public void adaptWindow() {
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
+
         System.out.println("MainWindow:" + this.MainWindow.getWidth() + "," + this.MainWindow.getHeight());
         // 初始化任务栏
-        this.buttonBar.setMaxHeight(1 * this.appWidth);
-        this.buttonBar.setMinHeight(1 * this.appWidth);
-        this.buttonBar.setPrefHeight(1 * this.appWidth);
-        this.buttonBar.setMaxWidth(this.sceneWidth);
-        this.buttonBar.setMinWidth(this.sceneWidth);
-        this.buttonBar.setPrefWidth(this.sceneWidth);
+        CompSet.SetCompSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
         // 初始化任务栏背景 ------------------------------------------------------------
-        this.buttonBarBackGround.setMinHeight(1 * this.appWidth);
-        this.buttonBarBackGround.setMaxHeight(1 * this.appWidth);
-        this.buttonBarBackGround.setPrefHeight(1 * this.appWidth);
-        this.buttonBarBackGround.setMinWidth(this.sceneWidth);
-        this.buttonBarBackGround.setMaxWidth(this.sceneWidth);
-        this.buttonBarBackGround.setPrefWidth(this.sceneWidth);
+        CompSet.SetCompSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
         this.buttonBarBackGround.setLayoutX(0);
         this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
@@ -347,26 +338,15 @@ public class MainController {
         setCompSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
         setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
-        this.appBox.setMinHeight(1 * this.appWidth);
-        this.appBox.setMaxHeight(1 * this.appWidth);
-        this.appBox.setPrefHeight(1 * this.appWidth);
-        this.appBox.setPrefWidth(this.appWidth * 10.0);
-        this.appBox.setMaxWidth(this.appWidth * 10.0);
-        this.appBox.setMinWidth(this.appWidth * 10.0);
+        CompSet.SetCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
         System.out.println(this.appBox.getWidth() + " " + this.appBox.getHeight());
 
-        this.tipBox.setMinHeight(1 * this.appWidth);
-        this.tipBox.setMaxHeight(1 * this.appWidth);
-        this.tipBox.setPrefHeight(1 * this.appWidth);
-        this.tipBox.setMaxWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
-        this.tipBox.setMinWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
-        this.tipBox.setPrefWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
-        this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
+        CompSet.SetCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
+        this.tipBox.setLayoutX(this.sceneWidth - 1.3 * this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
-        this.timeBox.setMinHeight(1.5 * this.appWidth);
-        this.tipBox.setMaxHeight(1.5 * this.appWidth);
+
         System.out.println(this.tipBox.getWidth() + " " + this.tipBox.getHeight());
     }
 
@@ -679,24 +659,18 @@ public class MainController {
     public void timeInit() {
         // 获取当前日期和时间
         Date date = new Date();
-
-        // 格式化日期和时间
-        String hour = String.format("%tH", date);
-        String minute = String.format("%tM", date);
-        String second = String.format("%tS", date);
-        String year = String.format("%ty", date);
-        String month = String.format("%tm", date);
-        String day = String.format("%td", date);
+        // 设置时间按钮的文本格式
+        this.timeButton1.setText(
+                String.format("%tH", date) + ":" +
+                        String.format("%tM", date) + ":" +
+                        String.format("%tS", date));
+        this.timeButton2.setText("20" + String.format("%ty", date) + "/" +
+                String.format("%tm", date) + "/" +
+                String.format("%td", date));
 
         // 设置时间按钮的最小和最大宽度
-        this.timeButton1.setMinWidth(2 * this.appWidth);
-        this.timeButton1.setMaxWidth(2 * this.appWidth);
-        this.timeButton2.setMinWidth(2 * this.appWidth);
-        this.timeButton2.setMaxWidth(2 * this.appWidth);
-
-        // 设置时间按钮的文本格式
-        this.timeButton1.setText(hour + ":" + minute + ":" + second);
-        this.timeButton2.setText("20" + year + "/" + month + "/" + day);
+        CompSet.SetCompSize(this.timeButton2, 2 * this.appWidth, -1);
+        CompSet.SetCompSize(this.timeBox, 2 * this.appWidth, -1);
     }
 
     // 初始化ui线程
