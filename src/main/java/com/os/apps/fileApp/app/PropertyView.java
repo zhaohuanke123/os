@@ -30,6 +30,7 @@ public class PropertyView extends Application {
     private String location;
     private Stage stage;
     private final ToggleGroup toggleGroup = new ToggleGroup();
+
     FXMLLoader fxmlLoader;
     PropertyCtl propertyCtl;
     private final Parent root;
@@ -41,6 +42,10 @@ public class PropertyView extends Application {
         this.icon = icon;
         this.pathMap = pathMap;
         this.stage = stage;
+    }
+
+    public void start(Stage primaryStage) throws Exception {
+        this.showView();
     }
 
     private void showView() {
@@ -85,12 +90,6 @@ public class PropertyView extends Application {
         imageView.setFitHeight(25.0);
         propertyCtl.propertyIcon.setGraphic(imageView);
 
-//        propertyCtl.acceptButton.setOnMouseEntered(event -> propertyCtl.acceptButton.setStyle("-fx-background-color: #808080;"));
-//        propertyCtl.acceptButton.setOnMouseExited(event -> propertyCtl.acceptButton.setStyle("-fx-background-color: #d3d3d3;"));
-//        propertyCtl.cancelButton.setOnMouseEntered(event -> propertyCtl.cancelButton.setStyle("-fx-background-color: #808080;"));
-//        propertyCtl.cancelButton.setOnMouseExited(event -> propertyCtl.cancelButton.setStyle("-fx-background-color: #d3d3d3;"));
-//        propertyCtl.applyButton.setOnMouseEntered(event -> propertyCtl.applyButton.setStyle("-fx-background-color: #808080;"));
-//        propertyCtl.applyButton.setOnMouseExited(event -> propertyCtl.applyButton.setStyle("-fx-background-color: #d3d3d3;"));
         propertyCtl.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> propertyCtl.applyButton.setDisable(false));
 
         this.buttonOnAction();
@@ -218,9 +217,5 @@ public class PropertyView extends Application {
             }
         }
 
-    }
-
-    public void start(Stage primaryStage) throws Exception {
-        this.showView();
     }
 }

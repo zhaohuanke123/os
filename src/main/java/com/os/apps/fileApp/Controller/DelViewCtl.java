@@ -21,9 +21,9 @@ public class DelViewCtl extends BaseController {
     public Label titleBarL;
     public HBox titleBarR;
     @FXML
-    private Button yes;
+    private Button acceptButton;
     @FXML
-    private Button no;
+    private Button cancelButton;
     @FXML
     private Text text;
     private Disk block;
@@ -33,7 +33,7 @@ public class DelViewCtl extends BaseController {
         this.text.setText(tipString);
         this.block = block;
 
-        this.yes.setOnMouseClicked(event -> {
+        this.acceptButton.setOnMouseClicked(event -> {
             stage.close();
             Path thisPath = null;
             if (block.getObject() instanceof Folder) {
@@ -72,7 +72,7 @@ public class DelViewCtl extends BaseController {
             mainView.flowPane.getChildren().removeAll(mainView.flowPane.getChildren());
             mainView.addIcon(MainUI.fat.getBlockList(mainView.recentPath), mainView.recentPath);
         });
-        this.no.setOnMouseClicked(event -> stage.close());
+        this.cancelButton.setOnMouseClicked(event -> stage.close());
     }
 
     public void tipOpen(String tipString) throws Exception {
