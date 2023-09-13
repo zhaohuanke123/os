@@ -2,18 +2,74 @@
 @import "../../WindowPane.css";
 
 /**************************************************面板设计*******************************************************/
-#flowPane
-{
-    -fx-background-color:#F9FAFB;
-    -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12 ;*/
-    /*-fx-background-radius: 0 0  12 12;*/
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(103, 157, 238);
+    -fx-effect: null;
+
 }
 
-#treeView
+.tab-pane
 {
-    -fx-background-color:#F9FAFB;
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: rgb(103, 157, 238);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #000000;
+}
+
+#currentPath {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #000000;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+
+#flowPane  {
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12 ;*/
-    /*-fx-background-radius: 0 0  12 12;*/
+    /*-fx-border-radius: 0 0 12 12;*/
+    /*-fx-background-radius: 0 0 12 12;*/
+}
+
+#treeView {
+    -fx-background-color: rgb(103, 157, 238);
+    -fx-border-color: transparent;
+    -fx-border-radius: 0 0 12 12;
+    -fx-background-radius: 0 0 12 12;
+}
+
+.tree-cell {
+    -fx-background-color: transparent;
+}
+
+
+.tree-cell:selected .tree-cell:hover {
+    -fx-background-color: rgb(103, 157, 238);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 12 12 12 12;
+    -fx-background-radius: 12 12 12 12;
 }

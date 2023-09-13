@@ -15,9 +15,9 @@
                onMousePressed="#pressBar" onMouseReleased="#releaseBar"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
-         <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
+         <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
                prefWidth="134.0" stylesheets="@../css/FileView.css" BorderPane.alignment="CENTER">
-            <Label fx:id="fileIcon" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="文件"
+            <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="294.0" text="文件"
                    HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -31,7 +31,7 @@
          </HBox>
       </left>
       <right>
-         <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
+         <HBox id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
                maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                spacing="10.0" BorderPane.alignment="CENTER">
             <opaqueInsets>
@@ -81,40 +81,22 @@
          </HBox>
       </right>
    </BorderPane>
-   <AnchorPane id="contentPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
+   <AnchorPane id="mainPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
                AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
       <Pane id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
          <VBox id="contentPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
-            <MenuBar fx:id="Bar" prefHeight="40.0" prefWidth="600.0">
+
+            <MenuBar fx:id="menuBar" prefHeight="40.0" prefWidth="600.0">
                <Menu fx:id="fileMenu" mnemonicParsing="false" text="文件">
                   <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
                   <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
                   <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
                </Menu>
-               <Menu mnemonicParsing="false" text="文字">
-                  <Menu mnemonicParsing="false" text="字体">
-                     <MenuItem mnemonicParsing="false" text="黑体"/>
-                     <MenuItem mnemonicParsing="false" text="宋体"/>
-                     <MenuItem mnemonicParsing="false" text="楷体"/>
-                     <MenuItem mnemonicParsing="false" text="微软雅黑"/>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="大小">
-                     <MenuItem mnemonicParsing="false" text="12px"/>
-                     <MenuItem mnemonicParsing="false" text="16px"/>
-                     <MenuItem mnemonicParsing="false" text="20px"/>
-                     <MenuItem mnemonicParsing="false" text="24px"/>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="颜色">
-                     <MenuItem mnemonicParsing="false" text="灰色"/>
-                     <MenuItem mnemonicParsing="false" text="黑色"/>
-                     <MenuItem mnemonicParsing="false" text="红色"/>
-                     <MenuItem mnemonicParsing="false" text="蓝色"/>
-                  </Menu>
-               </Menu>
             </MenuBar>
+
             <TextArea id="contentField" fx:id="contentField" prefHeight="482.0" prefWidth="600.0"
-                      style="-fx-border-color: #f3f3f3;" stylesheets="@../css/FileView.css" wrapText="true">
+                       stylesheets="@../css/FileView.css" wrapText="true">
                <font>
                   <Font size="16.0"/>
                </font>

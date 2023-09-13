@@ -6,18 +6,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 public class PropertyCtl extends BaseController {
     public BorderPane titleBar;
    public Label propertyIcon;
-   public Button yes;
-   public RadioButton write;
-   public RadioButton read;
-   public Button apply;
-   public Label type;
-   public Label loc;
-   public Label space;
-   public Label time;
-   public TextField na;
-   public Button no;
+   public Button acceptButton;
+   public RadioButton checkWrite;
+   public RadioButton checkRead;
+   public Button applyButton;
+   public Label typeField;
+   public Label locField;
+   public Label spaceField;
+   public Label timeField;
+   public TextField textField;
+   public Button cancelButton;
+   public HBox titleBarR;
 }

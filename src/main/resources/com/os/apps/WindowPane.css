@@ -1,9 +1,5 @@
 #mainPane {
-    -fx-background-color: rgba(103, 157, 238, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.15);
-    -fx-border-radius: 8 8 8 8;
-    -fx-background-radius: 8 8 8 8;
-
+    -fx-background-color: transparent;
 }
 
 #topMainPane {
@@ -22,8 +18,8 @@
 }
 
 #contentPane {
-    -fx-background-color: rgba(103, 157, 238, 0.9);
-    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-border-radius: 8 8 8 8;
     -fx-background-radius: 8 8 8 8;
 }

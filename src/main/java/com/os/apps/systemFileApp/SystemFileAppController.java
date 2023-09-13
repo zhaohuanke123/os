@@ -25,55 +25,64 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class SystemFileAppController extends BaseController {
-    public AnchorPane mainPane;
-   public Label titleBarL;
-   public HBox titleBarR;
-   @FXML
-   private AnchorPane topMainPane;
-   @FXML
-   private TableView<ExecutableFileData> executableFileTable;
-   @FXML
-   private TableColumn<?, ?> fileName;
-   @FXML
-   private TableView<InstructionData> fileDetailTable;
-   @FXML
-   private TableColumn<?, ?> fileDetail;
-   public static Vector<ExecutableFile> executableFileList;
-   public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();
-   public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();
+    @FXML
+    private AnchorPane topMainPane;
+    @FXML
+    private TableView<ExecutableFileData> executableFileTable;
+    @FXML
+    private TableColumn<?, ?> fileName;
+    @FXML
+    private TableView<InstructionData> fileDetailTable;
+    @FXML
+    private TableColumn<?, ?> fileDetail;
+    public static Vector<ExecutableFile> executableFileList;
+    public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();
+    public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();
 
-   @FXML
-   void selectFile(MouseEvent event) {
-      String s = this.executableFileTable.getSelectionModel().getSelectedItem().toString();
-      int i = Integer.parseInt(s);
-      this.updateFileDetailTable(i);
-   }
-   @Override
-   public void init(Stage stage) {
-      super.init(stage);
+    @FXML
+    void selectFile(MouseEvent event) {
+        String s = this.executableFileTable.getSelectionModel().getSelectedItem().toString();
+        int i = Integer.parseInt(s);
+        this.updateFileDetailTable(i);
+    }
 
-      executableFileList = ProcessManager.executableFileList;
-      this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
-      this.fileDetail.setCellValueFactory(new PropertyValueFactory<>("instruction"));
-      updateFileTable(this.executableFileTable);
-      DrawUtil drawUtil = new DrawUtil();
-      drawUtil.addDrawFunc(stage, this.topMainPane);
-      stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(SystemFileAppController.this::adaptWindow));
-      stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(SystemFileAppController.this::adaptWindow));
-   }
+    @Override
+    public void init(Stage stage) {
+        super.init(stage);
 
-   public static void updateFileTable(final TableView<ExecutableFileData> executableFileTable) {
-      Platform.runLater(() -> {
-         DataLoader.fileDataLoad(SystemFileAppController.executableFileDataList, SystemFileAppController.executableFileList);
-         executableFileTable.setItems(FXCollections.observableArrayList(SystemFileAppController.executableFileDataList));
-      });
-   }
+        executableFileList = ProcessManager.executableFileList;
+        this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
+        this.fileDetail.setCellValueFactory(new PropertyValueFactory<>("instruction"));
+        updateFileTable(this.executableFileTable);
+        DrawUtil drawUtil = new DrawUtil();
+        drawUtil.addDrawFunc(stage, this.topMainPane);
+        stage.widthProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        Platform.runLater(SystemFileAppController.this::adaptWindow));
+        stage.heightProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        Platform.runLater(SystemFileAppController.this::adaptWindow));
+    }
 
-   public void updateFileDetailTable(final int i) {
-      Platform.runLater(() -> {
-         DataLoader.fileDetailDataLoad(SystemFileAppController.this.fileDetailDataList, SystemFileAppController.executableFileList.get(i));
-         SystemFileAppController.this.fileDetail.setText("对应编号：" + i);
-         SystemFileAppController.this.fileDetailTable.setItems(FXCollections.observableArrayList(SystemFileAppController.this.fileDetailDataList));
-      });
-   }
+    public static void updateFileTable(final TableView<ExecutableFileData> executableFileTable) {
+        Platform.runLater(() -> {
+            DataLoader.fileDataLoad(
+                    SystemFileAppController.executableFileDataList,
+                    SystemFileAppController.executableFileList);
+            executableFileTable.setItems(
+                    FXCollections.observableArrayList(
+                            SystemFileAppController.executableFileDataList));
+        });
+    }
+
+    public void updateFileDetailTable(final int i) {
+        Platform.runLater(() -> {
+            DataLoader.fileDetailDataLoad(
+                    SystemFileAppController.this.fileDetailDataList,
+                    SystemFileAppController.executableFileList.get(i));
+            SystemFileAppController.this.fileDetail.setText("对应编号：" + i);
+            SystemFileAppController.this.fileDetailTable.setItems(
+                    FXCollections.observableArrayList(SystemFileAppController.this.fileDetailDataList));
+        });
+    }
 }

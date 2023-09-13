@@ -317,50 +317,50 @@ public class MainController {
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
         System.out.println("MainWindow:" + this.MainWindow.getWidth() + "," + this.MainWindow.getHeight());
         // 初始化任务栏
-        this.buttonBar.setMaxHeight(1.3 * this.appWidth);
-        this.buttonBar.setMinHeight(1.3 * this.appWidth);
-        this.buttonBar.setPrefHeight(1.3 * this.appWidth);
+        this.buttonBar.setMaxHeight(1 * this.appWidth);
+        this.buttonBar.setMinHeight(1 * this.appWidth);
+        this.buttonBar.setPrefHeight(1 * this.appWidth);
         this.buttonBar.setMaxWidth(this.sceneWidth);
         this.buttonBar.setMinWidth(this.sceneWidth);
         this.buttonBar.setPrefWidth(this.sceneWidth);
         this.buttonBar.setLayoutX(0);
-        this.buttonBar.setLayoutY(this.sceneHeight - 1.3 * this.appWidth);
+        this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
-        // 初始化任务栏背景
-        this.buttonBarBackGround.setMinHeight(1.2 * this.appWidth);
-        this.buttonBarBackGround.setMaxHeight(1.2 * this.appWidth);
-        this.buttonBarBackGround.setPrefHeight(1.2 * this.appWidth);
+        // 初始化任务栏背景 ------------------------------------------------------------
+        this.buttonBarBackGround.setMinHeight(1 * this.appWidth);
+        this.buttonBarBackGround.setMaxHeight(1 * this.appWidth);
+        this.buttonBarBackGround.setPrefHeight(1 * this.appWidth);
         this.buttonBarBackGround.setMinWidth(this.sceneWidth);
         this.buttonBarBackGround.setMaxWidth(this.sceneWidth);
         this.buttonBarBackGround.setPrefWidth(this.sceneWidth);
         this.buttonBarBackGround.setLayoutX(0);
-        this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1.2 * this.appWidth);
+        this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8.0D);
         this.buttonBarBackGround.setEffect(gaussianBlur);
         // ------------------------------------------------------------
 
-        setCompSize(this.systemFileButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setCompSize(this.fileManagerButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setCompSize(this.processButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setCompSize(this.occupancyButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
-        setCompSize(this.helpButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setCompSize(this.minimizeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
-        setCompSize(this.closeButton, 1.2 * this.appWidth, 1.2 * this.appWidth);
-        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.9, this.appWidth * 0.9);
+        setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
+        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
-        setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.8, this.appWidth * 0.8);
+        setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
-        this.appBox.setMinHeight(1.5 * this.appWidth);
-        this.appBox.setMaxHeight(1.5 * this.appWidth);
-        this.appBox.setPrefHeight(1.5 * this.appWidth);
+        this.appBox.setMinHeight(1 * this.appWidth);
+        this.appBox.setMaxHeight(1 * this.appWidth);
+        this.appBox.setPrefHeight(1 * this.appWidth);
         this.appBox.setPrefWidth(this.appWidth * 10.0);
         this.appBox.setMaxWidth(this.appWidth * 10.0);
         this.appBox.setMinWidth(this.appWidth * 10.0);
@@ -368,12 +368,12 @@ public class MainController {
         this.appBox.setLayoutY(0.0);
         System.out.println(this.appBox.getWidth() + " " + this.appBox.getHeight());
 
-        this.tipBox.setMinHeight(1.5 * this.appWidth);
-        this.tipBox.setMaxHeight(1.5 * this.appWidth);
-        this.tipBox.setPrefHeight(1.5 * this.appWidth);
-        this.tipBox.setMaxWidth(this.timeBox.getWidth() * 1.8);
-        this.tipBox.setMinWidth(this.timeBox.getWidth() * 1.8);
-        this.tipBox.setPrefWidth(this.timeBox.getWidth() * 1.8);
+        this.tipBox.setMinHeight(1 * this.appWidth);
+        this.tipBox.setMaxHeight(1 * this.appWidth);
+        this.tipBox.setPrefHeight(1 * this.appWidth);
+        this.tipBox.setMaxWidth(this.timeBox.getWidth() * 2);
+        this.tipBox.setMinWidth(this.timeBox.getWidth() * 2);
+        this.tipBox.setPrefWidth(this.timeBox.getWidth() * 2);
         this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
         this.timeBox.setMinHeight(1.5 * this.appWidth);

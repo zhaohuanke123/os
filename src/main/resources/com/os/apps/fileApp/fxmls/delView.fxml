@@ -83,16 +83,17 @@
          </HBox>
       </right>
    </BorderPane>
-   <AnchorPane id="contentPane" layoutX="8.0" layoutY="47.0" prefHeight="241.0" prefWidth="324.0"
+
+   <AnchorPane id="mainPane" layoutX="8.0" layoutY="47.0" prefHeight="241.0" prefWidth="324.0"
                stylesheets="@../css/DelView.css"
                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
                AnchorPane.topAnchor="45.0">
-      <Button fx:id="yes" layoutX="158.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
+      <Button fx:id="acceptButton" layoutX="158.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
               text="确认"/>
-      <Button fx:id="no" layoutX="244.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
+      <Button fx:id="cancelButton" layoutX="244.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
               text="取消"/>
       <Text fx:id="text" layoutX="11.0" layoutY="19.0" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="对对对对对对多" wrappingWidth="309.0402374267578"
+            text="文本" wrappingWidth="309.0402374267578"
             AnchorPane.topAnchor="7.0"/>
    </AnchorPane>
 </AnchorPane>

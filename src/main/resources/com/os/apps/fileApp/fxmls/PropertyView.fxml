@@ -81,7 +81,7 @@
          </HBox>
       </right>
    </BorderPane>
-   <AnchorPane id="contentPane" prefHeight="300.0" prefWidth="300.0" stylesheets="@../css/PropertyView.css"
+   <AnchorPane id="mainPane" prefHeight="300.0" prefWidth="300.0" stylesheets="@../css/PropertyView.css"
                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="604.0"
                AnchorPane.topAnchor="45.0">
       <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -133,20 +133,20 @@
                      <Insets left="8.0"/>
                   </GridPane.margin>
                </Label>
-               <Label fx:id="type" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-               <Label fx:id="loc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-               <Label fx:id="space" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-               <Label fx:id="time" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-               <TextField fx:id="na" prefHeight="26.0" prefWidth="150.0"
-                          style="-fx-border-color: #d3d3d3; -fx-border-radius: 5; -fx-background-color: #ffffff;"
+               <Label fx:id="typeField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+               <Label fx:id="locField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+               <Label fx:id="spaceField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+               <Label fx:id="timeField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+               <TextField fx:id="textField" prefHeight="26.0" prefWidth="150.0"
+                          stylesheets="@../css/PropertyView.css"
                           GridPane.columnIndex="1"/>
                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                  <RadioButton fx:id="read" mnemonicParsing="false" prefHeight="5.0" text="只读">
+                  <RadioButton fx:id="checkRead" mnemonicParsing="false" prefHeight="5.0" text="只读">
                      <HBox.margin>
                         <Insets top="10.0"/>
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton fx:id="write" mnemonicParsing="false" prefHeight="5.0" text="读写">
+                  <RadioButton fx:id="checkWrite" mnemonicParsing="false" prefHeight="5.0" text="读写">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0"/>
                      </HBox.margin>
@@ -154,12 +154,12 @@
                </HBox>
             </GridPane>
             <HBox prefHeight="50.0" prefWidth="290.0">
-               <Button fx:id="yes" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="确定">
+               <Button id="bButton" fx:id="acceptButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="确定">
                   <HBox.margin>
                      <Insets left="33.0" top="10.0"/>
                   </HBox.margin>
                </Button>
-               <Button fx:id="no" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="取消">
+               <Button id="bButton" fx:id="cancelButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="取消">
                   <opaqueInsets>
                      <Insets/>
                   </opaqueInsets>
@@ -167,7 +167,7 @@
                      <Insets left="20.0" top="10.0"/>
                   </HBox.margin>
                </Button>
-               <Button fx:id="apply" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="应用">
+               <Button id="bButton" fx:id="applyButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" text="应用">
                   <HBox.margin>
                      <Insets left="20.0" top="10.0"/>
                   </HBox.margin>
