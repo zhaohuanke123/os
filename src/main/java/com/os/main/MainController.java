@@ -1,11 +1,11 @@
 package com.os.main;
 
 import com.os.apps.fileApp.app.MainUI;
-import com.os.utils.fileSystem.FAT;
 import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.apps.processApp.ProcessApp;
 import com.os.apps.systemFileApp.SystemFileApp;
+import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
@@ -15,8 +15,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -29,23 +27,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
 
 public class MainController {
-    final Label menu = new Label();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     public Pane buttonBarBackGround;
-    ArrayList<Button> buttonList = new ArrayList<>();
     Scene scene = null;
     Stage primaryStage = null;
-    Button temporaryButton = null;
     public static Vector<StageRecord> stageList = new Vector<>();
     double appWidth;
-    double distance;
     double sceneWidth;
     double sceneHeight;
     @FXML
@@ -65,11 +58,7 @@ public class MainController {
     @FXML
     private HBox tipBox;
     @FXML
-    private Separator separator1;
-    @FXML
     private Button minimizeButton;
-    @FXML
-    private Separator separator2;
     @FXML
     private Button closeButton;
     @FXML
@@ -343,7 +332,7 @@ public class MainController {
         setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setImageViewSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
@@ -371,9 +360,9 @@ public class MainController {
         this.tipBox.setMinHeight(1 * this.appWidth);
         this.tipBox.setMaxHeight(1 * this.appWidth);
         this.tipBox.setPrefHeight(1 * this.appWidth);
-        this.tipBox.setMaxWidth(this.timeBox.getWidth() * 2);
-        this.tipBox.setMinWidth(this.timeBox.getWidth() * 2);
-        this.tipBox.setPrefWidth(this.timeBox.getWidth() * 2);
+        this.tipBox.setMaxWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
+        this.tipBox.setMinWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
+        this.tipBox.setPrefWidth(this.timeBox.getWidth() + 1.2 * this.deskButton.getWidth());
         this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
         this.timeBox.setMinHeight(1.5 * this.appWidth);
