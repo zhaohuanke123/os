@@ -3,7 +3,7 @@
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.5em;
+    -fx-font-size: 1.2em;
     -fx-text-fill: #1a1918;
 }
 
@@ -12,7 +12,7 @@
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.5em;
+    -fx-font-size: 1.2em;
     -fx-text-fill: #1a1918;
 }
 
@@ -23,7 +23,7 @@
     -fx-border-insets: 1, 1, 1, 1;
 
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1.2em; /* 12 */
     -fx-text-fill: #828282;
 }
 
@@ -44,16 +44,16 @@
 }
 
 #appBox {
-    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-background-color: transparent;
 
     -fx-background-radius: 10;
     -fx-border-insets: 1, 1, 1, 1;
     -fx-text-fill: black;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);
 }
 
 #buttonBar {
-    -fx-background-color: /*transparent,aliceblue;*/ rgba(255, 255, 255, 0.6);
+    -fx-background-color: rgba(255, 255, 255, 0.6);
     -fx-background-radius: 0px;
 }
 
@@ -65,21 +65,21 @@
     -fx-background-color: White;
     -fx-background-radius: 28;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1em;
 }
 
 #controlButton:hover {
     -fx-background-color: transparent, white;
     -fx-background-radius: 28;
     -fx-text-fill: black;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);
 }
 
 #controlButton:pressed {
     -fx-background-color: transparent, lightgray;
     -fx-background-radius: 25;
     -fx-text-fill: black;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);
 }
 
 #deskButton {
@@ -87,7 +87,7 @@
     -fx-background-radius: 0;
     -fx-opacity: 0;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1em;
 }
 
 #deskButton:hover {
@@ -95,7 +95,7 @@
     -fx-background-radius: 0;
     -fx-opacity: 1;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1em;
 }
 
 #deskButton:pressed {
@@ -103,5 +103,5 @@
     -fx-background-radius: 0;
     -fx-opacity: 0;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1em;
 }
