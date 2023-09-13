@@ -90,8 +90,8 @@ public class File implements Serializable {
       this.diskNum = diskNum;
       this.length = 0;
       this.content = "";
+      this.size = getSize(0);
       this.location = location;
-      this.size = getSize(this.content.length());
       this.space = this.size + "B";
       this.createTime = new Date();
       this.parent = parent;
