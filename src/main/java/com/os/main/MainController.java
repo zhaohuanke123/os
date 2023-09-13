@@ -90,7 +90,7 @@ public class MainController {
             "-fx-background-color: transparent,aliceblue;" +
             "-fx-background-radius: 12;" +
             "-fx-text-fill: black;" +
-            "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );";
+            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0, 0, 1);";
 
     @FXML
     void closeWindow(MouseEvent event) {
@@ -313,9 +313,11 @@ public class MainController {
         button.setFitHeight(height);
     }
 
+    // 调整界面的大小和布局
     public void adaptWindow() {
+        // 设置主窗口的大小与场景的大小相同
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
-        System.out.println("MainWindow:" + this.MainWindow.getWidth() + "," + this.MainWindow.getHeight());
+
         // 初始化任务栏
         this.buttonBar.setMaxHeight(1 * this.appWidth);
         this.buttonBar.setMinHeight(1 * this.appWidth);
@@ -326,7 +328,7 @@ public class MainController {
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
-        // 初始化任务栏背景 ------------------------------------------------------------
+        // 初始化任务栏背景
         this.buttonBarBackGround.setMinHeight(1 * this.appWidth);
         this.buttonBarBackGround.setMaxHeight(1 * this.appWidth);
         this.buttonBarBackGround.setPrefHeight(1 * this.appWidth);
@@ -335,29 +337,29 @@ public class MainController {
         this.buttonBarBackGround.setPrefWidth(this.sceneWidth);
         this.buttonBarBackGround.setLayoutX(0);
         this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
-        GaussianBlur gaussianBlur = new GaussianBlur();
-        gaussianBlur.setRadius(8.0D);
-        this.buttonBarBackGround.setEffect(gaussianBlur);
-        // ------------------------------------------------------------
+//        GaussianBlur gaussianBlur = new GaussianBlur();
+//        gaussianBlur.setRadius(8.0D);
+//        this.buttonBarBackGround.setEffect(gaussianBlur);
 
+        // 设置按钮和图像视图的大小
         setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setImageViewSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-
         setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
         setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
         setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.deskButton, 0.8 * this.appWidth, 0.8 * this.appWidth);
+        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
+        setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
         setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
+        // 设置appBox的大小和布局
         this.appBox.setMinHeight(1 * this.appWidth);
         this.appBox.setMaxHeight(1 * this.appWidth);
         this.appBox.setPrefHeight(1 * this.appWidth);
@@ -366,19 +368,16 @@ public class MainController {
         this.appBox.setMinWidth(this.appWidth * 10.0);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
-        System.out.println(this.appBox.getWidth() + " " + this.appBox.getHeight());
 
+        // 设置tipBox的大小和布局
         this.tipBox.setMinHeight(1 * this.appWidth);
         this.tipBox.setMaxHeight(1 * this.appWidth);
         this.tipBox.setPrefHeight(1 * this.appWidth);
-        this.tipBox.setMaxWidth(this.timeBox.getWidth() * 2);
-        this.tipBox.setMinWidth(this.timeBox.getWidth() * 2);
-        this.tipBox.setPrefWidth(this.timeBox.getWidth() * 2);
+        this.tipBox.setMaxWidth(this.timeBox.getWidth() + this.deskButton.getWidth());
+        this.tipBox.setMinWidth(this.timeBox.getWidth() + this.deskButton.getWidth());
+        this.tipBox.setPrefWidth(this.timeBox.getWidth() + this.deskButton.getWidth());
         this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
-        this.tipBox.setLayoutY(0.0);
-        this.timeBox.setMinHeight(1.5 * this.appWidth);
-        this.tipBox.setMaxHeight(1.5 * this.appWidth);
-        System.out.println(this.tipBox.getWidth() + " " + this.tipBox.getHeight());
+        this.tipBox.setLayoutY(0.5);
     }
 
     // 打开文件管理器
@@ -702,8 +701,17 @@ public class MainController {
         // 设置时间按钮的最小和最大宽度
         this.timeButton1.setMinWidth(2 * this.appWidth);
         this.timeButton1.setMaxWidth(2 * this.appWidth);
+        this.timeButton1.setPrefWidth(2 * this.appWidth);
+        this.timeButton1.setMinHeight(0.5 * this.appWidth);
+        this.timeButton1.setMaxHeight(0.5 * this.appWidth);
+        this.timeButton1.setPrefHeight(0.5 * this.appWidth);
+
         this.timeButton2.setMinWidth(2 * this.appWidth);
         this.timeButton2.setMaxWidth(2 * this.appWidth);
+        this.timeButton2.setPrefWidth(2 * this.appWidth);
+        this.timeButton2.setMinHeight(0.5 * this.appWidth);
+        this.timeButton2.setMaxHeight(0.5 * this.appWidth);
+        this.timeButton2.setPrefHeight(0.5 * this.appWidth);
 
         // 设置时间按钮的文本格式
         this.timeButton1.setText(hour + ":" + minute + ":" + second);
