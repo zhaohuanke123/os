@@ -36,8 +36,10 @@ public class MainWindow extends Application {
       final MainController mainController = fxmlLoader.getController();
 
       // 监听主窗口的宽度和高度变化，调整窗口
-      primaryStage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(mainController::adaptWindow));
-      primaryStage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(mainController::adaptWindow));
+      primaryStage.widthProperty().addListener((observable, oldValue, newValue)
+              -> Platform.runLater(mainController::adaptWindow));
+      primaryStage.heightProperty().addListener((observable, oldValue, newValue)
+              -> Platform.runLater(mainController::adaptWindow));
 
       // 最大化主窗口
       primaryStage.setMaximized(true);
