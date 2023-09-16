@@ -455,8 +455,8 @@ public class MainController {
         }
         //endregion
 
-        UIThread.mainButtons = buttons;
-        UIThread.stageList = stageList;
+//        UIThread.mainButtons = buttons;
+//        UIThread.stageList = stageList;
     }
 
     // 初始化时间显示
@@ -479,10 +479,25 @@ public class MainController {
 
     // 初始化ui线程
     private void uiThreadInit() {
-        UIThread.timeButton1 = this.timeButton1;
-        UIThread.timeButton2 = this.timeButton2;
+//        UIThread.timeButton1 = this.timeButton1;
+//        UIThread.timeButton2 = this.timeButton2;
         this.uiThread.init();
         this.uiThread.start();
+    }
+
+    public void timeUpdate() {
+        if (timeButton1 != null && timeButton2 != null) {
+            Platform.runLater(() -> {
+                Date date = new Date();
+                timeButton1.setText(
+                        String.format("%tH", date) + ":" +
+                                String.format("%tM", date) + ":" +
+                                String.format("%tS", date));
+                timeButton2.setText("20" + String.format("%ty", date) + "/" +
+                        String.format("%tm", date) + "/" +
+                        String.format("%td", date));
+            });
+        }
     }
 
     // 初始化进程线程
