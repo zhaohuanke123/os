@@ -7,7 +7,6 @@ import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.ui.CompSet;
 import com.os.utils.ui.DrawUtil;
-import com.os.utils.ui.UIThread;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,8 +19,6 @@ import javafx.stage.Stage;
 
 public class OccupancyAppController extends BaseController {
     //region [FXML comp variables]
-    public Label titleBarL;
-    public HBox titleBarR;
     public AnchorPane mainPane;
     public AnchorPane topMainPane;
     public Button memoryText;
@@ -115,14 +112,11 @@ public class OccupancyAppController extends BaseController {
 
         DrawUtil drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
-//         boxes1 = boxes1;
-//         textButtons = textButtons;
-//         boxes2 = boxes2;
 
         MainController.getInstance().uiThread.occupancyAppController = this;
     }
 
-    public void occupancyAppUpdate() {
+    public void Update() {
         this.occupancyTextUpdate();
         this.occupancyBoxes1Update();
         this.occupancyBoxes2Update();

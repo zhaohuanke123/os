@@ -2,8 +2,6 @@ package com.os.utils.ui;
 
 import com.os.apps.occupancyApp.OccupancyAppController;
 import com.os.apps.processApp.ProcessAppController;
-import com.os.datas.InstructionData;
-import com.os.datas.ProcessDetailData;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -52,9 +50,9 @@ public class UIThread extends Thread {
 
             MainController.getInstance().Update();
             if (this.processAppController != null)
-                processAppController.ProcessUpdate();
+                processAppController.Update();
             if (this.occupancyAppController != null)
-                occupancyAppController.occupancyAppUpdate();
+                occupancyAppController.Update();
         } while (true);
     }
 }

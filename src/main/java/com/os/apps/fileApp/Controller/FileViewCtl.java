@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FileViewCtl extends BaseController {
-    public BorderPane titleBar;
     public Label title;
     public MenuBar menuBar;
     public Menu fileMenu;

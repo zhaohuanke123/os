@@ -11,8 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class HelpAppController extends BaseController{
-    public Label titleBarL;
-    public HBox titleBarR;
     @FXML
     private AnchorPane topMainPane;
     @FXML

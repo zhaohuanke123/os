@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 
 public class TipWindowCtl extends BaseController {
    @FXML
-   private BorderPane titleBar;
-   @FXML
    private Text tipText;
 
    public void init(Stage stage, String tipString) {

@@ -17,9 +17,6 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 
 public class DelViewCtl extends BaseController {
-    public BorderPane titleBar;
-    public Label titleBarL;
-    public HBox titleBarR;
     @FXML
     private Button acceptButton;
     @FXML

@@ -39,7 +39,6 @@ public class MainController {
     }
 
     public static final String packageName = "com/os/apps/";
-    // 字典
     private TreeMap<String, Button> appButtonDict;
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
@@ -237,7 +236,7 @@ public class MainController {
     }
 
     // 打开文件管理器
-    private void fileAppOpen() throws Exception {
+    private void fileAppOpen() {
         // 窗口名称
         String stageName = "com/os/apps/fileApp";
 
@@ -390,28 +389,24 @@ public class MainController {
 
         this.systemFileButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                System.out.println("executableFileApp open success");
                 this.OnAppOpen("systemFileApp", new SystemFileApp());
             }
 
         });
         this.processButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                System.out.println("processApp open success");
                 this.OnAppOpen("processApp", new ProcessApp());
             }
 
         });
         this.occupancyButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                System.out.println("occupancyApp open success");
                 this.OnAppOpen("occupancyApp", new OccupancyApp());
             }
 
         });
         this.helpButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                System.out.println("helpApp open success");
                 this.OnAppOpen("helpApp", new HelpApp());
             }
 
@@ -426,12 +421,8 @@ public class MainController {
         this.fileManagerButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
                 System.out.println("fileApp open success");
-
-                try {
-                    MainController.this.fileAppOpen();
-                } catch (Exception var3) {
-                    System.out.println(Arrays.toString(var3.getStackTrace()));
-                }
+                MainController.this.fileAppOpen();
+//                OnAppOpen("com/os/apps/fileApp", new MainUI());
             }
 
         });
@@ -454,7 +445,6 @@ public class MainController {
             buttons[i].setTooltip(tooltip);
         }
         //endregion
-
     }
 
     // 初始化时间显示
@@ -488,8 +478,7 @@ public class MainController {
         this.processScheduleThread.start();
     }
 
-    public void Update()
-    {
+    public void Update() {
         appButtonUpdate();
         timeUpdate();
     }

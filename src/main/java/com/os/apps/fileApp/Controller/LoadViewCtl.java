@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class LoadViewCtl extends BaseController {
-    public BorderPane titleBar;
-    public HBox titleBarR;
     public Button no;
     public Button yes;
 

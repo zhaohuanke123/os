@@ -25,8 +25,6 @@ import java.util.Vector;
 
 public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
-    public Label titleBarL;
-    public HBox titleBarR;
     @FXML
     private AnchorPane topMainPane;
     @FXML
@@ -203,7 +201,7 @@ public class ProcessAppController extends BaseController {
 
 
     //region [进程管理器的Update方法]
-    public void ProcessUpdate() {
+    public void Update() {
         this.processTableUpdate();
         this.nowProcessTableUpdate();
         this.nowProcessUpdate();

@@ -3,6 +3,7 @@ package com.os.apps.fileApp.app;
 import com.os.apps.fileApp.Controller.MainCtl;
 import com.os.utils.fileSystem.*;
 import com.os.utils.fileSystem.File;
+import com.os.utils.ui.CompSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -51,11 +52,11 @@ public class MainUI {
     private MenuItem moveItem;
     private MenuItem pasteItem;
     private Label[] icons;
-    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/mainUI.fxml"));
+    FXMLLoader fxmlLoader;
     private final Parent root;
     public FlowPane flowPane;
     private final Label currentPath;
-    private final TreeView treeView;
+    private final TreeView<String> treeView;
     private final TabPane TabP;
     private final Tab chartTab;
     public static boolean clearFlag = false;
@@ -72,11 +73,16 @@ public class MainUI {
         fileAppAdditionStageList.add(stage);
     }
 
-    public MainUI(Stage primaryStage) throws Exception {
-        this.root = this.fxmlLoader.load();
+    public MainUI(Stage primaryStage)  {
+        fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/mainUI.fxml"));
+        try {
+            this.root = this.fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.flowPane = (FlowPane) this.root.lookup("#flowPane");
         this.currentPath = (Label) this.root.lookup("#currentPath");
-        this.treeView = (TreeView) this.root.lookup("#treeView");
+        this.treeView = (TreeView<String>) this.root.lookup("#treeView");
         this.TabP = (TabPane) this.root.lookup("#TabP");
         this.chartTab = this.TabP.getTabs().get(0);
         new LoadView();
@@ -127,7 +133,7 @@ public class MainUI {
         FAT.closeAll();
         this.menuInit();
         this.menuItemSetOnAction();
-        this.initTreeView();
+        this.treeViewInit();
         this.tableInit();
         primaryStage.show();
         this.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
@@ -224,7 +230,7 @@ public class MainUI {
     public void pieInit() {
         int UsedNum = 0;
 
-        for (int i = 0; i < 256; ++i) {
+        for (int i = 0; i < FAT.DISK_NUM; ++i) {
             if (fat.getDiskBlocks()[i].getIndex() != 0) {
                 ++UsedNum;
             }
@@ -239,11 +245,10 @@ public class MainUI {
         pieChart.setLabelsVisible(false);
     }
 
-    private void initTreeView() {
+    private void treeViewInit() {
         URL location = this.getClass().getResource("/com/os/apps/fileApp/res/disk.png");
         this.rootNode = new TreeItem<>("C:", new ImageView(String.valueOf(location)));
-        ((ImageView) this.rootNode.getGraphic()).setFitWidth(20.0);
-        ((ImageView) this.rootNode.getGraphic()).setFitHeight(20.0);
+        CompSet.setImageViewSize((ImageView) this.rootNode.getGraphic(), 20.0, 20.0);
         this.rootNode.setExpanded(true);
         this.recentNode = this.rootNode;
         this.pathMap.put(fat.getPath("C:"), this.rootNode);
@@ -253,19 +258,19 @@ public class MainUI {
         for (Path path : fat.getPaths()) {
             System.out.println(path);
             if (path.hasParent() && path.getParent().getPathName().equals(this.rootNode.getValue())) {
-                this.initTreeNode(path, this.rootNode);
+                this.TreeNodeInit(path, this.rootNode);
             }
         }
 
         this.addIcon(fat.getBlockList(this.recentPath), this.recentPath);
     }
 
-    private void initTreeNode(Path newPath, TreeItem<String> parentNode) {
+    private void TreeNodeInit(Path newPath, TreeItem<String> parentNode) {
         TreeItem<String> newNode = this.addNode(parentNode, newPath);
         if (newPath.hasChild()) {
 
             for (Path child : newPath.getChildren()) {
-                this.initTreeNode(child, newNode);
+                this.TreeNodeInit(child, newNode);
             }
         }
 
@@ -601,11 +606,11 @@ public class MainUI {
     public void delViewOpen(Disk block) throws Exception {
         Stage stage = new Stage();
         DelView delView = new DelView(this, block);
-        fileAppAdditionStageList.add(stage);
         delView.start(stage);
         stage.setAlwaysOnTop(true);
         stage.setIconified(false);
         stage.toFront();
+        fileAppAdditionStageList.add(stage);
     }
 
     public static void saveData() {
@@ -614,7 +619,7 @@ public class MainUI {
             Throwable var1 = null;
 
             try {
-                System.out.println("saving");
+                System.out.println("正在保存磁盘文件数据");
                 outputStream.writeObject(fat);
             } catch (Throwable var12) {
                 var1 = var12;
