@@ -6,22 +6,20 @@ import com.os.datas.ProcessDetailData;
 import com.os.main.MainController;
 import com.os.utils.DataLoader;
 import com.os.utils.process.Process;
-import com.os.utils.ui.DrawUtil;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
-import com.os.utils.ui.UIThread;
+import com.os.utils.ui.DrawUtil;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -190,16 +188,8 @@ public class ProcessAppController extends BaseController {
         this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
         this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
 
-//        UIThread.processTable = this.processTable;
-//        UIThread.nowProcessTable = this.nowProcessTable;
-//        UIThread.nowProcessName = this.nowProcessName;
-//        UIThread.nowResult = this.nowResult;
-//        UIThread.nowInstruction = this.nowInstruction;
-//        UIThread.residueSlice = this.residueSlice;
-//        UIThread.checkBoxes1 = checkBoxes1;
-//        UIThread.checkBoxes2 = checkBoxes2;
-         checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
-         checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
+        checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
+        checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
 
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
         DrawUtil drawUtil = new DrawUtil();
@@ -213,8 +203,7 @@ public class ProcessAppController extends BaseController {
 
 
     //region [进程管理器的Update方法]
-    public void ProcessUpdate()
-    {
+    public void ProcessUpdate() {
         this.processTableUpdate();
         this.nowProcessTableUpdate();
         this.nowProcessUpdate();
@@ -269,8 +258,8 @@ public class ProcessAppController extends BaseController {
                 updateList = (Vector<?>) ProcessManager.allProcessList.clone();
             }
 
-            DataLoader.processDetailDataLoad(UIThread.processDetailDataArrayList, (Vector<Process>) updateList, selectString);
-            Platform.runLater(() -> processTable.setItems(FXCollections.observableArrayList(UIThread.processDetailDataArrayList)));
+            DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, selectString);
+            Platform.runLater(() -> processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
             processTable.setRowFactory((row) -> new TableRow<>() {
                 public void updateItem(ProcessDetailData item, boolean empty) {
                     super.updateItem(item, empty);
@@ -307,10 +296,13 @@ public class ProcessAppController extends BaseController {
         }
     }
 
+    public ArrayList<ProcessDetailData> processDetailDataArrayList = new ArrayList<>();
+    public ArrayList<InstructionData> instructionDataArrayList = new ArrayList<>();
+
     private void nowProcessTableUpdate() {
         if (nowProcessTable != null) {
             if (MainController.getInstance().uiThread.runProcess != null) {
-                DataLoader.fileDetailDataLoad(UIThread.instructionDataArrayList, MainController.getInstance().uiThread.runProcess.executableFile);
+                DataLoader.fileDetailDataLoad(instructionDataArrayList, MainController.getInstance().uiThread.runProcess.executableFile);
                 nowProcessTable.setRowFactory((row) -> new TableRow<>() {
                     public void updateItem(InstructionData item, boolean empty) {
                         super.updateItem(item, empty);
@@ -325,10 +317,10 @@ public class ProcessAppController extends BaseController {
                     }
                 });
             } else {
-                UIThread. instructionDataArrayList.clear();
+                instructionDataArrayList.clear();
             }
 
-            Platform.runLater(() -> nowProcessTable.setItems(FXCollections.observableArrayList(UIThread.instructionDataArrayList)));
+            Platform.runLater(() -> nowProcessTable.setItems(FXCollections.observableArrayList(instructionDataArrayList)));
         }
     }
 

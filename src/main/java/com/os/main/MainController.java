@@ -455,8 +455,6 @@ public class MainController {
         }
         //endregion
 
-//        UIThread.mainButtons = buttons;
-//        UIThread.stageList = stageList;
     }
 
     // 初始化时间显示
@@ -479,13 +477,33 @@ public class MainController {
 
     // 初始化ui线程
     private void uiThreadInit() {
-//        UIThread.timeButton1 = this.timeButton1;
-//        UIThread.timeButton2 = this.timeButton2;
         this.uiThread.init();
         this.uiThread.start();
     }
 
-    public void timeUpdate() {
+    // 初始化进程线程
+    private void processThreadInit() {
+        ProcessManager.init();
+        this.processScheduleThread.Init();
+        this.processScheduleThread.start();
+    }
+
+    public void Update()
+    {
+        appButtonUpdate();
+        timeUpdate();
+    }
+
+    private void appButtonUpdate() {
+        appButtonDict.forEach((stageName, button) -> {
+            Stage stage = checkStage(stageName);
+            if (stage != null && !stage.isShowing()) {
+                button.setStyle("");
+            }
+        });
+    }
+
+    private void timeUpdate() {
         if (timeButton1 != null && timeButton2 != null) {
             Platform.runLater(() -> {
                 Date date = new Date();
@@ -498,21 +516,5 @@ public class MainController {
                         String.format("%td", date));
             });
         }
-    }
-
-    // 初始化进程线程
-    private void processThreadInit() {
-        ProcessManager.init();
-        this.processScheduleThread.Init();
-        this.processScheduleThread.start();
-    }
-
-    public void appButtonUpdate() {
-        appButtonDict.forEach((stageName, button) -> {
-            Stage stage = checkStage(stageName);
-            if (stage != null && !stage.isShowing()) {
-                button.setStyle("");
-            }
-        });
     }
 }
