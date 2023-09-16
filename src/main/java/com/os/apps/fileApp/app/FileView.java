@@ -1,5 +1,6 @@
 package com.os.apps.fileApp.app;
 
+import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.FileViewCtl;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.FAT;
@@ -26,24 +27,24 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class FileView extends Application {
+public class FileView extends BaseApp {
     private final File file;
     private final Disk block;
     private String newContent;
     private String oldContent;
     private final Stage stage;
     public static Map<File, Stage> maps = new HashMap<>();
-    FXMLLoader fxmlLoader;
     FileViewCtl fileViewCtl;
-    private final Parent root;
 
     public FileView(Stage stage, File file, Disk block)  {
-        fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/FileView.fxml"));
-        try {
-            this.root = this.fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        super(
+                "/com/os/apps/fileApp/fxmls/FileView.fxml",
+                "/com/os/apps/fileApp/res/file.png",
+                "文件",
+                -1,
+                -1
+        );
+
         this.file = file;
         this.block = block;
         this.stage = stage;
@@ -95,21 +96,11 @@ public class FileView extends Application {
             FAT.removeOpenedFile(this.block);
             this.stage.close();
         });
-        Scene scene = new Scene(this.root);
-        this.stage.setScene(scene);
-        this.stage.setTitle(this.file.getFileName());
-        this.stage.titleProperty().bind(this.file.fileNamePProperty());
-        location = getClass().getResource("/com/os/apps/fileApp/res/file.png");
-        this.stage.getIcons().add(new Image(String.valueOf(location)));
-
-        MainUI.fileAppAdditionStageList.add(this.stage);
-
-        scene.setFill(Color.TRANSPARENT);
-        this.stage.initStyle(StageStyle.TRANSPARENT);
 
         fileViewCtl.init(this.file, this.stage, this.block);
-        this.stage.show();
         maps.put(this.file, this.stage);
+        MainUI.fileAppAdditionStageList.add(this.stage);
+
         System.out.println(maps.get(this.file));
     }
 
@@ -132,7 +123,9 @@ public class FileView extends Application {
         MainUI.fat.reallocBlocks(blockCount, this.block);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws IOException {
+        super.start(stage);
+
         this.showView();
     }
 
