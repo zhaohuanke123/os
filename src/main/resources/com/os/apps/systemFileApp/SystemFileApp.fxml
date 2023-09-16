@@ -17,7 +17,7 @@
 <AnchorPane fx:id="topMainPane" prefHeight="484.0" prefWidth="503.0" stylesheets="@SystemFileApp.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.apps.systemFileApp.SystemFileAppController">
-    <BorderPane id="titleBar" layoutX="50.0" layoutY="50.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
+    <BorderPane fx:id="titleBar" layoutX="50.0" layoutY="50.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                 onMousePressed="#pressBar" onMouseReleased="#releaseBar" stylesheets="@SystemFileApp.css"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>

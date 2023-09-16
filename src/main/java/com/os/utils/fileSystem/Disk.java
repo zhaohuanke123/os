@@ -20,6 +20,22 @@ public class Disk implements Serializable {
    private transient StringProperty typeP = new SimpleStringProperty();
    private transient StringProperty objectP = new SimpleStringProperty();
 
+   public StringProperty numPProperty() {
+      return this.numP;
+   }
+
+   public StringProperty indexPProperty() {
+      return this.indexP;
+   }
+
+   public StringProperty typePProperty() {
+      return this.typeP;
+   }
+
+   public StringProperty objectPProperty() {
+      return this.objectP;
+   }
+
    private void setNumP() {
       this.numP.set(String.valueOf(this.num));
    }
@@ -50,6 +66,15 @@ public class Disk implements Serializable {
       this.setIndexP();
       this.setTypeP();
       this.setObjectP();
+   }
+
+   public int getNum() {
+      return this.num;
+   }
+
+   public void setNum(int num) {
+      this.num = num;
+      this.setNumP();
    }
 
    public int getIndex() {
