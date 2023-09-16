@@ -15,6 +15,7 @@
                 onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                 onMousePressed="#pressBar" onMouseReleased="#releaseBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!--设置窗口的标题和图标-->
         <left>
             <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
                   prefWidth="134.0" stylesheets="@../css/FileApp.css" BorderPane.alignment="CENTER">
@@ -32,6 +33,7 @@
                 </Label>
             </HBox>
         </left>
+        <!--设置3个控制按钮，最小化、最大化/还原、关闭-->
         <right>
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
                   maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
@@ -42,6 +44,7 @@
                 <cursor>
                     <Cursor fx:constant="DEFAULT"/>
                 </cursor>
+<!--                最小化按钮-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
@@ -57,6 +60,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
+<!--                最大化/还原按钮-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" prefHeight="0.0">
                     <graphic>
@@ -69,6 +73,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
+<!--                关闭按钮-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
                     <graphic>
@@ -83,7 +88,7 @@
             </HBox>
         </right>
     </BorderPane>
-
+<!--    包含"文件管理"和"磁盘使用情况"两个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
              minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
              tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
