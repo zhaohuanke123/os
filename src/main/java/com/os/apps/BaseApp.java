@@ -47,7 +47,6 @@ public class BaseApp extends Application {
 
         // 创建FXML加载器
         fxmlLoader = new FXMLLoader(location);
-//        fxmlLoader.setLocation(location);
 
         // 加载FXML文件并创建根节点
         root = fxmlLoader.load();
