@@ -19,6 +19,8 @@ public class BaseApp extends Application {
     protected String TitleName;  // 标题名称
     protected double sceneWidth;  // 场景宽度
     protected double sceneHeight;  // 场景高度
+    protected Parent root;
+    protected FXMLLoader fxmlLoader;
 
     public BaseApp(String fxmlPath, String IconPath, String TitleName, double sceneWidth, double sceneHeight) {
         this.fxmlPath = fxmlPath;
@@ -30,23 +32,25 @@ public class BaseApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setMaxHeight(MainController.getInstance().sceneHeight);
-        stage.setMinHeight(sceneHeight);
-        stage.setHeight(sceneHeight);
-        stage.setMaxWidth(MainController.getInstance().sceneWidth);
-        stage.setMinWidth(sceneWidth);
-        stage.setWidth(sceneWidth);
+        if (sceneHeight > 0 && sceneWidth > 0) {
+            stage.setMaxHeight(MainController.getInstance().sceneHeight);
+            stage.setMinHeight(sceneHeight);
+            stage.setHeight(sceneHeight);
+            stage.setMaxWidth(MainController.getInstance().sceneWidth);
+            stage.setMinWidth(sceneWidth);
+            stage.setWidth(sceneWidth);
+        }
 
         // 获取FXML文件的URL
         URL location = this.getClass().getResource(fxmlPath);
         if (location == null) return;
 
         // 创建FXML加载器
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(location);
+        fxmlLoader = new FXMLLoader(location);
+//        fxmlLoader.setLocation(location);
 
         // 加载FXML文件并创建根节点
-        Parent root = fxmlLoader.load();
+        root = fxmlLoader.load();
 
         // 设置窗口标题
         stage.setTitle(TitleName);
@@ -74,9 +78,6 @@ public class BaseApp extends Application {
 
         // 显示窗口
         stage.show();
-
-        // 当窗口关闭时，退出应用程序
-        stage.setOnCloseRequest(event -> System.exit(0));
 
         // 初始化控制器
         appController.init(stage);

@@ -252,7 +252,7 @@ public class MainController {
         // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
         if (stage == null) {
             stage = new Stage();
-            new MainUI(stage);
+//            new MainUI(stage);
             stageList.add(new StageRecord(stageName, stage));
         }
 
@@ -421,8 +421,7 @@ public class MainController {
         this.fileManagerButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
                 System.out.println("fileApp open success");
-                MainController.this.fileAppOpen();
-//                OnAppOpen("com/os/apps/fileApp", new MainUI());
+                OnAppOpen("com/os/apps/fileApp", new MainUI());
             }
 
         });

@@ -2,6 +2,8 @@ package com.os.apps.fileApp.Controller;
 
 import com.os.apps.BaseController;
 import com.os.apps.fileApp.app.MainUI;
+import com.os.utils.fileSystem.Disk;
+import com.os.utils.fileSystem.File;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -9,26 +11,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class MainCtl extends BaseController {
     @FXML
     private HBox toolBar;
+    public TabPane TabP;
+    public Label currentPath;
+    public TreeView<String> treeView;
+    public FlowPane flowPane;
+    public Tab chartTab;
     @FXML
-    private TabPane TabP;
+    public PieChart pieChart;
     @FXML
-    private Label currentPath;
+    public TableView<Disk> diskTable;
     @FXML
-    private TreeView<?> treeView;
-    @FXML
-    private FlowPane flowPane;
-    @FXML
-    private Tab chartTab;
-    @FXML
-    private PieChart pie;
-    @FXML
-    private TableView<?> diskTable;
-    @FXML
-    private TableView<?> openFile;
+    public TableView<File> openFile;
     @FXML
     private TableColumn<?, ?> filePath;
 
@@ -36,5 +34,11 @@ public class MainCtl extends BaseController {
     protected void closeStage(MouseEvent event) {
         MainUI.saveData();
         this.stage.close();
+    }
+
+    @Override
+    public void init(Stage stage) {
+        super.init(stage);
+
     }
 }
