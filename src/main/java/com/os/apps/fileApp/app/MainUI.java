@@ -581,7 +581,7 @@ public class MainUI {
         fileAppAdditionStageList.add(stage);
     }
 
-    public static void fileViewOpen(File file, Disk block) throws Exception {
+    public static void fileViewOpen(File file, Disk block)  {
         System.out.println("fileViewOpen" + file.isOpened());
         if (file.isOpened()) {
             FileView.maps.get(file).show();
@@ -593,7 +593,11 @@ public class MainUI {
         if (!file.isOpened()) {
             Stage stage = new Stage();
             FileView fileView = new FileView(stage, file, block);
-            fileView.start(stage);
+            try {
+                fileView.start(stage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("fileViewOpen" + file.isOpened());
             stage.setAlwaysOnTop(true);
             stage.setIconified(false);
