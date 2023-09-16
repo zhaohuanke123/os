@@ -1,6 +1,7 @@
 package com.os.utils.ui;
 
 import com.os.apps.fileApp.app.MainUI;
+import com.os.apps.occupancyApp.OccupancyAppController;
 import com.os.datas.InstructionData;
 import com.os.datas.ProcessDetailData;
 
@@ -44,6 +45,7 @@ public class UIThread extends Thread {
     public static CheckBox[] checkBoxes2 = null;
     public static VBox[] boxes1 = null;
     public static HBox[] boxes2 = null;
+    public OccupancyAppController occupancyAppController = null;
     public static Button[] textButtons = null;
     public static Button[] mainButtons = null;
     public static Vector<StageRecord> stageList = null;
@@ -369,7 +371,9 @@ public class UIThread extends Thread {
             this.processTableUpdate();
             this.nowProcessTableUpdate();
             this.nowProcessUpdate();
-            this.occupancyAppUpdate();
+            if (this.occupancyAppController != null)
+                occupancyAppController.occupancyAppUpdate();
+//            this.occupancyAppUpdate();
         } while (true);
     }
 }
