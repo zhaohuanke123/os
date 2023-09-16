@@ -54,11 +54,6 @@ public class MainUI extends BaseApp {
     private MenuItem moveItem;
     private MenuItem pasteItem;
     private Label[] icons;
-    public FlowPane flowPane;
-    //    private Label currentPath;
-//    private TreeView<String> treeView;
-//    private TabPane TabP;
-//    private Tab chartTab;
     public static boolean clearFlag = false;
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
     public MainCtl mainCtl;
