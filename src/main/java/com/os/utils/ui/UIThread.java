@@ -51,38 +51,6 @@ public class UIThread extends Thread {
     public void init() {
     }
 
-    public void mainButtonsUpdate() {
-        if (mainButtons != null && stageList != null) {
-            Stage stage;
-
-            stage = MainController.checkStage("com/os/apps/systemFileApp");
-            if (stage != null && !stage.isShowing()) {
-                mainButtons[0].setStyle("");
-            }
-
-            stage = MainController.checkStage("com/os/apps/fileApp");
-            if (stage != null && !stage.isShowing()) {
-                mainButtons[1].setStyle("");
-            }
-
-            stage = MainController.checkStage("com/os/apps/processApp");
-            if (stage != null && !stage.isShowing()) {
-                mainButtons[2].setStyle("");
-            }
-
-            stage = MainController.checkStage("com/os/apps/occupancyApp");
-            if (stage != null && !stage.isShowing()) {
-                mainButtons[3].setStyle("");
-            }
-
-            stage = MainController.checkStage("com/os/apps/helpApp");
-            if (stage != null && !stage.isShowing()) {
-                mainButtons[4].setStyle("");
-            }
-
-        }
-    }
-
     //region [占用管理器的Update方法]
     public void occupancyAppUpdate() {
         this.occupancyTextUpdate();
@@ -128,7 +96,7 @@ public class UIThread extends Thread {
             double width = boxes1[0].getWidth() - 2.0;
             Region region = (Region) boxes1[0].getChildren().get(0);
             double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
-            CompSet.SetCompSize(region, width, percent * height);
+            CompSet.setCompSize(region, width, percent * height);
 
             if (MainUI.fat != null) {
                 int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
@@ -136,7 +104,7 @@ public class UIThread extends Thread {
                 width = boxes1[1].getWidth() - 2.0;
                 percent = (double) numOfBusyDisk / 256.0;
                 region = (Region) boxes1[1].getChildren().get(0);
-                CompSet.SetCompSize(region, width, percent * height);
+                CompSet.setCompSize(region, width, percent * height);
 
                 System.out.println("BusyDiskNum:" + numOfBusyDisk);
             }
@@ -146,14 +114,14 @@ public class UIThread extends Thread {
             width = boxes1[2].getWidth() - 2.0;
             percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE;
             region = (Region) boxes1[2].getChildren().get(0);
-            CompSet.SetCompSize(region, width, percent * height);
+            CompSet.setCompSize(region, width, percent * height);
 
             int numOfBusyPcb = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
             height = boxes1[3].getHeight() - 2.0;
             width = boxes1[3].getWidth() - 2.0;
             percent = (double) numOfBusyPcb / (double) OccupancyManager.PCB_SIZE;
             region = (Region) boxes1[3].getChildren().get(0);
-            CompSet.SetCompSize(region, width, percent * height);
+            CompSet.setCompSize(region, width, percent * height);
         }
     }
 
@@ -378,7 +346,9 @@ public class UIThread extends Thread {
                 System.out.println(Arrays.toString(var3.getStackTrace()));
             }
 
-            this.mainButtonsUpdate();
+//            this.mainButtonsUpdate();
+            MainController.getInstance().appButtonUpdate();
+
             this.runProcessList = (Vector<Process>) ProcessManager.runProcessList.clone();
             this.runProcess = null;
             this.creatingProcessList = (Vector<Process>) ProcessManager.creatingProcessList.clone();

@@ -10,9 +10,11 @@ public class OccupancyApp extends BaseApp {
     }
 
     public OccupancyApp() {
-        super();
-        super.fxmlPath = "/com/os/apps/occupancyApp/OccupancyApp.fxml";
-        super.IconPath = "/com/os/img/device.png";
-        super.TitleName = "占用管理器";
+        super("/com/os/apps/occupancyApp/OccupancyApp.fxml",
+                "/com/os/img/device.png",
+                "占用管理器",
+                1000.0,
+                530.0);
     }
+
 }

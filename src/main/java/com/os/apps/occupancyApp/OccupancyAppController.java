@@ -54,7 +54,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / OccupancyManager.MEMORY_SIZE);
-            CompSet.SetCompSize(region, percent * width, height);
+            CompSet.setCompSize(region, percent * width, height);
             this.memoryBox2.getChildren().add(region);
         }
 
@@ -64,7 +64,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / FAT.DISK_NUM);
-            CompSet.SetCompSize(region, percent * width, height);
+            CompSet.setCompSize(region, percent * width, height);
             this.diskBox2.getChildren().add(region);
         }
 

@@ -1,5 +1,6 @@
 package com.os.apps;
 
+import com.os.main.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +17,34 @@ public class BaseApp extends Application {
     protected String fxmlPath;  // FXML 文件的路径
     protected String IconPath;  // 图标路径
     protected String TitleName;  // 标题名称
+    protected double sceneWidth;  // 场景宽度
+    protected double sceneHeight;  // 场景高度
+
+    public BaseApp() {
+        fxmlPath = "";
+        IconPath = "";
+        TitleName = "";
+        sceneWidth = 800;
+        sceneHeight = 600;
+    }
+
+    public BaseApp(String fxmlPath, String IconPath, String TitleName, double sceneWidth, double sceneHeight) {
+        this.fxmlPath = fxmlPath;
+        this.IconPath = IconPath;
+        this.TitleName = TitleName;
+        this.sceneWidth = sceneWidth;
+        this.sceneHeight = sceneHeight;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setMaxHeight(MainController.getInstance().sceneHeight);
+        stage.setMinHeight(sceneHeight);
+        stage.setHeight(sceneHeight);
+        stage.setMaxWidth(MainController.getInstance().sceneWidth);
+        stage.setMinWidth(sceneWidth);
+        stage.setWidth(sceneWidth);
+
         // 获取FXML文件的URL
         URL location = this.getClass().getResource(fxmlPath);
         if (location == null) return;
