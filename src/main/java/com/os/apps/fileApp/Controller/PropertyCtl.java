@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class PropertyCtl extends BaseController {
-    public BorderPane titleBar;
    public Label propertyIcon;
    public Button acceptButton;
    public RadioButton checkWrite;

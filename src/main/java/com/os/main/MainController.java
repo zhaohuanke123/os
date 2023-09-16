@@ -1,5 +1,6 @@
 package com.os.main;
 
+import com.os.apps.BaseApp;
 import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
@@ -20,6 +21,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,20 +29,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Vector;
+import java.util.*;
 
 public class MainController {
+    private static MainController _instance;
+
+    public static MainController getInstance() {
+        return _instance;
+    }
+
+    public static final String packageName = "com/os/apps/";
+    private TreeMap<String, Button> appButtonDict;
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     public Pane buttonBarBackGround;
-    Scene scene = null;
+    Scene mainWindowScene = null;
     Stage primaryStage = null;
     public static Vector<StageRecord> stageList = new Vector<>();
     double appWidth;
-    double sceneWidth;
-    double sceneHeight;
+    public double sceneWidth;
+    public double sceneHeight;
     @FXML
     private Pane MainWindow;
     @FXML
@@ -56,6 +64,10 @@ public class MainController {
     @FXML
     private Button occupancyButton;
     @FXML
+    private Button fileManagerButton;
+    @FXML
+    private Button helpButton;
+    @FXML
     private HBox tipBox;
     @FXML
     private Button minimizeButton;
@@ -69,10 +81,6 @@ public class MainController {
     private Button timeButton2;
     @FXML
     private Button deskButton;
-    @FXML
-    private Button helpButton;
-    @FXML
-    private Button fileManagerButton;
     boolean isTop = false;
     boolean haveChanged = true;
     private final String buttonStyle =
@@ -81,21 +89,24 @@ public class MainController {
                     "-fx-text-fill: black;" +
                     "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
 
-    // 关闭窗口
     @FXML
-    void closeWindow() {
+    void closeWindow(MouseEvent event) {
         FAT.closeAll();
-        if (MainUI.fat != null) MainUI.saveData();
+        if (MainUI.fat != null) {
+            MainUI.saveData();
+        }
+
         System.exit(0);
         Platform.exit();
         this.primaryStage.close();
     }
 
-    // 最小化窗口
     @FXML
-    void minimizeWindow() {
-        for (StageRecord stageRecord : stageList) {
-            if (stageRecord.name.contains("com/os/apps/")) {
+    void minimizeWindow(MouseEvent event) {
+        int i;
+        for (i = 0; i < stageList.size(); ++i) {
+            StageRecord stageRecord = stageList.get(i);
+            if (stageRecord.name.contains("App")) {
                 Stage stage = stageRecord.stage;
                 if (stage != null) {
                     stage.setIconified(true);
@@ -104,7 +115,7 @@ public class MainController {
         }
 
         if (MainUI.fileAppAdditionStageList != null) {
-            for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
+            for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
                 Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
                 if (stage1 != null && !stage1.isShowing()) {
                     MainUI.fileAppAdditionStageList.remove(stage1);
@@ -119,55 +130,56 @@ public class MainController {
         this.primaryStage.setIconified(true);
     }
 
-    // 设置界面元素的大小和布局
     public void adaptWindow() {
-        // 设置MainWindow的大小为屏幕大小
-        this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
+        //
+        this.MainWindow.setPrefSize(this.mainWindowScene.getWidth(), this.mainWindowScene.getHeight());
 
         // 初始化任务栏
-        CompSet.SetCompSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
+        CompSet.setCompSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
         // 初始化任务栏背景
-        CompSet.SetCompSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
+        CompSet.setCompSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
         this.buttonBarBackGround.setLayoutX(0);
         this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8.0D);
         this.buttonBarBackGround.setEffect(gaussianBlur);
 
-        // 设置button的大小和对应图标的大小
-        setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
-        setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
-        setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
+        //
+        CompSet.setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
-        // 设置appBox的大小和布局
-        CompSet.SetCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
+        //
+        CompSet.setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
+        CompSet.setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
+
+        //
+        CompSet.setCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
 
-        // 设置tipBox的大小和布局
-        CompSet.SetCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
+        //
+        CompSet.setCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
         this.tipBox.setLayoutX(this.sceneWidth - 1 * this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
     }
 
     // 返回桌面
-    public void toDesk() {
+    private void toDesk() {
         if (this.haveChanged) {
             this.haveChanged = false;
 
@@ -224,7 +236,7 @@ public class MainController {
     }
 
     // 打开文件管理器
-    public void fileAppOpen() throws Exception {
+    private void fileAppOpen() {
         // 窗口名称
         String stageName = "com/os/apps/fileApp";
 
@@ -262,20 +274,12 @@ public class MainController {
         this.fileManagerButton.setStyle(buttonStyle);
     }
 
-    // 打开帮助界面
-    public void helpAppOpen() {
-        // 窗口名称
-        String stageName = "com/os/apps/helpApp";
-
+    private void OnAppOpen(String stageName, BaseApp app) {
         // 检查窗口是否已存在
         Stage stage = checkStage(stageName);
 
         // 如果窗口存在但未显示，将其移除
         if (stage != null && !stage.isShowing()) removeStage(stageName);
-
-        // 创建 HelpApp 实例
-        HelpApp helpApp = new HelpApp();
-
         // 再次检查窗口是否存在
         stage = checkStage(stageName);
 
@@ -283,192 +287,8 @@ public class MainController {
         if (stage == null) {
             try {
                 stage = new Stage();
-
-                // 设置窗口的尺寸限制
-                stage.setMinHeight(550.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(800.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setHeight(550.0);
-                stage.setWidth(800.0);
-
-                // 使用 HelpApp 实例初始化新窗口
-                helpApp.start(stage);
-
-                // 将新窗口记录添加到窗口列表
-                stageList.add(new StageRecord(stageName, stage));
-            } catch (IOException e) {
-                e.getStackTrace();
-            }
-        }
-
-        // 如果窗口已显示，将其显示在最前面
-        if (stage.isShowing()) stage.show();
-
-        // 设置窗口始终位于其他窗口之上
-        stage.setAlwaysOnTop(true);
-        // 将窗口从最小化状态还原
-        stage.setIconified(false);
-        // 将窗口置于最前
-        stage.toFront();
-
-        // 更新窗口列表中的信息
-        updateStageList(stageName);
-
-        // 设置帮助界面按钮的下划线效果，并修改其样式
-        this.helpButton.setUnderline(true);
-        this.helpButton.setStyle(buttonStyle);
-    }
-
-    // 打开设备管理器
-    public void occupancyAppOpen() {
-        // 窗口名称
-        String stageName = "com/os/apps/occupancyApp";
-
-        // 检查窗口是否已存在
-        Stage stage = checkStage(stageName);
-
-        // 如果窗口存在但未显示，将其移除
-        if (stage != null && !stage.isShowing()) removeStage(stageName);
-
-        // 创建 OccupancyApp 实例
-        OccupancyApp occupancyApp = new OccupancyApp();
-
-        // 再次检查窗口是否存在
-        stage = checkStage(stageName);
-
-        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
-        if (stage == null) {
-            try {
-                stage = new Stage();
-
-                // 设置窗口的尺寸限制
-                stage.setMinHeight(530.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(1000.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setHeight(530.0);
-                stage.setWidth(1000.0);
-
-                // 使用 OccupancyApp 实例初始化新窗口
-                occupancyApp.start(stage);
-
-                // 将新窗口记录添加到窗口列表
-                stageList.add(new StageRecord(stageName, stage));
-            } catch (IOException e) {
-                e.getStackTrace();
-            }
-        }
-
-        // 如果窗口已显示，将其显示在最前面
-        if (stage.isShowing()) stage.show();
-
-        // 设置窗口始终位于其他窗口之上
-        stage.setAlwaysOnTop(true);
-        // 将窗口从最小化状态还原
-        stage.setIconified(false);
-        // 将窗口置于最前
-        stage.toFront();
-
-        // 更新窗口列表中的信息
-        updateStageList(stageName);
-
-        // 设置设备管理器按钮的下划线效果，并修改其样式
-        this.occupancyButton.setUnderline(true);
-        this.occupancyButton.setStyle(buttonStyle);
-    }
-
-    // 打开进程管理
-    public void processAppOpen() {
-        // 窗口名称
-        String stageName = "com/os/apps/processApp";
-
-        // 检查窗口是否已存在
-        Stage stage = checkStage(stageName);
-
-        // 如果窗口存在但未显示，将其移除
-        if (stage != null && !stage.isShowing()) removeStage(stageName);
-
-        // 创建 ProcessApp 实例
-        ProcessApp processApp = new ProcessApp();
-
-        // 再次检查窗口是否存在
-        stage = checkStage(stageName);
-
-        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
-        if (stage == null) {
-            try {
-                stage = new Stage();
-
-                // 设置窗口的尺寸限制
-                stage.setMinHeight(500.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(1100.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setHeight(500.0);
-                stage.setWidth(1100.0);
-
-                // 使用 ProcessApp 实例初始化新窗口
-                processApp.start(stage);
-
-                // 将新窗口记录添加到窗口列表
-                stageList.add(new StageRecord(stageName, stage));
-            } catch (IOException e) {
-                e.getStackTrace();
-            }
-        }
-
-        // 如果窗口已显示，将其显示在最前面
-        if (stage.isShowing()) stage.show();
-
-        // 设置窗口始终位于其他窗口之上
-        stage.setAlwaysOnTop(true);
-        // 将窗口从最小化状态还原
-        stage.setIconified(false);
-        // 将窗口置于最前
-        stage.toFront();
-
-        // 更新窗口列表中的信息
-        updateStageList(stageName);
-
-        // 设置设备管理器按钮的下划线效果，并修改其样式
-        this.processButton.setUnderline(true);
-        this.processButton.setStyle(buttonStyle);
-    }
-
-    // 打开系统文件表
-    public void systemFileAppOpen() {
-        // 窗口名称
-        String stageName = "com/os/apps/systemFileApp";
-
-        // 检查窗口是否已存在
-        Stage executableFileStage = checkStage(stageName);
-
-        // 如果窗口存在但未显示，将其移除
-        if (executableFileStage != null && !executableFileStage.isShowing()) removeStage(stageName);
-
-        // 创建 SystemFileApp 实例
-        SystemFileApp systemFileApp = new SystemFileApp();
-
-        // 再次检查窗口是否存在
-        Stage stage = checkStage(stageName);
-
-        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
-        if (stage == null) {
-            try {
-                stage = new Stage();
-
-                // 设置窗口的尺寸限制
-                stage.setMinHeight(500.0);
-                stage.setMaxHeight(this.primaryStage.getHeight() - 1.4 * this.appWidth);
-                stage.setMinWidth(500.0);
-                stage.setMaxWidth(this.primaryStage.getWidth());
-                stage.setHeight(500.0);
-                stage.setWidth(500.0);
-
                 // 使用 SystemFileApp 实例初始化新窗口
-                systemFileApp.start(stage);
-
+                app.start(stage);
                 // 将新窗口记录添加到窗口列表
                 stageList.add(new StageRecord(stageName, stage));
             } catch (IOException e) {
@@ -489,9 +309,12 @@ public class MainController {
         // 更新窗口列表中的信息
         updateStageList(stageName);
 
-        // 设置设备管理器按钮的下划线效果，并修改其样式
-        this.systemFileButton.setUnderline(true);
-        this.systemFileButton.setStyle(buttonStyle);
+        Button button = appButtonDict.get(stageName);
+        if (button != null) {
+            // 设置设备管理器按钮的下划线效果，并修改其样式
+            button.setUnderline(true);
+            button.setStyle(buttonStyle);
+        }
     }
 
     // 检查窗口是否已存在
@@ -529,7 +352,16 @@ public class MainController {
     }
 
     public void init(Scene scene, Stage stage) throws URISyntaxException {
-        this.scene = scene;
+        _instance = this;
+
+        appButtonDict = new TreeMap<>();
+        appButtonDict.put("systemFileApp", systemFileButton);
+        appButtonDict.put("processApp", processButton);
+        appButtonDict.put("occupancyApp", occupancyButton);
+        appButtonDict.put("com/os/apps/fileApp", fileManagerButton);
+        appButtonDict.put("helpApp", helpButton);
+
+        this.mainWindowScene = scene;
         this.primaryStage = stage;
         this.primaryStage.setOnCloseRequest(event -> {
             System.out.println("结束");
@@ -543,46 +375,43 @@ public class MainController {
         this.uiThreadInit();
     }
 
-    public void iconInit() {
-        this.appWidth = this.scene.getHeight() / 15.0;
-        this.sceneWidth = this.scene.getWidth();
-        this.sceneHeight = this.scene.getHeight();
+    private void iconInit() {
+        this.appWidth = this.mainWindowScene.getHeight() / 15.0;
+        this.sceneWidth = this.mainWindowScene.getWidth();
+        this.sceneHeight = this.mainWindowScene.getHeight();
 
         this.background.setLayoutX(0.0);
         this.background.setLayoutY(0.0);
-        this.background.fitWidthProperty().bind(this.scene.widthProperty());
-        this.background.fitHeightProperty().bind(this.scene.heightProperty());
+        this.background.fitWidthProperty().bind(this.mainWindowScene.widthProperty());
+        this.background.fitHeightProperty().bind(this.mainWindowScene.heightProperty());
         this.background.setPreserveRatio(false);
         this.background.setVisible(true);
 
         this.systemFileButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                System.out.println("executableFileApp open success");
-                MainController.this.systemFileAppOpen();
+                this.OnAppOpen("systemFileApp", new SystemFileApp());
             }
 
         });
         this.processButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                System.out.println("processApp open success");
-                MainController.this.processAppOpen();
+                this.OnAppOpen("processApp", new ProcessApp());
             }
 
         });
         this.occupancyButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                System.out.println("occupancyApp open success");
-                MainController.this.occupancyAppOpen();
+                this.OnAppOpen("occupancyApp", new OccupancyApp());
             }
 
         });
         this.helpButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                System.out.println("helpApp open success");
-                MainController.this.helpAppOpen();
+                this.OnAppOpen("helpApp", new HelpApp());
             }
 
         });
+
         this.deskButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 MainController.this.toDesk();
@@ -592,12 +421,8 @@ public class MainController {
         this.fileManagerButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
                 System.out.println("fileApp open success");
-
-                try {
-                    MainController.this.fileAppOpen();
-                } catch (Exception var3) {
-                    System.out.println(Arrays.toString(var3.getStackTrace()));
-                }
+                MainController.this.fileAppOpen();
+//                OnAppOpen("com/os/apps/fileApp", new MainUI());
             }
 
         });
@@ -620,13 +445,10 @@ public class MainController {
             buttons[i].setTooltip(tooltip);
         }
         //endregion
-
-        UIThread.mainButtons = buttons;
-        UIThread.stageList = stageList;
     }
 
     // 初始化时间显示
-    public void timeInit() {
+    private void timeInit() {
         // 获取当前日期和时间
         Date date = new Date();
         // 设置时间按钮的文本格式
@@ -639,35 +461,49 @@ public class MainController {
                 String.format("%td", date));
 
         // 设置时间按钮的最小和最大宽度
-        CompSet.SetCompSize(this.timeButton2, 2 * this.appWidth, -1);
-        CompSet.SetCompSize(this.timeBox, 2 * this.appWidth, -1);
+        CompSet.setCompSize(this.timeButton2, 2 * this.appWidth, -1);
+        CompSet.setCompSize(this.timeBox, 2 * this.appWidth, -1);
     }
 
     // 初始化ui线程
-    public void uiThreadInit() {
-        UIThread.timeButton1 = this.timeButton1;
-        UIThread.timeButton2 = this.timeButton2;
+    private void uiThreadInit() {
         this.uiThread.init();
         this.uiThread.start();
     }
 
     // 初始化进程线程
-    public void processThreadInit() {
+    private void processThreadInit() {
         ProcessManager.init();
         this.processScheduleThread.Init();
         this.processScheduleThread.start();
     }
 
-    // 设置按钮的大小
-    private void setCompSize(Button button, double width, double height) {
-        button.setPrefSize(width, height);
-        button.setMinSize(width, height);
-        button.setMaxSize(width, height);
+    public void Update() {
+        appButtonUpdate();
+        timeUpdate();
     }
 
-    // 设置图像视图的宽度和高度
-    private void setImageViewSize(ImageView button, double width, double height) {
-        button.setFitWidth(width);
-        button.setFitHeight(height);
+    private void appButtonUpdate() {
+        appButtonDict.forEach((stageName, button) -> {
+            Stage stage = checkStage(stageName);
+            if (stage != null && !stage.isShowing()) {
+                button.setStyle("");
+            }
+        });
+    }
+
+    private void timeUpdate() {
+        if (timeButton1 != null && timeButton2 != null) {
+            Platform.runLater(() -> {
+                Date date = new Date();
+                timeButton1.setText(
+                        String.format("%tH", date) + ":" +
+                                String.format("%tM", date) + ":" +
+                                String.format("%tS", date));
+                timeButton2.setText("20" + String.format("%ty", date) + "/" +
+                        String.format("%tm", date) + "/" +
+                        String.format("%td", date));
+            });
+        }
     }
 }

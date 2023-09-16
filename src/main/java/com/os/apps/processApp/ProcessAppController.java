@@ -3,29 +3,32 @@ package com.os.apps.processApp;
 import com.os.apps.BaseController;
 import com.os.datas.InstructionData;
 import com.os.datas.ProcessDetailData;
-import com.os.utils.ui.DrawUtil;
+import com.os.main.MainController;
+import com.os.utils.DataLoader;
+import com.os.utils.process.Process;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
-import com.os.utils.ui.UIThread;
+import com.os.utils.ui.DrawUtil;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Vector;
+
 public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
-    public Label titleBarL;
-    public HBox titleBarR;
     @FXML
     private AnchorPane topMainPane;
     @FXML
-    private TableView<?> processTable;
+    private TableView<ProcessDetailData> processTable;
     @FXML
     private TableColumn<?, ?> processName;
     @FXML
@@ -49,7 +52,7 @@ public class ProcessAppController extends BaseController {
     @FXML
     private Button nowInstruction;
     @FXML
-    private TableView<?> nowProcessTable;
+    private TableView<InstructionData> nowProcessTable;
     @FXML
     private TableColumn<?, ?> instruction;
     @FXML
@@ -88,6 +91,8 @@ public class ProcessAppController extends BaseController {
     private RadioButton speed4Button;
     @FXML
     private RadioButton speed8Button;
+    private CheckBox[] checkBoxes1;
+    private CheckBox[] checkBoxes2;
 
     @FXML
     void createSelectByMouse(MouseEvent event) {
@@ -162,6 +167,7 @@ public class ProcessAppController extends BaseController {
         System.out.println(radioButton.getId() + "被选中");
         radioButton.setSelected(true);
     }
+
     @Override
     public void init(Stage stage) {
         super.init(stage);
@@ -179,19 +185,142 @@ public class ProcessAppController extends BaseController {
         this.result.setCellValueFactory(new PropertyValueFactory<>("result"));
         this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
         this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
-        UIThread.processTable = (TableView<ProcessDetailData>) this.processTable;
-        UIThread.nowProcessTable = (TableView<InstructionData>) this.nowProcessTable;
-        UIThread.nowProcessName = this.nowProcessName;
-        UIThread.nowResult = this.nowResult;
-        UIThread.nowInstruction = this.nowInstruction;
-        UIThread.residueSlice = this.residueSlice;
-        UIThread.checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
-        UIThread.checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
+
+        checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
+        checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
+
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
         DrawUtil drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
         stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(ProcessAppController.this::adaptWindow));
         stage.heightProperty().addListener((observable, oldValue, newValue)
                 -> Platform.runLater(ProcessAppController.this::adaptWindow));
+
+        MainController.getInstance().uiThread.processAppController = this;
     }
+
+
+    //region [进程管理器的Update方法]
+    public void Update() {
+        this.processTableUpdate();
+        this.nowProcessTableUpdate();
+        this.nowProcessUpdate();
+    }
+
+    private void nowProcessUpdate() {
+        if (nowProcessName != null && nowResult != null && nowInstruction != null && residueSlice != null) {
+            Platform.runLater(() -> {
+                if (MainController.getInstance().uiThread.runProcess == null) {
+                    nowProcessName.setText("");
+                    nowResult.setText("");
+                    nowInstruction.setText("");
+                    residueSlice.setText("");
+                } else {
+                    nowProcessName.setText(MainController.getInstance().uiThread.runProcess.name + "");
+                    nowResult.setText(MainController.getInstance().uiThread.runProcess.AX + "");
+                    int counter = MainController.getInstance().uiThread.runProcess.PC;
+                    if (counter >= MainController.getInstance().uiThread.runProcess.executableFile.instructionArray.size()) {
+                        --counter;
+                    }
+
+                    nowInstruction.setText(
+                            MainController.getInstance().uiThread.runProcess.executableFile.getInstructionArray().get(counter) + "");
+                    residueSlice.setText(ProcessScheduleThread.residueSlice + "");
+                }
+
+            });
+        }
+    }
+
+    private void processTableUpdate() {
+        if (processTable != null) {
+            Vector<?> updateList = null;
+            String selectString = "";
+            if (checkBoxes1[0].isSelected()) {
+                selectString = checkBoxes1[0].getText();
+                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
+            } else if (checkBoxes1[1].isSelected()) {
+                selectString = checkBoxes1[1].getText();
+                updateList = (Vector<?>) ProcessManager.creatingProcessList.clone();
+            } else if (checkBoxes1[2].isSelected()) {
+                selectString = checkBoxes1[2].getText();
+                updateList = (Vector<?>) ProcessManager.waitProcessList.clone();
+            } else if (checkBoxes1[3].isSelected()) {
+                selectString = checkBoxes1[3].getText();
+                updateList = (Vector<?>) ProcessManager.blockProcessList.clone();
+            } else if (checkBoxes1[4].isSelected()) {
+                selectString = checkBoxes1[4].getText();
+                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
+            } else if (checkBoxes1[5].isSelected()) {
+                selectString = checkBoxes1[5].getText();
+                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
+            }
+
+            DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, selectString);
+            Platform.runLater(() -> processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
+            processTable.setRowFactory((row) -> new TableRow<>() {
+                public void updateItem(ProcessDetailData item, boolean empty) {
+                    super.updateItem(item, empty);
+                    String s = "运行态";
+                    if (checkBoxes2 != null) {
+                        for (int i = 0; i < checkBoxes2.length; ++i) {
+                            if (checkBoxes2[i].isSelected()) {
+                                if (i == 0) {
+                                    s = "新建态";
+                                } else if (i == 1) {
+                                    s = "就绪态";
+                                } else if (i == 2) {
+                                    s = "运行态";
+                                } else if (i == 3) {
+                                    s = "阻塞态";
+                                } else if (i == 4) {
+                                    s = "已销毁";
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    if (item == null) {
+                        this.setId("not-right");
+                    } else if (Objects.equals(item.getProcessState(), s)) {
+                        this.setId("right");
+                    } else {
+                        this.setId("not-right");
+                    }
+
+                }
+            });
+        }
+    }
+
+    public ArrayList<ProcessDetailData> processDetailDataArrayList = new ArrayList<>();
+    public ArrayList<InstructionData> instructionDataArrayList = new ArrayList<>();
+
+    private void nowProcessTableUpdate() {
+        if (nowProcessTable != null) {
+            if (MainController.getInstance().uiThread.runProcess != null) {
+                DataLoader.fileDetailDataLoad(instructionDataArrayList, MainController.getInstance().uiThread.runProcess.executableFile);
+                nowProcessTable.setRowFactory((row) -> new TableRow<>() {
+                    public void updateItem(InstructionData item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null) {
+                            this.setId("not-right");
+                        } else if (item.which == MainController.getInstance().uiThread.runProcess.PC) {
+                            this.setId("right");
+                        } else {
+                            this.setId("not-right");
+                        }
+
+                    }
+                });
+            } else {
+                instructionDataArrayList.clear();
+            }
+
+            Platform.runLater(() -> nowProcessTable.setItems(FXCollections.observableArrayList(instructionDataArrayList)));
+        }
+    }
+
+    //endregion
 }

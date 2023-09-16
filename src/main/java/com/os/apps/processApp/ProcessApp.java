@@ -9,11 +9,12 @@ public class ProcessApp extends BaseApp {
         Application.launch(args);
     }
 
-    public ProcessApp() {
-        super();
-
-        super.fxmlPath = "/com/os/apps/processApp/ProcessApp.fxml";
-        super.IconPath = "/com/os/img/process.png";
-        super.TitleName = "进程管理器";
+    public ProcessApp()
+    {
+        super("/com/os/apps/processApp/ProcessApp.fxml",
+                "/com/os/img/process.png",
+                "进程管理器",
+                1100.0,
+                500.0);
     }
 }

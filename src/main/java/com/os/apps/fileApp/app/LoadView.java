@@ -19,7 +19,7 @@ import com.os.main.MainController;
 import com.os.utils.ui.StageRecord;
 
 public class LoadView {
-    LoadView() throws IOException {
+    LoadView()  {
         Stage stage = MainController.checkStage("load");
         if (stage != null && !stage.isShowing()) {
             MainController.removeStage("load");
@@ -35,7 +35,12 @@ public class LoadView {
             }
 
             fileLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/loadView.fxml"));
-            Parent root1 = fileLoader.load();
+            Parent root1 = null;
+            try {
+                root1 = fileLoader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             stage = new Stage();
             stage.setAlwaysOnTop(true);
             stage.setIconified(false);

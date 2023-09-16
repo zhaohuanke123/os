@@ -10,26 +10,30 @@ import javafx.beans.property.StringProperty;
 
 public class Disk implements Serializable {
    private static final long serialVersionUID = 1L;
-   private final int num;  // 磁盘编号
-   private int index;  // 下一个磁盘编号
-   private String type;  // 存储类型
+   private int num;
+   private int index;
+   private String type;
    private Object object;
-   private boolean begin;  // 是否为开端
+   private boolean begin;
    private transient StringProperty numP = new SimpleStringProperty();
    private transient StringProperty indexP = new SimpleStringProperty();
    private transient StringProperty typeP = new SimpleStringProperty();
    private transient StringProperty objectP = new SimpleStringProperty();
 
-   public Disk(int num, int index, String type, Object object) {
-      this.num = num;
-      this.index = index;
-      this.type = type;
-      this.object = object;
-      this.begin = false;
-      this.setNumP();
-      this.setIndexP();
-      this.setTypeP();
-      this.setObjectP();
+   public StringProperty numPProperty() {
+      return this.numP;
+   }
+
+   public StringProperty indexPProperty() {
+      return this.indexP;
+   }
+
+   public StringProperty typePProperty() {
+      return this.typeP;
+   }
+
+   public StringProperty objectPProperty() {
+      return this.objectP;
    }
 
    private void setNumP() {
@@ -49,6 +53,28 @@ public class Disk implements Serializable {
       if (this.object instanceof ExecutableFile) {
          this.objectP.set(((ExecutableFile)this.object).getName());
       }
+
+   }
+
+   public Disk(int num, int index, String type, Object object) {
+      this.num = num;
+      this.index = index;
+      this.type = type;
+      this.object = object;
+      this.begin = false;
+      this.setNumP();
+      this.setIndexP();
+      this.setTypeP();
+      this.setObjectP();
+   }
+
+   public int getNum() {
+      return this.num;
+   }
+
+   public void setNum(int num) {
+      this.num = num;
+      this.setNumP();
    }
 
    public int getIndex() {
@@ -83,9 +109,10 @@ public class Disk implements Serializable {
          this.objectP.unbind();
          this.setObjectP();
       }
+
    }
 
-   public boolean getBegin() {
+   public boolean isBegin() {
       return this.begin;
    }
 
@@ -93,7 +120,6 @@ public class Disk implements Serializable {
       this.begin = begin;
    }
 
-   // 分配磁盘
    public void allocBlock(int index, String type, Object object, boolean begin) {
       this.setIndex(index);
       this.setType(type);
@@ -101,7 +127,6 @@ public class Disk implements Serializable {
       this.setBegin(begin);
    }
 
-   // 清空磁盘
    public void clearBlock() {
       this.setIndex(0);
       this.setType("空");
@@ -109,12 +134,10 @@ public class Disk implements Serializable {
       this.setBegin(false);
    }
 
-   // 判断磁盘是否空闲
    public boolean isFree() {
       return this.index == 0;
    }
 
-   // 读取数据
    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
       s.defaultReadObject();
       this.numP = new SimpleStringProperty(String.valueOf(this.num));
@@ -126,11 +149,10 @@ public class Disk implements Serializable {
 
    public String toString() {
       Object object = this.getObject();
-      // object是文件
-      if (object instanceof File) return object.toString();
-      // object是目录
-      else if(object instanceof Float) return object.toString();
-      // object是可执行文件
-      return ((ExecutableFile)object).getName();
+      if (object instanceof File) {
+         return object.toString();
+      } else {
+         return object instanceof Folder ? object.toString() : ((ExecutableFile)object).getName();
+      }
    }
 }

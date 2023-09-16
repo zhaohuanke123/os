@@ -1,9 +1,11 @@
 package com.os.apps;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class BaseController {
@@ -15,6 +17,11 @@ public class BaseController {
 
     @FXML
     protected BorderPane titleBar;  // 标题栏界面组件
+    @FXML
+    protected HBox titleBarL;
+    @FXML
+    protected  HBox titleBarR;
+    public Label title;
 
     // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {

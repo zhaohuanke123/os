@@ -8,10 +8,18 @@ public class HelpApp extends BaseApp {
         Application.launch(args);
     }
 
+//    public HelpApp() {
+//        super();
+//        super.fxmlPath = "/com/os/apps/helpApp/HelpApp.fxml";
+//        super.IconPath = "/com/os/img/help.png";
+//        super.TitleName = "帮助";
+//    }
+
     public HelpApp() {
-        super();
-        super.fxmlPath = "/com/os/apps/helpApp/HelpApp.fxml";
-        super.IconPath = "/com/os/img/help.png";
-        super.TitleName = "帮助";
+        super("/com/os/apps/helpApp/HelpApp.fxml",
+                "/com/os/img/help.png",
+                "帮助",
+                800,
+                550);
     }
 }

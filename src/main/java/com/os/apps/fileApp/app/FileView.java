@@ -37,9 +37,13 @@ public class FileView extends Application {
     FileViewCtl fileViewCtl;
     private final Parent root;
 
-    public FileView(Stage stage, File file, Disk block) throws IOException {
+    public FileView(Stage stage, File file, Disk block)  {
         fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/FileView.fxml"));
-        this.root = this.fxmlLoader.load();
+        try {
+            this.root = this.fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.file = file;
         this.block = block;
         this.stage = stage;

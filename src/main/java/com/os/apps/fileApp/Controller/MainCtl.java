@@ -11,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 public class MainCtl extends BaseController {
-    public BorderPane titleBar;
     @FXML
     private HBox toolBar;
     @FXML
