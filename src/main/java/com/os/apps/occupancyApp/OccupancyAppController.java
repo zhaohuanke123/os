@@ -115,9 +115,9 @@ public class OccupancyAppController extends BaseController {
 
         DrawUtil drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
-        UIThread.boxes1 = boxes1;
-        UIThread.textButtons = textButtons;
-        UIThread.boxes2 = boxes2;
+//         boxes1 = boxes1;
+//         textButtons = textButtons;
+//         boxes2 = boxes2;
 
         MainController.getInstance().uiThread.occupancyAppController = this;
     }
@@ -134,26 +134,26 @@ public class OccupancyAppController extends BaseController {
                 int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
                 double percent = (double) numOfBusyMemory / (double) OccupancyManager.allMemory.length * 100.0;
                 String result = String.format("%.2f", percent);
-                UIThread.textButtons[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
+                 textButtons[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
 
                 if (MainUI.fat != null) {
                     int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
 
                     percent = (double) numOfBusyDisk / (double) FAT.DISK_NUM * 100.0;
                     result = String.format("%.2f", percent);
-                    UIThread.textButtons[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
+                     textButtons[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
                 }
 
                 int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
                 percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE * 100.0;
                 result = String.format("%.2f", percent);
-                UIThread.textButtons[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
+                 textButtons[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
 
                 int numOfBusyPcb = 10 - OccupancyManager.freePcbList.size();
                 int pcbSize = OccupancyManager.PCB_SIZE;
                 percent = (double) numOfBusyPcb / (double) pcbSize * 100.0;
                 result = String.format("%.2f", percent);
-                UIThread.textButtons[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
+                 textButtons[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
             });
         }
     }
@@ -201,76 +201,76 @@ public class OccupancyAppController extends BaseController {
 
                 for (int memory_index = 0; memory_index < OccupancyManager.MEMORY_SIZE; ++memory_index) {
                     if (OccupancyManager.allMemory[memory_index] == 0) {
-                        UIThread.boxes2[0].getChildren().get(memory_index).setId("emptyBox");
+                         boxes2[0].getChildren().get(memory_index).setId("emptyBox");
                     } else {
-                        UIThread.boxes2[0].getChildren().get(memory_index).setId("memoryInBox1");
+                         boxes2[0].getChildren().get(memory_index).setId("memoryInBox1");
                     }
                 }
 
                 if (MainUI.fat != null) {
                     for (int disk_index = 0; disk_index < FAT.DISK_NUM; ++disk_index) {
                         if (MainUI.fat.getDiskBlocks()[disk_index].getIndex() != 0) {
-                            UIThread.boxes2[1].getChildren().get(disk_index).setId("diskInBox1");
+                             boxes2[1].getChildren().get(disk_index).setId("diskInBox1");
                         } else {
-                            UIThread.boxes2[1].getChildren().get(disk_index).setId("emptyBox");
+                             boxes2[1].getChildren().get(disk_index).setId("emptyBox");
                         }
                     }
                 }
 
                 for (int a_device_index = 0; a_device_index < OccupancyManager.A_DEVICE_SIZE; ++a_device_index) {
                     if (OccupancyManager.aDevice[a_device_index] == 0) {
-                        UIThread.boxes2[2].getChildren().get(a_device_index).setId("emptyBox");
+                         boxes2[2].getChildren().get(a_device_index).setId("emptyBox");
                     } else {
-                        UIThread.boxes2[2].getChildren().get(a_device_index).setId("deviceInBox1");
+                         boxes2[2].getChildren().get(a_device_index).setId("deviceInBox1");
                     }
                 }
 
                 for (int b_device_index = 0; b_device_index < OccupancyManager.B_DEVICE_SIZE; ++b_device_index) {
                     if (OccupancyManager.bDevice[b_device_index] == 0) {
-                        UIThread.boxes2[2].getChildren().get(2 + b_device_index).setId("emptyBox");
+                         boxes2[2].getChildren().get(2 + b_device_index).setId("emptyBox");
                     } else {
-                        UIThread.boxes2[2].getChildren().get(2 + b_device_index).setId("deviceInBox1");
+                         boxes2[2].getChildren().get(2 + b_device_index).setId("deviceInBox1");
                     }
                 }
 
                 for (int c_device_index = 0; c_device_index < OccupancyManager.C_DEVICE_SIZE; ++c_device_index) {
                     if (OccupancyManager.cDevice[c_device_index] == 0) {
-                        UIThread.boxes2[2].getChildren().get(5 + c_device_index).setId("emptyBox");
+                         boxes2[2].getChildren().get(5 + c_device_index).setId("emptyBox");
                     } else {
-                        UIThread.boxes2[2].getChildren().get(5 + c_device_index).setId("deviceInBox1");
+                         boxes2[2].getChildren().get(5 + c_device_index).setId("deviceInBox1");
                     }
                 }
 
                 int i, pcbId;
                 for (i = 0; i < OccupancyManager.PCB_SIZE; ++i) {
-                    UIThread.boxes2[3].getChildren().get(i).setId("emptyBox");
+                     boxes2[3].getChildren().get(i).setId("emptyBox");
                 }
 
                 for (i = 0; i < MainController.getInstance().uiThread.creatingProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.creatingProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
-                        UIThread.boxes2[3].getChildren().get(pcbId).setId("pcbInBox0");
+                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox0");
                     }
                 }
 
                 for (i = 0; i < MainController.getInstance().uiThread.waitProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.waitProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
-                        UIThread.boxes2[3].getChildren().get(pcbId).setId("pcbInBox1");
+                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox1");
                     }
                 }
 
                 if (MainController.getInstance().uiThread.runProcess != null) {
                     pcbId = MainController.getInstance().uiThread.runProcess.pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
-                        UIThread.boxes2[3].getChildren().get(pcbId).setId("pcbInBox2");
+                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox2");
                     }
                 }
 
                 for (i = 0; i < MainController.getInstance().uiThread.blockProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.blockProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
-                        UIThread.boxes2[3].getChildren().get(pcbId).setId("pcbInBox3");
+                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox3");
                     }
                 }
 
