@@ -66,7 +66,8 @@ public class DelViewCtl extends BaseController {
                 }
             }
 
-            mainView.flowPane.getChildren().removeAll(mainView.flowPane.getChildren());
+            mainView.mainCtl.flowPane.getChildren().removeAll(mainView.mainCtl.flowPane.getChildren());
+
             mainView.addIcon(MainUI.fat.getBlockList(mainView.recentPath), mainView.recentPath);
         });
         this.cancelButton.setOnMouseClicked(event -> stage.close());

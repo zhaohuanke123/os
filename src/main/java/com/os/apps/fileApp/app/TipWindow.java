@@ -28,22 +28,23 @@ public class TipWindow extends Application {
         URL location = this.getClass().getResource("/com/os/apps/fileApp/fxmls/TipWindow.fxml");
         if (location == null) {
             System.out.println("null");
-        } else {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(location);
-            Parent root = fxmlLoader.load();
-            primaryStage.setTitle("提示");
-            Scene MainScene = new Scene(root);
-            primaryStage.setScene(MainScene);
-            Scene scene = primaryStage.getScene();
-            TipWindowCtl tipWindowCtl = fxmlLoader.getController();
-            location = this.getClass().getResource("/com/os/apps/fileApp/res/tip.png");
-            primaryStage.getIcons().add(new Image(String.valueOf(location)));
-            scene.setFill(Color.TRANSPARENT);
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
-            primaryStage.show();
-            tipWindowCtl.init(primaryStage, this.tipString);
-            primaryStage.setResizable(false);
+            return;
         }
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(location);
+        Parent root = fxmlLoader.load();
+        primaryStage.setTitle("提示");
+        Scene MainScene = new Scene(root);
+        primaryStage.setScene(MainScene);
+        Scene scene = primaryStage.getScene();
+        TipWindowCtl tipWindowCtl = fxmlLoader.getController();
+        location = this.getClass().getResource("/com/os/apps/fileApp/res/tip.png");
+        primaryStage.getIcons().add(new Image(String.valueOf(location)));
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.show();
+        tipWindowCtl.init(primaryStage, this.tipString);
+        primaryStage.setResizable(false);
+
     }
 }

@@ -235,45 +235,6 @@ public class MainController {
 
     }
 
-    // 打开文件管理器
-    private void fileAppOpen() {
-        // 窗口名称
-        String stageName = "com/os/apps/fileApp";
-
-        // 检查窗口是否已存在
-        Stage stage = checkStage(stageName);
-
-        // 如果窗口存在但未显示，将其移除
-        if (stage != null && !stage.isShowing()) removeStage(stageName);
-
-        // 再次检查窗口是否存在
-        stage = checkStage(stageName);
-
-        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
-        if (stage == null) {
-            stage = new Stage();
-//            new MainUI(stage);
-            stageList.add(new StageRecord(stageName, stage));
-        }
-
-        // 如果窗口已显示，将其显示在最前面
-        if (stage.isShowing()) stage.show();
-
-        // 设置窗口始终位于其他窗口之上
-        stage.setAlwaysOnTop(true);
-        // 将窗口从最小化状态还原
-        stage.setIconified(false);
-        // 将窗口置于最前
-        stage.toFront();
-
-        // 更新窗口列表中的信息
-        updateStageList(stageName);
-
-        // 设置文件管理器按钮的下划线效果，并修改其样式
-        this.fileManagerButton.setUnderline(true);
-        this.fileManagerButton.setStyle(buttonStyle);
-    }
-
     private void OnAppOpen(String stageName, BaseApp app) {
         // 检查窗口是否已存在
         Stage stage = checkStage(stageName);
