@@ -72,6 +72,48 @@ public class MainUI extends Application {
         URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
         stage.getIcons().add(new Image(String.valueOf(location)));
         stage.setTitle("磁盘文件管理系统");
+
+        Scene scene;
+        stage.setResizable(false);
+        location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
+        stage.getIcons().add(new Image(String.valueOf(location)));
+        stage.setTitle("磁盘文件管理系统");
+        scene = stage.getScene();
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        MainCtl MainCtl = this.fxmlLoader.getController();
+        MainCtl.init(stage);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setOnCloseRequest((e) -> {
+            try {
+                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("data"));
+                Throwable var2 = null;
+
+                try {
+                    System.out.println("saving");
+                    outputStream.writeObject(fat);
+                } catch (Throwable var13) {
+                    var2 = var13;
+                    throw var13;
+                } finally {
+                    if (var2 != null) {
+                        try {
+                            outputStream.close();
+                        } catch (Throwable var12) {
+                            var2.addSuppressed(var12);
+                        }
+                    } else {
+                        outputStream.close();
+                    }
+
+                }
+            } catch (IOException var16) {
+                System.out.println(Arrays.toString(var16.getStackTrace()));
+            }
+
+        });
+        stage.show();
     }
 
     public static void updateFileStageList(Stage stage) {
@@ -110,7 +152,7 @@ public class MainUI extends Application {
         scene = new Scene(this.root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        MainCtl MainCtl = this.fxmlLoader.getController();
+        MainCtl = this.fxmlLoader.getController();
         MainCtl.init(primaryStage);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
