@@ -54,7 +54,7 @@ public class MainUI extends Application {
     private MenuItem pasteItem;
     private Label[] icons;
     FXMLLoader fxmlLoader;
-    private final Parent root;
+    private Parent root;
     public FlowPane flowPane;
     private final Label currentPath;
     private final TreeView<String> treeView;
@@ -67,18 +67,17 @@ public class MainUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/mainUI.fxml"));
-        this.fxmlLoader.load();
+        this.root =  fxmlLoader.load();
         stage.setResizable(false);
         URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
         stage.getIcons().add(new Image(String.valueOf(location)));
         stage.setTitle("磁盘文件管理系统");
 
         Scene scene;
-        stage.setResizable(false);
         location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
         stage.getIcons().add(new Image(String.valueOf(location)));
         stage.setTitle("磁盘文件管理系统");
-        scene = stage.getScene();
+        scene = new Scene(this.root);
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
         MainCtl MainCtl = this.fxmlLoader.getController();
@@ -138,25 +137,24 @@ public class MainUI extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        MainCtl = fxmlLoader.getController();
+        MainCtl.init(primaryStage);
         this.flowPane = (FlowPane) this.root.lookup("#flowPane");
         this.currentPath = (Label) this.root.lookup("#currentPath");
         this.treeView = (TreeView<String>) this.root.lookup("#treeView");
         this.TabP = (TabPane) this.root.lookup("#TabP");
         this.chartTab = this.TabP.getTabs().get(0);
-        new LoadView();
+//        new LoadView();
         Scene scene;
-        primaryStage.setResizable(false);
         URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
         primaryStage.getIcons().add(new Image(String.valueOf(location)));
         primaryStage.setTitle("磁盘文件管理系统");
         scene = new Scene(this.root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        MainCtl = this.fxmlLoader.getController();
-        MainCtl.init(primaryStage);
+
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        this.recentPath = "C:";
 
         primaryStage.setOnCloseRequest((e) -> {
             try {
@@ -187,14 +185,16 @@ public class MainUI extends Application {
 
         });
 
+        this.recentPath = "C:";
+
         this.loadData();
         FAT.closeAll();
         this.menuInit();
         this.menuItemSetOnAction();
         this.treeViewInit();
         this.tableInit();
-        primaryStage.show();
         this.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+        primaryStage.show();
     }
 
     private void loadData() {
