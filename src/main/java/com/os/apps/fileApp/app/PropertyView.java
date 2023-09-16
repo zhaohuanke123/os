@@ -1,10 +1,12 @@
 package com.os.apps.fileApp.app;
 
+import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.PropertyCtl;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
+import com.os.utils.ui.CompSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +24,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class PropertyView extends Application {
+public class PropertyView extends BaseApp {
     private final Disk block;
     private final Label icon;
     private final Map<Path, TreeItem<String>> pathMap;
@@ -30,21 +32,26 @@ public class PropertyView extends Application {
     private String location;
     private Stage stage;
     private final ToggleGroup toggleGroup = new ToggleGroup();
-
-    FXMLLoader fxmlLoader;
     PropertyCtl propertyCtl;
-    private final Parent root;
 
     public PropertyView(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap, Stage stage) throws IOException {
-        fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/PropertyView.fxml"));
-        this.root = this.fxmlLoader.load();
+        super(
+                "/com/os/apps/fileApp/fxmls/PropertyView.fxml",
+                (block.getObject() instanceof Folder) ? "/com/os/apps/fileApp/res/folder.png" : "/com/os/apps/fileApp/res/file.png",
+                "属性",
+                -1,
+                -1
+        );
+
         this.block = block;
         this.icon = icon;
         this.pathMap = pathMap;
         this.stage = stage;
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
+        super.start(primaryStage);
+
         this.showView();
     }
 
@@ -57,7 +64,6 @@ public class PropertyView extends Application {
         propertyCtl.checkWrite.setUserData(1);
         this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> propertyCtl.applyButton.setDisable(false));
 
-        Image ico;
         if (this.block.getObject() instanceof Folder) {
             Folder folder = (Folder) this.block.getObject();
             propertyCtl.textField.setText(folder.getFolderName());
@@ -69,8 +75,6 @@ public class PropertyView extends Application {
             this.location = folder.getLocation();
             propertyCtl.checkRead.setDisable(true);
             propertyCtl.checkWrite.setDisable(true);
-            URL location = getClass().getResource("/com/os/apps/fileApp/res/folder.png");
-            ico = new Image(String.valueOf(location));
         } else {
             File file = (File) this.block.getObject();
             propertyCtl.textField.setText(file.getFileName());
@@ -81,30 +85,12 @@ public class PropertyView extends Application {
             this.oldName = file.getFileName();
             this.location = file.getLocation();
             this.toggleGroup.selectToggle(file.getFlag() == 0 ? propertyCtl.checkRead : propertyCtl.checkWrite);
-            URL location = getClass().getResource("/com/os/apps/fileApp/res/file.png");
-            ico = new Image(String.valueOf(location));
         }
-
-        ImageView imageView = new ImageView(ico);
-        imageView.setFitWidth(25.0);
-        imageView.setFitHeight(25.0);
-        propertyCtl.propertyIcon.setGraphic(imageView);
 
         propertyCtl.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> propertyCtl.applyButton.setDisable(false));
 
         this.buttonOnAction();
-        Scene scene = new Scene(this.root);
-        this.stage = new Stage();
         MainUI.fileAppAdditionStageList.add(this.stage);
-        scene.setFill(Color.TRANSPARENT);
-        this.stage.initStyle(StageStyle.TRANSPARENT);
-        propertyCtl.init(this.stage);
-        this.stage.setScene(scene);
-        this.stage.setTitle("属性");
-        this.stage.setResizable(false);
-        this.stage.getIcons().add(ico);
-        this.stage.setAlwaysOnTop(true);
-        this.stage.show();
     }
 
     private void buttonOnAction() {

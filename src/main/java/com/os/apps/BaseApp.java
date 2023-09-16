@@ -1,11 +1,13 @@
 package com.os.apps;
 
 import com.os.main.MainController;
+import com.os.utils.ui.CompSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -66,7 +68,9 @@ public class BaseApp extends Application {
 
         // 设置窗口图标
         location = this.getClass().getResource(IconPath);
-        stage.getIcons().add(new Image(String.valueOf(location)));
+        ImageView imageView = new ImageView(String.valueOf(location));
+        CompSet.setImageViewSize(imageView, 20, 20);
+        appController.title.setGraphic(imageView);
 
         // 禁止窗口调整大小
         stage.setResizable(false);
