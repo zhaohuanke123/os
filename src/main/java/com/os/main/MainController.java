@@ -20,7 +20,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -82,23 +81,20 @@ public class MainController {
                     "-fx-text-fill: black;" +
                     "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
 
+    // 关闭窗口
     @FXML
-    void closeWindow(MouseEvent event) {
+    void closeWindow() {
         FAT.closeAll();
-        if (MainUI.fat != null) {
-            MainUI.saveData();
-        }
-
+        if (MainUI.fat != null) MainUI.saveData();
         System.exit(0);
         Platform.exit();
         this.primaryStage.close();
     }
 
+    // 最小化窗口
     @FXML
-    void minimizeWindow(MouseEvent event) {
-        int i;
-        for (i = 0; i < stageList.size(); ++i) {
-            StageRecord stageRecord = stageList.get(i);
+    void minimizeWindow() {
+        for (StageRecord stageRecord : stageList) {
             if (stageRecord.name.contains("com/os/apps/")) {
                 Stage stage = stageRecord.stage;
                 if (stage != null) {
@@ -108,7 +104,7 @@ public class MainController {
         }
 
         if (MainUI.fileAppAdditionStageList != null) {
-            for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
+            for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
                 Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
                 if (stage1 != null && !stage1.isShowing()) {
                     MainUI.fileAppAdditionStageList.remove(stage1);
@@ -123,8 +119,9 @@ public class MainController {
         this.primaryStage.setIconified(true);
     }
 
+    // 设置界面元素的大小和布局
     public void adaptWindow() {
-        //
+        // 设置MainWindow的大小为屏幕大小
         this.MainWindow.setPrefSize(this.scene.getWidth(), this.scene.getHeight());
 
         // 初始化任务栏
@@ -140,7 +137,7 @@ public class MainController {
         gaussianBlur.setRadius(8.0D);
         this.buttonBarBackGround.setEffect(gaussianBlur);
 
-        //
+        // 设置button的大小和对应图标的大小
         setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
@@ -149,8 +146,6 @@ public class MainController {
         setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-
-        //
         setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
         setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
@@ -160,12 +155,12 @@ public class MainController {
         setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
         setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
-        //
+        // 设置appBox的大小和布局
         CompSet.SetCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
 
-        //
+        // 设置tipBox的大小和布局
         CompSet.SetCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
         this.tipBox.setLayoutX(this.sceneWidth - 1 * this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);

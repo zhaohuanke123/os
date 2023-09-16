@@ -577,19 +577,19 @@ public class MainUI {
     }
 
     public static void fileViewOpen(File file, Disk block) throws Exception {
-        System.out.println("fileViewOpen" + file.isOpened());
-        if (file.isOpened()) {
+        System.out.println("fileViewOpen" + file.getOpened());
+        if (file.getOpened()) {
             FileView.maps.get(file).show();
             FileView.maps.get(file).setAlwaysOnTop(true);
             FileView.maps.get(file).setIconified(false);
             FileView.maps.get(file).toFront();
         }
 
-        if (!file.isOpened()) {
+        if (!file.getOpened()) {
             Stage stage = new Stage();
             FileView fileView = new FileView(stage, file, block);
             fileView.start(stage);
-            System.out.println("fileViewOpen" + file.isOpened());
+            System.out.println("fileViewOpen" + file.getOpened());
             stage.setAlwaysOnTop(true);
             stage.setIconified(false);
             stage.toFront();
