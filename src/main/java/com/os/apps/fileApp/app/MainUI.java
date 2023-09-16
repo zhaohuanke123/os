@@ -4,6 +4,7 @@ import com.os.apps.fileApp.Controller.MainCtl;
 import com.os.utils.fileSystem.*;
 import com.os.utils.fileSystem.File;
 import com.os.utils.ui.CompSet;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class MainUI {
+public class MainUI extends Application {
     private TreeItem<String> rootNode;
     private TreeItem<String> recentNode;
     public static FAT fat;
@@ -61,6 +62,17 @@ public class MainUI {
     private final Tab chartTab;
     public static boolean clearFlag = false;
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
+    public MainCtl MainCtl;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/mainUI.fxml"));
+        this.fxmlLoader.load();
+        stage.setResizable(false);
+        URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
+        stage.getIcons().add(new Image(String.valueOf(location)));
+        stage.setTitle("磁盘文件管理系统");
+    }
 
     public static void updateFileStageList(Stage stage) {
         for (int i = 0; i < fileAppAdditionStageList.size(); ++i) {
@@ -73,7 +85,11 @@ public class MainUI {
         fileAppAdditionStageList.add(stage);
     }
 
-    public MainUI(Stage primaryStage)  {
+//    public MainUI() {
+//
+//    }
+
+    public MainUI(Stage primaryStage) {
         fxmlLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/mainUI.fxml"));
         try {
             this.root = this.fxmlLoader.load();
@@ -581,7 +597,7 @@ public class MainUI {
         fileAppAdditionStageList.add(stage);
     }
 
-    public static void fileViewOpen(File file, Disk block)  {
+    public static void fileViewOpen(File file, Disk block) {
         System.out.println("fileViewOpen" + file.isOpened());
         if (file.isOpened()) {
             FileView.maps.get(file).show();

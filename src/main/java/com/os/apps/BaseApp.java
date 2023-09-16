@@ -20,14 +20,6 @@ public class BaseApp extends Application {
     protected double sceneWidth;  // 场景宽度
     protected double sceneHeight;  // 场景高度
 
-    public BaseApp() {
-        fxmlPath = "";
-        IconPath = "";
-        TitleName = "";
-        sceneWidth = 800;
-        sceneHeight = 600;
-    }
-
     public BaseApp(String fxmlPath, String IconPath, String TitleName, double sceneWidth, double sceneHeight) {
         this.fxmlPath = fxmlPath;
         this.IconPath = IconPath;
