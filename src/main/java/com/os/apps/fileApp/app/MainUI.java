@@ -6,8 +6,11 @@ import com.os.utils.fileSystem.*;
 import com.os.utils.fileSystem.File;
 import com.os.utils.ui.CompSet;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -28,6 +31,8 @@ import java.io.*;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class MainUI extends BaseApp {
     private TreeItem<String> rootNode;
@@ -103,13 +108,41 @@ public class MainUI extends BaseApp {
 
         this.recentPath = "C:";
 
-        this.loadData();
-        FAT.closeAll();
-        this.menuInit();
-        this.menuItemSetOnAction();
-        this.treeViewInit();
-        this.tableInit();
-        mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+        Service<Void> loadDataService = load();
+        loadDataService.start();
+
+//        this.loadData();
+//        FAT.closeAll();
+//        this.treeViewInit();
+//        this.tableInit();
+//        this.menuInit();
+//        this.menuItemSetOnAction();
+//        mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+    }
+
+    private Service<Void> load() {
+        Service<Void> loadDataService = new Service<>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<>() {
+                    @Override
+                    protected Void call() {
+                        loadData();
+                        return null;
+                    }
+                };
+            }
+        };
+
+        loadDataService.setOnSucceeded((e) -> {
+            FAT.closeAll();
+            this.treeViewInit();
+            this.tableInit();
+            this.menuInit();
+            this.menuItemSetOnAction();
+            mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+        });
+        return loadDataService;
     }
 
     public static void updateFileStageList(Stage stage) {
