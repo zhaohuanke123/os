@@ -1,10 +1,12 @@
 package com.os.apps.fileApp.app;
 
+import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.DelViewCtl;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
 
+import java.io.IOException;
 import java.net.URL;
 
 import javafx.application.Application;
@@ -16,12 +18,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class DelView extends Application {
+public class DelView extends BaseApp {
     private final Disk block;
     private final String tipString;
     private final MainUI mainView;
+    private DelViewCtl delViewCtl;
 
     public DelView(MainUI mainView, Disk block) {
+        super(
+                "/com/os/apps/fileApp/fxmls/delView.fxml",
+                "/com/os/apps/fileApp/res/tip.png",
+                "删除",
+                -1,
+                -1
+        );
+
         this.mainView = mainView;
         this.block = block;
         String msg;
@@ -36,31 +47,11 @@ public class DelView extends Application {
         this.tipString = msg;
     }
 
-    public void start(Stage stage) throws Exception {
-        URL location = this.getClass().getResource("/com/os/apps/fileApp/fxmls/delView.fxml");
-        if (location == null) {
-            System.out.println("null");
-        } else {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(location);
-            Parent root = fxmlLoader.load();
-            stage.setTitle("删除");
+    @Override
+    public void start(Stage stage) throws IOException {
+        super.start(stage);
 
-            Scene MainScene = new Scene(root);
-            stage.setScene(MainScene);
-
-            Scene scene = stage.getScene();
-            DelViewCtl delViewCtl = fxmlLoader.getController();
-
-            location = this.getClass().getResource("/com/os/apps/fileApp/res/tip.png");
-            stage.getIcons().add(new Image(String.valueOf(location)));
-
-            stage.setResizable(false);
-            scene.setFill(Color.TRANSPARENT);
-            stage.initStyle(StageStyle.TRANSPARENT);
-
-            stage.show();
-            delViewCtl.init(stage, this.mainView, this.tipString, this.block);
-        }
+        delViewCtl = fxmlLoader.getController();
+        delViewCtl.init(stage, this.mainView, this.tipString, this.block);
     }
 }

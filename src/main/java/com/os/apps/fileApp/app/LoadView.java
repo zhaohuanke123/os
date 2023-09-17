@@ -35,7 +35,7 @@ public class LoadView {
             }
 
             fileLoader = new FXMLLoader(this.getClass().getResource("/com/os/apps/fileApp/fxmls/loadView.fxml"));
-            Parent root1 = null;
+            Parent root1;
             try {
                 root1 = fileLoader.load();
             } catch (IOException e) {

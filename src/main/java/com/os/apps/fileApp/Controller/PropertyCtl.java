@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class PropertyCtl extends BaseController {
-   public Label propertyIcon;
+   public Label title;
    public Button acceptButton;
    public RadioButton checkWrite;
    public RadioButton checkRead;
