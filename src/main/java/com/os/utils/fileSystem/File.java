@@ -48,6 +48,21 @@ public class File implements Serializable {
       return this.lengthP;
    }
 
+   public File(String fileName) {
+      this.fileName = fileName;
+      this.setOpened(false);
+      this.setFileNameP();
+      if (this.hasParent()) {
+         Folder parent1 = this.getParent();
+         parent1.setSize(FAT.getFolderSize(parent1));
+
+         while(parent1.hasParent()) {
+            parent1 = parent1.getParent();
+            parent1.setSize(FAT.getFolderSize(parent1));
+         }
+      }
+   }
+
    private void setFileNameP() {
       this.fileNameP.set(this.fileName);
    }
@@ -66,22 +81,6 @@ public class File implements Serializable {
 
    private void setLengthP() {
       this.lengthP.set(String.valueOf(this.length));
-   }
-
-   public File(String fileName) {
-      this.fileName = fileName;
-      this.setOpened(false);
-      this.setFileNameP();
-      if (this.hasParent()) {
-         Folder parent1 = this.getParent();
-         parent1.setSize(FAT.getFolderSize(parent1));
-
-         while(parent1.hasParent()) {
-            parent1 = parent1.getParent();
-            parent1.setSize(FAT.getFolderSize(parent1));
-         }
-      }
-
    }
 
    public File(String fileName, String location, int diskNum, Folder parent) {
@@ -198,10 +197,6 @@ public class File implements Serializable {
    public String getCreateTime() {
       SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
       return format.format(this.createTime);
-   }
-
-   public void setCreateTime(Date createTime) {
-      this.createTime = createTime;
    }
 
    public Folder getParent() {

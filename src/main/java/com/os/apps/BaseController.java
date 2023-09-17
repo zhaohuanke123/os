@@ -21,6 +21,7 @@ public class BaseController {
     protected HBox titleBarL;
     @FXML
     protected  HBox titleBarR;
+    @FXML
     public Label title;
 
     // 初始化方法，用于设置窗口对象

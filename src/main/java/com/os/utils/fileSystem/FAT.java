@@ -421,7 +421,7 @@ public class FAT implements Serializable {
 
         int n;
         for (n = 3 + ProcessManager.executableFileList.size(); n < this.disks.length; ++n) {
-            if (!this.disks[n].isFree() && this.disks[n].getObject() instanceof Folder && ((Folder) this.disks[n].getObject()).getLocation().equals(path) && this.disks[n].isBegin()) {
+            if (!this.disks[n].isFree() && this.disks[n].getObject() instanceof Folder && ((Folder) this.disks[n].getObject()).getLocation().equals(path) && this.disks[n].getBegin()) {
                 List.add(this.disks[n]);
             }
         }
@@ -429,7 +429,7 @@ public class FAT implements Serializable {
         n = 0;
 
         for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
-            if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && ((File) this.disks[i].getObject()).getLocation().equals(path) && this.disks[i].isBegin()) {
+            if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && ((File) this.disks[i].getObject()).getLocation().equals(path) && this.disks[i].getBegin()) {
                 List.add(this.disks[i]);
                 ++n;
             }
