@@ -112,7 +112,7 @@ public class Disk implements Serializable {
 
    }
 
-   public boolean isBegin() {
+   public boolean getBegin() {
       return this.begin;
    }
 
