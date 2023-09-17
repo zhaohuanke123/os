@@ -84,7 +84,7 @@ public class FAT implements Serializable {
 
     public boolean isOpenedFile(Disk block) {
         return !(block.getObject() instanceof Folder) &&
-                ((File) block.getObject()).getOpened();
+                ((File) block.getObject()).isOpened();
     }
 
     public void tipOpen(String tipString) throws Exception {

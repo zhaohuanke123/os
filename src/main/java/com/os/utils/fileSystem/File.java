@@ -211,7 +211,7 @@ public class File implements Serializable {
       return this.parent != null;
    }
 
-   public boolean getOpened() {
+   public boolean isOpened() {
       return this.isOpen;
    }
 
