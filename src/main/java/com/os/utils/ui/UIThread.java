@@ -1,5 +1,6 @@
 package com.os.utils.ui;
 
+import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.occupancyApp.OccupancyAppController;
 import com.os.apps.processApp.ProcessAppController;
 
@@ -21,6 +22,7 @@ public class UIThread extends Thread {
     public ProcessAppController processAppController = null;
 
     public void init() {
+        MainUI.loadData();
     }
 
     //endregion

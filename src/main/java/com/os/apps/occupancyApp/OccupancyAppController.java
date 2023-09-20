@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 public class OccupancyAppController extends BaseController {
     //region [FXML comp variables]
     public AnchorPane mainPane;
-    public AnchorPane topMainPane;
     public Button memoryText;
     public Button diskText;
     public Button pcbText;

@@ -97,16 +97,16 @@ public class MainUI extends BaseApp {
 
         this.recentPath = "C:";
 
-        Service<Void> loadDataService = load();
-        loadDataService.start();
+//        Service<Void> loadDataService = load();
+//        loadDataService.start();
 
 //        this.loadData();
-//        FAT.closeAll();
-//        this.treeViewInit();
-//        this.tableInit();
-//        this.menuInit();
-//        this.menuItemSetOnAction();
-//        mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+        FAT.closeAll();
+        this.treeViewInit();
+        this.tableInit();
+        this.menuInit();
+        this.menuItemSetOnAction();
+        mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
     }
 
     private Service<Void> load() {
@@ -145,7 +145,7 @@ public class MainUI extends BaseApp {
         fileAppAdditionStageList.add(stage);
     }
 
-    private void loadData() {
+    public static void loadData() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"));
             Throwable var2 = null;

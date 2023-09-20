@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import com.os.main.MainController;
-import com.os.utils.ui.StageRecord;
+import com.os.utils.StageRecord;
 
 public class LoadView {
     LoadView()  {

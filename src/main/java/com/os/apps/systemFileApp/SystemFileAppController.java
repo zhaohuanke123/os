@@ -26,8 +26,6 @@ import java.util.Vector;
 
 public class SystemFileAppController extends BaseController {
     @FXML
-    private AnchorPane topMainPane;
-    @FXML
     private TableView<ExecutableFileData> executableFileTable;
     @FXML
     private TableColumn<?, ?> fileName;

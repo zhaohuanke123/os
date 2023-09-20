@@ -12,10 +12,6 @@ import javafx.stage.Stage;
 
 public class HelpAppController extends BaseController{
     @FXML
-    private AnchorPane topMainPane;
-    @FXML
-    private HBox toolBar;
-    @FXML
     private TabPane tabPane;
     @Override
     public void init(Stage stage) {

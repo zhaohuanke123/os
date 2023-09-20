@@ -1,4 +1,4 @@
-package com.os.utils.ui;
+package com.os.utils;
 
 import javafx.stage.Stage;
 

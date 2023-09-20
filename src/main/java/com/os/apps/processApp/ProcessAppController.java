@@ -26,8 +26,6 @@ import java.util.Vector;
 public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
     @FXML
-    private AnchorPane topMainPane;
-    @FXML
     private TableView<ProcessDetailData> processTable;
     @FXML
     private TableColumn<?, ?> processName;

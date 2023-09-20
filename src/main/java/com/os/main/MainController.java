@@ -11,7 +11,7 @@ import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
 import com.os.utils.ui.CompSet;
-import com.os.utils.ui.StageRecord;
+import com.os.utils.StageRecord;
 import com.os.utils.ui.UIThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

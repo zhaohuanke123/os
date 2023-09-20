@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -23,6 +24,9 @@ public class BaseController {
     protected  HBox titleBarR;
     @FXML
     public Label title;
+    @FXML
+    protected AnchorPane topMainPane;
+
 
     // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {
