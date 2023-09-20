@@ -38,18 +38,7 @@ public class MainController {
         return _instance;
     }
 
-    private TreeMap<String, Button> appButtonDict = new TreeMap<>();
-    private TreeMap<String, BaseApp> appDict = new TreeMap<>();
-    private TreeMap<String, Stage> stageDict = new TreeMap<>();
-    public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
-    public UIThread uiThread = new UIThread();
-    public Pane buttonBarBackGround;
-    Scene mainWindowScene = null;
-    Stage primaryStage = null;
-    public static Vector<StageRecord> stageList = new Vector<>();
-    double appWidth;
-    public double sceneWidth;
-    public double sceneHeight;
+    //region [FXML Comp]
     @FXML
     private Pane MainWindow;
     @FXML
@@ -82,6 +71,20 @@ public class MainController {
     private Button timeButton2;
     @FXML
     private Button deskButton;
+    //endregion
+
+    private TreeMap<String, Button> appButtonDict = new TreeMap<>();
+    private TreeMap<String, BaseApp> appDict = new TreeMap<>();
+    private TreeMap<String, Stage> stageDict = new TreeMap<>();
+    public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
+    public UIThread uiThread = new UIThread();
+    public Pane buttonBarBackGround;
+    Scene mainWindowScene = null;
+    Stage primaryStage = null;
+    double appWidth;
+    public double sceneWidth;
+    public double sceneHeight;
+
     boolean isTop = false;
     boolean haveChanged = true;
 
@@ -144,14 +147,6 @@ public class MainController {
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
-        // 初始化任务栏背景
-        CompSet.setCompFixSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
-        this.buttonBarBackGround.setLayoutX(0);
-        this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
-        GaussianBlur gaussianBlur = new GaussianBlur();
-        gaussianBlur.setRadius(8.0D);
-        this.buttonBarBackGround.setEffect(gaussianBlur);
-
         //
         CompSet.setCompFixSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
@@ -188,13 +183,8 @@ public class MainController {
         if (this.haveChanged) {
             this.haveChanged = false;
 
-            if (!this.isTop) {
-                this.primaryStage.toFront();
-
-                minimizeOnShowApp(true);
-            } else {
-                minimizeOnShowApp(false);
-            }
+            //  this.primaryStage.toFront();
+            minimizeOnShowApp(!this.isTop);
 
             this.isTop = !this.isTop;
             this.haveChanged = !this.haveChanged;
