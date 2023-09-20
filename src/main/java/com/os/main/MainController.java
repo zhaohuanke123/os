@@ -129,36 +129,8 @@ public class MainController {
 
     @FXML
     void minimizeWindow(MouseEvent event) {
-        int i;
-//        for (i = 0; i < stageList.size(); ++i) {
-//            StageRecord stageRecord = stageList.get(i);
-//            if (stageRecord.name.contains("apps")) {
-//                Stage stage = stageRecord.stage;
-//                if (stage != null) {
-//                    stage.setIconified(true);
-//                }
-//            }
-//        }
-        stageDict.forEach((stageName, stage) -> {
-            if (stageName.contains("apps")) {
-                if (stage != null) {
-                    stage.setIconified(true);
-                }
-            }
-        });
 
-        if (MainUI.fileAppAdditionStageList != null) {
-            for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
-                if (stage1 != null && !stage1.isShowing()) {
-                    MainUI.fileAppAdditionStageList.remove(stage1);
-                } else {
-                    if (stage1 != null) {
-                        stage1.setIconified(true);
-                    }
-                }
-            }
-        }
+        minimizeOnShowApp(true);
 
         this.primaryStage.setIconified(true);
     }
@@ -219,51 +191,38 @@ public class MainController {
             if (!this.isTop) {
                 this.primaryStage.toFront();
 
-                for (StageRecord stageRecord : stageList) {
-                    Stage stage1 = stageRecord.stage;
-                    if (stage1 != null && stage1.isShowing()) {
-                        stage1.setIconified(true);
-                    }
-                }
-
-                if (MainUI.fileAppAdditionStageList != null) {
-                    for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                        Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
-
-                        if (stage1 != null && !stage1.isShowing()) {
-                            MainUI.fileAppAdditionStageList.remove(stage1);
-                        } else {
-                            if (stage1 != null) {
-                                stage1.setIconified(true);
-                            }
-                        }
-                    }
-                }
+                minimizeOnShowApp(true);
             } else {
-                for (StageRecord stageRecord : stageList) {
-                    Stage stage1 = stageRecord.stage;
-                    if (stage1 != null && stage1.isShowing()) {
-                        stage1.setIconified(false);
-                    }
-                }
-
-                if (MainUI.fileAppAdditionStageList != null) {
-                    for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                        Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
-
-                        if (stage1 != null && !stage1.isShowing()) {
-                            MainUI.fileAppAdditionStageList.remove(stage1);
-                        } else {
-                            if (stage1 != null) {
-                                stage1.setIconified(false);
-                            }
-                        }
-                    }
-                }
+                minimizeOnShowApp(false);
             }
 
             this.isTop = !this.isTop;
             this.haveChanged = !this.haveChanged;
+        }
+
+    }
+
+    private void minimizeOnShowApp(Boolean isMinimize) {
+        stageDict.forEach((stageName, stage) -> {
+            if (stageName.contains("apps")) {
+                if (stage != null) {
+                    stage.setIconified(isMinimize);
+                }
+            }
+        });
+
+        if (MainUI.fileAppAdditionStageList != null) {
+            for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
+                Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
+
+                if (stage1 != null && !stage1.isShowing()) {
+                    MainUI.fileAppAdditionStageList.remove(stage1);
+                } else {
+                    if (stage1 != null) {
+                        stage1.setIconified(isMinimize);
+                    }
+                }
+            }
         }
 
     }
@@ -284,7 +243,6 @@ public class MainController {
                 // 使用 SystemFileApp 实例初始化新窗口
                 app.start(stage);
                 // 将新窗口记录添加到窗口列表
-//                stageList.add(new StageRecord(stageName, stage));
                 stageDict.put(stageName, stage);
             } catch (IOException e) {
                 e.getStackTrace();
@@ -318,38 +276,16 @@ public class MainController {
 
     // 检查窗口是否已存在
     public Stage checkStage(String name) {
-//        for (StageRecord stageRecord : stageList) {
-//            // 如果窗口的名称与传入的名称相匹配，返回该窗口对象
-//            if (stageRecord.name.equals(name)) {
-//                return stageRecord.stage;
-//            }
-//        }
-//        return null;
         return stageDict.get(name);
     }
 
     // 移除指定窗口
     public void removeStage(String name) {
-//        for (int i = stageList.size() - 1; i >= 0; --i) {
-//            // 如果窗口的名称与传入的名称相匹配，移除该窗口记录
-//            if (stageList.get(i).name.equals(name)) {
-//                stageList.remove(i);
-//            }
-//        }
         stageDict.remove(name);
     }
 
     // 更新窗口列表中的信息
     public void updateStageList(String name) {
-//        for (int i = 0; i < stageList.size(); ++i) {
-//            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
-//            if (stageList.get(i).name.equals(name)) {
-//                StageRecord stageRecord = stageList.get(i);
-//                stageList.remove(stageRecord);
-//                stageList.add(stageRecord);
-//                return;
-//            }
-//        }
         stageDict.put(name, checkStage(name));
     }
 
@@ -373,31 +309,6 @@ public class MainController {
             });
         });
 
-//        this.systemFileButton.setOnMouseClicked(event -> {
-//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                this.OnAppOpen("com/os/apps/systemFileApp", new SystemFileApp());
-//            }
-//        });
-//        this.processButton.setOnMouseClicked(event -> {
-//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                this.OnAppOpen("com/os/apps/processApp", new ProcessApp());
-//            }
-//        });
-//        this.occupancyButton.setOnMouseClicked(event -> {
-//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                this.OnAppOpen("com/os/apps/occupancyApp", new OccupancyApp());
-//            }
-//        });
-//        this.helpButton.setOnMouseClicked(event -> {
-//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                this.OnAppOpen("com/os/apps/helpApp", new HelpApp());
-//            }
-//        });
-//        this.fileManagerButton.setOnMouseClicked(event -> {
-//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-//                OnAppOpen("com/os/apps/fileApp", new MainUI());
-//            }
-//        });
         this.deskButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 this.toDesk();
