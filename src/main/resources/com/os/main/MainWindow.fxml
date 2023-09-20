@@ -104,9 +104,9 @@
 
             <!-- 时间组件-->
             <VBox fx:id="timeBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                <Button id="timeButton1" fx:id="timeButton1" mnemonicParsing="false" stylesheets="@MainWindow.css"
+                <Button id="timeButton" fx:id="timeButton1" mnemonicParsing="false" stylesheets="@MainWindow.css"
                         text="Button"/>
-                <Button id="timeButton2" fx:id="timeButton2" mnemonicParsing="false" stylesheets="@MainWindow.css"
+                <Button id="timeButton" fx:id="timeButton2" mnemonicParsing="false" stylesheets="@MainWindow.css"
                         text="Button"/>
             </VBox>
 

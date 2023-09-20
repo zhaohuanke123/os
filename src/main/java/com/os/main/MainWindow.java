@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainWindow extends Application {
-   public void start(Stage primaryStage) throws IOException, URISyntaxException {
+   public void start(Stage stage) throws IOException, URISyntaxException {
       // 获取FXML文件的URL
       URL location = this.getClass().getResource("/com/os/main/MainWindow.fxml");
       if (location == null) return;
@@ -27,35 +27,35 @@ public class MainWindow extends Application {
 
       // 创建主场景并将根节点添加到场景中
       Scene MainScene = new Scene(root);
-      primaryStage.setScene(MainScene);
+      stage.setScene(MainScene);
 
       // 获取当前场景
-      Scene scene = primaryStage.getScene();
+      Scene scene = stage.getScene();
 
       // 获取主控制器
       final MainController mainController = fxmlLoader.getController();
 
       // 监听主窗口的宽度和高度变化，调整窗口
-      primaryStage.widthProperty().addListener((observable, oldValue, newValue)
+      stage.widthProperty().addListener((observable, oldValue, newValue)
               -> Platform.runLater(mainController::adaptWindow));
-      primaryStage.heightProperty().addListener((observable, oldValue, newValue)
+      stage.heightProperty().addListener((observable, oldValue, newValue)
               -> Platform.runLater(mainController::adaptWindow));
 
       // 最大化主窗口
-      primaryStage.setMaximized(true);
+      stage.setMaximized(true);
 
       // 设置主窗口图标
       location = this.getClass().getResource("/com/os/img/Windows.png");
-      primaryStage.getIcons().add(new Image(String.valueOf(location)));
+      stage.getIcons().add(new Image(String.valueOf(location)));
 
       // 设置主窗口无边框
-      primaryStage.initStyle(StageStyle.UNDECORATED);
+      stage.initStyle(StageStyle.UNDECORATED);
 
       // 显示主窗口
-      primaryStage.show();
+      stage.show();
 
       // 初始化主控制器，并调整窗口
-      mainController.init(scene, primaryStage);
+      mainController.init(scene, stage);
       mainController.adaptWindow();
    }
 

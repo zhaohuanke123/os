@@ -11,14 +11,12 @@ import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
 import com.os.utils.ui.CompSet;
-import com.os.utils.StageRecord;
 import com.os.utils.ui.UIThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -29,7 +27,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.Date;
+import java.util.TreeMap;
 
 public class MainController {
     private static MainController _instance;
@@ -74,7 +73,7 @@ public class MainController {
     //endregion
 
     private TreeMap<String, Button> appButtonDict = new TreeMap<>();
-    private TreeMap<String, BaseApp> appDict = new TreeMap<>();
+    private TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
     private TreeMap<String, Stage> stageDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
@@ -143,7 +142,7 @@ public class MainController {
 
         // 初始化任务栏
         CompSet.setCompFixSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
-        this.buttonBar.setLayoutX(0);
+        this.buttonBar.setLayoutX(-appWidth);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
         //
@@ -172,8 +171,8 @@ public class MainController {
         this.appBox.setLayoutY(0.0);
 
         //
-        CompSet.setCompFixSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
-        this.tipBox.setLayoutX(this.sceneWidth - 1 * this.tipBox.getWidth());
+        CompSet.setCompFixSize(this.tipBox, this.timeBox.getWidth() + this.deskButton.getWidth(), 1 * this.appWidth);
+        this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
     }
 
@@ -216,7 +215,7 @@ public class MainController {
 
     }
 
-    private void OnAppOpen(String stageName, BaseApp app) {
+    private void OnAppOpen(String stageName, BaseApp<?> app) {
         // 检查窗口是否已存在
         Stage stage = checkStage(stageName);
 
@@ -290,13 +289,11 @@ public class MainController {
         this.background.setPreserveRatio(false);
         this.background.setVisible(true);
 
-        appButtonDict.forEach((stageName, button) -> {
-            button.setOnMouseClicked(event -> {
-                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                    this.OnAppOpen(stageName, appDict.get(stageName));
-                }
-            });
-        });
+        appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+                this.OnAppOpen(stageName, appDict.get(stageName));
+            }
+        }));
 
         this.deskButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {

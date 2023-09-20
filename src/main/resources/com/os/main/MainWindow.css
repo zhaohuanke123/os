@@ -1,4 +1,4 @@
-#timeButton1 {
+#timeButton {
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
@@ -7,14 +7,6 @@
     -fx-text-fill: #1a1918;
 }
 
-#timeButton2 {
-    -fx-border-width: 0;
-    -fx-background-radius: 0;
-    -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.2em;
-    -fx-text-fill: #1a1918;
-}
 
 #appButton {
     -fx-border-width: 0;
