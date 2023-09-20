@@ -28,7 +28,7 @@
 }
 
 #appButton:pressed {
-    -fx-background-color: transparent, lightgray;
+    -fx-background-color: rgba(255, 255, 255, 0.25);
     -fx-background-radius: 12;
     -fx-border-insets: 1, 1, 1, 1;
     -fx-text-fill: black;
@@ -96,4 +96,10 @@
     -fx-opacity: 0;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 1em;
+}
+
+.separator {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-opacity: 0;
 }

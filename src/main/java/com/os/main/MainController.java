@@ -142,7 +142,7 @@ public class MainController {
 
         // 初始化任务栏
         CompSet.setCompFixSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
-        this.buttonBar.setLayoutX(-appWidth);
+        this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
         //
@@ -254,10 +254,11 @@ public class MainController {
         if (button != null) {
             // 设置设备管理器按钮的下划线效果，并修改其样式
             button.setUnderline(true);
-            String buttonStyle = "-fx-background-color: transparent,aliceblue;" +
-                    "-fx-background-radius: 12;" +
-                    "-fx-text-fill: black;" +
-                    "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
+            String buttonStyle = "    -fx-background-color: rgba(255, 255, 255, 0.25);\n" +
+                    "    -fx-background-radius: 12;\n" +
+                    "    -fx-border-insets: 1, 1, 1, 1;\n" +
+                    "    -fx-text-fill: black;\n" +
+                    "    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);";
             button.setStyle(buttonStyle);
         }
     }

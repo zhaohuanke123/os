@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <Pane fx:id="MainWindow" prefHeight="622.0" prefWidth="1035.0" stylesheets="@MainWindow.css"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.os.main.MainController">
@@ -22,6 +23,7 @@
         <HBox id="appBox" fx:id="appBox" alignment="CENTER" layoutX="247.0" layoutY="13.0" prefHeight="84.0"
               prefWidth="392.0" stylesheets="@MainWindow.css">
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!-- 查看系统文件按钮  -->
             <Button id="appButton" fx:id="systemFileButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
@@ -33,6 +35,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  文件管理器按钮 -->
             <Button id="appButton" fx:id="fileManagerButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
@@ -44,6 +47,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  进程管理按钮-->
             <Button id="appButton" fx:id="processButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" textAlignment="CENTER">
@@ -54,6 +58,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  占用管理器按钮-->
             <Button id="appButton" fx:id="occupancyButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="55.0"
@@ -65,6 +70,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  帮助按钮-->
             <Button id="appButton" fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false">
@@ -75,6 +81,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!-- 最小化按钮-->
             <Button id="appButton" fx:id="minimizeButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="67.0"
@@ -86,6 +93,7 @@
                 </graphic>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!-- 关闭按钮-->
             <Button id="appButton" fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#closeWindow" prefHeight="50.0"
@@ -115,7 +123,7 @@
                     graphicTextGap="0.0" mnemonicParsing="false" stylesheets="@MainWindow.css">
                 <graphic>
                     <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/desktop.png"/>
+                        <Image url="@../img/desktop1.png"/>
                     </ImageView>
                 </graphic>
             </Button>
