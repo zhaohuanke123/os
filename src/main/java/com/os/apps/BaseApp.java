@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -35,12 +34,7 @@ public class BaseApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         if (sceneHeight > 0 && sceneWidth > 0) {
-            stage.setMaxHeight(MainController.getInstance().sceneHeight);
-            stage.setMinHeight(sceneHeight);
-            stage.setHeight(sceneHeight);
-            stage.setMaxWidth(MainController.getInstance().sceneWidth);
-            stage.setMinWidth(sceneWidth);
-            stage.setWidth(sceneWidth);
+            CompSet.setStageSize(stage, sceneWidth, sceneHeight);
         }
 
         // 获取FXML文件的URL
@@ -67,10 +61,7 @@ public class BaseApp extends Application {
         BaseController appController = fxmlLoader.getController();
 
         // 设置窗口图标
-        location = this.getClass().getResource(IconPath);
-        ImageView imageView = new ImageView(String.valueOf(location));
-        CompSet.setImageViewSize(imageView, 20, 20);
-        appController.title.setGraphic(imageView);
+        setTitleIco(appController, IconPath);
 
         // 禁止窗口调整大小
         stage.setResizable(false);
@@ -86,5 +77,12 @@ public class BaseApp extends Application {
         appController.init(stage);
         // 调整控制器窗口
         appController.adaptWindow();
+    }
+
+    private void setTitleIco(BaseController bc, String IconPath) {
+        URL location = this.getClass().getResource(IconPath);
+        ImageView imageView = new ImageView(String.valueOf(location));
+        CompSet.setImageViewFixSize(imageView, 20, 20);
+        bc.title.setGraphic(imageView);
     }
 }

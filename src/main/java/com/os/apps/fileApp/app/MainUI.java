@@ -5,34 +5,23 @@ import com.os.apps.fileApp.Controller.MainCtl;
 import com.os.utils.fileSystem.*;
 import com.os.utils.fileSystem.File;
 import com.os.utils.ui.CompSet;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.*;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 public class MainUI extends BaseApp {
     private TreeItem<String> rootNode;
@@ -267,7 +256,7 @@ public class MainUI extends BaseApp {
     private void treeViewInit() {
         URL location = this.getClass().getResource("/com/os/apps/fileApp/res/disk.png");
         this.rootNode = new TreeItem<>("C:", new ImageView(String.valueOf(location)));
-        CompSet.setImageViewSize((ImageView) this.rootNode.getGraphic(), 20.0, 20.0);
+        CompSet.setImageViewFixSize((ImageView) this.rootNode.getGraphic(), 20.0, 20.0);
 
         this.rootNode.setExpanded(true);
         this.recentNode = this.rootNode;

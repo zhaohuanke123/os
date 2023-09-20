@@ -135,12 +135,12 @@ public class MainController {
         this.MainWindow.setPrefSize(this.mainWindowScene.getWidth(), this.mainWindowScene.getHeight());
 
         // 初始化任务栏
-        CompSet.setCompSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
+        CompSet.setCompFixSize(this.buttonBar, this.sceneWidth, 1 * this.appWidth);
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
         // 初始化任务栏背景
-        CompSet.setCompSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
+        CompSet.setCompFixSize(this.buttonBarBackGround, this.sceneWidth, 1 * this.appWidth);
         this.buttonBarBackGround.setLayoutX(0);
         this.buttonBarBackGround.setLayoutY(this.sceneHeight - 1 * this.appWidth);
         GaussianBlur gaussianBlur = new GaussianBlur();
@@ -148,32 +148,32 @@ public class MainController {
         this.buttonBarBackGround.setEffect(gaussianBlur);
 
         //
-        CompSet.setCompSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.processButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
         //
-        CompSet.setCompSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
-        CompSet.setImageViewSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
+        CompSet.setCompFixSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
+        CompSet.setCompFixSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
+        CompSet.setImageViewFixSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
         //
-        CompSet.setCompSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
+        CompSet.setCompFixSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
 
         //
-        CompSet.setCompSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
+        CompSet.setCompFixSize(this.tipBox, this.timeBox.getWidth() + 1 * this.deskButton.getWidth(), 1 * this.appWidth);
         this.tipBox.setLayoutX(this.sceneWidth - 1 * this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
     }
@@ -421,8 +421,8 @@ public class MainController {
                 String.format("%td", date));
 
         // 设置时间按钮的最小和最大宽度
-        CompSet.setCompSize(this.timeButton2, 2 * this.appWidth, -1);
-        CompSet.setCompSize(this.timeBox, 2 * this.appWidth, -1);
+        CompSet.setCompFixSize(this.timeButton2, 2 * this.appWidth, -1);
+        CompSet.setCompFixSize(this.timeBox, 2 * this.appWidth, -1);
     }
 
     // 初始化ui线程

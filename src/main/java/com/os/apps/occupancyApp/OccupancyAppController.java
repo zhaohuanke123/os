@@ -58,7 +58,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / OccupancyManager.MEMORY_SIZE);
-            CompSet.setCompSize(region, percent * width, height);
+            CompSet.setCompFixSize(region, percent * width, height);
             this.memoryBox2.getChildren().add(region);
         }
 
@@ -68,7 +68,7 @@ public class OccupancyAppController extends BaseController {
 
             region = new Region();
             percent = (1.0 / FAT.DISK_NUM);
-            CompSet.setCompSize(region, percent * width, height);
+            CompSet.setCompFixSize(region, percent * width, height);
             this.diskBox2.getChildren().add(region);
         }
 
@@ -160,7 +160,7 @@ public class OccupancyAppController extends BaseController {
             double width = boxes1[0].getWidth() - 2.0;
             Region region = (Region) boxes1[0].getChildren().get(0);
             double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
-            CompSet.setCompSize(region, width, percent * height);
+            CompSet.setCompFixSize(region, width, percent * height);
 
             if (MainUI.fat != null) {
                 int numOfBusyDisk = MainUI.fat.checkNumOfBusyDisk();
@@ -168,7 +168,7 @@ public class OccupancyAppController extends BaseController {
                 width = boxes1[1].getWidth() - 2.0;
                 percent = (double) numOfBusyDisk / 256.0;
                 region = (Region) boxes1[1].getChildren().get(0);
-                CompSet.setCompSize(region, width, percent * height);
+                CompSet.setCompFixSize(region, width, percent * height);
 
                 System.out.println("BusyDiskNum:" + numOfBusyDisk);
             }
@@ -178,14 +178,14 @@ public class OccupancyAppController extends BaseController {
             width = boxes1[2].getWidth() - 2.0;
             percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE;
             region = (Region) boxes1[2].getChildren().get(0);
-            CompSet.setCompSize(region, width, percent * height);
+            CompSet.setCompFixSize(region, width, percent * height);
 
             int numOfBusyPcb = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
             height = boxes1[3].getHeight() - 2.0;
             width = boxes1[3].getWidth() - 2.0;
             percent = (double) numOfBusyPcb / (double) OccupancyManager.PCB_SIZE;
             region = (Region) boxes1[3].getChildren().get(0);
-            CompSet.setCompSize(region, width, percent * height);
+            CompSet.setCompFixSize(region, width, percent * height);
         }
     }
 
