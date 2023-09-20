@@ -6,9 +6,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TipWindow extends BaseApp {
+public class TipWindow extends BaseApp<TipWindowCtl> {
     String tipString;
-    TipWindowCtl tipWindowCtl;
 
     public static void main(String[] args) {
         launch(args);
@@ -29,7 +28,6 @@ public class TipWindow extends BaseApp {
     public void start(Stage stage) throws IOException {
         super.start(stage);
 
-        tipWindowCtl = fxmlLoader.getController();
-        tipWindowCtl.init(stage,tipString);
+        controller.init(stage,tipString);
     }
 }

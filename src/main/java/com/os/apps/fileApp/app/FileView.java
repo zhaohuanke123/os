@@ -27,14 +27,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class FileView extends BaseApp {
+public class FileView extends BaseApp<FileViewCtl> {
     private final File file;
     private final Disk block;
     private String newContent;
     private String oldContent;
     private final Stage stage;
     public static Map<File, Stage> maps = new HashMap<>();
-    FileViewCtl fileViewCtl;
 
     public FileView(Stage stage, File file, Disk block)  {
         super(
@@ -52,20 +51,20 @@ public class FileView extends BaseApp {
     }
 
     private void showView() {
-        fileViewCtl = this.fxmlLoader.getController();
-        fileViewCtl.title.setText(this.file.getLocation() + "\\" + this.file.getFileName());
+//        controller = this.fxmlLoader.getController();
+        controller.title.setText(this.file.getLocation() + "\\" + this.file.getFileName());
 
-        fileViewCtl.contentField.setText(this.file.getContent());
+        controller.contentField.setText(this.file.getContent());
         if (this.file.getFlag() == 0) {
-            fileViewCtl.contentField.setDisable(true);
+            controller.contentField.setDisable(true);
         }
 
         URL location = getClass().getResource("/com/os/apps/fileApp/res/save.png");
-        fileViewCtl.saveItem.setGraphic(new ImageView(String.valueOf(location)));
-        ((ImageView) fileViewCtl.saveItem.getGraphic()).setFitWidth(15.0);
-        ((ImageView) fileViewCtl.saveItem.getGraphic()).setFitHeight(15.0);
-        fileViewCtl.saveItem.setOnAction((ActionEvent) -> {
-            this.newContent = fileViewCtl.contentField.getText();
+        controller.saveItem.setGraphic(new ImageView(String.valueOf(location)));
+        ((ImageView) controller.saveItem.getGraphic()).setFitWidth(15.0);
+        ((ImageView) controller.saveItem.getGraphic()).setFitHeight(15.0);
+        controller.saveItem.setOnAction((ActionEvent) -> {
+            this.newContent = controller.contentField.getText();
             this.oldContent = this.file.getContent();
             if (this.newContent == null) {
                 this.newContent = "";
@@ -78,26 +77,26 @@ public class FileView extends BaseApp {
         });
 
         location = getClass().getResource("/com/os/apps/fileApp/res/save.png");
-        fileViewCtl.save_close.setGraphic(new ImageView(String.valueOf(location)));
-        ((ImageView) fileViewCtl.save_close.getGraphic()).setFitWidth(15.0);
-        ((ImageView) fileViewCtl.save_close.getGraphic()).setFitHeight(15.0);
-        fileViewCtl.save_close.setOnAction((ActionEvent) -> {
-            this.newContent = fileViewCtl.contentField.getText();
+        controller.save_close.setGraphic(new ImageView(String.valueOf(location)));
+        ((ImageView) controller.save_close.getGraphic()).setFitWidth(15.0);
+        ((ImageView) controller.save_close.getGraphic()).setFitHeight(15.0);
+        controller.save_close.setOnAction((ActionEvent) -> {
+            this.newContent = controller.contentField.getText();
             this.saveContent(this.newContent);
             FAT.removeOpenedFile(this.block);
             this.stage.close();
         });
 
         location = getClass().getResource("/com/os/apps/fileApp/res/close.png");
-        fileViewCtl.closeItem.setGraphic(new ImageView(String.valueOf(location)));
-        ((ImageView) fileViewCtl.closeItem.getGraphic()).setFitWidth(15.0);
-        ((ImageView) fileViewCtl.closeItem.getGraphic()).setFitHeight(15.0);
-        fileViewCtl.closeItem.setOnAction((ActionEvent) -> {
+        controller.closeItem.setGraphic(new ImageView(String.valueOf(location)));
+        ((ImageView) controller.closeItem.getGraphic()).setFitWidth(15.0);
+        ((ImageView) controller.closeItem.getGraphic()).setFitHeight(15.0);
+        controller.closeItem.setOnAction((ActionEvent) -> {
             FAT.removeOpenedFile(this.block);
             this.stage.close();
         });
 
-        fileViewCtl.init(this.file, this.stage, this.block);
+        controller.init(this.file, this.stage, this.block);
         maps.put(this.file, this.stage);
         MainUI.fileAppAdditionStageList.add(this.stage);
 

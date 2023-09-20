@@ -14,7 +14,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 
-public class BaseApp extends Application {
+public class BaseApp<T extends BaseController> extends Application
+
+{
     protected String fxmlPath;  // FXML 文件的路径
     protected String IconPath;  // 图标路径
     protected String TitleName;  // 标题名称
@@ -22,6 +24,7 @@ public class BaseApp extends Application {
     protected double sceneHeight;  // 场景高度
     protected Parent root;
     protected FXMLLoader fxmlLoader;
+    public T controller;
 
     public BaseApp(String fxmlPath, String IconPath, String TitleName, double sceneWidth, double sceneHeight) {
         this.fxmlPath = fxmlPath;
@@ -58,10 +61,10 @@ public class BaseApp extends Application {
         Scene scene = stage.getScene();
 
         // 获取控制器
-        BaseController appController = fxmlLoader.getController();
+        controller = fxmlLoader.getController();
 
         // 设置窗口图标
-        setTitleIco(appController, IconPath);
+        setTitleIco(controller, IconPath);
 
         // 禁止窗口调整大小
         stage.setResizable(false);
@@ -74,9 +77,9 @@ public class BaseApp extends Application {
         stage.show();
 
         // 初始化控制器
-        appController.init(stage);
+        controller.init(stage);
         // 调整控制器窗口
-        appController.adaptWindow();
+        controller.adaptWindow();
     }
 
     private void setTitleIco(BaseController bc, String IconPath) {

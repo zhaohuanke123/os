@@ -6,17 +6,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelpApp extends BaseApp {
+public class HelpApp extends BaseApp<HelpAppController> {
     public static void main(String[] args) {
         Application.launch(args);
     }
-
-//    public HelpApp() {
-//        super();
-//        super.fxmlPath = "/com/os/apps/helpApp/HelpApp.fxml";
-//        super.IconPath = "/com/os/img/help.png";
-//        super.TitleName = "帮助";
-//    }
 
     public HelpApp() {
         super("/com/os/apps/helpApp/HelpApp.fxml",

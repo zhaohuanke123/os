@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class PropertyView extends BaseApp {
+public class PropertyView extends BaseApp<PropertyCtl> {
     private final Disk block;
     private final Label icon;
     private final Map<Path, TreeItem<String>> pathMap;
@@ -32,7 +32,6 @@ public class PropertyView extends BaseApp {
     private String location;
     private Stage stage;
     private final ToggleGroup toggleGroup = new ToggleGroup();
-    PropertyCtl propertyCtl;
 
     public PropertyView(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap, Stage stage) throws IOException {
         super(
@@ -56,46 +55,45 @@ public class PropertyView extends BaseApp {
     }
 
     private void showView() {
-        propertyCtl = this.fxmlLoader.getController();
 
-        propertyCtl.checkRead.setToggleGroup(this.toggleGroup);
-        propertyCtl.checkRead.setUserData(0);
-        propertyCtl.checkWrite.setToggleGroup(this.toggleGroup);
-        propertyCtl.checkWrite.setUserData(1);
-        this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> propertyCtl.applyButton.setDisable(false));
+        controller.checkRead.setToggleGroup(this.toggleGroup);
+        controller.checkRead.setUserData(0);
+        controller.checkWrite.setToggleGroup(this.toggleGroup);
+        controller.checkWrite.setUserData(1);
+        this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> controller.applyButton.setDisable(false));
 
         if (this.block.getObject() instanceof Folder) {
             Folder folder = (Folder) this.block.getObject();
-            propertyCtl.textField.setText(folder.getFolderName());
-            propertyCtl.typeField.setText(folder.getType());
-            propertyCtl.locField.setText(folder.getLocation());
-            propertyCtl.spaceField.setText(folder.getSpace());
-            propertyCtl.timeField.setText(folder.getCreateTime());
+            controller.textField.setText(folder.getFolderName());
+            controller.typeField.setText(folder.getType());
+            controller.locField.setText(folder.getLocation());
+            controller.spaceField.setText(folder.getSpace());
+            controller.timeField.setText(folder.getCreateTime());
             this.oldName = folder.getFolderName();
             this.location = folder.getLocation();
-            propertyCtl.checkRead.setDisable(true);
-            propertyCtl.checkWrite.setDisable(true);
+            controller.checkRead.setDisable(true);
+            controller.checkWrite.setDisable(true);
         } else {
             File file = (File) this.block.getObject();
-            propertyCtl.textField.setText(file.getFileName());
-            propertyCtl.typeField.setText(file.getType());
-            propertyCtl.locField.setText(file.getLocation());
-            propertyCtl.spaceField.setText(file.getSpace());
-            propertyCtl.timeField.setText(file.getCreateTime());
+            controller.textField.setText(file.getFileName());
+            controller.typeField.setText(file.getType());
+            controller.locField.setText(file.getLocation());
+            controller.spaceField.setText(file.getSpace());
+            controller.timeField.setText(file.getCreateTime());
             this.oldName = file.getFileName();
             this.location = file.getLocation();
-            this.toggleGroup.selectToggle(file.getFlag() == 0 ? propertyCtl.checkRead : propertyCtl.checkWrite);
+            this.toggleGroup.selectToggle(file.getFlag() == 0 ? controller.checkRead : controller.checkWrite);
         }
 
-        propertyCtl.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> propertyCtl.applyButton.setDisable(false));
+        controller.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> controller.applyButton.setDisable(false));
 
         this.buttonOnAction();
         MainUI.fileAppAdditionStageList.add(this.stage);
     }
 
     private void buttonOnAction() {
-        propertyCtl.applyButton.setOnAction((ActionEvent) -> {
-            String newName = propertyCtl.textField.getText();
+        controller.applyButton.setOnAction((ActionEvent) -> {
+            String newName = controller.textField.getText();
             String regEx = "[$./]";
             Pattern p = Pattern.compile(regEx);
             boolean m = p.matcher(newName).find();
@@ -129,11 +127,11 @@ public class PropertyView extends BaseApp {
                 thisFile.setFlag(newFlag);
             }
 
-            propertyCtl.applyButton.setDisable(true);
+            controller.applyButton.setDisable(true);
         });
-        propertyCtl.cancelButton.setOnAction((ActionEvent) -> this.stage.close());
-        propertyCtl.acceptButton.setOnAction((ActionEvent) -> {
-            String newName = propertyCtl.textField.getText();
+        controller.cancelButton.setOnAction((ActionEvent) -> this.stage.close());
+        controller.acceptButton.setOnAction((ActionEvent) -> {
+            String newName = controller.textField.getText();
             String regEx = "[$./]";
             Pattern p = Pattern.compile(regEx);
             boolean m = p.matcher(newName).find();

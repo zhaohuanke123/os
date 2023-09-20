@@ -18,11 +18,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class DelView extends BaseApp {
+public class DelView extends BaseApp<DelViewCtl> {
     private final Disk block;
     private final String tipString;
     private final MainUI mainView;
-    private DelViewCtl delViewCtl;
 
     public DelView(MainUI mainView, Disk block) {
         super(
@@ -51,7 +50,6 @@ public class DelView extends BaseApp {
     public void start(Stage stage) throws IOException {
         super.start(stage);
 
-        delViewCtl = fxmlLoader.getController();
-        delViewCtl.init(stage, this.mainView, this.tipString, this.block);
+        controller.init(stage, this.mainView, this.tipString, this.block);
     }
 }

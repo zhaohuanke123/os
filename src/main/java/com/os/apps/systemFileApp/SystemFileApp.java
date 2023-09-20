@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SystemFileApp extends BaseApp {
+public class SystemFileApp extends BaseApp<SystemFileAppController> {
 
     public static void main(String[] args) {
         Application.launch(args);

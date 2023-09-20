@@ -23,7 +23,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class MainUI extends BaseApp {
+public class MainUI extends BaseApp<MainCtl> {
     public static FAT fat;
     private TreeItem<String> rootNode;
     private TreeItem<String> recentNode;
@@ -51,8 +51,6 @@ public class MainUI extends BaseApp {
     private Label[] icons;
     public static boolean clearFlag = false;
 
-    public MainCtl mainCtl;
-
     public MainUI() {
         super("/com/os/apps/fileApp/fxmls/mainUI.fxml",
                 "/com/os/apps/fileApp/res/folder.png",
@@ -63,8 +61,6 @@ public class MainUI extends BaseApp {
     @Override
     public void start(Stage stage) throws IOException {
         super.start(stage);
-
-        mainCtl = fxmlLoader.getController();
 
         stage.setResizable(false);
         stage.setOnCloseRequest((e) -> {
@@ -103,7 +99,7 @@ public class MainUI extends BaseApp {
         this.tableInit();
         this.menuInit();
         this.menuItemSetOnAction();
-        mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
+        controller.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
     }
 
     public static void updateFileStageList(Stage stage) {
@@ -163,14 +159,14 @@ public class MainUI extends BaseApp {
         this.moveItem = new MenuItem("剪切");
         this.contextMenu = new ContextMenu(this.createFileItem, this.createFolderItem, this.pasteItem);
         this.contextMenu2 = new ContextMenu(this.openItem, this.delItem, this.propItem, this.copyItem, this.moveItem);
-        mainCtl.flowPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (me) -> {
+        controller.flowPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (me) -> {
             if (me.getButton() == MouseButton.SECONDARY && !this.contextMenu2.isShowing()) {
                 this.pasteItem.setDisable(true);
                 if (copyFlag || moveFlag) {
                     this.pasteItem.setDisable(false);
                 }
 
-                this.contextMenu.show(mainCtl.flowPane, me.getScreenX(), me.getScreenY());
+                this.contextMenu.show(controller.flowPane, me.getScreenX(), me.getScreenY());
             } else {
                 this.contextMenu.hide();
             }
@@ -179,16 +175,16 @@ public class MainUI extends BaseApp {
     }
 
     private void tableInit() {
-        var disk = mainCtl.diskTable.getColumns().get(0);
-        var index = mainCtl.diskTable.getColumns().get(1);
-        var type = mainCtl.diskTable.getColumns().get(2);
-        var content = mainCtl.diskTable.getColumns().get(3);
+        var disk = controller.diskTable.getColumns().get(0);
+        var index = controller.diskTable.getColumns().get(1);
+        var type = controller.diskTable.getColumns().get(2);
+        var content = controller.diskTable.getColumns().get(3);
 
-        var fileName = mainCtl.openFile.getColumns().get(0);
-        var openType = mainCtl.openFile.getColumns().get(1);
-        var beginDisk = mainCtl.openFile.getColumns().get(2);
-        var fileLength = mainCtl.openFile.getColumns().get(3);
-        var filePath = mainCtl.openFile.getColumns().get(4);
+        var fileName = controller.openFile.getColumns().get(0);
+        var openType = controller.openFile.getColumns().get(1);
+        var beginDisk = controller.openFile.getColumns().get(2);
+        var fileLength = controller.openFile.getColumns().get(3);
+        var filePath = controller.openFile.getColumns().get(4);
 
         disk.setCellValueFactory(new PropertyValueFactory<>("numP"));
         index.setCellValueFactory(new PropertyValueFactory<>("indexP"));
@@ -196,7 +192,7 @@ public class MainUI extends BaseApp {
         content.setCellValueFactory(new PropertyValueFactory<>("objectP"));
 
         this.disksItem = FXCollections.observableArrayList(fat.getDiskBlocks());
-        mainCtl.diskTable.setItems(this.disksItem);
+        controller.diskTable.setItems(this.disksItem);
 
         fileName.setCellValueFactory(new PropertyValueFactory<>("fileNameP"));
         openType.setCellValueFactory(new PropertyValueFactory<>("flagP"));
@@ -205,7 +201,7 @@ public class MainUI extends BaseApp {
         filePath.setCellValueFactory(new PropertyValueFactory<>("locationP"));
 
         this.fileOpened = fat.getOpenedFiles();
-        mainCtl.openFile.setItems(this.fileOpened);
+        controller.openFile.setItems(this.fileOpened);
     }
 
     public void pieInit() {
@@ -221,8 +217,8 @@ public class MainUI extends BaseApp {
                         decimalFormat.format((double) (256 - UsedNum) / 256.0), 256 - UsedNum),
                 new PieChart.Data("已占用  " +
                         decimalFormat.format((double) UsedNum / 256.0), UsedNum));
-        mainCtl.pieChart.setData(pieChartData);
-        mainCtl.pieChart.setLabelsVisible(false);
+        controller.pieChart.setData(pieChartData);
+        controller.pieChart.setLabelsVisible(false);
     }
 
     private void treeViewInit() {
@@ -233,8 +229,8 @@ public class MainUI extends BaseApp {
         this.rootNode.setExpanded(true);
         this.recentNode = this.rootNode;
         this.pathMap.put(fat.getPath("C:"), this.rootNode);
-        mainCtl.treeView.setRoot(this.rootNode);
-        mainCtl.treeView.setCellFactory((p) -> new TextFieldTreeCellImpl());
+        controller.treeView.setRoot(this.rootNode);
+        controller.treeView.setCellFactory((p) -> new TextFieldTreeCellImpl());
 
         for (Path path : fat.getPaths()) {
             System.out.println(path);
@@ -309,7 +305,7 @@ public class MainUI extends BaseApp {
 
             this.icons[i].setContentDisplay(ContentDisplay.TOP);
             this.icons[i].setWrapText(true);
-            mainCtl.flowPane.getChildren().add(this.icons[i]);
+            controller.flowPane.getChildren().add(this.icons[i]);
             this.icons[i].setOnMouseEntered(event -> {
                 Label src = (Label) event.getSource();
 
@@ -320,13 +316,13 @@ public class MainUI extends BaseApp {
                 }
 
                 Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
-                Tooltip.install(mainCtl.flowPane, new Tooltip(thisBlock.getObject().toString()));
+                Tooltip.install(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
                 ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0.5); " +
                         "-fx-background-radius: 12;");
             });
             this.icons[i].setOnMouseExited(event -> {
                 Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
-                Tooltip.uninstall(mainCtl.flowPane, new Tooltip(thisBlock.getObject().toString()));
+                Tooltip.uninstall(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
                 ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0);");
             });
             this.icons[i].setOnMouseClicked(event -> {
@@ -399,9 +395,9 @@ public class MainUI extends BaseApp {
         } else {
             Folder thisFolder = (Folder) thisBlock.getObject();
             String newPath = thisFolder.getLocation() + "\\" + thisFolder.getFolderName();
-            mainCtl.flowPane.getChildren().removeAll(mainCtl.flowPane.getChildren());
+            controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
             this.addIcon(fat.getBlockList(newPath), newPath);
-            mainCtl.currentPath.setText(newPath);
+            controller.currentPath.setText(newPath);
             this.recentPath = newPath;
             this.recentNode = this.pathMap.get(thisFolder.getPath());
         }
@@ -414,7 +410,7 @@ public class MainUI extends BaseApp {
 
     private void menuItemSetOnAction() {
         this.createFileItem.setOnAction((ActionEvent) -> {
-            if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && mainCtl.currentPath.getText().equals("C:")) {
+            if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && controller.currentPath.getText().equals("C:")) {
                 try {
                     tipOpen("根路径最多创建\n8个目录项");
                 } catch (Exception var4) {
@@ -430,14 +426,14 @@ public class MainUI extends BaseApp {
                         System.out.println(Arrays.toString(var5.getStackTrace()));
                     }
                 } else {
-                    mainCtl.flowPane.getChildren().removeAll(mainCtl.flowPane.getChildren());
+                    controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     this.addIcon(fat.getBlockList(this.recentPath), this.recentPath);
                 }
 
             }
         });
         this.createFolderItem.setOnAction((ActionEvent) -> {
-            if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && mainCtl.currentPath.getText().equals("C:")) {
+            if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && controller.currentPath.getText().equals("C:")) {
                 try {
                     tipOpen("根路径最多创建\n8个目录项");
                 } catch (Exception var5) {
@@ -455,7 +451,7 @@ public class MainUI extends BaseApp {
                 } else {
                     Folder newFolder = (Folder) fat.getBlock(no).getObject();
                     Path newPath = newFolder.getPath();
-                    mainCtl.flowPane.getChildren().removeAll(mainCtl.flowPane.getChildren());
+                    controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     this.addIcon(fat.getBlockList(this.recentPath), this.recentPath);
                     this.addNode(this.recentNode, newPath);
                 }
@@ -525,7 +521,7 @@ public class MainUI extends BaseApp {
                         moveFlag = false;
                     }
 
-                    mainCtl.flowPane.getChildren().removeAll(mainCtl.flowPane.getChildren());
+                    controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     this.addIcon(fat.getBlockList(this.recentPath), this.recentPath);
                 }
 
@@ -644,12 +640,12 @@ public class MainUI extends BaseApp {
                     }
 
                     List<Disk> fats = MainUI.fat.getBlockList(pathName);
-                    mainCtl.flowPane.getChildren().removeAll(mainCtl.flowPane.getChildren());
+                    controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     MainUI.this.addIcon(fats, pathName);
                     MainUI.this.recentPath = pathName;
                     System.out.println(pathName);
                     MainUI.this.recentNode = TextFieldTreeCellImpl.this.getTreeItem();
-                    mainCtl.currentPath.setText(MainUI.this.recentPath);
+                    controller.currentPath.setText(MainUI.this.recentPath);
                 }
 
             });

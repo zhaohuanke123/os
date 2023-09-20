@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OccupancyApp extends BaseApp {
+public class OccupancyApp extends BaseApp<OccupancyAppController> {
 
     public static void main(String[] args) {
         Application.launch(args);

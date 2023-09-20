@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ProcessApp extends BaseApp {
+public class ProcessApp extends BaseApp<ProcessAppController> {
 
     public static void main(String[] args) {
         Application.launch(args);
