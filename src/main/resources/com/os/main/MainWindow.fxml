@@ -10,7 +10,7 @@
     <!--    桌面背景-->
     <ImageView fx:id="background" fitHeight="599.0" fitWidth="1035.0" layoutY="14.0" pickOnBounds="true"
                preserveRatio="true">
-        <Image url="@../img/background.png"/>
+        <Image url="@../img/background.jpg"/>
     </ImageView>
 
     <!--   用于模糊背景-->

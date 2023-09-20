@@ -22,7 +22,6 @@ public class UIThread extends Thread {
     public ProcessAppController processAppController = null;
 
     public void init() {
-        MainUI.loadData();
     }
 
     //endregion

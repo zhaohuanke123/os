@@ -38,8 +38,9 @@ public class MainController {
         return _instance;
     }
 
-    public static final String packageName = "com/os/apps/";
-    private TreeMap<String, Button> appButtonDict;
+    private TreeMap<String, Button> appButtonDict = new TreeMap<>();
+    private TreeMap<String, BaseApp> appDict = new TreeMap<>();
+    private TreeMap<String, Stage> stageDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     public Pane buttonBarBackGround;
@@ -83,11 +84,36 @@ public class MainController {
     private Button deskButton;
     boolean isTop = false;
     boolean haveChanged = true;
-    private final String buttonStyle =
-            "-fx-background-color: transparent,aliceblue;" +
-                    "-fx-background-radius: 12;" +
-                    "-fx-text-fill: black;" +
-                    "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
+
+    public void init(Scene scene, Stage stage) throws URISyntaxException {
+        _instance = this;
+
+        appButtonDict.put("com/os/apps/systemFileApp", systemFileButton);
+        appButtonDict.put("com/os/apps/processApp", processButton);
+        appButtonDict.put("com/os/apps/occupancyApp", occupancyButton);
+        appButtonDict.put("com/os/apps/helpApp", helpButton);
+        appButtonDict.put("com/os/apps/fileApp", fileManagerButton);
+
+        appDict.put("com/os/apps/systemFileApp", new SystemFileApp());
+        appDict.put("com/os/apps/processApp", new ProcessApp());
+        appDict.put("com/os/apps/occupancyApp", new OccupancyApp());
+        appDict.put("com/os/apps/helpApp", new HelpApp());
+        appDict.put("com/os/apps/fileApp", new MainUI());
+
+        this.mainWindowScene = scene;
+        this.primaryStage = stage;
+        this.primaryStage.setOnCloseRequest(event -> {
+            System.out.println("结束");
+            System.exit(0);
+        });
+
+        this.iconInit();
+        this.timeInit();
+        OccupancyManager.init();
+        MainUI.loadData();
+        this.processThreadInit();
+        this.uiThreadInit();
+    }
 
     @FXML
     void closeWindow(MouseEvent event) {
@@ -104,15 +130,22 @@ public class MainController {
     @FXML
     void minimizeWindow(MouseEvent event) {
         int i;
-        for (i = 0; i < stageList.size(); ++i) {
-            StageRecord stageRecord = stageList.get(i);
-            if (stageRecord.name.contains("App")) {
-                Stage stage = stageRecord.stage;
+//        for (i = 0; i < stageList.size(); ++i) {
+//            StageRecord stageRecord = stageList.get(i);
+//            if (stageRecord.name.contains("apps")) {
+//                Stage stage = stageRecord.stage;
+//                if (stage != null) {
+//                    stage.setIconified(true);
+//                }
+//            }
+//        }
+        stageDict.forEach((stageName, stage) -> {
+            if (stageName.contains("apps")) {
                 if (stage != null) {
                     stage.setIconified(true);
                 }
             }
-        }
+        });
 
         if (MainUI.fileAppAdditionStageList != null) {
             for (i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
@@ -251,7 +284,8 @@ public class MainController {
                 // 使用 SystemFileApp 实例初始化新窗口
                 app.start(stage);
                 // 将新窗口记录添加到窗口列表
-                stageList.add(new StageRecord(stageName, stage));
+//                stageList.add(new StageRecord(stageName, stage));
+                stageDict.put(stageName, stage);
             } catch (IOException e) {
                 e.getStackTrace();
             }
@@ -274,66 +308,49 @@ public class MainController {
         if (button != null) {
             // 设置设备管理器按钮的下划线效果，并修改其样式
             button.setUnderline(true);
+            String buttonStyle = "-fx-background-color: transparent,aliceblue;" +
+                    "-fx-background-radius: 12;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-effect: dropshadow( three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);";
             button.setStyle(buttonStyle);
         }
     }
 
     // 检查窗口是否已存在
-    public static Stage checkStage(String name) {
-        for (StageRecord stageRecord : stageList) {
-            // 如果窗口的名称与传入的名称相匹配，返回该窗口对象
-            if (stageRecord.name.equals(name)) {
-                return stageRecord.stage;
-            }
-        }
-        return null;
+    public Stage checkStage(String name) {
+//        for (StageRecord stageRecord : stageList) {
+//            // 如果窗口的名称与传入的名称相匹配，返回该窗口对象
+//            if (stageRecord.name.equals(name)) {
+//                return stageRecord.stage;
+//            }
+//        }
+//        return null;
+        return stageDict.get(name);
     }
 
     // 移除指定窗口
-    public static void removeStage(String name) {
-        for (int i = stageList.size() - 1; i >= 0; --i) {
-            // 如果窗口的名称与传入的名称相匹配，移除该窗口记录
-            if (stageList.get(i).name.equals(name)) {
-                stageList.remove(i);
-            }
-        }
+    public void removeStage(String name) {
+//        for (int i = stageList.size() - 1; i >= 0; --i) {
+//            // 如果窗口的名称与传入的名称相匹配，移除该窗口记录
+//            if (stageList.get(i).name.equals(name)) {
+//                stageList.remove(i);
+//            }
+//        }
+        stageDict.remove(name);
     }
 
     // 更新窗口列表中的信息
-    public static void updateStageList(String name) {
-        for (int i = 0; i < stageList.size(); ++i) {
-            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
-            if (stageList.get(i).name.equals(name)) {
-                StageRecord stageRecord = stageList.get(i);
-                stageList.remove(stageRecord);
-                stageList.add(stageRecord);
-                return;
-            }
-        }
-    }
-
-    public void init(Scene scene, Stage stage) throws URISyntaxException {
-        _instance = this;
-
-        appButtonDict = new TreeMap<>();
-        appButtonDict.put("systemFileApp", systemFileButton);
-        appButtonDict.put("processApp", processButton);
-        appButtonDict.put("occupancyApp", occupancyButton);
-        appButtonDict.put("com/os/apps/fileApp", fileManagerButton);
-        appButtonDict.put("helpApp", helpButton);
-
-        this.mainWindowScene = scene;
-        this.primaryStage = stage;
-        this.primaryStage.setOnCloseRequest(event -> {
-            System.out.println("结束");
-            System.exit(0);
-        });
-
-        this.iconInit();
-        this.timeInit();
-        OccupancyManager.init();
-        this.processThreadInit();
-        this.uiThreadInit();
+    public void updateStageList(String name) {
+//        for (int i = 0; i < stageList.size(); ++i) {
+//            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
+//            if (stageList.get(i).name.equals(name)) {
+//                StageRecord stageRecord = stageList.get(i);
+//                stageList.remove(stageRecord);
+//                stageList.add(stageRecord);
+//                return;
+//            }
+//        }
+        stageDict.put(name, checkStage(name));
     }
 
     private void iconInit() {
@@ -348,44 +365,45 @@ public class MainController {
         this.background.setPreserveRatio(false);
         this.background.setVisible(true);
 
-        this.systemFileButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen("systemFileApp", new SystemFileApp());
-            }
-
-        });
-        this.processButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen("processApp", new ProcessApp());
-            }
-
-        });
-        this.occupancyButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen("occupancyApp", new OccupancyApp());
-            }
-
-        });
-        this.helpButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen("helpApp", new HelpApp());
-            }
-
+        appButtonDict.forEach((stageName, button) -> {
+            button.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+                    this.OnAppOpen(stageName, appDict.get(stageName));
+                }
+            });
         });
 
+//        this.systemFileButton.setOnMouseClicked(event -> {
+//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+//                this.OnAppOpen("com/os/apps/systemFileApp", new SystemFileApp());
+//            }
+//        });
+//        this.processButton.setOnMouseClicked(event -> {
+//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+//                this.OnAppOpen("com/os/apps/processApp", new ProcessApp());
+//            }
+//        });
+//        this.occupancyButton.setOnMouseClicked(event -> {
+//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+//                this.OnAppOpen("com/os/apps/occupancyApp", new OccupancyApp());
+//            }
+//        });
+//        this.helpButton.setOnMouseClicked(event -> {
+//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+//                this.OnAppOpen("com/os/apps/helpApp", new HelpApp());
+//            }
+//        });
+//        this.fileManagerButton.setOnMouseClicked(event -> {
+//            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+//                OnAppOpen("com/os/apps/fileApp", new MainUI());
+//            }
+//        });
         this.deskButton.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                MainController.this.toDesk();
+                this.toDesk();
             }
-
         });
-        this.fileManagerButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                System.out.println("fileApp open success");
-                OnAppOpen("com/os/apps/fileApp", new MainUI());
-            }
 
-        });
 
         //region [设置按钮的提示信息]
         Button[] buttons = new Button[]{
