@@ -250,7 +250,7 @@ public class MainController {
         stage.toFront();
 
         // 更新窗口列表中的信息
-        updateStageList(stageName);
+//        updateStageList(stageName);
 
         Button button = appButtonDict.get(stageName);
         if (button != null) {
