@@ -78,7 +78,6 @@ public class MainController {
     private TreeMap<String, Stage> stageDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
-    public Pane buttonBarBackGround;
     Scene mainWindowScene = null;
     Stage primaryStage = null;
     double appWidth;

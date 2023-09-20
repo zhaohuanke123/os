@@ -24,9 +24,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 public class MainUI extends BaseApp {
+    public static FAT fat;
     private TreeItem<String> rootNode;
     private TreeItem<String> recentNode;
-    public static FAT fat;
     private int ind;
     public static Disk copyBlock;
     private List<Disk> blockList;
@@ -34,6 +34,7 @@ public class MainUI extends BaseApp {
     public static File copyFile;
     public static boolean copyFlag;
     public static boolean moveFlag = false;
+    public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();
     private ObservableList<Disk> disksItem;
     private ObservableList<File> fileOpened;
@@ -49,7 +50,7 @@ public class MainUI extends BaseApp {
     private MenuItem pasteItem;
     private Label[] icons;
     public static boolean clearFlag = false;
-    public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
+
     public MainCtl mainCtl;
 
     public MainUI() {
@@ -97,41 +98,12 @@ public class MainUI extends BaseApp {
 
         this.recentPath = "C:";
 
-//        Service<Void> loadDataService = load();
-//        loadDataService.start();
-
-//        this.loadData();
         FAT.closeAll();
         this.treeViewInit();
         this.tableInit();
         this.menuInit();
         this.menuItemSetOnAction();
         mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
-    }
-
-    private Service<Void> load() {
-        Service<Void> loadDataService = new Service<>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<>() {
-                    @Override
-                    protected Void call() {
-                        loadData();
-                        return null;
-                    }
-                };
-            }
-        };
-
-        loadDataService.setOnSucceeded((e) -> {
-            FAT.closeAll();
-            this.treeViewInit();
-            this.tableInit();
-            this.menuInit();
-            this.menuItemSetOnAction();
-            mainCtl.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
-        });
-        return loadDataService;
     }
 
     public static void updateFileStageList(Stage stage) {
