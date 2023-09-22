@@ -7,8 +7,6 @@ import com.os.utils.fileSystem.File;
 import com.os.utils.ui.CompSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -38,16 +36,16 @@ public class MainUI extends BaseApp<MainCtl> {
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();
     private ObservableList<Disk> disksItem;
     private ObservableList<File> fileOpened;
-    private ContextMenu contextMenu;
-    private ContextMenu contextMenu2;
-    private MenuItem createFileItem;
-    private MenuItem createFolderItem;
-    private MenuItem openItem;
-    private MenuItem delItem;
-    private MenuItem propItem;
-    private MenuItem copyItem;
-    private MenuItem moveItem;
-    private MenuItem pasteItem;
+    private ContextMenu contextMenu1;  // 文件管理器的右键菜单
+    private ContextMenu contextMenu2;  // 文件/目录的右键菜单
+    private MenuItem createFileItem;  // 新建文件
+    private MenuItem createFolderItem;  // 新建目录
+    private MenuItem pasteItem;  // 粘贴
+    private MenuItem openItem;  // 打开
+    private MenuItem delItem;  // 删除
+    private MenuItem propItem;  // 属性
+    private MenuItem copyItem;  // 复制
+    private MenuItem moveItem;  // 剪切
     private Label[] icons;
     public static boolean clearFlag = false;
 
@@ -113,6 +111,7 @@ public class MainUI extends BaseApp<MainCtl> {
         fileAppAdditionStageList.add(stage);
     }
 
+    // 加载数据
     public static void loadData() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"));
@@ -133,21 +132,19 @@ public class MainUI extends BaseApp<MainCtl> {
                 } else {
                     inputStream.close();
                 }
-
             }
-        } catch (Exception var14) {
-            System.out.println("读取完毕");
-            System.out.println("clearFlag=" + clearFlag);
+        } catch (Exception e) {
+            e.getStackTrace();
         }
 
+        // 如果没有fat，则新建fat
         if (fat == null || clearFlag) {
             fat = new FAT();
             clearFlag = false;
-            System.out.println("fat=null");
         }
-
     }
 
+    // 初始化右键菜单
     private void menuInit() {
         this.createFileItem = new MenuItem("新建文件");
         this.createFolderItem = new MenuItem("新建文件夹");
@@ -157,20 +154,24 @@ public class MainUI extends BaseApp<MainCtl> {
         this.propItem = new MenuItem("属性");
         this.copyItem = new MenuItem("复制");
         this.moveItem = new MenuItem("剪切");
-        this.contextMenu = new ContextMenu(this.createFileItem, this.createFolderItem, this.pasteItem);
+
+        this.contextMenu1 = new ContextMenu(this.createFileItem, this.createFolderItem, this.pasteItem);
         this.contextMenu2 = new ContextMenu(this.openItem, this.delItem, this.propItem, this.copyItem, this.moveItem);
+
         controller.flowPane.addEventHandler(MouseEvent.MOUSE_CLICKED, (me) -> {
+            // 鼠标右键点击且contextMenu2未显示，则显示contextMenu1
             if (me.getButton() == MouseButton.SECONDARY && !this.contextMenu2.isShowing()) {
+                // 禁用粘贴菜单项
                 this.pasteItem.setDisable(true);
-                if (copyFlag || moveFlag) {
-                    this.pasteItem.setDisable(false);
-                }
+                // 如果有复制标志、剪切文件，则允许使用粘贴菜单项
+                if (copyFlag || moveFlag) this.pasteItem.setDisable(false);
 
-                this.contextMenu.show(controller.flowPane, me.getScreenX(), me.getScreenY());
+                // 在鼠标的当前位置显示菜单
+                this.contextMenu1.show(controller.flowPane, me.getScreenX(), me.getScreenY());
             } else {
-                this.contextMenu.hide();
+                // 隐藏contextMenu1
+                this.contextMenu1.hide();
             }
-
         });
     }
 
