@@ -51,7 +51,6 @@ public class FileView extends BaseFileApp<FileViewCtl> {
     }
 
     private void showView() {
-//        controller = this.fxmlLoader.getController();
         controller.title.setText(this.file.getLocation() + "\\" + this.file.getFileName());
 
         controller.contentField.setText(this.file.getContent());

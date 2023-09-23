@@ -552,20 +552,12 @@ public class MainUI extends BaseApp<MainCtl> {
         if (propertyView != null) {
             propertyView.start(stage);
         }
-//        stage.setAlwaysOnTop(true);
-//        stage.setIconified(false);
-//        stage.toFront();
-//        fileAppAdditionStageList.add(stage);
     }
 
     public static void tipOpen(String tipString) throws Exception {
         Stage stage = new Stage();
         TipWindow tipWindow = new TipWindow(tipString);
         tipWindow.start(stage);
-//        stage.setAlwaysOnTop(true);
-//        stage.setIconified(false);
-//        stage.toFront();
-//        fileAppAdditionStageList.add(stage);
     }
 
     public static void fileViewOpen(File file, Disk block) {
@@ -586,10 +578,6 @@ public class MainUI extends BaseApp<MainCtl> {
                 throw new RuntimeException(e);
             }
             System.out.println("fileViewOpen" + file.isOpened());
-//            stage.setAlwaysOnTop(true);
-//            stage.setIconified(false);
-//            stage.toFront();
-//            fileAppAdditionStageList.add(stage);
         }
 
     }
@@ -598,10 +586,6 @@ public class MainUI extends BaseApp<MainCtl> {
         Stage stage = new Stage();
         DelView delView = new DelView(this, block);
         delView.start(stage);
-//        stage.setAlwaysOnTop(true);
-//        stage.setIconified(false);
-//        stage.toFront();
-//        fileAppAdditionStageList.add(stage);
     }
 
     public static void saveData() {

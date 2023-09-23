@@ -55,7 +55,6 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
     }
 
     private void showView() {
-
         controller.checkRead.setToggleGroup(this.toggleGroup);
         controller.checkRead.setUserData(0);
         controller.checkWrite.setToggleGroup(this.toggleGroup);

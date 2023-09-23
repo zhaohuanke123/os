@@ -5,6 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * @description: 窗口拖动改变大小工具类
+ */
 public class DrawUtil {
    private boolean isRight;
    private boolean isBottomRight;
