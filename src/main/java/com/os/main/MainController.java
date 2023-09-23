@@ -47,29 +47,29 @@ public class MainController {
     @FXML
     private HBox appBox;
     @FXML
-    private Button systemFileButton;
+    private Button systemFileButton;  // 系统文件按钮
     @FXML
-    private Button processButton;
+    private Button processButton;  // 进程管理按钮
     @FXML
-    private Button occupancyButton;
+    private Button occupancyButton;  // 占用管理按钮
     @FXML
-    private Button fileManagerButton;
+    private Button fileManagerButton;  // 文件管理按钮
     @FXML
-    private Button helpButton;
+    private Button helpButton;  // 帮助按钮
     @FXML
-    private HBox tipBox;
+    private HBox tipBox;  // 包含时间和返回桌面按钮的HBox
     @FXML
-    private Button minimizeButton;
+    private Button minimizeButton;  // 最小化窗口按钮
     @FXML
-    private Button closeButton;
+    private Button closeButton;  // 关闭窗口按钮
     @FXML
-    private VBox timeBox;
+    private VBox timeBox;  // 包含2种时间显示的VBox
     @FXML
-    private Button timeButton1;
+    private Button timeButton1;  // 时间显示
     @FXML
-    private Button timeButton2;
+    private Button timeButton2;  // 日期显示
     @FXML
-    private Button deskButton;
+    private Button deskButton;  // 返回桌面按钮
     //endregion
 
     private TreeMap<String, Button> appButtonDict = new TreeMap<>();
@@ -103,10 +103,7 @@ public class MainController {
 
         this.mainWindowScene = scene;
         this.primaryStage = stage;
-        this.primaryStage.setOnCloseRequest(event -> {
-            System.out.println("结束");
-            System.exit(0);
-        });
+        this.primaryStage.setOnCloseRequest(event -> System.exit(0));
 
         this.iconInit();
         this.timeInit();
@@ -252,13 +249,12 @@ public class MainController {
 
         Button button = appButtonDict.get(stageName);
         if (button != null) {
-            // 设置设备管理器按钮的下划线效果，并修改其样式
+            // 修改按钮样式
             button.setUnderline(true);
-            String buttonStyle = "    -fx-background-color: rgba(255, 255, 255, 0.25);\n" +
-                    "    -fx-background-radius: 12;\n" +
-                    "    -fx-border-insets: 1, 1, 1, 1;\n" +
-                    "    -fx-text-fill: black;\n" +
-                    "    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);";
+            String buttonStyle = "-fx-background-color: rgba(255, 255, 255, 0.9);\n" +
+                    "-fx-background-radius: 10;\n" +
+                    "-fx-border-insets: 1, 1, 1, 1;\n" +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);";
             button.setStyle(buttonStyle);
         }
     }
@@ -354,11 +350,13 @@ public class MainController {
         this.processScheduleThread.start();
     }
 
+    // 更新桌面显示
     public void Update() {
         appButtonUpdate();
         timeUpdate();
     }
 
+    // 更新图标样式
     private void appButtonUpdate() {
         appButtonDict.forEach((stageName, button) -> {
             Stage stage = checkStage(stageName);
@@ -368,6 +366,7 @@ public class MainController {
         });
     }
 
+    // 实时更新系统时间
     private void timeUpdate() {
         if (timeButton1 != null && timeButton2 != null) {
             Platform.runLater(() -> {
