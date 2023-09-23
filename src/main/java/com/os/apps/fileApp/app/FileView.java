@@ -98,7 +98,6 @@ public class FileView extends BaseApp<FileViewCtl> {
 
         controller.init(this.file, this.stage, this.block);
         maps.put(this.file, this.stage);
-        MainUI.fileAppAdditionStageList.add(this.stage);
 
         System.out.println(maps.get(this.file));
     }

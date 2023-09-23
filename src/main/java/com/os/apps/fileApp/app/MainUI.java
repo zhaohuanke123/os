@@ -547,6 +547,7 @@ public class MainUI extends BaseApp<MainCtl> {
         stage.setAlwaysOnTop(true);
         stage.setIconified(false);
         stage.toFront();
+        fileAppAdditionStageList.add(stage);
     }
 
     public static void tipOpen(String tipString) throws Exception {

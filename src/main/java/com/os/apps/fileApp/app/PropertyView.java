@@ -88,7 +88,6 @@ public class PropertyView extends BaseApp<PropertyCtl> {
         controller.textField.addEventFilter(MouseDragEvent.MOUSE_PRESSED, (event) -> controller.applyButton.setDisable(false));
 
         this.buttonOnAction();
-        MainUI.fileAppAdditionStageList.add(this.stage);
     }
 
     private void buttonOnAction() {
