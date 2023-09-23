@@ -27,12 +27,12 @@ public class MainUI extends BaseApp<MainCtl> {
     private TreeItem<String> recentNode;
     private int ind;
     public static Disk copyBlock;
-    private List<Disk> blockList;
-    public String recentPath;
-    public static File copyFile;
     public static boolean copyFlag;
     public static boolean moveFlag = false;
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
+    private List<Disk> blockList;
+    public String recentPath;
+    public static File copyFile;
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();
     private ObservableList<Disk> disksItem;
     private ObservableList<File> fileOpened;

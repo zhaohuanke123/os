@@ -87,7 +87,6 @@ public class ProcessScheduleThread extends Thread {
                residueSlice = sliceLength - i;
 
                try {
-//                  sleep(ProcessManager.slice / ProcessManager.speed);
                   TimeUnit.MILLISECONDS.sleep(ProcessManager.slice / ProcessManager.speed);
                } catch (InterruptedException var4) {
                   System.out.println(var4.getMessage());

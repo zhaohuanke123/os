@@ -74,10 +74,9 @@ public class MainController {
     private Button deskButton;  // 返回桌面按钮
     //endregion
 
-    private TreeMap<String, Button> appButtonDict = new TreeMap<>();
-    private TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
-    private TreeMap<String, Stage> stageDict = new TreeMap<>();
-    private Vector<StageRecord> stageList = new Vector<>();
+    private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
+    private final TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
+    private final Vector<StageRecord> stageList = new Vector<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     Scene mainWindowScene = null;
@@ -240,11 +239,7 @@ public class MainController {
         if (button != null) {
             // 修改按钮样式
             button.setUnderline(true);
-            String buttonStyle = "-fx-background-color: rgba(255, 255, 255, 0.9);\n" +
-                    "-fx-background-radius: 10;\n" +
-                    "-fx-border-insets: 1, 1, 1, 1;\n" +
-                    "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);";
-            button.setStyle(buttonStyle);
+            button.setId("appButtonSelected");
         }
     }
 
@@ -263,12 +258,15 @@ public class MainController {
 
     // 更新窗口列表中的信息
     public void updateStageList(String name) {
-        stageList.forEach(stageRecord -> {
-            if (stageRecord.name.equals(name)) {
+        for (int i = 0; i < stageList.size(); ++i) {
+            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
+            if (stageList.get(i).name.equals(name)) {
+                StageRecord stageRecord = stageList.get(i);
                 stageList.remove(stageRecord);
                 stageList.add(stageRecord);
+                return;
             }
-        });
+        }
     }
 
     private void iconInit() {
@@ -358,7 +356,7 @@ public class MainController {
         appButtonDict.forEach((stageName, button) -> {
             Stage stage = checkStage(stageName);
             if (stage != null && !stage.isShowing()) {
-                button.setStyle("");
+                button.setId("appButton");
             }
         });
     }
