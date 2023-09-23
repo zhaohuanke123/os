@@ -111,6 +111,20 @@ public class MainUI extends BaseApp<MainCtl> {
         fileAppAdditionStageList.add(stage);
     }
 
+    public static void minimizeOnShowApp(boolean isMinimize) {
+        if (fileAppAdditionStageList != null) {
+            fileAppAdditionStageList.forEach(stage -> {
+                if (stage != null) {
+                    if (!stage.isShowing()) {
+                        fileAppAdditionStageList.remove(stage);
+                    } else {
+                        stage.setIconified(isMinimize);
+                    }
+                }
+            });
+        }
+    }
+
     // 加载数据
     public static void loadData() {
         try {

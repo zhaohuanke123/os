@@ -6,6 +6,7 @@ import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.apps.processApp.ProcessApp;
 import com.os.apps.systemFileApp.SystemFileApp;
+import com.os.utils.StageRecord;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.TreeMap;
+import java.util.Vector;
 
 public class MainController {
     private static MainController _instance;
@@ -75,6 +77,7 @@ public class MainController {
     private TreeMap<String, Button> appButtonDict = new TreeMap<>();
     private TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
     private TreeMap<String, Stage> stageDict = new TreeMap<>();
+    private Vector<StageRecord> stageList = new Vector<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     Scene mainWindowScene = null;
@@ -188,28 +191,14 @@ public class MainController {
     }
 
     private void minimizeOnShowApp(Boolean isMinimize) {
-        stageDict.forEach((stageName, stage) -> {
-            if (stageName.contains("apps")) {
-                if (stage != null) {
-                    stage.setIconified(isMinimize);
-                }
+        stageList.forEach(stageRecord -> {
+            Stage stage = stageRecord.stage;
+            if (stage != null && stage.isShowing()) {
+                stage.setIconified(isMinimize);
             }
         });
 
-        if (MainUI.fileAppAdditionStageList != null) {
-            for (int i = 0; i < MainUI.fileAppAdditionStageList.size(); ++i) {
-                Stage stage1 = MainUI.fileAppAdditionStageList.get(i);
-
-                if (stage1 != null && !stage1.isShowing()) {
-                    MainUI.fileAppAdditionStageList.remove(stage1);
-                } else {
-                    if (stage1 != null) {
-                        stage1.setIconified(isMinimize);
-                    }
-                }
-            }
-        }
-
+        MainUI.minimizeOnShowApp(isMinimize);
     }
 
     private void OnAppOpen(String stageName, BaseApp<?> app) {
@@ -228,7 +217,7 @@ public class MainController {
                 // 使用 SystemFileApp 实例初始化新窗口
                 app.start(stage);
                 // 将新窗口记录添加到窗口列表
-                stageDict.put(stageName, stage);
+                stageList.add(new StageRecord(stageName, stage));
             } catch (IOException e) {
                 e.getStackTrace();
             }
@@ -245,7 +234,7 @@ public class MainController {
         stage.toFront();
 
         // 更新窗口列表中的信息
-//        updateStageList(stageName);
+        updateStageList(stageName);
 
         Button button = appButtonDict.get(stageName);
         if (button != null) {
@@ -261,17 +250,25 @@ public class MainController {
 
     // 检查窗口是否已存在
     public Stage checkStage(String name) {
-        return stageDict.get(name);
+        return stageList.stream()
+                .filter(stageRecord -> stageRecord.name.equals(name))
+                .map(stageRecord -> stageRecord.stage)
+                .findFirst().orElse(null);
     }
 
     // 移除指定窗口
     public void removeStage(String name) {
-        stageDict.remove(name);
+        stageList.removeIf(stageRecord -> stageRecord.name.equals(name));
     }
 
     // 更新窗口列表中的信息
     public void updateStageList(String name) {
-        stageDict.put(name, checkStage(name));
+        stageList.forEach(stageRecord -> {
+            if (stageRecord.name.equals(name)) {
+                stageList.remove(stageRecord);
+                stageList.add(stageRecord);
+            }
+        });
     }
 
     private void iconInit() {
