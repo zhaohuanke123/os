@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TipWindow extends BaseApp<TipWindowCtl> {
+public class TipWindow extends BaseFileApp<TipWindowCtl> {
     String tipString;
 
     public static void main(String[] args) {

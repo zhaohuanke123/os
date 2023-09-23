@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class FileView extends BaseApp<FileViewCtl> {
+public class FileView extends BaseFileApp<FileViewCtl> {
     private final File file;
     private final Disk block;
     private String newContent;

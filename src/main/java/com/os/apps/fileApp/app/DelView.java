@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class DelView extends BaseApp<DelViewCtl> {
+public class DelView extends BaseFileApp<DelViewCtl> {
     private final Disk block;
     private final String tipString;
     private final MainUI mainView;

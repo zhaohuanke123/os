@@ -41,17 +41,17 @@ public class DelViewCtl extends BaseController {
             if (res == 0) {
                 mainView.removeNode(mainView.getRecentNode(), thisPath);
 
-                try {
-                    DelViewCtl.this.tipOpen("删除文件夹成功");
-                } catch (Exception var8) {
-                    System.out.println(Arrays.toString(var8.getStackTrace()));
-                }
+//                try {
+//                    DelViewCtl.this.tipOpen("删除文件夹成功");
+//                } catch (Exception var8) {
+//                    System.out.println(Arrays.toString(var8.getStackTrace()));
+//                }
             } else if (res == 1) {
-                try {
-                    DelViewCtl.this.tipOpen("删除文件成功");
-                } catch (Exception var7) {
-                    System.out.println(Arrays.toString(var7.getStackTrace()));
-                }
+//                try {
+//                    DelViewCtl.this.tipOpen("删除文件成功");
+//                } catch (Exception var7) {
+//                    System.out.println(Arrays.toString(var7.getStackTrace()));
+//                }
             } else if (res == 2) {
                 try {
                     DelViewCtl.this.tipOpen("文件夹不为空");

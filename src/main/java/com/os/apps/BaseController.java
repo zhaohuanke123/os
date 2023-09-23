@@ -109,4 +109,13 @@ public class BaseController {
         this.titleBar.setMaxWidth(sw);
         this.titleBar.setMinWidth(sw);
     }
+
+    public void showStageToFront() {
+        // 设置窗口始终位于其他窗口之上
+        stage.setAlwaysOnTop(true);
+        // 将窗口从最小化状态还原
+        stage.setIconified(false);
+        // 将窗口置于最前
+        stage.toFront();
+    }
 }

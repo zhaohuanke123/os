@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class PropertyView extends BaseApp<PropertyCtl> {
+public class PropertyView extends BaseFileApp<PropertyCtl> {
     private final Disk block;
     private final Label icon;
     private final Map<Path, TreeItem<String>> pathMap;
