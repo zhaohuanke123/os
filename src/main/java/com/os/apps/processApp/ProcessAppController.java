@@ -100,8 +100,8 @@ public class ProcessAppController extends BaseController {
     void createSelect(CheckBox checkBox) {
         CheckBox[] array = new CheckBox[]{this.continueButton, this.suspendButton};
 
-        for (int i = 0; i < 2; ++i) {
-            array[i].setSelected(checkBox == array[i]);
+        for (CheckBox box : array) {
+            box.setSelected(checkBox == box);
         }
 
         checkBox.setSelected(true);
@@ -115,11 +115,10 @@ public class ProcessAppController extends BaseController {
     void showSelect(CheckBox checkBox) {
         CheckBox[] array = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
 
-        for (int i = 0; i < 6; ++i) {
-            array[i].setSelected(checkBox == array[i]);
+        for (CheckBox box : array) {
+            box.setSelected(checkBox == box);
         }
 
-        System.out.println(checkBox.getId() + "被选中");
         checkBox.setSelected(true);
     }
 
@@ -161,7 +160,6 @@ public class ProcessAppController extends BaseController {
             ProcessManager.speed = 8;
         }
 
-        System.out.println(radioButton.getId() + "被选中");
         radioButton.setSelected(true);
     }
 
@@ -183,8 +181,11 @@ public class ProcessAppController extends BaseController {
         this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
         this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
 
-        checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
-        checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
+        checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating,
+                this.showWaiting, this.showBlocked,
+                this.showEnded, this.showAll};
+        checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting,
+                this.signRunning, this.signBlocked, this.signEnded};
 
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
 
@@ -249,7 +250,9 @@ public class ProcessAppController extends BaseController {
             }
 
             DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, selectString);
-            Platform.runLater(() -> processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
+            Platform.runLater(() ->
+                    processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
+
             processTable.setRowFactory((row) -> new TableRow<>() {
                 public void updateItem(ProcessDetailData item, boolean empty) {
                     super.updateItem(item, empty);

@@ -14,17 +14,15 @@
 }
 
 .tool-bar {
-    -fx-background-color: /*transparent,aliceblue;*/ rgba(255, 255, 255, 1);
+    -fx-background-color: rgba(255, 255, 255, 1);
     -fx-background-radius: 22px;
     -fx-border-radius: 15px;
-
 }
 
 
 .table-view .column-header,
 .table-view .column-header .filler,
 .table-view .column-header-background .filler {
-    /*-fx-background-color: derive;*/
     -fx-stroke: transparent;
     -fx-size: 30;
     -fx-alignment: CENTER;
@@ -55,15 +53,15 @@
 }
 
 
-/*#right .table-column {*/
-/*    -fx-background-color: lightblue;*/
-/*}*/
+#right .table-column {
+    -fx-background-color: lightblue;
+}
 
 /*#not-right .table-column:even {*/
 /*    -fx-background-color: white;*/
 /*}*/
 
 /*#not-right .table-column:odd {*/
-/*    !*-fx-background-color:LightBase;*!*/
+/*    -fx-background-color:LightBase;*/
 /*}*/
 
