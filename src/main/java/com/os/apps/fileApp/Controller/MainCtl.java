@@ -13,9 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class MainCtl extends BaseController {
-    @FXML
-    private HBox toolBar;
+public class MainCtl extends BaseFileCtl {
     public TabPane TabP;
     public Label currentPath;
     public TreeView<String> treeView;

@@ -11,11 +11,9 @@
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 1em; /* 12 */
     -fx-border-radius: 12;
-    /*-fx-text-fill: #828282;*/
 }
 
 .tool-bar {
-    /*-fx-border-color: black;*/
     -fx-background-color: /*transparent,aliceblue;*/ rgba(255, 255, 255, 1);
     -fx-background-radius: 22px;
     -fx-border-radius: 15px;
@@ -39,8 +37,6 @@
     -fx-size: 30;
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
-
-
 }
 
 .table-view:row-selection {
@@ -59,23 +55,15 @@
 }
 
 
-/*#right .text{*/
-/*    -fx-fill : red;*/
+/*#right .table-column {*/
+/*    -fx-background-color: lightblue;*/
 /*}*/
 
-#right .table-column {
-    -fx-background-color: lightblue;
-}
+/*#not-right .table-column:even {*/
+/*    -fx-background-color: white;*/
+/*}*/
 
-#not-right .table-column:even {
-    -fx-background-color: white;
-}
-
-#not-right .table-column:odd {
-    /*-fx-background-color:LightBase;*/
-}
-
-/*#not-right .text{*/
-/*    -fx-fill : black;*/
+/*#not-right .table-column:odd {*/
+/*    !*-fx-background-color:LightBase;*!*/
 /*}*/
 

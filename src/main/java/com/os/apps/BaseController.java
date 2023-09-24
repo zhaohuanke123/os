@@ -1,6 +1,9 @@
 package com.os.apps;
 
+import com.os.apps.processApp.ProcessAppController;
 import com.os.main.MainController;
+import com.os.utils.ui.DrawUtil;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
@@ -32,6 +35,13 @@ public class BaseController {
     // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {
         this.stage = stage;
+
+        DrawUtil drawUtil = new DrawUtil();
+        drawUtil.addDrawFunc(stage, this.topMainPane);
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
+        stage.heightProperty().addListener((observable, oldValue, newValue)
+                -> Platform.runLater(this::adaptWindow));
+        this.adaptWindow();
     }
 
     // 关闭窗口

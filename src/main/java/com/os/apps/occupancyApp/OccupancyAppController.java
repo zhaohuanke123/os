@@ -109,9 +109,6 @@ public class OccupancyAppController extends BaseController {
             this.pcbBox2.getChildren().add(label);
         }
 
-        DrawUtil drawUtil = new DrawUtil();
-        drawUtil.addDrawFunc(stage, this.topMainPane);
-
         MainController.getInstance().uiThread.occupancyAppController = this;
     }
 

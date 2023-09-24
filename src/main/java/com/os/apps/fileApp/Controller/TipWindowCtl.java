@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class TipWindowCtl extends BaseController {
+public class TipWindowCtl extends BaseFileCtl {
    @FXML
    private Text tipText;
 

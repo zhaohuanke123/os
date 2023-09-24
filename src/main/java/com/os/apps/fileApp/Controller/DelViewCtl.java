@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.util.Arrays;
 
-public class DelViewCtl extends BaseController {
+public class DelViewCtl extends BaseFileCtl {
     @FXML
     private Button acceptButton;
     @FXML

@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FileViewCtl extends BaseController {
+public class FileViewCtl extends BaseFileCtl {
     public MenuBar menuBar;
     public Menu fileMenu;
     public MenuItem saveItem;

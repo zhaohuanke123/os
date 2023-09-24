@@ -104,7 +104,6 @@ public class ProcessAppController extends BaseController {
             array[i].setSelected(checkBox == array[i]);
         }
 
-//        System.out.println(checkBox.getId() + "被选中");
         checkBox.setSelected(true);
     }
 
@@ -188,11 +187,6 @@ public class ProcessAppController extends BaseController {
         checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
 
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
-        DrawUtil drawUtil = new DrawUtil();
-        drawUtil.addDrawFunc(stage, this.topMainPane);
-        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(ProcessAppController.this::adaptWindow));
-        stage.heightProperty().addListener((observable, oldValue, newValue)
-                -> Platform.runLater(ProcessAppController.this::adaptWindow));
 
         MainController.getInstance().uiThread.processAppController = this;
     }

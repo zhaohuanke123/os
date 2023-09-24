@@ -52,14 +52,6 @@ public class SystemFileAppController extends BaseController {
         this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         this.fileDetail.setCellValueFactory(new PropertyValueFactory<>("instruction"));
         updateFileTable(this.executableFileTable);
-        DrawUtil drawUtil = new DrawUtil();
-        drawUtil.addDrawFunc(stage, this.topMainPane);
-        stage.widthProperty().addListener(
-                (observable, oldValue, newValue) ->
-                        Platform.runLater(SystemFileAppController.this::adaptWindow));
-        stage.heightProperty().addListener(
-                (observable, oldValue, newValue) ->
-                        Platform.runLater(SystemFileAppController.this::adaptWindow));
     }
 
     public static void updateFileTable(final TableView<ExecutableFileData> executableFileTable) {
