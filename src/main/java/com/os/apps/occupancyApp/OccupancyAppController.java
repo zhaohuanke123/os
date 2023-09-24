@@ -169,7 +169,7 @@ public class OccupancyAppController extends BaseController {
                 region = (Region) boxes1[1].getChildren().get(0);
                 CompSet.setCompFixSize(region, width, percent * height);
 
-                System.out.println("BusyDiskNum:" + numOfBusyDisk);
+//                System.out.println("BusyDiskNum:" + numOfBusyDisk);
             }
 
             int busyDeviceNum = OccupancyManager.getBusyDeviceNum();

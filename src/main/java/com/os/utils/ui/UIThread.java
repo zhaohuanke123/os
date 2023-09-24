@@ -34,12 +34,6 @@ public class UIThread extends Thread {
                 System.out.println(Arrays.toString(var3.getStackTrace()));
             }
 
-
-//            this.runProcessList = (Vector<Process>) ProcessManager.runProcessList.clone();
-//            this.runProcess = null;
-//            this.creatingProcessList = (Vector<Process>) ProcessManager.creatingProcessList.clone();
-//            this.waitProcessList = (Vector<Process>) ProcessManager.waitProcessList.clone();
-//            this.blockProcessList = (Vector<Process>) ProcessManager.blockProcessList.clone();
             this.runProcessList = new Vector<>(ProcessManager.runProcessList);
             this.runProcess = null;
             this.creatingProcessList = new Vector<>(ProcessManager.creatingProcessList);

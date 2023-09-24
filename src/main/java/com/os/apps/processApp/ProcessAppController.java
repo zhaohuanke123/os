@@ -104,7 +104,7 @@ public class ProcessAppController extends BaseController {
             array[i].setSelected(checkBox == array[i]);
         }
 
-        System.out.println(checkBox.getId() + "被选中");
+//        System.out.println(checkBox.getId() + "被选中");
         checkBox.setSelected(true);
     }
 
