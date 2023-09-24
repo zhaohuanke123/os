@@ -32,6 +32,8 @@ import java.util.Date;
 import java.util.TreeMap;
 import java.util.Vector;
 
+import static java.util.Collections.swap;
+
 public class MainController {
     private static MainController _instance;
 
@@ -261,9 +263,7 @@ public class MainController {
         for (int i = 0; i < stageList.size(); ++i) {
             // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
             if (stageList.get(i).name.equals(name)) {
-                StageRecord stageRecord = stageList.get(i);
-                stageList.remove(stageRecord);
-                stageList.add(stageRecord);
+                swap(stageList, i, stageList.size() - 1);
                 return;
             }
         }
