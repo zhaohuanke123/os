@@ -1,6 +1,6 @@
 package com.os.utils.fileSystem;
 
-import com.os.apps.fileApp.app.MainUI;
+import com.os.apps.fileApp.FileApp;
 import com.os.apps.fileApp.app.TipWindow;
 
 import java.io.IOException;
@@ -202,14 +202,14 @@ public class FAT implements Serializable {
             num = this.searchEmptyDiskBlock();
             File file = new File(fileName, path, num, parent);
             file.setFlag(1);
-            if (MainUI.copyFlag) {
-                file.setContent(MainUI.copyFile.getContent());
+            if (FileApp.copyFlag) {
+                file.setContent(FileApp.copyFile.getContent());
                 boolean canName1;
                 index = 1;
 
                 int newLength;
                 do {
-                    fileName = MainUI.copyFile.getFileName();
+                    fileName = FileApp.copyFile.getFileName();
                     canName1 = true;
                     fileName = fileName + index;
 
@@ -227,10 +227,10 @@ public class FAT implements Serializable {
                 } while (!canName1);
 
                 file.setFileName(fileName);
-                newLength = MainUI.copyFile.getContent().length();
+                newLength = FileApp.copyFile.getContent().length();
                 int blockCount = blocksCount(newLength);
                 file.setLength(blockCount);
-                file.setContent(MainUI.copyFile.getContent());
+                file.setContent(FileApp.copyFile.getContent());
                 file.setSize(getSize(newLength));
                 if (file.hasParent()) {
                     Folder parent1 = file.getParent();
@@ -242,12 +242,12 @@ public class FAT implements Serializable {
                     }
                 }
 
-                if (MainUI.moveFlag) {
+                if (FileApp.moveFlag) {
                     boolean canName2;
                     index = 1;
 
                     while (true) {
-                        fileName = MainUI.copyFile.getFileName();
+                        fileName = FileApp.copyFile.getFileName();
                         canName2 = true;
                         fileName = fileName + index;
 
@@ -269,7 +269,7 @@ public class FAT implements Serializable {
                     }
                 }
 
-                this.reallocBlocks(blockCount, MainUI.copyBlock);
+                this.reallocBlocks(blockCount, FileApp.copyBlock);
             }
 
             parent.addChildren(file);

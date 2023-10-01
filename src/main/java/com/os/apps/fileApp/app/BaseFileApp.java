@@ -2,6 +2,7 @@ package com.os.apps.fileApp.app;
 
 import com.os.apps.BaseApp;
 import com.os.apps.BaseController;
+import com.os.apps.fileApp.FileApp;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,6 +18,6 @@ public class BaseFileApp<T extends BaseController> extends BaseApp<T> {
         super.start(stage);
 
         controller.showStageToFront();
-        MainUI.fileAppAdditionStageList.add(stage);
+        FileApp.fileAppAdditionStageList.add(stage);
     }
 }

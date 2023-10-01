@@ -1,29 +1,21 @@
 package com.os.apps.fileApp.app;
 
-import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.DelViewCtl;
+import com.os.apps.fileApp.FileApp;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
 
 import java.io.IOException;
-import java.net.URL;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class DelView extends BaseFileApp<DelViewCtl> {
     private final Disk block;
     private final String tipString;
-    private final MainUI mainView;
+    private final FileApp mainView;
 
-    public DelView(MainUI mainView, Disk block) {
+    public DelView(FileApp mainView, Disk block) {
         super(
                 "/com/os/apps/fileApp/fxmls/delView.fxml",
                 "/com/os/apps/fileApp/res/tip.png",

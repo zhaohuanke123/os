@@ -1,16 +1,12 @@
 package com.os.apps.fileApp.Controller;
 
-import com.os.apps.BaseController;
-import com.os.apps.fileApp.app.MainUI;
+import com.os.apps.fileApp.FileApp;
 import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -25,7 +21,7 @@ public class DelViewCtl extends BaseFileCtl {
     private Text text;
     private Disk block;
 
-    public void init(final Stage stage, final MainUI mainView, String tipString, final Disk block) {
+    public void init(final Stage stage, final FileApp mainView, String tipString, final Disk block) {
         super.init(stage);
         this.text.setText(tipString);
         this.block = block;
@@ -37,7 +33,7 @@ public class DelViewCtl extends BaseFileCtl {
                 thisPath = ((Folder) block.getObject()).getPath();
             }
 
-            int res = MainUI.fat.delete(block);
+            int res = FileApp.fat.delete(block);
             if (res == 0) {
                 mainView.removeNode(mainView.getRecentNode(), thisPath);
 
@@ -68,7 +64,7 @@ public class DelViewCtl extends BaseFileCtl {
 
             mainView.controller.flowPane.getChildren().removeAll(mainView.controller.flowPane.getChildren());
 
-            mainView.addIcon(MainUI.fat.getBlockList(mainView.recentPath), mainView.recentPath);
+            mainView.addIcon(FileApp.fat.getBlockList(mainView.recentPath), mainView.recentPath);
         });
         this.cancelButton.setOnMouseClicked(event -> stage.close());
     }

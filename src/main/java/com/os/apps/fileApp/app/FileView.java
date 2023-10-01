@@ -1,7 +1,7 @@
 package com.os.apps.fileApp.app;
 
-import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.FileViewCtl;
+import com.os.apps.fileApp.FileApp;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.fileSystem.File;
@@ -12,20 +12,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class FileView extends BaseFileApp<FileViewCtl> {
     private final File file;
@@ -117,7 +105,7 @@ public class FileView extends BaseFileApp<FileViewCtl> {
             }
         }
 
-        MainUI.fat.reallocBlocks(blockCount, this.block);
+        FileApp.fat.reallocBlocks(blockCount, this.block);
     }
 
     public void start(Stage stage) throws IOException {

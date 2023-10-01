@@ -1,11 +1,7 @@
 package com.os.main;
 
 import com.os.apps.BaseApp;
-import com.os.apps.fileApp.app.MainUI;
-import com.os.apps.helpApp.HelpApp;
-import com.os.apps.occupancyApp.OccupancyApp;
-import com.os.apps.processApp.ProcessApp;
-import com.os.apps.systemFileApp.SystemFileApp;
+import com.os.apps.fileApp.FileApp;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.processSystem.OccupancyManager;
 import com.os.utils.processSystem.ProcessManager;
@@ -76,7 +72,6 @@ public class MainController {
     //endregion
 
     private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
-    private final TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
 
@@ -87,7 +82,6 @@ public class MainController {
     public double sceneHeight;
     boolean isTop = false;
     boolean haveChanged = true;
-    private String packageName = "com/os/apps/";
 
     public void init(Scene scene, Stage stage) throws URISyntaxException {
         _instance = this;
@@ -98,12 +92,6 @@ public class MainController {
         appButtonDict.put("helpApp", helpButton);
         appButtonDict.put("fileApp", fileManagerButton);
 
-        appDict.put("systemFileApp", new SystemFileApp());
-        appDict.put("processApp", new ProcessApp());
-        appDict.put("occupancyApp", new OccupancyApp());
-        appDict.put("helpApp", new HelpApp());
-        appDict.put("fileApp", new MainUI());
-
         this.mainWindowScene = scene;
         this.primaryStage = stage;
         this.primaryStage.setOnCloseRequest(event -> System.exit(0));
@@ -111,7 +99,7 @@ public class MainController {
         this.iconInit();
         this.timeInit();
         OccupancyManager.init();
-        MainUI.loadData();
+        FileApp.loadData();
         this.processThreadInit();
         this.uiThreadInit();
     }
@@ -119,8 +107,8 @@ public class MainController {
     @FXML
     void closeWindow(MouseEvent event) {
         FAT.closeAll();
-        if (MainUI.fat != null) {
-            MainUI.saveData();
+        if (FileApp.fat != null) {
+            FileApp.saveData();
         }
 
         System.exit(0);
@@ -192,10 +180,10 @@ public class MainController {
     private void minimizeOnShowApp(Boolean isMinimize) {
         SceneManager.getInstance().setAllStageState(isMinimize);
 
-        MainUI.minimizeOnShowApp(isMinimize);
+        FileApp.minimizeOnShowApp(isMinimize);
     }
 
-    private void OnAppOpen(String stageName, BaseApp<?> app) {
+    private void OnAppOpen(String stageName) {
         // 检查窗口是否已存在
         Stage stage = SceneManager.getInstance().checkStage(stageName);
 
@@ -211,7 +199,9 @@ public class MainController {
             try {
                 stage = new Stage();
                 // 使用 SystemFileApp 实例初始化新窗口
-                app.start(stage);
+//                app.start(stage);
+                BaseApp<?> newApp = SceneManager.getInstance().getApp(stageName);
+                newApp.start(stage);
                 // 将新窗口记录添加到窗口列表
                 SceneManager.getInstance().addStage(stageName, stage);
             } catch (IOException e) {
@@ -254,7 +244,7 @@ public class MainController {
 
         appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen(stageName, appDict.get(stageName));
+                this.OnAppOpen(stageName);
             }
         }));
 

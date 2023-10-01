@@ -36,4 +36,6 @@ module os {
     opens com.os.utils.scene to javafx.fxml;
     exports com.os;
     opens com.os to javafx.fxml;
+    exports com.os.apps.fileApp;
+    opens com.os.apps.fileApp to javafx.fxml;
 }

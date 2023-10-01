@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane id="topMainPane" stylesheets="@../css/FileApp.css" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.fileApp.Controller.MainCtl">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.apps.fileApp.Controller.FileAppController">
     <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/FileApp.css"
                 onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                 onMousePressed="#pressBar" onMouseReleased="#releaseBar"

@@ -3,6 +3,7 @@ package com.os.utils.scene;
 import com.os.apps.BaseApp;
 import javafx.stage.Stage;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -59,5 +60,30 @@ public class SceneManager {
                 stage.setIconified(isMinimize);
             }
         });
+    }
+
+    public BaseApp<?> getApp(String stageName) {
+        if (appDict.containsKey(stageName)) {
+            return appDict.get(stageName);
+        }
+        // Java反射机制创建类
+        Class<?> baseClass;
+        String ClassName = stageName;
+        // 首字母大写
+        ClassName = ClassName.substring(0, 1).toUpperCase() + ClassName.substring(1);
+        try {
+            baseClass = Class.forName("com.os.apps." + stageName + "." + ClassName);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Object o;
+        try {
+            o = baseClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        BaseApp<?> app = (BaseApp<?>) o;
+        appDict.put(stageName, app);
+        return app;
     }
 }

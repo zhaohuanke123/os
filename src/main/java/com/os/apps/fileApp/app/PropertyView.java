@@ -1,6 +1,7 @@
 package com.os.apps.fileApp.app;
 
 import com.os.apps.fileApp.Controller.PropertyCtl;
+import com.os.apps.fileApp.FileApp;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
@@ -87,16 +88,16 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
             if (!this.oldName.equals(newName)) {
                 if (m) {
                     try {
-                        MainUI.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
+                        FileApp.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
                     } catch (Exception var9) {
                         System.out.println(var9.getMessage());
                     }
                 }
 
-                if (MainUI.fat.hasName(this.location, newName)) {
+                if (FileApp.fat.hasName(this.location, newName)) {
                     try {
-                        MainUI.tipOpen("此位置已包含同名文件/文件夹");
+                        FileApp.tipOpen("此位置已包含同名文件/文件夹");
                     } catch (Exception var8) {
                         System.out.println(var8.getMessage());
                     }
@@ -125,16 +126,16 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
             if (!this.oldName.equals(newName)) {
                 if (m) {
                     try {
-                        MainUI.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
+                        FileApp.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
                     } catch (Exception var9) {
                         System.out.println(var9.getMessage());
                     }
                 }
 
-                if (MainUI.fat.hasName(this.location, newName)) {
+                if (FileApp.fat.hasName(this.location, newName)) {
                     try {
-                        MainUI.tipOpen("此位置已包含同名文件/文件夹");
+                        FileApp.tipOpen("此位置已包含同名文件/文件夹");
                     } catch (Exception var8) {
                         System.out.println(var8.getMessage());
                     }
@@ -169,8 +170,8 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
     private void reLoc(String oldP, String newP, String oldN, String newN, Folder folder) {
         String oldLoc = oldP + "\\" + oldN;
         String newLoc = newP + "\\" + newN;
-        Path oldPath = MainUI.fat.getPath(oldLoc);
-        MainUI.fat.replacePath(oldPath, newLoc);
+        Path oldPath = FileApp.fat.getPath(oldLoc);
+        FileApp.fat.replacePath(oldPath, newLoc);
 
         for (Object child : folder.getChildren()) {
             if (child instanceof File) {
@@ -181,9 +182,9 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
                 if (nextFolder.hasChild()) {
                     this.reLoc(oldLoc, newLoc, nextFolder.getFolderName(), nextFolder.getFolderName(), nextFolder);
                 } else {
-                    Path nextPath = MainUI.fat.getPath(oldLoc + "\\" + nextFolder.getFolderName());
+                    Path nextPath = FileApp.fat.getPath(oldLoc + "\\" + nextFolder.getFolderName());
                     String newNext = newLoc + "\\" + nextFolder.getFolderName();
-                    MainUI.fat.replacePath(nextPath, newNext);
+                    FileApp.fat.replacePath(nextPath, newNext);
                 }
             }
         }

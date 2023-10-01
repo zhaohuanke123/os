@@ -1,7 +1,11 @@
-package com.os.apps.fileApp.app;
+package com.os.apps.fileApp;
 
 import com.os.apps.BaseApp;
-import com.os.apps.fileApp.Controller.MainCtl;
+import com.os.apps.fileApp.Controller.FileAppController;
+import com.os.apps.fileApp.app.DelView;
+import com.os.apps.fileApp.app.FileView;
+import com.os.apps.fileApp.app.PropertyView;
+import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.*;
 import com.os.utils.fileSystem.File;
 import com.os.utils.uiUtil.CompSet;
@@ -21,7 +25,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class MainUI extends BaseApp<MainCtl> {
+public class FileApp extends BaseApp<FileAppController> {
     public static FAT fat;
     private TreeItem<String> rootNode;
     private TreeItem<String> recentNode;
@@ -49,7 +53,7 @@ public class MainUI extends BaseApp<MainCtl> {
     private Label[] icons;
     public static boolean clearFlag = false;
 
-    public MainUI() {
+    public FileApp() {
         super("/com/os/apps/fileApp/fxmls/mainUI.fxml",
                 "/com/os/apps/fileApp/res/folder.png",
                 "磁盘文件管理系统",
@@ -318,18 +322,18 @@ public class MainUI extends BaseApp<MainCtl> {
                 Label src = (Label) event.getSource();
 
                 for (int j = 0; j < n; ++j) {
-                    if (src == MainUI.this.icons[j]) {
-                        MainUI.this.ind = j;
+                    if (src == FileApp.this.icons[j]) {
+                        FileApp.this.ind = j;
                     }
                 }
 
-                Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
+                Disk thisBlock = FileApp.this.blockList.get(FileApp.this.ind);
                 Tooltip.install(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
                 ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0.5); " +
                         "-fx-background-radius: 12;");
             });
             this.icons[i].setOnMouseExited(event -> {
-                Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
+                Disk thisBlock = FileApp.this.blockList.get(FileApp.this.ind);
                 Tooltip.uninstall(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
                 ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0);");
             });
@@ -337,31 +341,31 @@ public class MainUI extends BaseApp<MainCtl> {
                 Label src = (Label) event.getSource();
 
                 for (int j = 0; j < n; ++j) {
-                    if (src == MainUI.this.icons[j]) {
-                        MainUI.this.ind = j;
+                    if (src == FileApp.this.icons[j]) {
+                        FileApp.this.ind = j;
                     }
                 }
 
-                MainUI.this.copyItem.setDisable(false);
-                MainUI.this.moveItem.setDisable(false);
-                MainUI.this.createFileItem.setDisable(false);
+                FileApp.this.copyItem.setDisable(false);
+                FileApp.this.moveItem.setDisable(false);
+                FileApp.this.createFileItem.setDisable(false);
                 if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
-                    Disk thisBlock = MainUI.this.blockList.get(MainUI.this.ind);
+                    Disk thisBlock = FileApp.this.blockList.get(FileApp.this.ind);
                     if (thisBlock.getType().equals("文件夹")) {
-                        MainUI.this.copyItem.setDisable(true);
-                        MainUI.this.moveItem.setDisable(true);
+                        FileApp.this.copyItem.setDisable(true);
+                        FileApp.this.moveItem.setDisable(true);
                     }
 
-                    MainUI.this.contextMenu2.show(src, event.getScreenX(), event.getScreenY());
+                    FileApp.this.contextMenu2.show(src, event.getScreenX(), event.getScreenY());
                 } else if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     try {
-                        MainUI.this.onOpen();
+                        FileApp.this.onOpen();
                     } catch (IOException var4) {
                         System.out.println(Arrays.toString(var4.getStackTrace()));
                         System.out.println(Arrays.toString(var4.getStackTrace()));
                     }
                 } else {
-                    MainUI.this.contextMenu2.hide();
+                    FileApp.this.contextMenu2.hide();
                 }
 
             });
@@ -625,20 +629,20 @@ public class MainUI extends BaseApp<MainCtl> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1 && TextFieldTreeCellImpl.this.getTreeItem() != null) {
                     String pathName = null;
 
-                    for (Map.Entry<Path, TreeItem<String>> pathTreeItemEntry : MainUI.this.pathMap.entrySet()) {
+                    for (Map.Entry<Path, TreeItem<String>> pathTreeItemEntry : FileApp.this.pathMap.entrySet()) {
                         if (TextFieldTreeCellImpl.this.getTreeItem() == pathTreeItemEntry.getValue()) {
                             pathName = pathTreeItemEntry.getKey().getPathName();
                             break;
                         }
                     }
 
-                    List<Disk> fats = MainUI.fat.getBlockList(pathName);
+                    List<Disk> fats = FileApp.fat.getBlockList(pathName);
                     controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
-                    MainUI.this.addIcon(fats, pathName);
-                    MainUI.this.recentPath = pathName;
+                    FileApp.this.addIcon(fats, pathName);
+                    FileApp.this.recentPath = pathName;
                     System.out.println(pathName);
-                    MainUI.this.recentNode = TextFieldTreeCellImpl.this.getTreeItem();
-                    controller.currentPath.setText(MainUI.this.recentPath);
+                    FileApp.this.recentNode = TextFieldTreeCellImpl.this.getTreeItem();
+                    controller.currentPath.setText(FileApp.this.recentPath);
                 }
 
             });
