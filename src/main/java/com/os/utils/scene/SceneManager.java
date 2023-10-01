@@ -8,7 +8,7 @@ import static java.util.Collections.swap;
 
 public class SceneManager {
     private static SceneManager instance = null;
-    private final Vector<StageRecord> stageList ;
+    private final Vector<StageRecord> stageList;
 
     private SceneManager() {
         stageList = new Vector<>();
@@ -42,5 +42,18 @@ public class SceneManager {
                 return;
             }
         }
+    }
+
+    public void addStage(String name, Stage stage) {
+        stageList.add(new StageRecord(name, stage));
+    }
+
+    public void setAllStageState(boolean isMinimize) {
+        stageList.forEach(stageRecord -> {
+            Stage stage = stageRecord.stage;
+            if (stage != null && stage.isShowing()) {
+                stage.setIconified(isMinimize);
+            }
+        });
     }
 }

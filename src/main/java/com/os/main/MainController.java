@@ -6,11 +6,11 @@ import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.apps.processApp.ProcessApp;
 import com.os.apps.systemFileApp.SystemFileApp;
-import com.os.utils.scene.StageRecord;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
 import com.os.utils.process.ProcessScheduleThread;
+import com.os.utils.scene.SceneManager;
 import com.os.utils.ui.CompSet;
 import com.os.utils.ui.UIThread;
 import javafx.application.Platform;
@@ -30,9 +30,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.TreeMap;
-import java.util.Vector;
-
-import static java.util.Collections.swap;
 
 public class MainController {
     private static MainController _instance;
@@ -78,7 +75,7 @@ public class MainController {
 
     private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
     private final TreeMap<String, BaseApp<?>> appDict = new TreeMap<>();
-    private final Vector<StageRecord> stageList = new Vector<>();
+//    private final Vector<StageRecord> stageList = new Vector<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
     Scene mainWindowScene = null;
@@ -192,24 +189,21 @@ public class MainController {
     }
 
     private void minimizeOnShowApp(Boolean isMinimize) {
-        stageList.forEach(stageRecord -> {
-            Stage stage = stageRecord.stage;
-            if (stage != null && stage.isShowing()) {
-                stage.setIconified(isMinimize);
-            }
-        });
+        SceneManager.getInstance().setAllStageState(isMinimize);
 
         MainUI.minimizeOnShowApp(isMinimize);
     }
 
     private void OnAppOpen(String stageName, BaseApp<?> app) {
         // 检查窗口是否已存在
-        Stage stage = checkStage(stageName);
+        Stage stage = SceneManager.getInstance().checkStage(stageName);
 
         // 如果窗口存在但未显示，将其移除
-        if (stage != null && !stage.isShowing()) removeStage(stageName);
+        if (stage != null && !stage.isShowing())
+            SceneManager.getInstance().removeStage(stageName);
+
         // 再次检查窗口是否存在
-        stage = checkStage(stageName);
+        stage = SceneManager.getInstance().checkStage(stageName);
 
         // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
         if (stage == null) {
@@ -218,7 +212,8 @@ public class MainController {
                 // 使用 SystemFileApp 实例初始化新窗口
                 app.start(stage);
                 // 将新窗口记录添加到窗口列表
-                stageList.add(new StageRecord(stageName, stage));
+//                stageList.add(new StageRecord(stageName, stage));
+                SceneManager.getInstance().addStage(stageName, stage);
             } catch (IOException e) {
                 e.getStackTrace();
             }
@@ -235,7 +230,7 @@ public class MainController {
         stage.toFront();
 
         // 更新窗口列表中的信息
-        updateStageList(stageName);
+        SceneManager.getInstance().updateStageList(stageName);
 
         Button button = appButtonDict.get(stageName);
         if (button != null) {
@@ -244,30 +239,30 @@ public class MainController {
             button.setId("appButtonSelected");
         }
     }
-
-    // 检查窗口是否已存在
-    public Stage checkStage(String name) {
-        return stageList.stream()
-                .filter(stageRecord -> stageRecord.name.equals(name))
-                .map(stageRecord -> stageRecord.stage)
-                .findFirst().orElse(null);
-    }
-
-    // 移除指定窗口
-    public void removeStage(String name) {
-        stageList.removeIf(stageRecord -> stageRecord.name.equals(name));
-    }
-
-    // 更新窗口列表中的信息
-    public void updateStageList(String name) {
-        for (int i = 0; i < stageList.size(); ++i) {
-            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
-            if (stageList.get(i).name.equals(name)) {
-                swap(stageList, i, stageList.size() - 1);
-                return;
-            }
-        }
-    }
+//
+//    // 检查窗口是否已存在
+//    public Stage checkStage(String name) {
+//        return stageList.stream()
+//                .filter(stageRecord -> stageRecord.name.equals(name))
+//                .map(stageRecord -> stageRecord.stage)
+//                .findFirst().orElse(null);
+//    }
+//
+//    // 移除指定窗口
+//    public void removeStage(String name) {
+//        stageList.removeIf(stageRecord -> stageRecord.name.equals(name));
+//    }
+//
+//    // 更新窗口列表中的信息
+//    public void updateStageList(String name) {
+//        for (int i = 0; i < stageList.size(); ++i) {
+//            // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
+//            if (stageList.get(i).name.equals(name)) {
+//                swap(stageList, i, stageList.size() - 1);
+//                return;
+//            }
+//        }
+//    }
 
     private void iconInit() {
         this.appWidth = this.mainWindowScene.getHeight() / 15.0;
@@ -354,7 +349,7 @@ public class MainController {
     // 更新图标样式
     private void appButtonUpdate() {
         appButtonDict.forEach((stageName, button) -> {
-            Stage stage = checkStage(stageName);
+            Stage stage = SceneManager.getInstance().checkStage(stageName);
             if (stage != null && !stage.isShowing()) {
                 button.setId("appButton");
             }
