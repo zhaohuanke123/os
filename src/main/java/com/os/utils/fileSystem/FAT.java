@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import com.os.utils.processSystem.ProcessManager;
+import javafx.util.Pair;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,7 +23,6 @@ public class FAT implements Serializable {
     private static ObservableList<File> openedFiles;
     private Disk[] disks;
     private final Folder c;
-    private final Path rootPath = new Path("C:", null);
     private List<Path> paths;
 
     public FAT() {
@@ -49,8 +49,9 @@ public class FAT implements Serializable {
 
         openedFiles = FXCollections.observableArrayList(new ArrayList<>());
         this.paths = new ArrayList<>();
-        this.paths.add(this.rootPath);
-        this.c.setPath(this.rootPath);
+        Path rootPath = new Path("C:", null);
+        this.paths.add(rootPath);
+        this.c.setPath(rootPath);
     }
 
     public void addOpenedFile(Disk block) {
