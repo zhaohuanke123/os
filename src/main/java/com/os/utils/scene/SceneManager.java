@@ -54,6 +54,8 @@ public class SceneManager {
         // 如果窗口已显示，将其显示在最前面
         if (stage.isShowing()) stage.show();
 
+        updateStageList(stageName);
+
         // 设置窗口始终位于其他窗口之上
         stage.setAlwaysOnTop(true);
         // 将窗口从最小化状态还原
@@ -62,7 +64,7 @@ public class SceneManager {
         stage.toFront();
     }
 
-    public Stage checkStage(String name) {
+    private Stage checkStage(String name) {
         return stageList.stream()
                 .filter(stageRecord -> stageRecord.name.equals(name))
                 .map(stageRecord -> stageRecord.stage)
@@ -70,12 +72,12 @@ public class SceneManager {
     }
 
     // 移除指定窗口
-    public void removeStage(String name) {
+    private void removeStage(String name) {
         stageList.removeIf(stageRecord -> stageRecord.name.equals(name));
     }
 
     // 更新窗口列表中的信息
-    public void updateStageList(String name) {
+    private void updateStageList(String name) {
         for (int i = 0; i < stageList.size(); ++i) {
             // 如果窗口的名称与传入的名称相匹配，更新该窗口的信息
             if (stageList.get(i).name.equals(name)) {
@@ -85,11 +87,11 @@ public class SceneManager {
         }
     }
 
-    public void addStage(String name, Stage stage) {
+    private void addStage(String name, Stage stage) {
         stageList.add(new StageRecord(name, stage));
     }
 
-    public void setAllStageState(boolean isMinimize) {
+    public void setAllStageHideOrShow(boolean isMinimize) {
         stageList.forEach(stageRecord -> {
             Stage stage = stageRecord.stage;
             if (stage != null && stage.isShowing()) {
@@ -115,11 +117,17 @@ public class SceneManager {
         Object o;
         try {
             o = baseClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
         BaseApp<?> app = (BaseApp<?>) o;
         appDict.put(stageName, app);
         return app;
+    }
+
+    public boolean isStageClosed(String stageName) {
+        Stage stage = checkStage(stageName);
+        return stage != null && !stage.isShowing();
     }
 }

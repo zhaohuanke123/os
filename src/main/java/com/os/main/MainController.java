@@ -20,7 +20,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -194,14 +193,11 @@ public class MainController {
 
         new Thread(() -> {
             while (true) {
-                Platform.runLater(() -> {
-                    appButtonDict.forEach((stageName, button) -> {
-                        Stage stage = SceneManager.getInstance().checkStage(stageName);
-                        if (stage != null && !stage.isShowing()) {
-                            button.setId("appButton");
-                        }
-                    });
-                });
+                Platform.runLater(() -> appButtonDict.forEach((stageName, button) -> {
+                    if (SceneManager.getInstance().isStageClosed(stageName)) {
+                        button.setId("appButton");
+                    }
+                }));
 
                 try {
                     TimeUnit.MILLISECONDS.sleep(500);
@@ -271,48 +267,8 @@ public class MainController {
     }
 
     private void minimizeOnShowApp(Boolean isMinimize) {
-        SceneManager.getInstance().setAllStageState(isMinimize);
+        SceneManager.getInstance().setAllStageHideOrShow(isMinimize);
 
         FileApp.minimizeOnShowApp(isMinimize);
-    }
-
-    private void OnAppOpen(String stageName) {
-        // 检查窗口是否已存在
-        Stage stage = SceneManager.getInstance().checkStage(stageName);
-
-        // 如果窗口存在但未显示，将其移除
-        if (stage != null && !stage.isShowing())
-            SceneManager.getInstance().removeStage(stageName);
-
-        // 再次检查窗口是否存在
-        stage = SceneManager.getInstance().checkStage(stageName);
-
-        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
-        if (stage == null) {
-            try {
-                stage = new Stage();
-                // 使用 SystemFileApp 实例初始化新窗口
-                SceneManager.getInstance().getApp(stageName).start(stage);
-                // 将新窗口记录添加到窗口列表
-                SceneManager.getInstance().addStage(stageName, stage);
-            } catch (IOException e) {
-                e.getStackTrace();
-            }
-        }
-
-        // 如果窗口已显示，将其显示在最前面
-        if (stage.isShowing()) stage.show();
-
-        // 设置窗口始终位于其他窗口之上
-        stage.setAlwaysOnTop(true);
-        // 将窗口从最小化状态还原
-        stage.setIconified(false);
-        // 将窗口置于最前
-        stage.toFront();
-
-        // 更新窗口列表中的信息
-        SceneManager.getInstance().updateStageList(stageName);
-
-
     }
 }
