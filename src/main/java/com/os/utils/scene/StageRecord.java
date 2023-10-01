@@ -1,4 +1,4 @@
-package com.os.utils;
+package com.os.utils.scene;
 
 import javafx.stage.Stage;
 

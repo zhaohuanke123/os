@@ -32,4 +32,6 @@ module os {
     opens com.os.apps.fileApp.css to javafx.fxml;
     opens com.os.apps.fileApp.res to javafx.fxml;
     opens com.os.img to javafx.fxml;
+    exports com.os.utils.scene;
+    opens com.os.utils.scene to javafx.fxml;
 }

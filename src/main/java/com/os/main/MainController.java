@@ -6,7 +6,7 @@ import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.apps.processApp.ProcessApp;
 import com.os.apps.systemFileApp.SystemFileApp;
-import com.os.utils.StageRecord;
+import com.os.utils.scene.StageRecord;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.process.OccupancyManager;
 import com.os.utils.process.ProcessManager;
