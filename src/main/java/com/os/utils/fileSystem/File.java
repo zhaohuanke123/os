@@ -1,25 +1,13 @@
 package com.os.utils.fileSystem;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class File extends BaseFile implements Serializable {
-//   private static final long serialVersionUID = 1L;
-//   private String Name;
-//   private transient StringProperty NameP = new SimpleStringProperty();
-//   private String type;
-//   private int diskNum;
-//   private String location;
-//   private double size;
-//   private String space;
-//   private Date createTime;
-//   private Folder parent;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
+public class File extends BaseFile implements Serializable {
     private int flag;
     private int length;
     private String content;
@@ -28,10 +16,6 @@ public class File extends BaseFile implements Serializable {
     private transient StringProperty diskNumP = new SimpleStringProperty();
     private transient StringProperty locationP = new SimpleStringProperty();
     private transient StringProperty lengthP = new SimpleStringProperty();
-
-    public StringProperty namePProperty() {
-        return this.NameP;
-    }
 
     public StringProperty flagPProperty() {
         return this.flagP;
@@ -51,8 +35,6 @@ public class File extends BaseFile implements Serializable {
 
     public File(String fileName) {
         super(fileName);
-//      this.Name = fileName;
-//      this.setNameP();
         this.setOpened(false);
         if (this.hasParent()) {
             Folder parent1 = this.getParent();
@@ -63,10 +45,6 @@ public class File extends BaseFile implements Serializable {
                 parent1.setSize(FAT.getFolderSize(parent1));
             }
         }
-    }
-
-    private void setNameP() {
-        this.NameP.set(this.Name);
     }
 
     private void setFlagP() {
@@ -88,6 +66,8 @@ public class File extends BaseFile implements Serializable {
     public File(String fileName, String location, int diskNum, Folder parent) {
         super(fileName, location, diskNum, parent);
 
+        content = "";
+
         this.setOpened(false);
         if (this.hasParent()) {
             Folder parent1 = this.getParent();
@@ -105,29 +85,8 @@ public class File extends BaseFile implements Serializable {
         this.setLengthP();
     }
 
-    public String getName() {
-        return this.Name;
-    }
-
-    public void setName(String name) {
-        this.Name = name;
-        this.setNameP();
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getDiskNum() {
-        return this.diskNum;
-    }
-
     public void setDiskNum(int diskNum) {
-        this.diskNum = diskNum;
+        super.setDiskNum(diskNum);
         this.setDiskNumP();
     }
 
@@ -157,51 +116,13 @@ public class File extends BaseFile implements Serializable {
         this.content = content;
     }
 
-    public String getLocation() {
-        return this.location;
-    }
-
     public void setLocation(String location) {
-        this.location = location;
+        super.setLocation(location);
         this.setLocationP();
-    }
-
-    public double getSize() {
-        return this.size;
-    }
-
-    public void setSize(double BCount) {
-        this.size = BCount;
-        this.setSpace(this.size + "B");
     }
 
     public static double getSize(int length) {
         return Double.parseDouble(String.valueOf(length));
-    }
-
-    public String getSpace() {
-        return this.space;
-    }
-
-    public void setSpace(String space) {
-        this.space = space;
-    }
-
-    public String getCreateTime() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
-        return format.format(this.createTime);
-    }
-
-    public Folder getParent() {
-        return this.parent;
-    }
-
-    public void setParent(Folder parent) {
-        this.parent = parent;
-    }
-
-    public boolean hasParent() {
-        return this.parent != null;
     }
 
     public boolean isOpened() {
@@ -221,7 +142,4 @@ public class File extends BaseFile implements Serializable {
         this.lengthP = new SimpleStringProperty(String.valueOf(this.length));
     }
 
-    public String toString() {
-        return this.Name;
-    }
 }

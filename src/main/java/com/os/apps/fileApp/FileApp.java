@@ -307,7 +307,8 @@ public class FileApp extends BaseApp<FileAppController> {
                     try {
                         fileViewOpen((File) thisBlock.getObject(), thisBlock);
                     } catch (Exception var5) {
-                        System.out.println(Arrays.toString(var5.getStackTrace()));
+//                        System.out.println(Arrays.toString(var5.getStackTrace()));
+                        var5.printStackTrace();
                     }
 
                     fat.addOpenedFile(thisBlock);

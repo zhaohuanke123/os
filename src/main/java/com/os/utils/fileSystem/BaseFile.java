@@ -3,11 +3,12 @@ package com.os.utils.fileSystem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BaseFile {
-    protected static final long serialVersionUID = 1L;
+public class BaseFile implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String Name;
     protected transient StringProperty NameP = new SimpleStringProperty();
     protected String type;

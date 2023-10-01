@@ -354,7 +354,7 @@ public class FAT implements Serializable {
     }
 
     public boolean reallocFolderBlocks(int num, Disk block) {
-        Folder thisFolder = (Folder) block.getObject();
+        BaseFile thisFolder = (BaseFile) block.getObject();
         int begin = thisFolder.getDiskNum();
         int index = this.disks[begin].getIndex();
 
