@@ -64,7 +64,6 @@ public class FileApp extends BaseApp<FileAppController> {
     public void start(Stage stage) throws IOException {
         super.start(stage);
 
-        stage.setResizable(false);
         stage.setOnCloseRequest((e) -> {
             try {
                 ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("data"));

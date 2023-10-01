@@ -5,8 +5,10 @@ import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
+import com.sun.javafx.tk.Toolkit;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -73,8 +75,5 @@ public class DelViewCtl extends BaseFileCtl {
         Stage stage = new Stage();
         TipWindow tipWindow = new TipWindow(tipString);
         tipWindow.start(stage);
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
     }
 }
