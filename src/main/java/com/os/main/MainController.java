@@ -1,6 +1,5 @@
 package com.os.main;
 
-import com.os.apps.BaseApp;
 import com.os.apps.fileApp.FileApp;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.processSystem.OccupancyManager;
@@ -13,7 +12,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +41,7 @@ public class MainController {
     private Pane MainWindow;
     @FXML
     private ImageView background;
+
     @FXML
     private Pane buttonBar;
     @FXML
@@ -63,18 +62,19 @@ public class MainController {
     private Button minimizeButton;  // 最小化窗口按钮
     @FXML
     private Button closeButton;  // 关闭窗口按钮
+    private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
+
+
     @FXML
     private VBox timeBox;  // 包含2种时间显示的VBox
-
     @FXML
     private Button timeButton1;  // 时间显示
     @FXML
     private Button timeButton2;  // 日期显示
     @FXML
     private Button deskButton;  // 返回桌面按钮
-    private TimeModel timeModel = new TimeModel();
+    private final TimeModel timeModel = new TimeModel();
 
-    private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
     public UIThread uiThread = new UIThread();
 
@@ -99,12 +99,26 @@ public class MainController {
         this.primaryStage = stage;
         this.primaryStage.setOnCloseRequest(event -> System.exit(0));
 
+        this.initBackGround();
         this.iconInit();
         this.timeInit();
         OccupancyManager.init();
         FileApp.loadData();
         this.processThreadInit();
         this.uiThreadInit();
+    }
+
+    private void initBackGround() {
+        this.appWidth = this.mainWindowScene.getHeight() / 15.0;
+        this.sceneWidth = this.mainWindowScene.getWidth();
+        this.sceneHeight = this.mainWindowScene.getHeight();
+
+        this.background.setLayoutX(0.0);
+        this.background.setLayoutY(0.0);
+        this.background.fitWidthProperty().bind(this.mainWindowScene.widthProperty());
+        this.background.fitHeightProperty().bind(this.mainWindowScene.heightProperty());
+        this.background.setPreserveRatio(false);
+        this.background.setVisible(true);
     }
 
     @FXML
@@ -167,6 +181,82 @@ public class MainController {
         this.tipBox.setLayoutY(0.0);
     }
 
+    private void iconInit() {
+        appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+                SceneManager.getInstance().AppStart(stageName);
+
+                // 修改按钮样式
+                button.setUnderline(true);
+                button.setId("appButtonSelected");
+            }
+        }));
+
+        new Thread(() -> {
+            while (true) {
+                Platform.runLater(() -> {
+                    appButtonDict.forEach((stageName, button) -> {
+                        Stage stage = SceneManager.getInstance().checkStage(stageName);
+                        if (stage != null && !stage.isShowing()) {
+                            button.setId("appButton");
+                        }
+                    });
+                });
+
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException ignore) {
+                }
+            }
+        }).start();
+
+        this.deskButton.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                this.toDesk();
+            }
+        });
+    }
+
+    // 初始化时间显示
+    private void timeInit() {
+        timeButton1.textProperty().bind(timeModel.time1Property());
+        timeButton2.textProperty().bind(timeModel.time2Property());
+        SimpleDateFormat sdf_ymd = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf_hms = new SimpleDateFormat("HH:mm:ss");
+
+        new Thread(() -> {
+            while (true) {
+                Platform.runLater(() -> {
+                    Date date = new Date();
+                    timeModel.setTime1(sdf_hms.format(date));
+                    timeModel.setTime2(sdf_ymd.format(date));
+                });
+
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException ignore) {
+                }
+            }
+        }).start();
+
+        // 设置时间按钮的最小和最大宽度
+        CompSet.setCompFixSize(this.timeButton2, 2 * this.appWidth, -1);
+        CompSet.setCompFixSize(this.timeBox, 2 * this.appWidth, -1);
+    }
+
+    // 初始化ui线程
+    private void uiThreadInit() {
+        this.uiThread.init();
+        this.uiThread.start();
+    }
+
+    // 初始化进程线程
+    private void processThreadInit() {
+        ProcessManager.init();
+        this.processScheduleThread.Init();
+        this.processScheduleThread.start();
+    }
+
     // 返回桌面
     private void toDesk() {
         if (this.haveChanged) {
@@ -223,140 +313,6 @@ public class MainController {
         // 更新窗口列表中的信息
         SceneManager.getInstance().updateStageList(stageName);
 
-        Button button = appButtonDict.get(stageName);
-        if (button != null) {
-            // 修改按钮样式
-            button.setUnderline(true);
-            button.setId("appButtonSelected");
-        }
-    }
 
-    private void iconInit() {
-        this.appWidth = this.mainWindowScene.getHeight() / 15.0;
-        this.sceneWidth = this.mainWindowScene.getWidth();
-        this.sceneHeight = this.mainWindowScene.getHeight();
-
-        this.background.setLayoutX(0.0);
-        this.background.setLayoutY(0.0);
-        this.background.fitWidthProperty().bind(this.mainWindowScene.widthProperty());
-        this.background.fitHeightProperty().bind(this.mainWindowScene.heightProperty());
-        this.background.setPreserveRatio(false);
-        this.background.setVisible(true);
-
-        appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                this.OnAppOpen(stageName);
-            }
-        }));
-
-        this.deskButton.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY)) {
-                this.toDesk();
-            }
-        });
-
-
-        //region [设置按钮的提示信息]
-        Button[] buttons = new Button[]{
-                this.systemFileButton, this.fileManagerButton,
-                this.processButton, this.occupancyButton,
-                this.helpButton, this.minimizeButton,
-                this.closeButton, this.deskButton};
-        String[] buttonNames = new String[]{
-                "系统文件表", "文件管理器",
-                "进程管理器", "占用管理器",
-                "帮助", "最小化",
-                "关闭", "显示桌面"};
-        String tooltipStyle = "-fx-font-size: 12";
-        for (int i = 0; i < buttons.length; ++i) {
-            Tooltip tooltip = new Tooltip(buttonNames[i]);
-            tooltip.setStyle(tooltipStyle);
-            buttons[i].setTooltip(tooltip);
-        }
-        //endregion
-    }
-
-    // 初始化时间显示
-    private void timeInit() {
-        timeButton1.textProperty().bind(timeModel.time1Property());
-        timeButton2.textProperty().bind(timeModel.time2Property());
-        new Thread(() -> {
-            while (true) {
-                // 注意：这里只需要改变model中的time属性即可，视图层的Label信息会跟着调整
-                // 因为在initialize方法中已经将time属性绑定在Label控件中了。
-                Platform.runLater(() -> {
-                    SimpleDateFormat sdf_ymd = new SimpleDateFormat("yyyy-MM-dd");
-                    SimpleDateFormat sdf_hms = new SimpleDateFormat("HH:mm:ss");
-                    Date date = new Date();
-                    timeModel.setTime1(sdf_hms.format(date));
-                    timeModel.setTime2(sdf_ymd.format(date));
-                });
-
-                try {
-                    TimeUnit.MILLISECONDS.sleep(500);
-                } catch (InterruptedException ignore) {
-                }
-            }
-        }).start();
-
-//        // 获取当前日期和时间
-//        Date date = new Date();
-//        // 设置时间按钮的文本格式
-//        this.timeButton1.setText(
-//                String.format("%tH", date) + ":" +
-//                        String.format("%tM", date) + ":" +
-//                        String.format("%tS", date));
-//        this.timeButton2.setText("20" + String.format("%ty", date) + "/" +
-//                String.format("%tm", date) + "/" +
-//                String.format("%td", date));
-
-        // 设置时间按钮的最小和最大宽度
-        CompSet.setCompFixSize(this.timeButton2, 2 * this.appWidth, -1);
-        CompSet.setCompFixSize(this.timeBox, 2 * this.appWidth, -1);
-    }
-
-    // 初始化ui线程
-    private void uiThreadInit() {
-        this.uiThread.init();
-        this.uiThread.start();
-    }
-
-    // 初始化进程线程
-    private void processThreadInit() {
-        ProcessManager.init();
-        this.processScheduleThread.Init();
-        this.processScheduleThread.start();
-    }
-
-    // 更新桌面显示
-    public void Update() {
-        appButtonUpdate();
-        timeUpdate();
-    }
-
-    // 更新图标样式
-    private void appButtonUpdate() {
-        appButtonDict.forEach((stageName, button) -> {
-            Stage stage = SceneManager.getInstance().checkStage(stageName);
-            if (stage != null && !stage.isShowing()) {
-                button.setId("appButton");
-            }
-        });
-    }
-
-    // 实时更新系统时间
-    private void timeUpdate() {
-//        if (timeButton1 != null && timeButton2 != null) {
-//            Platform.runLater(() -> {
-//                Date date = new Date();
-//                timeButton1.setText(
-//                        String.format("%tH", date) + ":" +
-//                                String.format("%tM", date) + ":" +
-//                                String.format("%tS", date));
-//                timeButton2.setText("20" + String.format("%ty", date) + "/" +
-//                        String.format("%tm", date) + "/" +
-//                        String.format("%td", date));
-//            });
-//        }
     }
 }

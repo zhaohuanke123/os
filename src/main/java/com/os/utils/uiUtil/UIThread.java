@@ -49,7 +49,6 @@ public class UIThread extends Thread {
                 this.runProcess.PC = 0;
             }
 
-            MainController.getInstance().Update();
             if (this.processAppController != null)
                 processAppController.Update();
             if (this.occupancyAppController != null)

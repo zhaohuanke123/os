@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class TimeModel {
-    private StringProperty time1 = new SimpleStringProperty();
-    private StringProperty time2 = new SimpleStringProperty();
+    private final StringProperty time1 = new SimpleStringProperty();
+    private final StringProperty time2 = new SimpleStringProperty();
 
     public String getTime1() {
         return time1.get();

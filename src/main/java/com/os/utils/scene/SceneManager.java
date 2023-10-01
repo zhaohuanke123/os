@@ -3,6 +3,7 @@ package com.os.utils.scene;
 import com.os.apps.BaseApp;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -24,6 +25,41 @@ public class SceneManager {
             instance = new SceneManager();
         }
         return instance;
+    }
+
+    public void AppStart(String stageName) {
+        // 检查窗口是否已存在
+        Stage stage = checkStage(stageName);
+
+        // 如果窗口存在但未显示，将其移除
+        if (stage != null && !stage.isShowing())
+            removeStage(stageName);
+
+        // 再次检查窗口是否存在
+        stage = checkStage(stageName);
+
+        // 如果窗口不存在，则创建新的窗口并添加到 stageList 中
+        if (stage == null) {
+            try {
+                stage = new Stage();
+                // 使用 SystemFileApp 实例初始化新窗口
+                getApp(stageName).start(stage);
+                // 将新窗口记录添加到窗口列表
+                addStage(stageName, stage);
+            } catch (IOException e) {
+                e.getStackTrace();
+            }
+        }
+
+        // 如果窗口已显示，将其显示在最前面
+        if (stage.isShowing()) stage.show();
+
+        // 设置窗口始终位于其他窗口之上
+        stage.setAlwaysOnTop(true);
+        // 将窗口从最小化状态还原
+        stage.setIconified(false);
+        // 将窗口置于最前
+        stage.toFront();
     }
 
     public Stage checkStage(String name) {
