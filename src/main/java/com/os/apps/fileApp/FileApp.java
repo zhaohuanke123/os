@@ -110,7 +110,8 @@ public class FileApp extends BaseApp<FileAppController> {
 
     public static void minimizeOnShowApp(boolean isMinimize) {
         if (fileAppAdditionStageList != null) {
-            fileAppAdditionStageList.forEach(stage -> {
+            for (int i = 0; i < fileAppAdditionStageList.size(); ++i) {
+                Stage stage = fileAppAdditionStageList.get(i);
                 if (stage != null) {
                     if (!stage.isShowing()) {
                         fileAppAdditionStageList.remove(stage);
@@ -118,7 +119,7 @@ public class FileApp extends BaseApp<FileAppController> {
                         stage.setIconified(isMinimize);
                     }
                 }
-            });
+            }
         }
     }
 
