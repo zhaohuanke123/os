@@ -102,9 +102,9 @@ public class Disk implements Serializable {
    public void setObject(Object object) {
       this.object = object;
       if (object instanceof File) {
-         this.objectP.bind(((File)object).fileNamePProperty());
+         this.objectP.bind(((File)object).namePProperty());
       } else if (object instanceof Folder) {
-         this.objectP.bind(((Folder)object).folderNamePProperty());
+         this.objectP.bind(((Folder)object).namePProperty());
       } else {
          this.objectP.unbind();
          this.setObjectP();

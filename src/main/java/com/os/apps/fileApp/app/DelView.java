@@ -29,10 +29,10 @@ public class DelView extends BaseFileApp<DelViewCtl> {
         String msg;
         if (block.getObject() instanceof Folder) {
             Folder folder = (Folder) block.getObject();
-            msg = "名称: " + folder.getFolderName() + "\n类型: " + folder.getType() + "\n大小: " + folder.getSize() + "B\n创建时间: " + folder.getCreateTime();
+            msg = "名称: " + folder.getName() + "\n类型: " + folder.getType() + "\n大小: " + folder.getSize() + "B\n创建时间: " + folder.getCreateTime();
         } else {
             File file = (File) block.getObject();
-            msg = "名称: " + file.getFileName() + "\n类型: " + file.getType() + "\n大小: " + file.getSize() + "B\n创建时间: " + file.getCreateTime();
+            msg = "名称: " + file.getName() + "\n类型: " + file.getType() + "\n大小: " + file.getSize() + "B\n创建时间: " + file.getCreateTime();
         }
 
         this.tipString = msg;

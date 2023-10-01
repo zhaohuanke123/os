@@ -39,7 +39,7 @@ public class FileView extends BaseFileApp<FileViewCtl> {
     }
 
     private void showView() {
-        controller.title.setText(this.file.getLocation() + "\\" + this.file.getFileName());
+        controller.title.setText(this.file.getLocation() + "\\" + this.file.getName());
 
         controller.contentField.setText(this.file.getContent());
         if (this.file.getFlag() == 0) {

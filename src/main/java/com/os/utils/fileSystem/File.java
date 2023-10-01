@@ -4,231 +4,224 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class File implements Serializable {
-   private static final long serialVersionUID = 1L;
-   private String fileName;
-   private String type;
-   private int diskNum;
-   private int flag;
-   private int length;
-   private String content;
-   private Folder parent;
-   private String location;
-   private double size;
-   private String space;
-   private Date createTime;
-   private boolean isOpen;
-   private transient StringProperty fileNameP = new SimpleStringProperty();
-   private transient StringProperty flagP = new SimpleStringProperty();
-   private transient StringProperty diskNumP = new SimpleStringProperty();
-   private transient StringProperty locationP = new SimpleStringProperty();
-   private transient StringProperty lengthP = new SimpleStringProperty();
+public class File extends BaseFile implements Serializable {
+//   private static final long serialVersionUID = 1L;
+//   private String Name;
+//   private transient StringProperty NameP = new SimpleStringProperty();
+//   private String type;
+//   private int diskNum;
+//   private String location;
+//   private double size;
+//   private String space;
+//   private Date createTime;
+//   private Folder parent;
 
-   public StringProperty fileNamePProperty() {
-      return this.fileNameP;
-   }
+    private int flag;
+    private int length;
+    private String content;
+    private boolean isOpen;
+    private transient StringProperty flagP = new SimpleStringProperty();
+    private transient StringProperty diskNumP = new SimpleStringProperty();
+    private transient StringProperty locationP = new SimpleStringProperty();
+    private transient StringProperty lengthP = new SimpleStringProperty();
 
-   public StringProperty flagPProperty() {
-      return this.flagP;
-   }
+    public StringProperty namePProperty() {
+        return this.NameP;
+    }
 
-   public StringProperty diskNumPProperty() {
-      return this.diskNumP;
-   }
+    public StringProperty flagPProperty() {
+        return this.flagP;
+    }
 
-   public StringProperty locationPProperty() {
-      return this.locationP;
-   }
+    public StringProperty diskNumPProperty() {
+        return this.diskNumP;
+    }
 
-   public StringProperty lengthPProperty() {
-      return this.lengthP;
-   }
+    public StringProperty locationPProperty() {
+        return this.locationP;
+    }
 
-   public File(String fileName) {
-      this.fileName = fileName;
-      this.setOpened(false);
-      this.setFileNameP();
-      if (this.hasParent()) {
-         Folder parent1 = this.getParent();
-         parent1.setSize(FAT.getFolderSize(parent1));
+    public StringProperty lengthPProperty() {
+        return this.lengthP;
+    }
 
-         while(parent1.hasParent()) {
-            parent1 = parent1.getParent();
+    public File(String fileName) {
+        super(fileName);
+//      this.Name = fileName;
+//      this.setNameP();
+        this.setOpened(false);
+        if (this.hasParent()) {
+            Folder parent1 = this.getParent();
             parent1.setSize(FAT.getFolderSize(parent1));
-         }
-      }
-   }
 
-   private void setFileNameP() {
-      this.fileNameP.set(this.fileName);
-   }
+            while (parent1.hasParent()) {
+                parent1 = parent1.getParent();
+                parent1.setSize(FAT.getFolderSize(parent1));
+            }
+        }
+    }
 
-   private void setFlagP() {
-      this.flagP.set(this.flag == 0 ? "只读" : "读写");
-   }
+    private void setNameP() {
+        this.NameP.set(this.Name);
+    }
 
-   private void setDiskNumP() {
-      this.diskNumP.set(String.valueOf(this.diskNum));
-   }
+    private void setFlagP() {
+        this.flagP.set(this.flag == 0 ? "只读" : "读写");
+    }
 
-   private void setLocationP() {
-      this.locationP.set(this.location);
-   }
+    private void setDiskNumP() {
+        this.diskNumP.set(String.valueOf(this.diskNum));
+    }
 
-   private void setLengthP() {
-      this.lengthP.set(String.valueOf(this.length));
-   }
+    private void setLocationP() {
+        this.locationP.set(this.location);
+    }
 
-   public File(String fileName, String location, int diskNum, Folder parent) {
-      this.fileName = fileName;
-      this.type = "文件";
-      this.diskNum = diskNum;
-      this.length = 0;
-      this.content = "";
-      this.size = getSize(0);
-      this.location = location;
-      this.space = this.size + "B";
-      this.createTime = new Date();
-      this.parent = parent;
-      this.setOpened(false);
-      if (this.hasParent()) {
-         Folder parent1 = this.getParent();
-         parent1.setSize(FAT.getFolderSize(parent1));
+    private void setLengthP() {
+        this.lengthP.set(String.valueOf(this.length));
+    }
 
-         while(parent1.hasParent()) {
-            parent1 = parent1.getParent();
+    public File(String fileName, String location, int diskNum, Folder parent) {
+        super(fileName, location, diskNum, parent);
+
+        this.setOpened(false);
+        if (this.hasParent()) {
+            Folder parent1 = this.getParent();
             parent1.setSize(FAT.getFolderSize(parent1));
-         }
-      }
 
-      this.setFileNameP();
-      this.setFlagP();
-      this.setDiskNumP();
-      this.setLocationP();
-      this.setLengthP();
-   }
+            while (parent1.hasParent()) {
+                parent1 = parent1.getParent();
+                parent1.setSize(FAT.getFolderSize(parent1));
+            }
+        }
 
-   public String getFileName() {
-      return this.fileName;
-   }
+        this.setFlagP();
+        this.setDiskNumP();
+        this.setLocationP();
+        this.setLengthP();
+    }
 
-   public void setFileName(String fileName) {
-      this.fileName = fileName;
-      this.setFileNameP();
-   }
+    public String getName() {
+        return this.Name;
+    }
 
-   public String getType() {
-      return this.type;
-   }
+    public void setName(String name) {
+        this.Name = name;
+        this.setNameP();
+    }
 
-   public void setType(String type) {
-      this.type = type;
-   }
+    public String getType() {
+        return this.type;
+    }
 
-   public int getDiskNum() {
-      return this.diskNum;
-   }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-   public void setDiskNum(int diskNum) {
-      this.diskNum = diskNum;
-      this.setDiskNumP();
-   }
+    public int getDiskNum() {
+        return this.diskNum;
+    }
 
-   public int getFlag() {
-      return this.flag;
-   }
+    public void setDiskNum(int diskNum) {
+        this.diskNum = diskNum;
+        this.setDiskNumP();
+    }
 
-   public void setFlag(int flag) {
-      this.flag = flag;
-      this.setFlagP();
-   }
+    public int getFlag() {
+        return this.flag;
+    }
 
-   public int getLength() {
-      return this.length;
-   }
+    public void setFlag(int flag) {
+        this.flag = flag;
+        this.setFlagP();
+    }
 
-   public void setLength(int length) {
-      this.length = length;
-      this.setLengthP();
-   }
+    public int getLength() {
+        return this.length;
+    }
 
-   public String getContent() {
-      return this.content;
-   }
+    public void setLength(int length) {
+        this.length = length;
+        this.setLengthP();
+    }
 
-   public void setContent(String content) {
-      this.content = content;
-   }
+    public String getContent() {
+        return this.content;
+    }
 
-   public String getLocation() {
-      return this.location;
-   }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-   public void setLocation(String location) {
-      this.location = location;
-      this.setLocationP();
-   }
+    public String getLocation() {
+        return this.location;
+    }
 
-   public double getSize() {
-      return this.size;
-   }
+    public void setLocation(String location) {
+        this.location = location;
+        this.setLocationP();
+    }
 
-   public void setSize(double BCount) {
-      this.size = BCount;
-      this.setSpace(this.size + "B");
-   }
+    public double getSize() {
+        return this.size;
+    }
 
-   public static double getSize(int length) {
-      return Double.parseDouble(String.valueOf(length));
-   }
+    public void setSize(double BCount) {
+        this.size = BCount;
+        this.setSpace(this.size + "B");
+    }
 
-   public String getSpace() {
-      return this.space;
-   }
+    public static double getSize(int length) {
+        return Double.parseDouble(String.valueOf(length));
+    }
 
-   public void setSpace(String space) {
-      this.space = space;
-   }
+    public String getSpace() {
+        return this.space;
+    }
 
-   public String getCreateTime() {
-      SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
-      return format.format(this.createTime);
-   }
+    public void setSpace(String space) {
+        this.space = space;
+    }
 
-   public Folder getParent() {
-      return this.parent;
-   }
+    public String getCreateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+        return format.format(this.createTime);
+    }
 
-   public void setParent(Folder parent) {
-      this.parent = parent;
-   }
+    public Folder getParent() {
+        return this.parent;
+    }
 
-   public boolean hasParent() {
-      return this.parent != null;
-   }
+    public void setParent(Folder parent) {
+        this.parent = parent;
+    }
 
-   public boolean isOpened() {
-      return this.isOpen;
-   }
+    public boolean hasParent() {
+        return this.parent != null;
+    }
 
-   public void setOpened(boolean isOpen) {
-      this.isOpen = isOpen;
-   }
+    public boolean isOpened() {
+        return this.isOpen;
+    }
 
-   private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-      s.defaultReadObject();
-      this.fileNameP = new SimpleStringProperty(this.fileName);
-      this.flagP = new SimpleStringProperty(this.flag == 0 ? "只读" : "读写");
-      this.diskNumP = new SimpleStringProperty(String.valueOf(this.type));
-      this.locationP = new SimpleStringProperty(this.location);
-      this.lengthP = new SimpleStringProperty(String.valueOf(this.length));
-   }
+    public void setOpened(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
 
-   public String toString() {
-      return this.fileName;
-   }
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        this.NameP = new SimpleStringProperty(this.Name);
+        this.flagP = new SimpleStringProperty(this.flag == 0 ? "只读" : "读写");
+        this.diskNumP = new SimpleStringProperty(String.valueOf(this.type));
+        this.locationP = new SimpleStringProperty(this.location);
+        this.lengthP = new SimpleStringProperty(String.valueOf(this.length));
+    }
+
+    public String toString() {
+        return this.Name;
+    }
 }

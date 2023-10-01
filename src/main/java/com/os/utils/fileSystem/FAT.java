@@ -15,7 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import com.os.utils.processSystem.ProcessManager;
-import javafx.util.Pair;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -112,7 +111,7 @@ public class FAT implements Serializable {
             for (num = 3 + ProcessManager.executableFileList.size(); num < this.disks.length; ++num) {
                 if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件夹")) {
                     parent = (Folder) this.disks[num].getObject();
-                    if (path.equals(parent.getLocation()) && folderName.equals(parent.getFolderName())) {
+                    if (path.equals(parent.getLocation()) && folderName.equals(parent.getName())) {
                         canName = false;
                     }
                 }
@@ -172,7 +171,7 @@ public class FAT implements Serializable {
             for (num = 3; num < this.disks.length; ++num) {
                 if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件")) {
                     File file = (File) this.disks[num].getObject();
-                    if (path.equals(file.getLocation()) && fileName.equals(file.getFileName())) {
+                    if (path.equals(file.getLocation()) && fileName.equals(file.getName())) {
                         canName = false;
                     }
                 }
@@ -199,7 +198,7 @@ public class FAT implements Serializable {
                 this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
-            System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getFolderName());
+            System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getName());
             num = this.searchEmptyDiskBlock();
             File file = new File(fileName, path, num, parent);
             file.setFlag(1);
@@ -210,14 +209,14 @@ public class FAT implements Serializable {
 
                 int newLength;
                 do {
-                    fileName = FileApp.copyFile.getFileName();
+                    fileName = FileApp.copyFile.getName();
                     canName1 = true;
                     fileName = fileName + index;
 
                     for (newLength = 3 + ProcessManager.executableFileList.size(); newLength < this.disks.length; ++newLength) {
                         if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
                             File file1 = (File) this.disks[newLength].getObject();
-                            if (path.equals(file1.getLocation()) && fileName.equals(file1.getFileName())) {
+                            if (path.equals(file1.getLocation()) && fileName.equals(file1.getName())) {
                                 canName1 = false;
                                 break;
                             }
@@ -227,7 +226,7 @@ public class FAT implements Serializable {
                     ++index;
                 } while (!canName1);
 
-                file.setFileName(fileName);
+                file.setName(fileName);
                 newLength = FileApp.copyFile.getContent().length();
                 int blockCount = blocksCount(newLength);
                 file.setLength(blockCount);
@@ -248,14 +247,14 @@ public class FAT implements Serializable {
                     index = 1;
 
                     while (true) {
-                        fileName = FileApp.copyFile.getFileName();
+                        fileName = FileApp.copyFile.getName();
                         canName2 = true;
                         fileName = fileName + index;
 
                         for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
                             if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
                                 File file2 = (File) this.disks[i].getObject();
-                                if (path.equals(file2.getLocation()) && fileName.equals(file2.getFileName())) {
+                                if (path.equals(file2.getLocation()) && fileName.equals(file2.getName())) {
                                     canName2 = false;
                                     break;
                                 }
@@ -264,7 +263,7 @@ public class FAT implements Serializable {
 
                         ++index;
                         if (canName2) {
-                            file.setFileName(fileName);
+                            file.setName(fileName);
                             break;
                         }
                     }
@@ -457,7 +456,7 @@ public class FAT implements Serializable {
                 }
 
                 folder = var6.next();
-            } while (!folder.getFolderName().equals(folderName));
+            } while (!folder.getName().equals(folderName));
 
             return folder;
         }
@@ -513,7 +512,7 @@ public class FAT implements Serializable {
                 return 1;
             }
         } else {
-            String folderPath = ((Folder) block.getObject()).getLocation() + "\\" + ((Folder) block.getObject()).getFolderName();
+            String folderPath = ((Folder) block.getObject()).getLocation() + "\\" + ((Folder) block.getObject()).getName();
             int index = 0;
 
             for (i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {

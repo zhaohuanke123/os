@@ -138,7 +138,7 @@ public class FileApp extends BaseApp<FileAppController> {
         this.disksItem = FXCollections.observableArrayList(fat.getDiskBlocks());
         controller.diskTable.setItems(this.disksItem);
 
-        fileName.setCellValueFactory(new PropertyValueFactory<>("fileNameP"));
+        fileName.setCellValueFactory(new PropertyValueFactory<>("NameP"));
         openType.setCellValueFactory(new PropertyValueFactory<>("flagP"));
         beginDisk.setCellValueFactory(new PropertyValueFactory<>("diskNumP"));
         fileLength.setCellValueFactory(new PropertyValueFactory<>("lengthP"));
@@ -207,7 +207,7 @@ public class FileApp extends BaseApp<FileAppController> {
         for (int i = 0; i < n; ++i) {
             String nName;
             if (bList.get(i).getObject() instanceof Folder) {
-                nName = ((Folder) bList.get(i).getObject()).getFolderName();
+                nName = ((Folder) bList.get(i).getObject()).getName();
                 if (nName.length() > 4) {
                     nName = nName.substring(0, 4) + "..";
                 }
@@ -215,7 +215,7 @@ public class FileApp extends BaseApp<FileAppController> {
                 URL location = this.getClass().getResource("/com/os/apps/fileApp/res/folder.png");
                 this.icons[i] = new Label(nName, new ImageView(String.valueOf(location)));
             } else {
-                nName = ((File) bList.get(i).getObject()).getFileName();
+                nName = ((File) bList.get(i).getObject()).getName();
                 if (nName.length() > 4) {
                     nName = nName.substring(0, 4) + "..";
                 }
@@ -321,7 +321,7 @@ public class FileApp extends BaseApp<FileAppController> {
             }
         } else {
             Folder thisFolder = (Folder) thisBlock.getObject();
-            String newPath = thisFolder.getLocation() + "\\" + thisFolder.getFolderName();
+            String newPath = thisFolder.getLocation() + "\\" + thisFolder.getName();
             controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
             this.addIcon(fat.getBlockList(newPath), newPath);
             controller.currentPath.setText(newPath);

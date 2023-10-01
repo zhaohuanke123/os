@@ -51,23 +51,23 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
 
         if (this.block.getObject() instanceof Folder) {
             Folder folder = (Folder) this.block.getObject();
-            controller.textField.setText(folder.getFolderName());
+            controller.textField.setText(folder.getName());
             controller.typeField.setText(folder.getType());
             controller.locField.setText(folder.getLocation());
             controller.spaceField.setText(folder.getSpace());
             controller.timeField.setText(folder.getCreateTime());
-            this.oldName = folder.getFolderName();
+            this.oldName = folder.getName();
             this.location = folder.getLocation();
             controller.checkRead.setDisable(true);
             controller.checkWrite.setDisable(true);
         } else {
             File file = (File) this.block.getObject();
-            controller.textField.setText(file.getFileName());
+            controller.textField.setText(file.getName());
             controller.typeField.setText(file.getType());
             controller.locField.setText(file.getLocation());
             controller.spaceField.setText(file.getSpace());
             controller.timeField.setText(file.getCreateTime());
-            this.oldName = file.getFileName();
+            this.oldName = file.getName();
             this.location = file.getLocation();
             this.toggleGroup.selectToggle(file.getFlag() == 0 ? controller.checkRead : controller.checkWrite);
         }
@@ -157,11 +157,11 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
     private void setNewName(String newName) {
         if (this.block.getObject() instanceof Folder) {
             Folder thisFolder = (Folder) this.block.getObject();
-            thisFolder.setFolderName(newName);
+            thisFolder.setName(newName);
             this.pathMap.get(thisFolder.getPath()).setValue(newName);
             this.reLoc(this.location, this.location, this.oldName, newName, thisFolder);
         } else {
-            ((File) this.block.getObject()).setFileName(newName);
+            ((File) this.block.getObject()).setName(newName);
         }
     }
 
@@ -178,10 +178,10 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
                 Folder nextFolder = (Folder) child;
                 nextFolder.setLocation(newLoc);
                 if (nextFolder.hasChild()) {
-                    this.reLoc(oldLoc, newLoc, nextFolder.getFolderName(), nextFolder.getFolderName(), nextFolder);
+                    this.reLoc(oldLoc, newLoc, nextFolder.getName(), nextFolder.getName(), nextFolder);
                 } else {
-                    Path nextPath = FileApp.fat.getPath(oldLoc + "\\" + nextFolder.getFolderName());
-                    String newNext = newLoc + "\\" + nextFolder.getFolderName();
+                    Path nextPath = FileApp.fat.getPath(oldLoc + "\\" + nextFolder.getName());
+                    String newNext = newLoc + "\\" + nextFolder.getName();
                     FileApp.fat.replacePath(nextPath, newNext);
                 }
             }
