@@ -3,8 +3,8 @@ package com.os.utils;
 import com.os.datas.ExecutableFileData;
 import com.os.datas.InstructionData;
 import com.os.datas.ProcessDetailData;
-import com.os.utils.process.ExecutableFile;
-import com.os.utils.process.Process;
+import com.os.utils.processSystem.ExecutableFile;
+import com.os.utils.processSystem.Process;
 
 import java.util.ArrayList;
 import java.util.Vector;

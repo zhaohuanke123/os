@@ -1,4 +1,4 @@
-package com.os.utils.ui;
+package com.os.utils.uiUtil;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;

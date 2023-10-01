@@ -1,6 +1,6 @@
 package com.os.datas;
 
-import com.os.utils.process.Process;
+import com.os.utils.processSystem.Process;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;

@@ -1,15 +1,14 @@
-package com.os.utils.ui;
+package com.os.utils.uiUtil;
 
-import com.os.apps.fileApp.app.MainUI;
 import com.os.apps.occupancyApp.OccupancyAppController;
 import com.os.apps.processApp.ProcessAppController;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import com.os.utils.process.ExecutableFile;
-import com.os.utils.process.*;
-import com.os.utils.process.Process;
+import com.os.utils.processSystem.ExecutableFile;
+import com.os.utils.processSystem.*;
+import com.os.utils.processSystem.Process;
 import com.os.main.MainController;
 
 public class UIThread extends Thread {

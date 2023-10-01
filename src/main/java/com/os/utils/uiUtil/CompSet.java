@@ -1,4 +1,4 @@
-package com.os.utils.ui;
+package com.os.utils.uiUtil;
 
 import com.os.main.MainController;
 import javafx.scene.image.ImageView;

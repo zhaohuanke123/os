@@ -24,14 +24,16 @@ module os {
     exports com.os.main;
     opens com.os.utils.fileSystem to javafx.fxml;
     exports com.os.utils.fileSystem;
-    opens com.os.utils.ui to javafx.fxml;
-    exports com.os.utils.ui;
-    opens com.os.utils.process to javafx.fxml;
-    exports com.os.utils.process;
+    opens com.os.utils.uiUtil to javafx.fxml;
+    exports com.os.utils.uiUtil;
+    opens com.os.utils.processSystem to javafx.fxml;
+    exports com.os.utils.processSystem;
     opens com.os.apps.fileApp.fxmls to javafx.fxml;
     opens com.os.apps.fileApp.css to javafx.fxml;
     opens com.os.apps.fileApp.res to javafx.fxml;
     opens com.os.img to javafx.fxml;
     exports com.os.utils.scene;
     opens com.os.utils.scene to javafx.fxml;
+    exports com.os;
+    opens com.os to javafx.fxml;
 }

@@ -1,6 +1,4 @@
-package com.os.utils.process;
-
-import com.os.utils.process.Instruction;
+package com.os.utils.processSystem;
 
 import java.io.Serializable;
 import java.util.Random;

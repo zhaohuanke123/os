@@ -1,26 +1,15 @@
 package com.os.apps.fileApp.app;
 
-import com.os.apps.BaseApp;
 import com.os.apps.fileApp.Controller.PropertyCtl;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.File;
 import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
-import com.os.utils.ui.CompSet;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 import java.util.regex.Pattern;
 

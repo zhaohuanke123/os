@@ -1,6 +1,6 @@
 package com.os.datas;
 
-import com.os.utils.process.Instruction;
+import com.os.utils.processSystem.Instruction;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

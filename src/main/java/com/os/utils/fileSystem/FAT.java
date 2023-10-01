@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.os.utils.process.ExecutableFile;
+import com.os.utils.processSystem.ExecutableFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import com.os.utils.process.ProcessManager;
+import com.os.utils.processSystem.ProcessManager;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;

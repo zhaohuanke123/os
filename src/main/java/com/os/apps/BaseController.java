@@ -1,12 +1,10 @@
 package com.os.apps;
 
-import com.os.apps.processApp.ProcessAppController;
-import com.os.main.MainController;
-import com.os.utils.ui.DrawUtil;
+import com.os.utils.scene.SceneManager;
+import com.os.utils.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;

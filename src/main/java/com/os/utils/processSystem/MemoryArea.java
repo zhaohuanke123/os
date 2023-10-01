@@ -1,4 +1,4 @@
-package com.os.utils.process;
+package com.os.utils.processSystem;
 
 public class MemoryArea {
    public int start;

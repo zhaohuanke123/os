@@ -1,7 +1,9 @@
 package com.os.utils.scene;
 
+import com.os.apps.BaseApp;
 import javafx.stage.Stage;
 
+import java.util.TreeMap;
 import java.util.Vector;
 
 import static java.util.Collections.swap;
@@ -9,9 +11,11 @@ import static java.util.Collections.swap;
 public class SceneManager {
     private static SceneManager instance = null;
     private final Vector<StageRecord> stageList;
+    private final TreeMap<String, BaseApp<?>> appDict;
 
     private SceneManager() {
         stageList = new Vector<>();
+        appDict = new TreeMap<>();
     }
 
     public static SceneManager getInstance() {

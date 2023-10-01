@@ -1,4 +1,4 @@
-package com.os.utils;
+package com.os;
 
 import java.util.Vector;
 
