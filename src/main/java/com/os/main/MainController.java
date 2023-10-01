@@ -24,11 +24,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class MainController {
     private static MainController _instance;
+
     public static MainController getInstance() {
         if (_instance == null) {
             throw new NullPointerException("MainController is null");
@@ -36,7 +39,6 @@ public class MainController {
         return _instance;
     }
 
-    //region [FXML Comp]
     @FXML
     private Pane MainWindow;
     @FXML
@@ -63,13 +65,14 @@ public class MainController {
     private Button closeButton;  // 关闭窗口按钮
     @FXML
     private VBox timeBox;  // 包含2种时间显示的VBox
+
     @FXML
     private Button timeButton1;  // 时间显示
     @FXML
     private Button timeButton2;  // 日期显示
     @FXML
     private Button deskButton;  // 返回桌面按钮
-    //endregion
+    private TimeModel timeModel = new TimeModel();
 
     private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
     public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
@@ -199,9 +202,7 @@ public class MainController {
             try {
                 stage = new Stage();
                 // 使用 SystemFileApp 实例初始化新窗口
-//                app.start(stage);
-                BaseApp<?> newApp = SceneManager.getInstance().getApp(stageName);
-                newApp.start(stage);
+                SceneManager.getInstance().getApp(stageName).start(stage);
                 // 将新窗口记录添加到窗口列表
                 SceneManager.getInstance().addStage(stageName, stage);
             } catch (IOException e) {
@@ -277,16 +278,37 @@ public class MainController {
 
     // 初始化时间显示
     private void timeInit() {
-        // 获取当前日期和时间
-        Date date = new Date();
-        // 设置时间按钮的文本格式
-        this.timeButton1.setText(
-                String.format("%tH", date) + ":" +
-                        String.format("%tM", date) + ":" +
-                        String.format("%tS", date));
-        this.timeButton2.setText("20" + String.format("%ty", date) + "/" +
-                String.format("%tm", date) + "/" +
-                String.format("%td", date));
+        timeButton1.textProperty().bind(timeModel.time1Property());
+        timeButton2.textProperty().bind(timeModel.time2Property());
+        new Thread(() -> {
+            while (true) {
+                // 注意：这里只需要改变model中的time属性即可，视图层的Label信息会跟着调整
+                // 因为在initialize方法中已经将time属性绑定在Label控件中了。
+                Platform.runLater(() -> {
+                    SimpleDateFormat sdf_ymd = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf_hms = new SimpleDateFormat("HH:mm:ss");
+                    Date date = new Date();
+                    timeModel.setTime1(sdf_hms.format(date));
+                    timeModel.setTime2(sdf_ymd.format(date));
+                });
+
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException ignore) {
+                }
+            }
+        }).start();
+
+//        // 获取当前日期和时间
+//        Date date = new Date();
+//        // 设置时间按钮的文本格式
+//        this.timeButton1.setText(
+//                String.format("%tH", date) + ":" +
+//                        String.format("%tM", date) + ":" +
+//                        String.format("%tS", date));
+//        this.timeButton2.setText("20" + String.format("%ty", date) + "/" +
+//                String.format("%tm", date) + "/" +
+//                String.format("%td", date));
 
         // 设置时间按钮的最小和最大宽度
         CompSet.setCompFixSize(this.timeButton2, 2 * this.appWidth, -1);
@@ -324,17 +346,17 @@ public class MainController {
 
     // 实时更新系统时间
     private void timeUpdate() {
-        if (timeButton1 != null && timeButton2 != null) {
-            Platform.runLater(() -> {
-                Date date = new Date();
-                timeButton1.setText(
-                        String.format("%tH", date) + ":" +
-                                String.format("%tM", date) + ":" +
-                                String.format("%tS", date));
-                timeButton2.setText("20" + String.format("%ty", date) + "/" +
-                        String.format("%tm", date) + "/" +
-                        String.format("%td", date));
-            });
-        }
+//        if (timeButton1 != null && timeButton2 != null) {
+//            Platform.runLater(() -> {
+//                Date date = new Date();
+//                timeButton1.setText(
+//                        String.format("%tH", date) + ":" +
+//                                String.format("%tM", date) + ":" +
+//                                String.format("%tS", date));
+//                timeButton2.setText("20" + String.format("%ty", date) + "/" +
+//                        String.format("%tm", date) + "/" +
+//                        String.format("%td", date));
+//            });
+//        }
     }
 }
