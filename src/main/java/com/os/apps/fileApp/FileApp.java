@@ -100,11 +100,7 @@ public class FileApp extends BaseApp<FileAppController> {
         this.tableInit();
         this.menuInit();
         this.menuItemSetOnAction();
-        controller.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
-    }
-
-    public static void updateFileStageList() {
-
+//        controller.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
     }
 
     public static void minimizeOnShowApp(boolean isMinimize) {

@@ -158,9 +158,9 @@
         <Tab fx:id="chartTab" text="磁盘使用情况">
             <Pane prefHeight="200.0" prefWidth="200.0">
                 <HBox layoutX="6.0" layoutY="5.0" prefHeight="534.0" prefWidth="888.0">
-                    <HBox prefHeight="570.0" prefWidth="600.0" style="-fx-background-color: #e1fcfd;">
-                        <PieChart fx:id="pieChart" prefHeight="500.0" prefWidth="452.0" startAngle="50.3"/>
-                    </HBox>
+<!--                    <HBox prefHeight="570.0" prefWidth="600.0" style="-fx-background-color: #e1fcfd;">-->
+<!--                        <PieChart fx:id="pieChart" prefHeight="500.0" prefWidth="452.0" startAngle="50.3"/>-->
+<!--                    </HBox>-->
                     <VBox fillWidth="false" prefHeight="570.0" prefWidth="600.0">
                         <TableView fx:id="diskTable" prefHeight="300.0" prefWidth="453.0">
                             <columns>
