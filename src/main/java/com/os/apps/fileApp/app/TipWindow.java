@@ -28,6 +28,6 @@ public class TipWindow extends BaseFileApp<TipWindowCtl> {
     public void start(Stage stage) throws IOException {
         super.start(stage);
 
-        controller.init(stage,tipString);
+        controller.init(stage, tipString);
     }
 }

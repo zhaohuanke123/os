@@ -23,7 +23,7 @@ public class BaseController {
     @FXML
     protected HBox titleBarL;
     @FXML
-    protected  HBox titleBarR;
+    protected HBox titleBarR;
     @FXML
     public Label title;
     @FXML
@@ -44,7 +44,7 @@ public class BaseController {
 
     // 关闭窗口
     @FXML
-    protected void closeStage() {
+    public void closeStage() {
         this.stage.close();
     }
 

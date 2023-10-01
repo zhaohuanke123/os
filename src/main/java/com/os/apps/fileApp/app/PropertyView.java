@@ -20,10 +20,9 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
     private final Map<Path, TreeItem<String>> pathMap;
     private String oldName;
     private String location;
-    private Stage stage;
     private final ToggleGroup toggleGroup = new ToggleGroup();
 
-    public PropertyView(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap, Stage stage) throws IOException {
+    public PropertyView(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap) throws IOException {
         super(
                 "/com/os/apps/fileApp/fxmls/PropertyView.fxml",
                 (block.getObject() instanceof Folder) ? "/com/os/apps/fileApp/res/folder.png" : "/com/os/apps/fileApp/res/file.png",
@@ -35,7 +34,6 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
         this.block = block;
         this.icon = icon;
         this.pathMap = pathMap;
-        this.stage = stage;
     }
 
     public void start(Stage primaryStage) throws IOException {
@@ -117,7 +115,7 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
 
             controller.applyButton.setDisable(true);
         });
-        controller.cancelButton.setOnAction((ActionEvent) -> this.stage.close());
+        controller.cancelButton.setOnAction((ActionEvent) -> this.controller.closeStage());
         controller.acceptButton.setOnAction((ActionEvent) -> {
             String newName = controller.textField.getText();
             String regEx = "[$./]";
@@ -152,7 +150,7 @@ public class PropertyView extends BaseFileApp<PropertyCtl> {
                 thisFile.setFlag(newFlag);
             }
 
-            this.stage.close();
+            controller.closeStage();
         });
     }
 

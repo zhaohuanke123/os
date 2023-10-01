@@ -5,10 +5,8 @@ import com.os.apps.fileApp.app.TipWindow;
 import com.os.utils.fileSystem.Disk;
 import com.os.utils.fileSystem.Folder;
 import com.os.utils.fileSystem.Path;
-import com.sun.javafx.tk.Toolkit;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -38,18 +36,7 @@ public class DelViewCtl extends BaseFileCtl {
             int res = FileApp.fat.delete(block);
             if (res == 0) {
                 mainView.removeNode(mainView.getRecentNode(), thisPath);
-
-//                try {
-//                    DelViewCtl.this.tipOpen("删除文件夹成功");
-//                } catch (Exception var8) {
-//                    System.out.println(Arrays.toString(var8.getStackTrace()));
-//                }
             } else if (res == 1) {
-//                try {
-//                    DelViewCtl.this.tipOpen("删除文件成功");
-//                } catch (Exception var7) {
-//                    System.out.println(Arrays.toString(var7.getStackTrace()));
-//                }
             } else if (res == 2) {
                 try {
                     DelViewCtl.this.tipOpen("文件夹不为空");
@@ -68,6 +55,7 @@ public class DelViewCtl extends BaseFileCtl {
 
             mainView.addIcon(FileApp.fat.getBlockList(mainView.recentPath), mainView.recentPath);
         });
+
         this.cancelButton.setOnMouseClicked(event -> stage.close());
     }
 

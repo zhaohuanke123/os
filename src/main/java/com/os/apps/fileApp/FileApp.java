@@ -1,7 +1,6 @@
 package com.os.apps.fileApp;
 
 import com.os.apps.BaseApp;
-import com.os.apps.fileApp.Controller.FileAppController;
 import com.os.apps.fileApp.app.DelView;
 import com.os.apps.fileApp.app.FileView;
 import com.os.apps.fileApp.app.PropertyView;
@@ -12,7 +11,6 @@ import com.os.utils.uiUtil.CompSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -22,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class FileApp extends BaseApp<FileAppController> {
@@ -64,34 +61,7 @@ public class FileApp extends BaseApp<FileAppController> {
     public void start(Stage stage) throws IOException {
         super.start(stage);
 
-        stage.setOnCloseRequest((e) -> {
-            try {
-                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("data"));
-                Throwable var2 = null;
-
-                try {
-                    System.out.println("saving");
-                    outputStream.writeObject(fat);
-                } catch (Throwable var13) {
-                    var2 = var13;
-                    throw var13;
-                } finally {
-                    if (var2 != null) {
-                        try {
-                            outputStream.close();
-                        } catch (Throwable var12) {
-                            var2.addSuppressed(var12);
-                        }
-                    } else {
-                        outputStream.close();
-                    }
-
-                }
-            } catch (IOException var16) {
-                System.out.println(Arrays.toString(var16.getStackTrace()));
-            }
-
-        });
+        stage.setOnCloseRequest((e) -> saveData());
 
         this.recentPath = "C:";
 
@@ -100,7 +70,6 @@ public class FileApp extends BaseApp<FileAppController> {
         this.tableInit();
         this.menuInit();
         this.menuItemSetOnAction();
-//        controller.chartTab.setOnSelectionChanged((ActionEvent) -> this.pieInit());
     }
 
     public static void minimizeOnShowApp(boolean isMinimize) {
@@ -115,39 +84,6 @@ public class FileApp extends BaseApp<FileAppController> {
                     }
                 }
             }
-        }
-    }
-
-    // 加载数据
-    public static void loadData() {
-        try {
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"));
-            Throwable var2 = null;
-
-            try {
-                fat = (FAT) inputStream.readObject();
-            } catch (Throwable var12) {
-                var2 = var12;
-                throw var12;
-            } finally {
-                if (var2 != null) {
-                    try {
-                        inputStream.close();
-                    } catch (Throwable var11) {
-                        var2.addSuppressed(var11);
-                    }
-                } else {
-                    inputStream.close();
-                }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-
-        // 如果没有fat，则新建fat
-        if (fat == null || clearFlag) {
-            fat = new FAT();
-            clearFlag = false;
         }
     }
 
@@ -210,23 +146,6 @@ public class FileApp extends BaseApp<FileAppController> {
 
         this.fileOpened = fat.getOpenedFiles();
         controller.openFile.setItems(this.fileOpened);
-    }
-
-    public void pieInit() {
-        int UsedNum = fat.checkNumOfBusyDisk();
-
-        DecimalFormat decimalFormat = new DecimalFormat("##.00%");
-
-        System.out.println(decimalFormat.format(UsedNum / FAT.DISK_NUM));
-        System.out.println("已占用：" + UsedNum);
-
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("未占用  " +
-                        decimalFormat.format((double) (256 - UsedNum) / 256.0), 256 - UsedNum),
-                new PieChart.Data("已占用  " +
-                        decimalFormat.format((double) UsedNum / 256.0), UsedNum));
-        controller.pieChart.setData(pieChartData);
-        controller.pieChart.setLabelsVisible(false);
     }
 
     private void treeViewInit() {
@@ -544,7 +463,7 @@ public class FileApp extends BaseApp<FileAppController> {
         PropertyView propertyView = null;
 
         try {
-            propertyView = new PropertyView(thisBlock, icon, pathMap, stage);
+            propertyView = new PropertyView(thisBlock, icon, pathMap);
         } catch (IOException var7) {
             System.out.println(Arrays.toString(var7.getStackTrace()));
         }
@@ -586,6 +505,39 @@ public class FileApp extends BaseApp<FileAppController> {
         Stage stage = new Stage();
         DelView delView = new DelView(this, block);
         delView.start(stage);
+    }
+
+    // 加载数据
+    public static void loadData() {
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"));
+            Throwable var2 = null;
+
+            try {
+                fat = (FAT) inputStream.readObject();
+            } catch (Throwable var12) {
+                var2 = var12;
+                throw var12;
+            } finally {
+                if (var2 != null) {
+                    try {
+                        inputStream.close();
+                    } catch (Throwable var11) {
+                        var2.addSuppressed(var11);
+                    }
+                } else {
+                    inputStream.close();
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
+        // 如果没有fat，则新建fat
+        if (fat == null || clearFlag) {
+            fat = new FAT();
+            clearFlag = false;
+        }
     }
 
     public static void saveData() {
