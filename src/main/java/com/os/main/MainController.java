@@ -102,8 +102,8 @@ public class MainController {
         this.iconInit();
         this.timeInit();
         OccupancyManager.init();
-        FileApp.loadData();
         this.processThreadInit();
+        FileApp.loadData();
         this.uiThreadInit();
     }
 
