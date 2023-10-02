@@ -10,7 +10,6 @@ import java.util.Date;
 public class BaseFile implements Serializable {
     private static final long serialVersionUID = 1L;
     protected String Name;
-    protected transient StringProperty NameP = new SimpleStringProperty();
     protected String type;
     protected int diskNum;
     protected String location;
@@ -18,6 +17,7 @@ public class BaseFile implements Serializable {
     protected String space;
     protected Date createTime;
     protected Folder parent;
+    protected transient StringProperty NameP = new SimpleStringProperty();
 
     public StringProperty NamePProperty() {
         return this.NameP;

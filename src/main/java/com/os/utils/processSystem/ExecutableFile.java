@@ -32,7 +32,7 @@ public class ExecutableFile implements Serializable {
             this.instructionArray.add(new Instruction(1));
          } else if (which == 2) {
             this.instructionArray.add(new Instruction(2));
-         } else if (which == 3) {
+         } else {
             num = random.nextInt(3);
             int num1 = 1 + random.nextInt(5);
             this.instructionArray.add(new Instruction(3, num, num1));
