@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import com.os.utils.processSystem.ProcessManager;
+import javafx.util.Pair;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -137,7 +139,7 @@ public class FAT implements Serializable {
                     countBlock = parent.getCatalogNum() / 8 + 1;
                 }
 
-                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
+                this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
             num = this.searchEmptyDiskBlock();
@@ -195,7 +197,7 @@ public class FAT implements Serializable {
                     countBlock = parent.getCatalogNum() / 8 + 1;
                 }
 
-                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
+                this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
             System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getName());
@@ -302,7 +304,7 @@ public class FAT implements Serializable {
     }
 
     public boolean reallocBlocks(int num, Disk block) {
-        File thisFile = (File) block.getObject();
+        BaseFile thisFile = (BaseFile) block.getObject();
         int begin = thisFile.getDiskNum();
         int index = this.disks[begin].getIndex();
 
@@ -328,6 +330,7 @@ public class FAT implements Serializable {
 
             for (i = 1; i <= end; ++i) {
                 next = this.searchEmptyDiskBlock();
+//                String type = thisFile instanceof File ? "文件" : "文件夹";
                 this.disks[next].allocBlock(-1, "文件", thisFile, false);
                 if (i != end) {
                     int space2 = this.searchEmptyDiskBlock();
@@ -349,57 +352,8 @@ public class FAT implements Serializable {
             this.disks[end].setIndex(-1);
         }
 
-        thisFile.setLength(num);
-        return true;
-    }
-
-    public boolean reallocFolderBlocks(int num, Disk block) {
-        BaseFile thisFolder = (BaseFile) block.getObject();
-        int begin = thisFolder.getDiskNum();
-        int index = this.disks[begin].getIndex();
-
-        int oldNum;
-        for (oldNum = 1; index != -1; index = this.disks[index].getIndex()) {
-            ++oldNum;
-            if (this.disks[index].getIndex() == -1) {
-                begin = index;
-            }
-        }
-
-        int end;
-        int next;
-        int i;
-        if (num > oldNum) {
-            end = num - oldNum;
-            if (this.freeBlocksCount() < end) {
-                return false;
-            }
-
-            next = this.searchEmptyDiskBlock();
-            this.disks[begin].setIndex(next);
-
-            for (i = 1; i <= end; ++i) {
-                next = this.searchEmptyDiskBlock();
-                this.disks[next].allocBlock(-1, "文件夹", thisFolder, false);
-                if (i != end) {
-                    int space2 = this.searchEmptyDiskBlock();
-                    this.disks[next].setIndex(space2);
-                }
-
-                System.out.println(thisFolder);
-            }
-        } else if (num < oldNum) {
-            for (end = thisFolder.getDiskNum(); num > 1; --num) {
-                end = this.disks[end].getIndex();
-            }
-
-            for (i = this.disks[end].getIndex(); i != -1; i = next) {
-                next = this.disks[i].getIndex();
-                this.disks[i].clearBlock();
-            }
-
-            this.disks[end].setIndex(-1);
-        }
+        if (thisFile instanceof File)
+            thisFile.setLength(num);
 
         return true;
     }
@@ -493,7 +447,7 @@ public class FAT implements Serializable {
                         i = parent.getCatalogNum() / 8 + 1;
                     }
 
-                    this.reallocFolderBlocks(i, this.disks[parent.getDiskNum()]);
+                    this.reallocBlocks(i, this.disks[parent.getDiskNum()]);
                     parent.removeChildren(thisFile);
                     parent.setSize(getFolderSize(parent));
 
@@ -546,7 +500,7 @@ public class FAT implements Serializable {
                     countBlock = parent.getCatalogNum() / 8 + 1;
                 }
 
-                this.reallocFolderBlocks(countBlock, this.disks[parent.getDiskNum()]);
+                this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
             this.paths.remove(this.getPath(folderPath));

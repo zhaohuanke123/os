@@ -12,6 +12,7 @@ public class Folder extends BaseFile implements Serializable {
     private List<Object> children;
     private Path path;
     private int catalogNum;
+
     public Folder(String folderName) {
         super(folderName);
     }

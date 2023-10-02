@@ -9,13 +9,11 @@ import java.io.Serializable;
 
 public class File extends BaseFile implements Serializable {
     private int flag;
-    private int length;
     private String content;
     private boolean isOpen;
     private transient StringProperty flagP = new SimpleStringProperty();
     private transient StringProperty diskNumP = new SimpleStringProperty();
     private transient StringProperty locationP = new SimpleStringProperty();
-    private transient StringProperty lengthP = new SimpleStringProperty();
 
     public StringProperty flagPProperty() {
         return this.flagP;
@@ -59,10 +57,6 @@ public class File extends BaseFile implements Serializable {
         this.locationP.set(this.location);
     }
 
-    private void setLengthP() {
-        this.lengthP.set(String.valueOf(this.length));
-    }
-
     public File(String fileName, String location, int diskNum, Folder parent) {
         super(fileName, location, diskNum, parent);
 
@@ -97,15 +91,6 @@ public class File extends BaseFile implements Serializable {
     public void setFlag(int flag) {
         this.flag = flag;
         this.setFlagP();
-    }
-
-    public int getLength() {
-        return this.length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-        this.setLengthP();
     }
 
     public String getContent() {

@@ -2,6 +2,7 @@ package com.os.utils.fileSystem;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.util.Pair;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,9 @@ public class BaseFile implements Serializable {
     protected String space;
     protected Date createTime;
     protected Folder parent;
+    protected int length;
     protected transient StringProperty NameP = new SimpleStringProperty();
+    protected transient StringProperty lengthP = new SimpleStringProperty();
 
     public StringProperty NamePProperty() {
         return this.NameP;
@@ -113,6 +116,19 @@ public class BaseFile implements Serializable {
 
     public boolean hasParent() {
         return this.parent != null;
+    }
+
+    protected void setLengthP() {
+        this.lengthP.set(String.valueOf(this.length));
+    }
+
+    public int getLength() {
+        return this.length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+        this.setLengthP();
     }
 
     public String toString() {
