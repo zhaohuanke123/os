@@ -5,6 +5,7 @@ import com.os.apps.fileApp.app.TipWindow;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -19,6 +20,7 @@ import com.os.utils.processSystem.ProcessManager;
 import javafx.util.Pair;
 
 public class FAT implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final int DISK_NUM = 256;
     private static ObservableList<File> openedFiles;
@@ -87,15 +89,6 @@ public class FAT implements Serializable {
     public boolean isOpenedFile(Disk block) {
         return !(block.getObject() instanceof Folder) &&
                 ((File) block.getObject()).isOpened();
-    }
-
-    public void tipOpen(String tipString) throws Exception {
-        Stage stage = new Stage();
-        TipWindow tipWindow = new TipWindow(tipString);
-        tipWindow.start(stage);
-        stage.setAlwaysOnTop(true);
-        stage.setIconified(false);
-        stage.toFront();
     }
 
     public int createFolder(String path) {
@@ -330,8 +323,8 @@ public class FAT implements Serializable {
 
             for (i = 1; i <= end; ++i) {
                 next = this.searchEmptyDiskBlock();
-//                String type = thisFile instanceof File ? "文件" : "文件夹";
-                this.disks[next].allocBlock(-1, "文件", thisFile, false);
+                String type = thisFile instanceof File ? "文件" : "文件夹";
+                this.disks[next].allocBlock(-1, type, thisFile, false);
                 if (i != end) {
                     int space2 = this.searchEmptyDiskBlock();
                     this.disks[next].setIndex(space2);
@@ -492,7 +485,7 @@ public class FAT implements Serializable {
                 parent.removeChildren(thisFolder);
                 parent.setSize(getFolderSize(parent));
                 parent.setCatalogNum(parent.getCatalogNum() - 1);
-//            int countBlock = false;
+
                 int countBlock;
                 if (parent.getCatalogNum() % 8 == 0) {
                     countBlock = parent.getCatalogNum() / 8;
