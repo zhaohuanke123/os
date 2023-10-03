@@ -5,7 +5,6 @@ import com.os.apps.fileApp.app.TipWindow;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -20,7 +19,6 @@ import com.os.utils.processSystem.ProcessManager;
 import javafx.util.Pair;
 
 public class FAT implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
     public static final int DISK_NUM = 256;
     private static ObservableList<File> openedFiles;

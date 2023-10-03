@@ -110,7 +110,7 @@ public class SceneManager {
         // 首字母大写
         ClassName = ClassName.substring(0, 1).toUpperCase() + ClassName.substring(1);
         try {
-            baseClass = Class.forName("com.os.apps." + stageName + "." + ClassName);
+            baseClass = Class.forName(stageName);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

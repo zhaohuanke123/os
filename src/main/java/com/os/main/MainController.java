@@ -1,6 +1,10 @@
 package com.os.main;
 
 import com.os.apps.fileApp.FileApp;
+import com.os.apps.helpApp.HelpApp;
+import com.os.apps.occupancyApp.OccupancyApp;
+import com.os.apps.processApp.ProcessApp;
+import com.os.apps.systemFileApp.SystemFileApp;
 import com.os.utils.fileSystem.FAT;
 import com.os.utils.processSystem.OccupancyManager;
 import com.os.utils.processSystem.ProcessManager;
@@ -88,11 +92,11 @@ public class MainController {
     public void init(Scene scene, Stage stage) throws URISyntaxException {
         _instance = this;
 
-        appButtonDict.put("systemFileApp", systemFileButton);
-        appButtonDict.put("processApp", processButton);
-        appButtonDict.put("occupancyApp", occupancyButton);
-        appButtonDict.put("helpApp", helpButton);
-        appButtonDict.put("fileApp", fileManagerButton);
+        appButtonDict.put(SystemFileApp.class.getName(), systemFileButton);
+        appButtonDict.put(ProcessApp.class.getName(), processButton);
+        appButtonDict.put(OccupancyApp.class.getName(), occupancyButton);
+        appButtonDict.put(FileApp.class.getName(), fileManagerButton);
+        appButtonDict.put(HelpApp.class.getName(), helpButton);
 
         this.mainWindowScene = scene;
         this.primaryStage = stage;
