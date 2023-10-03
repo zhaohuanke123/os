@@ -1,14 +1,14 @@
 package com.os.utility.uiUtil;
 
-import com.os.apps.occupancyApp.OccupancyAppController;
-import com.os.apps.processApp.ProcessAppController;
+import com.os.applications.occupancyApp.OccupancyAppController;
+import com.os.applications.processApp.ProcessAppController;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import com.os.utility.processSystem.ExecutableFile;
-import com.os.utility.processSystem.*;
-import com.os.utility.processSystem.Process;
+import com.os.applications.processApp.processSystem.ExecutableFile;
+import com.os.applications.processApp.processSystem.*;
+import com.os.applications.processApp.processSystem.Process;
 
 public class UIThread extends Thread {
     public Vector<Process> runProcessList;

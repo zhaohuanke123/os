@@ -1,6 +1,6 @@
 package com.os.utility.fileSystem;
 
-import com.os.apps.fileApp.FileApplication;
+import com.os.applications.fileApp.FileApplication;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.os.utility.processSystem.ExecutableFile;
+import com.os.applications.processApp.processSystem.ExecutableFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.os.utility.processSystem.ProcessManager;
+import com.os.applications.processApp.processSystem.ProcessManager;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -1,14 +1,14 @@
 package com.os.main;
 
-import com.os.apps.fileApp.FileApplication;
-import com.os.apps.helpApp.HelpApp;
-import com.os.apps.occupancyApp.OccupancyApp;
-import com.os.apps.processApp.ProcessApp;
-import com.os.apps.systemFileApp.SystemFileApp;
+import com.os.applications.fileApp.FileApplication;
+import com.os.applications.helpApp.HelpApp;
+import com.os.applications.occupancyApp.OccupancyApp;
+import com.os.applications.processApp.ProcessApp;
+import com.os.applications.systemFileApp.SystemFileApp;
 import com.os.utility.fileSystem.FAT;
-import com.os.utility.processSystem.OccupancyManager;
-import com.os.utility.processSystem.ProcessManager;
-import com.os.utility.processSystem.ProcessScheduleThread;
+import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.processApp.processSystem.ProcessManager;
+import com.os.applications.processApp.processSystem.ProcessScheduleThread;
 import com.os.utility.sceneManager.SceneManager;
 import com.os.utility.uiUtil.CompSet;
 import com.os.utility.uiUtil.UIThread;

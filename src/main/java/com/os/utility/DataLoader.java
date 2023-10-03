@@ -1,10 +1,10 @@
 package com.os.utility;
 
-import com.os.datas.ExecutableFileData;
-import com.os.datas.InstructionData;
-import com.os.datas.ProcessDetailData;
-import com.os.utility.processSystem.ExecutableFile;
-import com.os.utility.processSystem.Process;
+import com.os.models.ExecutableFileData;
+import com.os.models.InstructionData;
+import com.os.applications.processApp.models.ProcessDetailData;
+import com.os.applications.processApp.processSystem.ExecutableFile;
+import com.os.applications.processApp.processSystem.Process;
 
 import java.util.ArrayList;
 import java.util.Vector;

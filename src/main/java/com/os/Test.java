@@ -1,6 +1,6 @@
 package com.os;
 
-import com.os.apps.fileApp.FileApplication;
+import com.os.applications.fileApp.FileApplication;
 
 public class Test {
     public static void main(String[] args) {

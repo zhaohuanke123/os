@@ -1,6 +1,6 @@
 package com.os.utility.sceneManager;
 
-import com.os.apps.BaseApp;
+import com.os.applications.BaseApp;
 import javafx.stage.Stage;
 
 import java.io.IOException;
