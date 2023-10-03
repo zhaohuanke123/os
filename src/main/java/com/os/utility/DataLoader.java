@@ -1,7 +1,7 @@
 package com.os.utility;
 
-import com.os.models.ExecutableFileData;
-import com.os.models.InstructionData;
+import com.os.dataModels.ExecutableFileData;
+import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
 import com.os.applications.processApp.processSystem.ExecutableFile;
 import com.os.applications.processApp.processSystem.Process;

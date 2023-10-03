@@ -1,7 +1,7 @@
 package com.os.applications.processApp;
 
 import com.os.applications.BaseController;
-import com.os.models.InstructionData;
+import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
 import com.os.main.MainController;
 import com.os.utility.DataLoader;

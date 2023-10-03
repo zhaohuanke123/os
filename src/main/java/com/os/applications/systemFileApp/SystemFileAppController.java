@@ -1,8 +1,8 @@
 package com.os.applications.systemFileApp;
 
 import com.os.applications.BaseController;
-import com.os.models.ExecutableFileData;
-import com.os.models.InstructionData;
+import com.os.dataModels.ExecutableFileData;
+import com.os.dataModels.InstructionData;
 import com.os.utility.DataLoader;
 import com.os.applications.processApp.processSystem.ExecutableFile;
 import com.os.applications.processApp.processSystem.ProcessManager;

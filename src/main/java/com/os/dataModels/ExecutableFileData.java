@@ -1,4 +1,4 @@
-package com.os.models;
+package com.os.dataModels;
 
 import com.os.applications.processApp.processSystem.ExecutableFile;
 import javafx.beans.property.SimpleStringProperty;
