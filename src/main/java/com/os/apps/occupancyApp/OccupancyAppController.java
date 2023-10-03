@@ -1,11 +1,11 @@
 package com.os.apps.occupancyApp;
 
 import com.os.apps.BaseController;
-import com.os.apps.fileApp.FileApp;
+import com.os.apps.fileApp.FileApplication;
 import com.os.main.MainController;
-import com.os.utils.fileSystem.FAT;
-import com.os.utils.processSystem.OccupancyManager;
-import com.os.utils.uiUtil.CompSet;
+import com.os.utility.fileSystem.FAT;
+import com.os.utility.processSystem.OccupancyManager;
+import com.os.utility.uiUtil.CompSet;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -125,8 +125,8 @@ public class OccupancyAppController extends BaseController {
                 String result = String.format("%.2f", percent);
                  textButtons[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
 
-                if (FileApp.fat != null) {
-                    int numOfBusyDisk = FileApp.fat.checkNumOfBusyDisk();
+                if (FileApplication.fat != null) {
+                    int numOfBusyDisk = FileApplication.fat.checkNumOfBusyDisk();
 
                     percent = (double) numOfBusyDisk / (double) FAT.DISK_NUM * 100.0;
                     result = String.format("%.2f", percent);
@@ -157,8 +157,8 @@ public class OccupancyAppController extends BaseController {
             double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
             CompSet.setCompFixSize(region, width, percent * height);
 
-            if (FileApp.fat != null) {
-                int numOfBusyDisk = FileApp.fat.checkNumOfBusyDisk();
+            if (FileApplication.fat != null) {
+                int numOfBusyDisk = FileApplication.fat.checkNumOfBusyDisk();
                 height = boxes1[1].getHeight() - 2.0;
                 width = boxes1[1].getWidth() - 2.0;
                 percent = (double) numOfBusyDisk / 256.0;
@@ -196,9 +196,9 @@ public class OccupancyAppController extends BaseController {
                     }
                 }
 
-                if (FileApp.fat != null) {
+                if (FileApplication.fat != null) {
                     for (int disk_index = 0; disk_index < FAT.DISK_NUM; ++disk_index) {
-                        if (FileApp.fat.getDiskBlocks()[disk_index].getIndex() != 0) {
+                        if (FileApplication.fat.getDiskBlocks()[disk_index].getIndex() != 0) {
                              boxes2[1].getChildren().get(disk_index).setId("diskInBox1");
                         } else {
                              boxes2[1].getChildren().get(disk_index).setId("emptyBox");

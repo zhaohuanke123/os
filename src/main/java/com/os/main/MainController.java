@@ -1,17 +1,17 @@
 package com.os.main;
 
-import com.os.apps.fileApp.FileApp;
+import com.os.apps.fileApp.FileApplication;
 import com.os.apps.helpApp.HelpApp;
 import com.os.apps.occupancyApp.OccupancyApp;
 import com.os.apps.processApp.ProcessApp;
 import com.os.apps.systemFileApp.SystemFileApp;
-import com.os.utils.fileSystem.FAT;
-import com.os.utils.processSystem.OccupancyManager;
-import com.os.utils.processSystem.ProcessManager;
-import com.os.utils.processSystem.ProcessScheduleThread;
-import com.os.utils.scene.SceneManager;
-import com.os.utils.uiUtil.CompSet;
-import com.os.utils.uiUtil.UIThread;
+import com.os.utility.fileSystem.FAT;
+import com.os.utility.processSystem.OccupancyManager;
+import com.os.utility.processSystem.ProcessManager;
+import com.os.utility.processSystem.ProcessScheduleThread;
+import com.os.utility.sceneManager.SceneManager;
+import com.os.utility.uiUtil.CompSet;
+import com.os.utility.uiUtil.UIThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -95,7 +95,7 @@ public class MainController {
         appButtonDict.put(SystemFileApp.class.getName(), systemFileButton);
         appButtonDict.put(ProcessApp.class.getName(), processButton);
         appButtonDict.put(OccupancyApp.class.getName(), occupancyButton);
-        appButtonDict.put(FileApp.class.getName(), fileManagerButton);
+        appButtonDict.put(FileApplication.class.getName(), fileManagerButton);
         appButtonDict.put(HelpApp.class.getName(), helpButton);
 
         this.mainWindowScene = scene;
@@ -107,7 +107,7 @@ public class MainController {
         this.timeInit();
         OccupancyManager.init();
         this.processThreadInit();
-        FileApp.loadData();
+        FileApplication.loadData();
         this.uiThreadInit();
     }
 
@@ -127,8 +127,8 @@ public class MainController {
     @FXML
     void closeWindow(MouseEvent event) {
         FAT.closeAll();
-        if (FileApp.fat != null) {
-            FileApp.saveData();
+        if (FileApplication.fat != null) {
+            FileApplication.saveData();
         }
 
         System.exit(0);
@@ -273,6 +273,6 @@ public class MainController {
     private void minimizeOnShowApp(Boolean isMinimize) {
         SceneManager.getInstance().setAllStageHideOrShow(isMinimize);
 
-        FileApp.minimizeOnShowApp(isMinimize);
+        FileApplication.minimizeOnShowApp(isMinimize);
     }
 }

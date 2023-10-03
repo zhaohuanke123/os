@@ -11,7 +11,7 @@
 <AnchorPane id="topMainPane"
             stylesheets="@../css/DelView.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.os.apps.fileApp.Controller.DelViewCtl">
+            fx:controller="com.os.apps.fileApp.controller.DeleteDialogController">
    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/DelView.css"
                onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                onMousePressed="#pressBar" onMouseReleased="#releaseBar"

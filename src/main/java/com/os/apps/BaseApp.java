@@ -1,6 +1,6 @@
 package com.os.apps;
 
-import com.os.utils.uiUtil.CompSet;
+import com.os.utility.uiUtil.CompSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

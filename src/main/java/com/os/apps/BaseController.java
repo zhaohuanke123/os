@@ -1,7 +1,6 @@
 package com.os.apps;
 
-import com.os.utils.scene.SceneManager;
-import com.os.utils.uiUtil.DrawUtil;
+import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

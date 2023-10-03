@@ -16,7 +16,7 @@
 
 <AnchorPane id="topMainPane" prefHeight="242.0" prefWidth="323.0" stylesheets="@../css/TipWindow.css"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.os.apps.fileApp.Controller.TipWindowCtl">
+            fx:controller="com.os.apps.fileApp.controller.TipDialogController">
    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/TipWindow.css"
                onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                onMousePressed="#pressBar" onMouseReleased="#releaseBar"
