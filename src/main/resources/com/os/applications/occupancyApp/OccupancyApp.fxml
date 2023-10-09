@@ -17,6 +17,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
 <AnchorPane id="topMainPane" fx:id="topMainPane" stylesheets="@OccupancyShowApp.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.occupancyApp.OccupancyAppController">
@@ -199,5 +202,7 @@
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="361.0" prefHeight="15.0"
                    prefWidth="44.0" text="阻塞"/>
         </AnchorPane>
+<!--     一个LineChart   -->
+
     </AnchorPane>
 </AnchorPane>
