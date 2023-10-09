@@ -4,8 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -52,9 +50,6 @@
                <graphic>
                   <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                              pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <DropShadow/>
-                     </effect>
                      <cursor>
                         <Cursor fx:constant="DEFAULT"/>
                      </cursor>
@@ -67,9 +62,6 @@
                <graphic>
                   <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
                              preserveRatio="true">
-                     <effect>
-                        <InnerShadow/>
-                     </effect>
                      <Image url="@../../../img/change.png"/>
                   </ImageView>
                </graphic>
@@ -78,9 +70,6 @@
                     layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <DropShadow/>
-                     </effect>
                      <Image url="@../../../img/close.png"/>
                   </ImageView>
                </graphic>

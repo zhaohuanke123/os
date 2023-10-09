@@ -60,18 +60,17 @@
             </HBox>
         </right>
     </BorderPane>
+
 <!--    包含"文件管理"、"磁盘使用情况"和"系统可执行文件"三个选项-->
-    <TabPane fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-             minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
-             tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+    <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE"
+             AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
+             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
 
         <Tab id="tab" text="文件管理">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0">
-                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                      prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0"
-                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <HBox prefHeight="30.0" prefWidth="900.0">
+            <AnchorPane>
+                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <HBox>
                         <Label id="recentPath" prefHeight="33.0" prefWidth="67.0" text="当前路径:"
                                textAlignment="CENTER">
                             <font>
@@ -127,36 +126,25 @@
         </Tab>
 
         <Tab fx:id="chartTab" text="磁盘使用情况">
-            <Pane prefHeight="200.0" prefWidth="200.0">
-                <HBox layoutX="6.0" layoutY="5.0" prefHeight="534.0" prefWidth="888.0">
-<!--                    <HBox prefHeight="570.0" prefWidth="600.0" style="-fx-background-color: #e1fcfd;">-->
-<!--                        <PieChart fx:id="pieChart" prefHeight="500.0" prefWidth="452.0" startAngle="50.3"/>-->
-<!--                    </HBox>-->
-                    <VBox fillWidth="false" prefHeight="570.0" prefWidth="600.0">
-                        <TableView fx:id="diskTable" prefHeight="300.0" prefWidth="453.0">
-                            <columns>
-                                <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="磁盘块"/>
-                                <TableColumn prefWidth="60.0" resizable="false" sortable="false" text="索引"/>
-                                <TableColumn prefWidth="85.0" resizable="false" sortable="false" text="类型"/>
-                                <TableColumn prefWidth="159.199951171875" resizable="false" sortable="false"
-                                             text="内容"/>
-                            </columns>
-                        </TableView>
-                        <TableView fx:id="openFile" prefHeight="270.0" prefWidth="451.0">
-                            <columns>
-                                <TableColumn prefWidth="62.13329774141312" resizable="false" sortable="false"
-                                             text="文件名"/>
-                                <TableColumn prefWidth="70.66668701171875" resizable="false" sortable="false"
-                                             text="打开方式"/>
-                                <TableColumn prefWidth="68.0" resizable="false" sortable="false"
-                                             text="起始盘块"/>
-                                <TableColumn prefWidth="65.60005187988281" resizable="false" sortable="false"
-                                             text="文件长度"/>
-                                <TableColumn fx:id="filePath" prefWidth="179.2000732421875" resizable="false"
-                                             sortable="false" text="文件路径"/>
-                            </columns>
-                        </TableView>
-                    </VBox>
+            <Pane>
+                <HBox layoutX="10.0" layoutY="5.0" prefHeight="600">
+                    <TableView fx:id="diskTable">
+                        <columns>
+                            <TableColumn prefWidth="70.0" resizable="false" sortable="false" text="磁盘块"/>
+                            <TableColumn prefWidth="70.0" resizable="false" sortable="false" text="索引"/>
+                            <TableColumn prefWidth="90.0" resizable="false" sortable="false" text="类型"/>
+                            <TableColumn prefWidth="150.0" resizable="false" sortable="false" text="内容"/>
+                        </columns>
+                    </TableView>
+                    <TableView fx:id="openFile">
+                        <columns>
+                            <TableColumn prefWidth="55" resizable="false" sortable="false" text="文件名"/>
+                            <TableColumn prefWidth="60" resizable="false" sortable="false" text="打开方式"/>
+                            <TableColumn prefWidth="60" resizable="false" sortable="false" text="起始盘块"/>
+                            <TableColumn prefWidth="60" resizable="false" sortable="false" text="文件长度"/>
+                            <TableColumn fx:id="filePath" prefWidth="180" resizable="false" sortable="false" text="文件路径"/>
+                        </columns>
+                    </TableView>
                 </HBox>
             </Pane>
         </Tab>
