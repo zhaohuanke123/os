@@ -49,8 +49,6 @@ public class MainController {
     private Pane buttonBar;
     @FXML
     private HBox appBox;
-//    @FXML
-//    private Button systemFileButton;  // 系统文件按钮
     @FXML
     private Button processButton;  // 进程管理按钮
     @FXML
@@ -153,9 +151,6 @@ public class MainController {
         this.buttonBar.setLayoutX(0);
         this.buttonBar.setLayoutY(this.sceneHeight - 1 * this.appWidth);
 
-        //
-//        CompSet.setCompFixSize(this.systemFileButton, 1 * this.appWidth, 1 * this.appWidth);
-//        CompSet.setImageViewFixSize((ImageView) this.systemFileButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         CompSet.setCompFixSize(this.fileManagerButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.fileManagerButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         CompSet.setCompFixSize(this.processButton, 1 * this.appWidth, 1 * this.appWidth);
