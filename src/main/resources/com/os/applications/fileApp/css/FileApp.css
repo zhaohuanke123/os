@@ -1,73 +1,49 @@
-/**************************************************面板设计*******************************************************/
 @import "../../WindowPane.css";
 
-/**************************************************面板设计*******************************************************/
 .table-view {
-    -fx-background-color: #679DED;
-    -fx-table-cell-border-color: #679DED;
-    -fx-table-header-border-color: #679DED;
-    -fx-padding: 16px;
-    -fx-background-radius: 6px;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: #679DED;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: white;
+    -fx-padding: 20px;
 }
 
 .table-view .column-header, .table-view .filler {
-    -fx-background-color: #679DED;
-    -fx-text-fill: white;
+    -fx-background-color: white;
 }
 
 .table-view .table-row-cell {
-    -fx-background-color: #679DED;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
     -fx-text-fill: black;
-    -fx-background-radius: 6px;
 }
 
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
 
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
-    -fx-border-color: rgb(103, 157, 238);
-    -fx-effect: null;
-
 }
 
-.tab-pane
-{
-    -fx-tab-min-width:90px;
-}
-
-.tab{
-    -fx-background-insets: 0 1 0 1,0,0;
-}
-
-.tab-pane .tab
-{
+.tab-pane .tab {
     -fx-background-color: #e6e6e6;
 }
 
-.tab-pane .tab:selected
-{
+.tab-pane .tab:selected {
     -fx-background-color: rgb(103, 157, 238);
 }
 
 .tab .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #828282;
+    -fx-text-fill: black;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
-.tab:selected .tab-label {
-    -fx-alignment: CENTER;
-    -fx-text-fill: #000000;
-}
 
 #currentPath {
-    -fx-background-color: rgba(255, 255, 255, 0.15);
-    -fx-border-color: #000000;
+    -fx-background-color: white;
+    -fx-border-color: black;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
 }
@@ -76,25 +52,16 @@
 #flowPane  {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12;*/
-    /*-fx-background-radius: 0 0 12 12;*/
+    -fx-padding: 10px;
 }
 
+
 #treeView {
-    -fx-background-color: rgb(103, 157, 238);
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-border-radius: 0 0 12 12;
-    -fx-background-radius: 0 0 12 12;
+    -fx-padding: 10px;
 }
 
 .tree-cell {
     -fx-background-color: transparent;
-}
-
-
-.tree-cell:selected .tree-cell:hover {
-    -fx-background-color: rgb(103, 157, 238);
-    -fx-border-color: rgba(255, 255, 255, 0.15);
-    -fx-border-radius: 12 12 12 12;
-    -fx-background-radius: 12 12 12 12;
 }
