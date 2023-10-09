@@ -64,11 +64,12 @@
             </HBox>
         </right>
     </BorderPane>
-<!--    包含"文件管理"和"磁盘使用情况"两个选项-->
+<!--    包含"文件管理"、"磁盘使用情况"和"系统可执行文件"三个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
              minWidth="-Infinity" prefHeight="571.0" prefWidth="900.0" stylesheets="@../css/FileApp.css"
              tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+
         <Tab id="tab" text="文件管理">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0">
                 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -131,6 +132,7 @@
                 </VBox>
             </AnchorPane>
         </Tab>
+
         <Tab fx:id="chartTab" text="磁盘使用情况">
             <Pane prefHeight="200.0" prefWidth="200.0">
                 <HBox layoutX="6.0" layoutY="5.0" prefHeight="534.0" prefWidth="888.0">
@@ -165,6 +167,7 @@
                 </HBox>
             </Pane>
         </Tab>
+
         <Tab fx:id="systemFileTab" text="系统可执行文件">
             <AnchorPane id="mainPane" layoutX="2.0" layoutY="44.0" minHeight="0.0" minWidth="0.0"
                         prefHeight="437.0" prefWidth="497.0" stylesheets="@../css/FileApp.css"
