@@ -63,7 +63,7 @@
                      <effect>
                         <InnerShadow/>
                      </effect>
-                     <Image url="@../../../img/squares.png"/>
+                     <Image url="@../../../img/change.png"/>
                   </ImageView>
                </graphic>
             </Button>
