@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<AnchorPane id="topMainPane" fx:id="topMainPane"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.occupancyApp.OccuApplicationController">
     <BorderPane fx:id="titleBar" layoutX="20.0" layoutY="20.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
@@ -83,7 +84,7 @@
                     AnchorPane.topAnchor="40.0">
             <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                      minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="384.0" prefWidth="796.0"
-                     side="LEFT" stylesheets="@OccupancyShowApp.css" tabClosingPolicy="UNAVAILABLE"
+                     side="LEFT" stylesheets="@../helpApp/HelpApp.css" tabClosingPolicy="UNAVAILABLE"
                      AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
                      AnchorPane.topAnchor="10.0">
                 <Tab>
@@ -93,6 +94,12 @@
                               stylesheets="@OccupancyShowApp.css">
                             <Region id="memoryInBox" prefHeight="19.0" prefWidth="98.0"/>
                         </VBox>
+                    </graphic>
+                    <AnchorPane prefHeight="596.0" prefWidth="771.0">
+                        <HBox id="memoryOutBox" fx:id="memoryBox2" alignment="CENTER" prefHeight="70.0"
+                              layoutX="100" layoutY="300"
+                              prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
+
                         <VBox alignment="CENTER" layoutY="1.0" maxHeight="79.0" maxWidth="170.0" minHeight="70.0"
                               minWidth="170.0" prefHeight="70.0" prefWidth="643.0" AnchorPane.leftAnchor="0.0"
                               AnchorPane.rightAnchor="0.0">
@@ -107,13 +114,6 @@
                             <Button id="text2" fx:id="memoryText" maxWidth="170.0" minWidth="170.0"
                                     mnemonicParsing="false" prefWidth="170.0" text="1G/10GB(10%)"/>
                         </VBox>
-                    </graphic>
-                    <AnchorPane prefHeight="596.0" prefWidth="771.0">
-                        <HBox id="memoryOutBox" fx:id="memoryBox2" alignment="CENTER" prefHeight="70.0"
-                              layoutX="100" layoutY="300"
-                              prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
-
-
                     </AnchorPane>
                 </Tab>
                 <Tab>
