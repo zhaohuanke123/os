@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -55,6 +57,7 @@
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
+
                             <cursor>
                                 <Cursor fx:constant="DEFAULT"/>
                             </cursor>
@@ -67,6 +70,7 @@
                     <graphic>
                         <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
                                    preserveRatio="true">
+
                             <Image url="@../../img/change.png"/>
                         </ImageView>
                     </graphic>
@@ -75,6 +79,7 @@
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+
                             <Image url="@../../img/close0.png"/>
                         </ImageView>
                     </graphic>

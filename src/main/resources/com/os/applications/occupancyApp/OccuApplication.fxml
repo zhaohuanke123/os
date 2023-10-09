@@ -10,7 +10,7 @@
 <AnchorPane id="topMainPane" fx:id="topMainPane"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.os.applications.occupancyApp.OccupancyAppController">
+            fx:controller="com.os.applications.occupancyApp.OccuApplicationController">
     <BorderPane fx:id="titleBar" layoutX="20.0" layoutY="20.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
                 onMousePressed="#pressBar" onMouseReleased="#releaseBar" stylesheets="@OccupancyShowApp.css"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -125,9 +125,7 @@
                         </VBox>
                     </graphic>
                     <AnchorPane prefHeight="596.0" prefWidth="771.0">
-                        <HBox id="deviceOutBox" fx:id="deviceBox2" alignment="CENTER"
-                              layoutX="100" layoutY="300"
-                              prefHeight="70.0"
+                        <HBox id="deviceOutBox" fx:id="deviceBox2" alignment="CENTER" layoutY="207.0" prefHeight="70.0"
                               prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
                         <VBox alignment="CENTER" layoutY="208.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
                               minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
@@ -145,7 +143,7 @@
                         </VBox>
                     </AnchorPane>
                 </Tab>
-                <!--                加一个分隔-->
+<!--                加一个分隔-->
                 <Tab>
                     <graphic>
                         <VBox id="diskOutBox" fx:id="diskBox1" alignment="BOTTOM_CENTER" layoutY="104.0"
@@ -155,9 +153,7 @@
                         </VBox>
                     </graphic>
                     <AnchorPane prefHeight="596.0" prefWidth="771.0">
-                        <HBox id="diskOutBox" fx:id="diskBox2" alignment="CENTER"
-                              layoutX="100" layoutY="300"
-                              prefHeight="70.0"
+                        <HBox id="diskOutBox" fx:id="diskBox2" alignment="CENTER" layoutY="104.0" prefHeight="70.0"
                               prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
                         <VBox alignment="CENTER" layoutY="105.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
                               minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
@@ -184,9 +180,7 @@
                         </VBox>
                     </graphic>
                     <AnchorPane prefHeight="596.0" prefWidth="771.0">
-                        <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER"
-                              layoutX="100" layoutY="300"
-                              prefHeight="70.0"
+                        <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER" layoutY="307.0" prefHeight="70.0"
                               prefWidth="512.0" stylesheets="@OccupancyShowApp.css"/>
                         <VBox alignment="CENTER" layoutY="308.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
                               minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
@@ -206,6 +200,15 @@
                 </Tab>
             </TabPane>
         </AnchorPane>
+        <!--        <AnchorPane layoutX="152.0" layoutY="42.0" prefHeight="440.0" prefWidth="194.0"-->
+        <!--                    stylesheets="@OccupancyShowApp.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="165.0"-->
+        <!--                    AnchorPane.topAnchor="40.0">-->
+
+
+        <!--        </AnchorPane>-->
+        <!--        <AnchorPane fx:id="mainPane" layoutX="316.0" prefWidth="585.0" stylesheets="@OccupancyShowApp.css"-->
+        <!--                    AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="40.0">-->
+
 
         <!--            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34d399" height="11.0" layoutX="526.0" layoutY="329.0"-->
         <!--                       stroke="BLACK" strokeType="INSIDE" width="15.0"/>-->

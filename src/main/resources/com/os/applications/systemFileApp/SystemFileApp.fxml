@@ -6,12 +6,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <AnchorPane fx:id="topMainPane" prefHeight="484.0" prefWidth="503.0" stylesheets="@SystemFileApp.css"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.systemFileApp.SystemFileAppController">
@@ -49,6 +53,9 @@
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
                             <cursor>
                                 <Cursor fx:constant="DEFAULT"/>
                             </cursor>
@@ -61,6 +68,7 @@
                     <graphic>
                         <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
                                    preserveRatio="true">
+
                             <Image url="@../../img/change.png"/>
                         </ImageView>
                     </graphic>
@@ -69,6 +77,9 @@
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <effect>
+                                <DropShadow/>
+                            </effect>
                             <Image url="@../../img/close0.png"/>
                         </ImageView>
                     </graphic>

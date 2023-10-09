@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -31,6 +32,7 @@ public class OccupancyAppController extends BaseController {
     public HBox deviceBox2;
     public HBox diskBox2;
     public HBox pcbBox2;
+    public TabPane tabPane;
 
     private VBox[] boxes1;
     private Button[] textButtons;
