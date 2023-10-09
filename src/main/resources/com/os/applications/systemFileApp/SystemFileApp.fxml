@@ -68,9 +68,7 @@
                     <graphic>
                         <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
                                    preserveRatio="true">
-                            <effect>
-                                <InnerShadow/>
-                            </effect>
+
                             <Image url="@../../img/change.png"/>
                         </ImageView>
                     </graphic>
