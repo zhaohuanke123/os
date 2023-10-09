@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.DropShadow?>
@@ -165,5 +165,33 @@
                 </HBox>
             </Pane>
         </Tab>
+        <Tab fx:id="systemFileTab" text="系统可执行文件">
+            <AnchorPane id="mainPane" layoutX="2.0" layoutY="44.0" minHeight="0.0" minWidth="0.0"
+                        prefHeight="437.0" prefWidth="497.0" stylesheets="@../css/FileApp.css"
+                        AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
+                        AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+
+                <TableView fx:id="executableFileTable" layoutX="42.0" layoutY="22.0"
+                           onMousePressed="#selectFile" prefHeight="390.0" prefWidth="196.0"
+                           AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0"
+                           AnchorPane.topAnchor="20.0">
+                    <columns>
+                        <TableColumn fx:id="fileName" prefWidth="168.0" text="可执行文件" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <TextArea id="contentField" fx:id="contentField" editable="false"
+                          layoutX="266.0" layoutY="20.0" prefHeight="504.0"
+                          prefWidth="600.0" stylesheets="@../css/FileView.css"
+                          wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextArea>
+            </AnchorPane>
+        </Tab>
+
     </TabPane>
 </AnchorPane>

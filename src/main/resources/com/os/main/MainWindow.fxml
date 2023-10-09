@@ -24,21 +24,6 @@
               prefWidth="392.0" stylesheets="@MainWindow.css">
 
             <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
-            <!-- 查看系统文件按钮  -->
-            <Button id="appButton" fx:id="systemFileButton" alignment="CENTER" contentDisplay="CENTER"
-                    graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
-                    stylesheets="@MainWindow.css">
-                <graphic>
-                    <ImageView fitHeight="54.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/task.png"/>
-                    </ImageView>
-                </graphic>
-                <tooltip>
-                    <Tooltip text="系统文件表"/>
-                </tooltip>
-            </Button>
-
-            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  文件管理器按钮 -->
             <Button id="appButton" fx:id="fileManagerButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"

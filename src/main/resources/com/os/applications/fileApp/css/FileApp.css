@@ -2,6 +2,31 @@
 @import "../../WindowPane.css";
 
 /**************************************************面板设计*******************************************************/
+.table-view {
+    -fx-background-color: #679DED;
+    -fx-table-cell-border-color: #679DED;
+    -fx-table-header-border-color: #679DED;
+    -fx-padding: 16px;
+    -fx-background-radius: 6px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #679DED;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #679DED;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #679DED;
+    -fx-text-fill: black;
+    -fx-background-radius: 6px;
+}
+
+
+
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
     -fx-border-color: rgb(103, 157, 238);
