@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
@@ -75,8 +71,7 @@
                 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                       prefHeight="580.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0"
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <HBox prefHeight="30.0" prefWidth="900.0" stylesheets="@../css/FileApp.css">
-
+                    <HBox prefHeight="30.0" prefWidth="900.0">
                         <Label id="recentPath" prefHeight="33.0" prefWidth="67.0" text="当前路径:"
                                textAlignment="CENTER">
                             <font>
@@ -86,8 +81,7 @@
                                 <Insets left="250.0"/>
                             </HBox.margin>
                         </Label>
-                        <Label fx:id="currentPath" prefHeight="24.0" prefWidth="504.0"
-                               text="C:">
+                        <Label fx:id="currentPath" prefHeight="24.0" prefWidth="504.0" text="C:">
                             <font>
                                 <Font name="Bell MT" size="16.0"/>
                             </font>
@@ -99,8 +93,7 @@
                             </HBox.margin>
                         </Label>
                     </HBox>
-                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                          prefHeight="503.0" prefWidth="900.0">
+                    <HBox>
                         <VBox.margin>
                             <Insets bottom="5.0"/>
                         </VBox.margin>
