@@ -18,6 +18,7 @@ public class UIThread extends Thread {
     public Vector<Process> blockProcessList;
     public OccupancyAppController occupancyAppController = null;
     public ProcessAppController processAppController = null;
+    public int time = 0;
 
     public void init() {
 
@@ -32,6 +33,7 @@ public class UIThread extends Thread {
                 System.out.println(Arrays.toString(var3.getStackTrace()));
             }
 
+            ++this.time;
             this.runProcessList = new Vector<>(ProcessManager.runProcessList);
             this.runProcess = null;
             this.creatingProcessList = new Vector<>(ProcessManager.creatingProcessList);

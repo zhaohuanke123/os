@@ -16,7 +16,7 @@ public class OccupancyApp extends BaseApp<OccupancyAppController> {
         super("/com/os/applications/occupancyApp/OccupancyApp.fxml",
                 "/com/os/img/device.png",
                 "占用管理器",
-                1000.0,
+                1200.0,
                 530.0);
     }
 

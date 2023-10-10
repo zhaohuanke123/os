@@ -4,11 +4,11 @@
 /**************************************************面板设计*******************************************************/
 
 #tabPane {
-    -fx-tab-min-height: 12em;
-    -fx-tab-max-height: 12em;
+    -fx-tab-min-height: 22em;
+    -fx-tab-max-height: 22em;
 
-    -fx-tab-min-width: 15em;
-    -fx-tab-max-width: 15em;
+    -fx-tab-min-width: 6em;
+    -fx-tab-max-width: 6em;
 
 
     -fx-border-radius: 8 8 8 8;
