@@ -4,11 +4,11 @@
 /**************************************************面板设计*******************************************************/
 
 #tabPane {
-    -fx-tab-min-height: 12em;
-    -fx-tab-max-height: 12em;
+    -fx-tab-min-height: 22em;
+    -fx-tab-max-height: 22em;
 
-    -fx-tab-min-width: 15em;
-    -fx-tab-max-width: 15em;
+    -fx-tab-min-width: 6em;
+    -fx-tab-max-width: 6em;
 
 
     -fx-border-radius: 8 8 8 8;
@@ -81,59 +81,58 @@
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 
     -fx-font-size: 1em; /* 12 */
-    /*-fx-text-fill: #828282;*/
     -fx-text-fill: black;
-
 }
+
+/*------------------------------------------------------*/
 
 #pcbInBox {
     -fx-background-color: #60A5FA;
-    /*-fx-border-color: #1D4ED8;*/
 }
 
 #pcbInBox0 {
     -fx-background-color: #E5E7EB;
-    /*-fx-border-color: #1D4ED8;*/
     -fx-border-color: White;
-
 }
-
 
 #pcbInBox1 {
     -fx-background-color: #34d399;
-    /*-fx-border-color: #1D4ED8;*/
     -fx-border-color: white;
-
 }
 
 #pcbInBox2 {
     -fx-background-color: #60A5FA;
-    /*-fx-border-color: #1D4ED8;*/
     -fx-border-color: white;
-
 }
 
 #pcbInBox3 {
     -fx-background-color: #fcd34d;
-    /*-fx-border-color: #1D4ED8;*/
     -fx-border-color: white;
-
 }
+
+#pcbChart .default-color0.chart-series-line .default-color0.chart-line-symbol.series0 {
+    -fx-stroke: #60A5FA;
+}
+
+/*------------------------------------------------------*/
 
 #memoryInBox {
     -fx-background-color: #10B981;
-    /*-fx-border-color: #047857;*/
 }
 
 #memoryInBox1 {
     -fx-background-color: #10B981;
-    /*-fx-border-color: white;*/
 }
 
+/*修改折线的颜色 和 坐标点的样式*/
+#memoryChart .default-color0.chart-series-line {
+    -fx-stroke: #10B981;
+}
+
+/*------------------------------------------------------*/
 
 #deviceInBox {
     -fx-background-color: #F472B6;
-    /*-fx-border-color:#BE185D ;*/
 }
 
 #deviceInBox1 {
@@ -141,17 +140,25 @@
     -fx-border-color: white;
 }
 
+#deviceChart .default-color0.chart-series-line {
+    -fx-stroke: #F472B6;
+}
+
+/*------------------------------------------------------*/
 
 #diskInBox {
     -fx-background-color: #A78BFA;
-    /*-fx-border-color: #6D28D9;*/
 }
 
 #diskInBox1 {
     -fx-background-color: #A78BFA;
-    /*-fx-border-color: #6D28D9;*/
 }
 
+#diskChart .default-color0.chart-series-line {
+    -fx-stroke: #A78BFA;
+}
+
+/*------------------------------------------------------*/
 
 #emptyBox {
     -fx-background-color: White;
