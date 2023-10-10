@@ -2,7 +2,7 @@
 
 .table-view {
     -fx-background-color: transparent;
-    -fx-table-cell-border-color: white;
+    -fx-table-cell-border-color: transparent;
     -fx-padding: 20px;
 }
 
@@ -20,6 +20,12 @@
     -fx-text-fill: black;
 }
 
+.table-row-cell:selected {
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
@@ -50,18 +56,30 @@
 
 
 #flowPane  {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 0 10 10 0;
     -fx-border-color: transparent;
     -fx-padding: 10px;
 }
 
 
 #treeView {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 10 0 0 10;
+    -fx-background-insets: 0;
     -fx-border-color: transparent;
     -fx-padding: 10px;
 }
 
+#treeView .tree-cell:selected {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 .tree-cell {
     -fx-background-color: transparent;
+}
+
+.tree-cell:expanded > .tree-disclosure-node {
+    -fx-text-fill: transparent;
 }
