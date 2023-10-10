@@ -80,7 +80,7 @@
                                 <Font name="Segue UI Symbol" size="14.0"/>
                             </font>
                             <HBox.margin>
-                                <Insets left="20.0"/>
+                                <Insets left="40.0"/>
                             </HBox.margin>
                         </Label>
                         <Label fx:id="currentPath" prefWidth="700.0" text="C:">
@@ -93,8 +93,16 @@
                         </Label>
                     </HBox>
                     <HBox alignment="CENTER">
-                        <TreeView fx:id="treeView" prefHeight="500" prefWidth="200"/>
-                        <FlowPane fx:id="flowPane" prefHeight="500" prefWidth="700"/>
+                        <TreeView fx:id="treeView" prefHeight="520" prefWidth="200">
+                            <HBox.margin>
+                                <Insets top="15.0"/>
+                            </HBox.margin>
+                        </TreeView>
+                        <FlowPane fx:id="flowPane" prefHeight="520" prefWidth="650">
+                            <HBox.margin>
+                                <Insets top="15.0"/>
+                            </HBox.margin>
+                        </FlowPane>
                     </HBox>
                 </VBox>
             </AnchorPane>

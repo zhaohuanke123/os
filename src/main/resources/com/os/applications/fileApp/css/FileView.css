@@ -28,20 +28,19 @@
 
 
 .menu-item .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .menu-item:focused {
-    -fx-background-color: darkgray;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
 }
 
 .menu-item:focused .label {
-    -fx-text-fill: blue;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }
 
 .context-menu {
-    -fx-background-color: rgba(0, 0, 0, 0);
-    -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
-    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
+    -fx-background-color: rgba(220, 220, 220, 0.9);
+    -fx-background-radius: 0 5 5 5;
 }

@@ -14,8 +14,6 @@ module os {
     exports com.os.applications.helpApp;
     opens com.os.applications.processApp to javafx.fxml;
     exports com.os.applications.processApp;
-    opens com.os.applications.systemFileApp to javafx.fxml;
-    exports com.os.applications.systemFileApp;
     opens com.os.dataModels to javafx.fxml;
     exports com.os.dataModels;
     opens com.os.utility to javafx.fxml;
