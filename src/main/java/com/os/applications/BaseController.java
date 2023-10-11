@@ -1,5 +1,6 @@
 package com.os.applications;
 
+import com.os.main.MainController;
 import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

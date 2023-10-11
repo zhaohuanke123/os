@@ -22,6 +22,7 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
         );
 
         this.tipString = tipString;
+        super.toolTip = tipString;
     }
 
     public void start(Stage stage) throws IOException {

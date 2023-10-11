@@ -36,6 +36,7 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
         }
 
         this.tipString = msg;
+        super.toolTip = msg;
     }
 
     @Override

@@ -36,6 +36,8 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
         this.block = block;
         this.stage = stage;
         this.saveContent(file.getContent());
+
+        super.toolTip = file.getName();
     }
 
     private void showView() {

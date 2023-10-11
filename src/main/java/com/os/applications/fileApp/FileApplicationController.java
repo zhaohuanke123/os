@@ -36,7 +36,7 @@ public class FileApplicationController extends BaseFileController {
     private TableColumn<?, ?> filePath;
 
     @FXML
-    protected void closeStage(MouseEvent event) {
+    public void closeStage(MouseEvent event) {
         FileApplication.saveData();
         this.stage.close();
     }

@@ -13,8 +13,11 @@ import com.os.utility.uiUtil.CompSet;
 import com.os.utility.uiUtil.UIThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -24,12 +27,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-public class MainController {
+public class MainController implements Initializable {
     private static MainController _instance;
 
     public static MainController getInstance() {
@@ -63,7 +68,7 @@ public class MainController {
     @FXML
     private Button closeButton;  // 关闭窗口按钮
     private final TreeMap<String, Button> appButtonDict = new TreeMap<>();
-
+    public AppBoxManager appBoxManager;
 
     @FXML
     private VBox timeBox;  // 包含2种时间显示的VBox
@@ -86,14 +91,20 @@ public class MainController {
     boolean isTop = false;
     boolean haveChanged = true;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
     public void init(Scene scene, Stage stage) throws URISyntaxException {
         _instance = this;
 
-//        appButtonDict.put(SystemFileApp.class.getName(), systemFileButton);
         appButtonDict.put(ProcessApp.class.getName(), processButton);
         appButtonDict.put(OccupancyApp.class.getName(), occupancyButton);
         appButtonDict.put(FileApplication.class.getName(), fileManagerButton);
         appButtonDict.put(HelpApp.class.getName(), helpButton);
+
+        appBoxManager = new AppBoxManager(appBox);
 
         this.mainWindowScene = scene;
         this.primaryStage = stage;
@@ -142,7 +153,6 @@ public class MainController {
     }
 
     public void adaptWindow() {
-        //
         this.MainWindow.setPrefSize(this.mainWindowScene.getWidth(), this.mainWindowScene.getHeight());
 
         // 初始化任务栏
@@ -157,7 +167,6 @@ public class MainController {
         CompSet.setCompFixSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
-        //
         CompSet.setCompFixSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
@@ -167,12 +176,10 @@ public class MainController {
         CompSet.setCompFixSize(this.deskButton, 0.2 * this.appWidth, 0.8 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.deskButton.getGraphic(), this.appWidth * 0.6, this.appWidth * 0.6);
 
-        //
-        CompSet.setCompFixSize(this.appBox, this.appWidth * 10.0, 1 * this.appWidth);
+        appBox.setPrefSize(this.appWidth * 10.0, 1 * this.appWidth);
         this.appBox.setLayoutX(this.sceneWidth / 2.0 - this.appBox.getWidth() / 2.0);
         this.appBox.setLayoutY(0.0);
 
-        //
         CompSet.setCompFixSize(this.tipBox, this.timeBox.getWidth() + this.deskButton.getWidth(), 1 * this.appWidth);
         this.tipBox.setLayoutX(this.sceneWidth - this.tipBox.getWidth());
         this.tipBox.setLayoutY(0.0);
@@ -195,6 +202,7 @@ public class MainController {
                     if (SceneManager.getInstance().isStageClosed(stageName)) {
                         button.setId("appButton");
                     }
+                    appBoxManager.updateButton();
                 }));
 
                 try {
