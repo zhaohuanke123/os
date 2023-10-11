@@ -9,17 +9,17 @@ import java.util.Date;
 
 public class BaseFile implements Serializable {
     private static final long serialVersionUID = 1L;
-    protected String Name;
-    protected String type;
-    protected int diskNum;
-    protected String location;
-    protected double size;
-    protected String space;
-    protected Date createTime;
-    protected Folder parent;
-    protected int length;
-    protected transient StringProperty NameP = new SimpleStringProperty();
-    protected transient StringProperty lengthP = new SimpleStringProperty();
+    protected String Name;  // 文件或文件夹的名称
+    protected String type;  // 文件或文件夹
+    protected int diskNum;  // 磁盘编号
+    protected String location;  // 文件路径
+    protected double size;  // 文件大小
+    protected String space;  // 文件大小（字符串）
+    protected Date createTime;  // 创建时间
+    protected Folder parent;  // 父节点
+    protected int length;  // 长度
+    protected transient StringProperty NameP = new SimpleStringProperty();  // 文件名称的显示
+    protected transient StringProperty lengthP = new SimpleStringProperty();  // 文件大小的显示
 
     public StringProperty NamePProperty() {
         return this.NameP;

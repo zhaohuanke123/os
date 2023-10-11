@@ -10,11 +10,11 @@ import javafx.beans.property.StringProperty;
 
 public class Disk implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int num;
-    private int index;
-    private String type;
-    private Object object;
-    private boolean begin;
+    private int num;  // 磁盘块编号
+    private int index;  // 磁盘块索引
+    private String type;  // 磁盘块类型
+    private Object object;  // 磁盘块上存储的对象
+    private boolean begin;  // 记录是否为文件的起始块
     private transient StringProperty numP = new SimpleStringProperty();
     private transient StringProperty indexP = new SimpleStringProperty();
     private transient StringProperty typeP = new SimpleStringProperty();
@@ -62,6 +62,7 @@ public class Disk implements Serializable {
         this.type = type;
         this.object = object;
         this.begin = false;
+
         this.setNumP();
         this.setIndexP();
         this.setTypeP();
@@ -109,7 +110,6 @@ public class Disk implements Serializable {
             this.objectP.unbind();
             this.setObjectP();
         }
-
     }
 
     public boolean getBegin() {

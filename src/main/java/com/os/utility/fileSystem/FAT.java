@@ -17,7 +17,7 @@ import com.os.applications.processApp.processSystem.ProcessManager;
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final int DISK_NUM = 256;
-    private static ObservableList<File> openedFiles;
+    private static ObservableList<File> openedFiles;  // 记录已打开的文件
     private Disk[] disks;
     private final Folder c;
     private List<Path> paths;
@@ -70,6 +70,7 @@ public class FAT implements Serializable {
 
     }
 
+    // 关闭所有已打开的文件
     public static void closeAll() {
         if (openedFiles != null) {
             for (int i = openedFiles.size() - 1; i >= 0; --i) {
