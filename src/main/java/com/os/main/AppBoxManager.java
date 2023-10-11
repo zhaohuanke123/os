@@ -27,7 +27,7 @@ public class AppBoxManager {
     public void addAppButton(Button appButton, Stage stage, String toolTipString) {
         appButtons.add(new AppBean(appButton, stage));
 
-        appButton.setId("appButton");
+        appButton.setId("appButtonSelected");
         CompSet.setCompFixSize(appButton, MainController.getInstance().appWidth, 1 * MainController.getInstance().appWidth);
         CompSet.setImageViewFixSize((ImageView) appButton.getGraphic(), 0.7 * MainController.getInstance().appWidth, 0.7 * MainController.getInstance().appWidth);
         appButton.setTooltip(new Tooltip(toolTipString));
@@ -57,16 +57,6 @@ public class AppBoxManager {
         }
 
         appBox.setLayoutX(MainController.getInstance().sceneWidth / 2.0 - appBox.getWidth() / 2.0);
-    }
-
-    public void updateButton() {
-        appButtons.forEach((appBean -> {
-            if (appBean.stage.isIconified()) {
-                appBean.appButton.setId("appButton");
-            } else {
-                appBean.appButton.setId("appButtonSelected");
-            }
-        }));
     }
 
     static class AppBean {

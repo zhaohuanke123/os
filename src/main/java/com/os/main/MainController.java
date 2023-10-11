@@ -187,9 +187,8 @@ public class MainController implements Initializable {
 
     private void iconInit() {
         appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
                 SceneManager.getInstance().AppStart(stageName);
-
                 // 修改按钮样式
                 button.setUnderline(true);
                 button.setId("appButtonSelected");
@@ -202,7 +201,6 @@ public class MainController implements Initializable {
                     if (SceneManager.getInstance().isStageClosed(stageName)) {
                         button.setId("appButton");
                     }
-                    appBoxManager.updateButton();
                 }));
 
                 try {
