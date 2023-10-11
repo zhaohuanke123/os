@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Folder extends BaseFile implements Serializable {
-    private List<Object> children;
-    private Path path;
+    private List<Object> children;  // 子节点
+    private Path path;  // 文件夹路径
     private int catalogNum;
 
     public Folder(String folderName) {
@@ -30,6 +30,7 @@ public class Folder extends BaseFile implements Serializable {
     public void setCatalogNum(int catalogNum) {
         this.catalogNum = catalogNum;
     }
+
     public List<Object> getChildren() {
         return this.children;
     }
@@ -58,9 +59,9 @@ public class Folder extends BaseFile implements Serializable {
         this.path = path;
     }
 
+    // 读取数据
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
         this.NameP = new SimpleStringProperty(this.Name);
     }
-
 }
