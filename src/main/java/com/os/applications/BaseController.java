@@ -127,4 +127,9 @@ public class BaseController {
         // 将窗口置于最前
         stage.toFront();
     }
+
+    @FXML
+    protected void showDescription() {
+
+    }
 }

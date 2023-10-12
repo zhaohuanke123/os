@@ -1,7 +1,6 @@
 package com.os.main;
 
 import com.os.applications.fileApp.FileApplication;
-import com.os.applications.helpApp.HelpApp;
 import com.os.applications.occupancyApp.OccupancyApp;
 import com.os.applications.processApp.ProcessApp;
 import com.os.utility.fileSystem.FAT;
@@ -102,7 +101,6 @@ public class MainController implements Initializable {
         appButtonDict.put(ProcessApp.class.getName(), processButton);
         appButtonDict.put(OccupancyApp.class.getName(), occupancyButton);
         appButtonDict.put(FileApplication.class.getName(), fileManagerButton);
-        appButtonDict.put(HelpApp.class.getName(), helpButton);
 
         appBoxManager = new AppBoxManager(appBox);
 
@@ -167,9 +165,7 @@ public class MainController implements Initializable {
         CompSet.setCompFixSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
-        CompSet.setCompFixSize(this.helpButton, 1 * this.appWidth, 1 * this.appWidth);
-        CompSet.setImageViewFixSize((ImageView) this.helpButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
-        CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
+           CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         CompSet.setCompFixSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);

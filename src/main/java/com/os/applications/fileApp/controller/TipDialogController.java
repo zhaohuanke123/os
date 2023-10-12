@@ -1,15 +1,20 @@
 package com.os.applications.fileApp.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class TipDialogController extends BaseFileController {
-   @FXML
-   private Text tipText;
+    public BorderPane contentPane;
+    @FXML
+    private Text tipText;
 
-   public void init(Stage stage, String tipString) {
-      super.init(stage);
-      this.tipText.setText(tipString);
-   }
+    public void init(Stage stage, String tipString) {
+        super.init(stage);
+        this.tipText.setText(tipString);
+
+        contentPane.setPrefWidth(stage.getWidth());
+        tipText.setWrappingWidth(stage.getWidth() - 20);
+    }
 }

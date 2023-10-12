@@ -2,12 +2,14 @@ package com.os.applications.occupancyApp;
 
 import com.os.applications.BaseController;
 import com.os.applications.fileApp.FileApplication;
+import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;
 import com.os.utility.fileSystem.OccupancyManager;
 import com.os.utility.uiUtil.CompSet;
 import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -21,6 +23,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Properties;
 
 public class OccupancyAppController extends BaseController {
@@ -322,6 +325,26 @@ public class OccupancyAppController extends BaseController {
             dataSeries.getData().add(new XYChart.Data<>(String.valueOf(x), y));
             if (dataSeries.getData().size() > 15)
                 dataSeries.getData().remove(0);
+        }
+    }
+
+    @FXML
+    @Override
+    protected void showDescription() {
+        super.showDescription();
+
+        Stage stage = new Stage();
+        TipDialogApplication tipWindow = new TipDialogApplication("占用管理，主要作用是可视化用户区内存、磁盘、设备、PCB的占用情况。" +
+                "1）用户区内存占用可视化：显示内存占用比、内存占用分布情况。" +
+                "2）磁盘占用可视化：显示磁盘占用比、磁盘占用分布情况。" +
+                "3）设备占用可视化：显示设备占用比，设备占用分布情况。" +
+                "4）PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n" +
+                "                              ",
+                500,500);
+        try {
+            tipWindow.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

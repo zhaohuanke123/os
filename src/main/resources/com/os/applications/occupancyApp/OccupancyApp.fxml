@@ -44,6 +44,20 @@
                     <Cursor fx:constant="DEFAULT"/>
                 </cursor>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0"
+                        stylesheets="@../processApp/ProcessApp.css">
+                    <graphic>
+                        <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
+                                   pickOnBounds="true" preserveRatio="true">
+
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT"/>
+                            </cursor>
+                            <Image url="@../../img/help.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0"
                         stylesheets="@../processApp/ProcessApp.css">
                     <graphic>

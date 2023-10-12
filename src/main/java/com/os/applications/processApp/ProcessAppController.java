@@ -1,6 +1,7 @@
 package com.os.applications.processApp;
 
 import com.os.applications.BaseController;
+import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
 import com.os.main.MainController;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Vector;
@@ -315,5 +317,26 @@ public class ProcessAppController extends BaseController {
         }
     }
 
+    @FXML
+    @Override
+    protected void showDescription() {
+        super.showDescription();
+
+        Stage stage = new Stage();
+        TipDialogApplication tipWindow = new TipDialogApplication("进程管理，主要作用是可视化进程的运行情况. " +
+                "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。[默认时间片为6]。" +
+                " 2）显示当前进程的执行进度，高亮当前执行指令。" +
+                "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
+                "4）进程详表设置：包括显示设置、标记设置和进程控制。    " +
+                "①显示设置：用于选择想要显示的进程，包括当前进程、新建进程、就绪进程、阻塞进程、销毁进程、显示所有" +
+                "②标记设置：用于选择想要高亮的进程，包括新建进程、就绪进程、运行进程、阻塞进程、销毁进程" +
+                "③进程控制：用于控制继续新建进程或者暂停新建进程，以及控制进程运行的倍速（1倍速，2倍速，4倍速，8倍速）。" +
+                "\"\n", 500,500);
+        try {
+            tipWindow.start(stage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //endregion
 }
