@@ -8,12 +8,12 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class File extends BaseFile implements Serializable {
-    private int flag; // flag=0表示只读，flag=1表示读写
-    private String content;  // 文件内容
-    private boolean isOpen;  // 记录文件是否打开
-    private transient StringProperty flagP = new SimpleStringProperty();  // 文件属性的显示
-    private transient StringProperty diskNumP = new SimpleStringProperty();  // 磁盘编号的显示
-    private transient StringProperty locationP = new SimpleStringProperty();  // 路径的显示
+    private int flag;
+    private String content;
+    private boolean isOpen;
+    private transient StringProperty flagP = new SimpleStringProperty();
+    private transient StringProperty diskNumP = new SimpleStringProperty();
+    private transient StringProperty locationP = new SimpleStringProperty();
 
     public StringProperty flagPProperty() {
         return this.flagP;
@@ -34,10 +34,10 @@ public class File extends BaseFile implements Serializable {
     public File(String fileName) {
         super(fileName);
         this.setOpened(false);
-        // 更新父节点的信息
         if (this.hasParent()) {
             Folder parent1 = this.getParent();
             parent1.setSize(FAT.getFolderSize(parent1));
+
             while (parent1.hasParent()) {
                 parent1 = parent1.getParent();
                 parent1.setSize(FAT.getFolderSize(parent1));
@@ -63,11 +63,10 @@ public class File extends BaseFile implements Serializable {
         content = "";
 
         this.setOpened(false);
-
-        // 更新父节点的信息
         if (this.hasParent()) {
             Folder parent1 = this.getParent();
             parent1.setSize(FAT.getFolderSize(parent1));
+
             while (parent1.hasParent()) {
                 parent1 = parent1.getParent();
                 parent1.setSize(FAT.getFolderSize(parent1));
@@ -119,7 +118,6 @@ public class File extends BaseFile implements Serializable {
         this.isOpen = isOpen;
     }
 
-    // 读取数据
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
         this.NameP = new SimpleStringProperty(this.Name);

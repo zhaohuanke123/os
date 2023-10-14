@@ -44,20 +44,6 @@
                     <Cursor fx:constant="DEFAULT"/>
                 </cursor>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0"
-                        stylesheets="@../processApp/ProcessApp.css">
-                    <graphic>
-                        <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
-                                   pickOnBounds="true" preserveRatio="true">
-
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT"/>
-                            </cursor>
-                            <Image url="@../../img/help.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0"
                         stylesheets="@../processApp/ProcessApp.css">
                     <graphic>
@@ -281,4 +267,53 @@
             </Tab>
         </TabPane>
     </AnchorPane>
+
+    <!--            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34d399" height="11.0" layoutX="526.0" layoutY="329.0"-->
+    <!--                       stroke="BLACK" strokeType="INSIDE" width="15.0"/>-->
+    <!--            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="309.0" prefHeight="15.0"-->
+    <!--                   prefWidth="44.0" text="新建"/>-->
+    <!--            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b82f6" height="11.0" layoutX="526.0" layoutY="345.0"-->
+    <!--                       stroke="BLACK" strokeType="INSIDE" width="15.0"/>-->
+    <!--            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="328.0" prefHeight="15.0"-->
+    <!--                   prefWidth="44.0" text="就绪"/>-->
+    <!--            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcd34d" height="11.0" layoutX="526.0" layoutY="363.0"-->
+    <!--                       stroke="BLACK" strokeType="INSIDE" width="15.0"/>-->
+    <!--            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="343.0" prefHeight="15.0"-->
+    <!--                   prefWidth="44.0" text="运行"/>-->
+    <!--            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5e7eb" height="11.0" layoutX="526.0" layoutY="311.0"-->
+    <!--                       stroke="BLACK" strokeType="INSIDE" width="15.0"/>-->
+    <!--            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="541.0" layoutY="361.0" prefHeight="15.0"-->
+    <!--                   prefWidth="44.0" text="阻塞"/>-->
+    <!--        </AnchorPane>-->
+
+    <!--    <AnchorPane layoutX="3.0" layoutY="32.0" prefHeight="640.0" prefWidth="796.0" stylesheets="@OccupancyShowApp.css"-->
+    <!--                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"-->
+    <!--                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">-->
+    <!--        <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"-->
+    <!--                 minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="384.0" prefWidth="796.0"-->
+    <!--                 side="LEFT" stylesheets="@../helpApp/HelpApp.css" tabClosingPolicy="UNAVAILABLE"-->
+    <!--                 AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"-->
+    <!--                 AnchorPane.topAnchor="10.0">-->
+    <!--            <Tab>-->
+    <!--                <graphic>-->
+    <!--                    <Label id="tabLabel" text="图标大全" textAlignment="CENTER">-->
+    <!--                        <graphic>-->
+    <!--                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">-->
+    <!--                                <Image url="@../../img/Windows.png"/>-->
+    <!--                            </ImageView>-->
+    <!--                        </graphic>-->
+    <!--                    </Label>-->
+    <!--                </graphic>-->
+    <!--                <LineChart fx:id="lineChart" layoutX="41.0" layoutY="81.0" prefHeight="412.0" prefWidth="557.0"-->
+    <!--                           stylesheets="@OccupancyShowApp.css">-->
+    <!--                    <xAxis>-->
+    <!--                        <CategoryAxis side="BOTTOM"/>-->
+    <!--                    </xAxis>-->
+    <!--                    <yAxis>-->
+    <!--                        <NumberAxis side="LEFT"/>-->
+    <!--                    </yAxis>-->
+    <!--                </LineChart>-->
+    <!--            </Tab>-->
+    <!--        </TabPane>-->
+    <!--    </AnchorPane>-->
 </AnchorPane>

@@ -1,6 +1,5 @@
 package com.os.applications;
 
-import com.os.main.MainController;
 import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -126,10 +125,5 @@ public class BaseController {
         stage.setIconified(false);
         // 将窗口置于最前
         stage.toFront();
-    }
-
-    @FXML
-    protected void showDescription() {
-
     }
 }

@@ -1,7 +1,6 @@
 package com.os.applications.processApp;
 
 import com.os.applications.BaseController;
-import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
 import com.os.main.MainController;
@@ -18,15 +17,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Vector;
 
 public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
+    public AnchorPane mainPane1;
     @FXML
     private TableView<ProcessDetailData> processTable;
+    @FXML
+    private TableView<ProcessDetailData> processTable1;
     @FXML
     private TableColumn<?, ?> processName;
     @FXML
@@ -44,54 +45,27 @@ public class ProcessAppController extends BaseController {
     @FXML
     private TableColumn<?, ?> progressBar;
     @FXML
-    private Button nowProcessName;
+    private TableColumn<?, ?> processName1;
     @FXML
-    private Button nowResult;
+    private TableColumn<?, ?> processState1;
     @FXML
-    private Button nowInstruction;
+    private TableColumn<?, ?> whichFile1;
     @FXML
-    private TableView<InstructionData> nowProcessTable;
+    private TableColumn<?, ?> havedDevice1;
     @FXML
-    private TableColumn<?, ?> instruction;
+    private TableColumn<?, ?> havedMemory1;
     @FXML
-    private CheckBox showNow;
+    private TableColumn<?, ?> havedPid1;
     @FXML
-    private CheckBox showCreating;
+    private TableColumn<?, ?> result1;
     @FXML
-    private CheckBox showWaiting;
-    @FXML
-    private CheckBox showBlocked;
-    @FXML
-    private CheckBox showEnded;
-    @FXML
-    private CheckBox showAll;
-    @FXML
-    private CheckBox signEnded;
-    @FXML
-    private CheckBox signCreating;
-    @FXML
-    private CheckBox signWaiting;
-    @FXML
-    private CheckBox signBlocked;
-    @FXML
-    private CheckBox signRunning;
+    private TableColumn<?, ?> progressBar1;
     @FXML
     private CheckBox continueButton;
     @FXML
     private CheckBox suspendButton;
-    @FXML
-    private Button residueSlice;
-    @FXML
-    private RadioButton speed1Button;
-    @FXML
-    private RadioButton speed2Button;
-    @FXML
-    private RadioButton speed4Button;
-    @FXML
-    private RadioButton speed8Button;
-    private CheckBox[] checkBoxes1;
-    private CheckBox[] checkBoxes2;
 
+    //继续新建进程/停止新建进程
     @FXML
     void createSelectByMouse(MouseEvent event) {
         this.createSelect((CheckBox) event.getSource());
@@ -107,70 +81,12 @@ public class ProcessAppController extends BaseController {
         checkBox.setSelected(true);
     }
 
-    @FXML
-    void showSelectByMouse(MouseEvent event) {
-        this.showSelect((CheckBox) event.getSource());
-    }
-
-    void showSelect(CheckBox checkBox) {
-        CheckBox[] array = new CheckBox[]{this.showNow, this.showCreating, this.showWaiting, this.showBlocked, this.showEnded, this.showAll};
-
-        for (CheckBox box : array) {
-            box.setSelected(checkBox == box);
-        }
-
-        checkBox.setSelected(true);
-    }
-
-    @FXML
-    void signSelectByMouse(MouseEvent event) {
-        this.signSelect((CheckBox) event.getSource());
-    }
-
-    void signSelect(CheckBox checkBox) {
-        CheckBox[] array = new CheckBox[]{this.signCreating, this.signWaiting, this.signRunning, this.signBlocked, this.signEnded};
-
-        for (int i = 0; i < 5; ++i) {
-            array[i].setSelected(checkBox == array[i]);
-        }
-
-        System.out.println(checkBox.getId() + "被选中");
-        checkBox.setSelected(true);
-    }
-
-    @FXML
-    void speedSelectByMouse(MouseEvent event) {
-        this.speedSelect((RadioButton) event.getSource());
-    }
-
-    void speedSelect(RadioButton radioButton) {
-        RadioButton[] array = new RadioButton[]{this.speed1Button, this.speed2Button, this.speed4Button, this.speed8Button};
-
-        for (int i = 0; i < 4; ++i) {
-            array[i].setSelected(radioButton == array[i]);
-        }
-
-        if (this.speed1Button.isSelected()) {
-            ProcessManager.speed = 1;
-        } else if (this.speed2Button.isSelected()) {
-            ProcessManager.speed = 2;
-        } else if (this.speed4Button.isSelected()) {
-            ProcessManager.speed = 4;
-        } else if (this.speed8Button.isSelected()) {
-            ProcessManager.speed = 8;
-        }
-
-        radioButton.setSelected(true);
-    }
-
+    //初始化
     @Override
     public void init(Stage stage) {
         super.init(stage);
 
-        this.showSelect(this.showNow);
-        this.signSelect(this.signRunning);
-        this.createSelect(this.continueButton);
-        this.speedSelect(this.speed1Button);
+        //显示面板
         this.processName.setCellValueFactory(new PropertyValueFactory<>("processName"));
         this.processState.setCellValueFactory(new PropertyValueFactory<>("processState"));
         this.whichFile.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
@@ -179,164 +95,44 @@ public class ProcessAppController extends BaseController {
         this.havedPid.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
         this.result.setCellValueFactory(new PropertyValueFactory<>("result"));
         this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
-        this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
+        //this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
 
-        checkBoxes1 = new CheckBox[]{this.showNow, this.showCreating,
-                this.showWaiting, this.showBlocked,
-                this.showEnded, this.showAll};
-        checkBoxes2 = new CheckBox[]{this.signCreating, this.signWaiting,
-                this.signRunning, this.signBlocked, this.signEnded};
+        //显示面板
+        this.processName1.setCellValueFactory(new PropertyValueFactory<>("processName"));
+        this.processState1.setCellValueFactory(new PropertyValueFactory<>("processState"));
+        this.whichFile1.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
+        this.havedDevice1.setCellValueFactory(new PropertyValueFactory<>("havedDevice"));
+        this.havedMemory1.setCellValueFactory(new PropertyValueFactory<>("havedMemory"));
+        this.havedPid1.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
+        this.result1.setCellValueFactory(new PropertyValueFactory<>("result"));
+        this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
 
+        //继续或者停止新建
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
 
         MainController.getInstance().uiThread.processAppController = this;
     }
 
-
-    //region [进程管理器的Update方法]
     public void Update() {
         this.processTableUpdate();
-        this.nowProcessTableUpdate();
-        this.nowProcessUpdate();
-    }
-
-    private void nowProcessUpdate() {
-        if (nowProcessName != null && nowResult != null && nowInstruction != null && residueSlice != null) {
-            Platform.runLater(() -> {
-                if (MainController.getInstance().uiThread.runProcess == null) {
-                    nowProcessName.setText("");
-                    nowResult.setText("");
-                    nowInstruction.setText("");
-                    residueSlice.setText("");
-                } else {
-                    nowProcessName.setText(MainController.getInstance().uiThread.runProcess.name + "");
-                    nowResult.setText(MainController.getInstance().uiThread.runProcess.AX + "");
-                    int counter = MainController.getInstance().uiThread.runProcess.PC;
-                    if (counter >= MainController.getInstance().uiThread.runProcess.executableFile.instructionArray.size()) {
-                        --counter;
-                    }
-
-                    nowInstruction.setText(
-                            MainController.getInstance().uiThread.runProcess.executableFile.getInstructionArray().get(counter) + "");
-                    residueSlice.setText(ProcessScheduleThread.residueSlice + "");
-                }
-
-            });
-        }
-    }
-
-    private void processTableUpdate() {
-        if (processTable != null) {
-            Vector<?> updateList = null;
-            String selectString = "";
-            if (checkBoxes1[0].isSelected()) {
-                selectString = checkBoxes1[0].getText();
-                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
-            } else if (checkBoxes1[1].isSelected()) {
-                selectString = checkBoxes1[1].getText();
-                updateList = (Vector<?>) ProcessManager.creatingProcessList.clone();
-            } else if (checkBoxes1[2].isSelected()) {
-                selectString = checkBoxes1[2].getText();
-                updateList = (Vector<?>) ProcessManager.waitProcessList.clone();
-            } else if (checkBoxes1[3].isSelected()) {
-                selectString = checkBoxes1[3].getText();
-                updateList = (Vector<?>) ProcessManager.blockProcessList.clone();
-            } else if (checkBoxes1[4].isSelected()) {
-                selectString = checkBoxes1[4].getText();
-                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
-            } else if (checkBoxes1[5].isSelected()) {
-                selectString = checkBoxes1[5].getText();
-                updateList = (Vector<?>) ProcessManager.allProcessList.clone();
-            }
-
-            DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, selectString);
-            Platform.runLater(() ->
-                    processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
-
-            processTable.setRowFactory((row) -> new TableRow<>() {
-                public void updateItem(ProcessDetailData item, boolean empty) {
-                    super.updateItem(item, empty);
-                    String s = "运行态";
-                    if (checkBoxes2 != null) {
-                        for (int i = 0; i < checkBoxes2.length; ++i) {
-                            if (checkBoxes2[i].isSelected()) {
-                                if (i == 0) {
-                                    s = "新建态";
-                                } else if (i == 1) {
-                                    s = "就绪态";
-                                } else if (i == 2) {
-                                    s = "运行态";
-                                } else if (i == 3) {
-                                    s = "阻塞态";
-                                } else if (i == 4) {
-                                    s = "已销毁";
-                                }
-                                break;
-                            }
-                        }
-                    }
-
-                    if (item == null) {
-                        this.setId("not-right");
-                    } else if (Objects.equals(item.getProcessState(), s)) {
-                        this.setId("right");
-                    } else {
-                        this.setId("not-right");
-                    }
-
-                }
-            });
-        }
     }
 
     public ArrayList<ProcessDetailData> processDetailDataArrayList = new ArrayList<>();
-    public ArrayList<InstructionData> instructionDataArrayList = new ArrayList<>();
+    public ArrayList<ProcessDetailData> processDetailDataArrayList1 = new ArrayList<>();
 
-    private void nowProcessTableUpdate() {
-        if (nowProcessTable != null) {
-            if (MainController.getInstance().uiThread.runProcess != null) {
-                DataLoader.fileDetailDataLoad(instructionDataArrayList, MainController.getInstance().uiThread.runProcess.executableFile);
-                nowProcessTable.setRowFactory((row) -> new TableRow<>() {
-                    public void updateItem(InstructionData item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item == null) {
-                            this.setId("not-right");
-                        } else if (item.which == MainController.getInstance().uiThread.runProcess.PC) {
-                            this.setId("right");
-                        } else {
-                            this.setId("not-right");
-                        }
+    //进行数据更新
+    private void processTableUpdate() {
 
-                    }
-                });
-            } else {
-                instructionDataArrayList.clear();
-            }
+            Vector<?> updateList = (Vector<?>) ProcessManager.allProcessList.clone();
+            //$$$获取数据
+            DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, "当前进程");
+            Platform.runLater(() ->
+                    processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
 
-            Platform.runLater(() -> nowProcessTable.setItems(FXCollections.observableArrayList(instructionDataArrayList)));
-        }
+            //$$$获取数据
+            DataLoader.processDetailDataLoad(processDetailDataArrayList1, (Vector<Process>) updateList, "销毁进程");
+            Platform.runLater(() ->
+                    processTable1.setItems(FXCollections.observableArrayList(processDetailDataArrayList1)));
+
     }
-
-    @FXML
-    @Override
-    protected void showDescription() {
-        super.showDescription();
-
-        Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication("进程管理，主要作用是可视化进程的运行情况. " +
-                "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。[默认时间片为6]。" +
-                " 2）显示当前进程的执行进度，高亮当前执行指令。" +
-                "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
-                "4）进程详表设置：包括显示设置、标记设置和进程控制。    " +
-                "①显示设置：用于选择想要显示的进程，包括当前进程、新建进程、就绪进程、阻塞进程、销毁进程、显示所有" +
-                "②标记设置：用于选择想要高亮的进程，包括新建进程、就绪进程、运行进程、阻塞进程、销毁进程" +
-                "③进程控制：用于控制继续新建进程或者暂停新建进程，以及控制进程运行的倍速（1倍速，2倍速，4倍速，8倍速）。" +
-                "\"\n", 500,500);
-        try {
-            tipWindow.start(stage);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    //endregion
 }

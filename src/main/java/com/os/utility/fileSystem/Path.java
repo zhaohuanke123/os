@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Path implements Serializable {
    private static final long serialVersionUID = 1L;
-   private String pathName;  // 路径名称
-   private Path parent;  // 父路径
-   private List<Path> children;  // 子路径
+   private String pathName;
+   private Path parent;
+   private List<Path> children;
 
    public Path(String name, Path parent) {
       this.setPathName(name);

@@ -2,7 +2,10 @@ package com.os.applications.fileApp.application;
 
 import com.os.applications.fileApp.controller.PropertyController;
 import com.os.applications.fileApp.FileApplication;
-import com.os.utility.fileSystem.*;
+import com.os.utility.fileSystem.Disk;
+import com.os.utility.fileSystem.File;
+import com.os.utility.fileSystem.Folder;
+import com.os.utility.fileSystem.Path;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseDragEvent;
 import javafx.stage.Stage;
@@ -37,8 +40,6 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
         super.start(primaryStage);
 
         this.showView();
-
-        super.toolTip = ((BaseFile) this.block.getObject()).getName();
     }
 
     private void showView() {

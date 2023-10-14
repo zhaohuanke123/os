@@ -1,21 +1,44 @@
 @import "../../WindowPane.css";
 
-/* 设置tab顶部的样式 */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 20px;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: white;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-text-fill: black;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+.table-row-cell:selected {
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
 }
 
-/* 设置tab卡片的样式 */
 .tab-pane .tab {
     -fx-background-color: #e6e6e6;
 }
 
-/* 设置tab卡片选中的样式 */
 .tab-pane .tab:selected {
     -fx-background-color: rgb(103, 157, 238);
 }
 
-/* 设置tab卡片文字的样式 */
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: black;
@@ -24,7 +47,6 @@
 }
 
 
-/* 设置当前路径展示框的样式 */
 #currentPath {
     -fx-background-color: white;
     -fx-border-color: black;
@@ -33,7 +55,6 @@
 }
 
 
-/* 设置文件展示框的样式 */
 #flowPane  {
     -fx-background-color: rgba(255, 255, 255, 0.9);
     -fx-background-radius: 0 10 10 0;
@@ -42,7 +63,6 @@
 }
 
 
-/* 设置文件目录的样式 */
 #treeView {
     -fx-background-color: rgba(255, 255, 255, 0.9);
     -fx-background-radius: 10 0 0 10;
@@ -51,61 +71,15 @@
     -fx-padding: 10px;
 }
 
-/* 设置文件目录选中的样式 */
 #treeView .tree-cell:selected {
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
-/* 设置文件目录子组件的样式 */
 .tree-cell {
     -fx-background-color: transparent;
 }
 
-/* 设置箭头样式的前置 */
-.tree-cell .tree-disclosure-node {
-    -fx-background-color: transparent;
-}
-
-/* 设置展开箭头的样式 */
-.tree-cell:expanded > .tree-disclosure-node > .arrow{
-    -fx-background-color: black;
-}
-
-/* 设置折叠箭头的样式 */
-.tree-cell:collapsed > .tree-disclosure-node > .arrow {
-    -fx-background-color: black;
-}
-
-
-/* 设置表格的样式 */
-.table-view {
-    -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
-    -fx-padding: 20px;
-}
-
-/* 设置表格标题的样式 */
-.table-view .column-header, .table-view .filler {
-    -fx-background-color: white;
-}
-
-/* 设置表格内容的样式 */
-.table-view .table-row-cell {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
-    -fx-text-fill: black;
-}
-
-/* 设置表格文字的样式 */
-.table-view .table-cell {
-    -fx-alignment: CENTER;
-    -fx-text-fill: black;
-}
-
-/* 设置表格选中的样式 */
-.table-row-cell:selected {
-    -fx-table-cell-border-color: transparent;
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
+.tree-cell:expanded > .tree-disclosure-node {
+    -fx-text-fill: transparent;
 }

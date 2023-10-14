@@ -22,20 +22,6 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
         );
 
         this.tipString = tipString;
-        super.toolTip = tipString;
-    }
-
-    public TipDialogApplication(String tipString, int width, int height) {
-        super(
-                "/com/os/applications/fileApp/fxmls/TipWindow.fxml",
-                "/com/os/applications/fileApp/res/tip.png",
-                "提示",
-                width,
-                height
-        );
-
-        this.tipString = tipString;
-        super.toolTip = tipString;
     }
 
     public void start(Stage stage) throws IOException {

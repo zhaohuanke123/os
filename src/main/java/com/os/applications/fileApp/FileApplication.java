@@ -32,7 +32,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public static boolean moveFlag = false;
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
     private List<Disk> blockList;
-    public String recentPath;  // 记录当前路径
+    public String recentPath;
     public static File copyFile;
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();
     private ObservableList<Disk> disksItem;
@@ -173,10 +173,12 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     private void TreeNodeInit(Path newPath, TreeItem<String> parentNode) {
         TreeItem<String> newNode = this.addNode(parentNode, newPath);
         if (newPath.hasChild()) {
+
             for (Path child : newPath.getChildren()) {
                 this.TreeNodeInit(child, newNode);
             }
         }
+
     }
 
     private TreeItem<String> addNode(TreeItem<String> parentNode, Path newPath) {

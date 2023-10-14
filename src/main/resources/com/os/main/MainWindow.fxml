@@ -69,6 +69,21 @@
             </Button>
 
             <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
+            <!--  帮助按钮-->
+            <Button id="appButton" fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER"
+                    graphicTextGap="0.0" mnemonicParsing="false"
+                    stylesheets="@MainWindow.css">
+                <graphic>
+                    <ImageView fitHeight="50.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../img/help.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="帮助"/>
+                </tooltip>
+            </Button>
+
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!-- 最小化按钮-->
             <Button id="appButton" fx:id="minimizeButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="67.0"

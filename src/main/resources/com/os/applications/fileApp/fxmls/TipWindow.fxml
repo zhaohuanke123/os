@@ -80,7 +80,7 @@
    <AnchorPane id="mainPane" layoutX="75.0" layoutY="68.703125" stylesheets="@../css/TipWindow.css"
                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="45.0">
-      <BorderPane fx:id="contentPane" layoutX="72.0" layoutY="28.703125" stylesheets="@../css/TipWindow.css"
+      <BorderPane id="contentPane" layoutX="72.0" layoutY="28.703125" stylesheets="@../css/TipWindow.css"
                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                   AnchorPane.topAnchor="0.0">
          <center>

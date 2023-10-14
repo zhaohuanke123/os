@@ -49,9 +49,6 @@ public class SceneManager {
             } catch (IOException e) {
                 e.getStackTrace();
             }
-        } else if (!stage.isIconified()) {
-            stage.setIconified(true);
-            return;
         }
 
         // 如果窗口已显示，将其显示在最前面

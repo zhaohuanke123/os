@@ -13,7 +13,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 
-public class BaseApp<T extends BaseController> extends Application {
+public class BaseApp<T extends BaseController> extends Application
+
+{
     protected String fxmlPath;  // FXML 文件的路径
     protected String IconPath;  // 图标路径
     protected String TitleName;  // 标题名称
@@ -84,10 +86,5 @@ public class BaseApp<T extends BaseController> extends Application {
         ImageView imageView = new ImageView(String.valueOf(location));
         CompSet.setImageViewFixSize(imageView, 20, 20);
         bc.title.setGraphic(imageView);
-    }
-
-    protected ImageView getIco() {
-        URL location = this.getClass().getResource(IconPath);
-        return new ImageView(String.valueOf(location));
     }
 }

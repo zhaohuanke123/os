@@ -33,14 +33,6 @@
         <right>
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" BorderPane.alignment="CENTER">
-                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false" prefHeight="0.0" onMouseClicked="#showDescription">
-                    <graphic>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../../../img/help.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
 <!--                最小化按钮-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" prefHeight="0.0" onMouseClicked="#minimizeStage">
