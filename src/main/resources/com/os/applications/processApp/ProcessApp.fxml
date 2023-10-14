@@ -124,6 +124,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
         </TableView>
+
         <ToolBar layoutX="35.0" layoutY="21.0" prefHeight="41.0" prefWidth="725.0" stylesheets="@ProcessApp.css"
                  AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="21.0">
             <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="149.0" text="正在运行进程的编号："/>
