@@ -30,8 +30,9 @@
                 onMousePressed="#pressBar" onMouseReleased="#releaseBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>
-            <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="134.0"
-                  stylesheets="@../helpApp/HelpApp.css" BorderPane.alignment="CENTER">
+            <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
+                  prefWidth="134.0"
+                  stylesheets="@ProcessApp.css" BorderPane.alignment="CENTER">
                 <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
                        text="进程管理器" HBox.hgrow="ALWAYS">
                     <graphic>
