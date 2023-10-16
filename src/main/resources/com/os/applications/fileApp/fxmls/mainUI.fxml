@@ -51,10 +51,10 @@
                     </graphic>
                 </Button>
 <!--                最大化/还原按钮-->
-                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                <Button disable="true" id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" prefHeight="0.0">
                     <graphic>
-                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../../img/change.png"/>
                         </ImageView>
                     </graphic>

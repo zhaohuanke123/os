@@ -87,8 +87,7 @@
                         stylesheets="@../processApp/ProcessApp.css">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-
-                            <Image url="@../../img/close0.png"/>
+                            <Image url="@../../img/close.png"/>
                         </ImageView>
                     </graphic>
                 </Button>

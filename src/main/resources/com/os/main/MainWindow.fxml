@@ -116,7 +116,7 @@
                     graphicTextGap="0.0" mnemonicParsing="false" stylesheets="@MainWindow.css">
                 <graphic>
                     <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/desktop1.png"/>
+                        <Image url="@../img/desktop.png"/>
                     </ImageView>
                 </graphic>
                 <tooltip>

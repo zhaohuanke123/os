@@ -76,8 +76,7 @@
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-
-                            <Image url="@../../img/close0.png"/>
+                            <Image url="@../../img/close.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
@@ -118,7 +117,7 @@
             </AnchorPane>
         </Tab>
 
-        <Tab fx:id="deadTab" text="销毁进程">
+        <Tab fx:id="deadTab" text="已完成进程">
             <AnchorPane fx:id="mainPane1" layoutX="10.0" layoutY="47.0" minHeight="0.0" minWidth="0.0"
                         prefHeight="437.0" prefWidth="1008.0" stylesheets="@ProcessApp.css"
                         AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"

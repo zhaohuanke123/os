@@ -51,27 +51,25 @@ public class Test extends Application {
 
         // 添加数据
         new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                            dataSeries.getData().add(new XYChart.Data<>(6, 12));
-                            Thread.sleep(1000);
-                            dataSeries.getData().add(new XYChart.Data<>(7, 14));
-                            Thread.sleep(1000);
-                            dataSeries.getData().add(new XYChart.Data<>(8, 16));
-                            Thread.sleep(1000);
-                            dataSeries.getData().add(new XYChart.Data<>(9, 18));
-                            Thread.sleep(1000);
-                            dataSeries.getData().add(new XYChart.Data<>(10, 20));
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                        dataSeries.getData().add(new XYChart.Data<>(6, 12));
+                        Thread.sleep(1000);
+                        dataSeries.getData().add(new XYChart.Data<>(7, 14));
+                        Thread.sleep(1000);
+                        dataSeries.getData().add(new XYChart.Data<>(8, 16));
+                        Thread.sleep(1000);
+                        dataSeries.getData().add(new XYChart.Data<>(9, 18));
+                        Thread.sleep(1000);
+                        dataSeries.getData().add(new XYChart.Data<>(10, 20));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
+            }
         ).start();
     }
-
 }
-
