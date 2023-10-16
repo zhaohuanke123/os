@@ -27,7 +27,7 @@ public class DeleteDialogController extends BaseFileController {
         this.block = block;
 
         this.acceptButton.setOnMouseClicked(event -> {
-            stage.close();
+            this.closeStage();
             Path thisPath = null;
             if (block.getObject() instanceof Folder) {
                 thisPath = ((Folder) block.getObject()).getPath();

@@ -15,10 +15,12 @@ public class Folder extends BaseFile implements Serializable {
 
     public Folder(String folderName) {
         super(folderName);
+        this.type = "文件夹";
     }
 
     public Folder(String folderName, String location, int diskNum, Folder parent) {
         super(folderName, location, diskNum, parent);
+        this.type = "文件夹";
         this.setChildren(new ArrayList<>());
         this.catalogNum = 0;
     }
