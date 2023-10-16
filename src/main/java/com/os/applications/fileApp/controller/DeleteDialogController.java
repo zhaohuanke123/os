@@ -56,7 +56,7 @@ public class DeleteDialogController extends BaseFileController {
             mainView.addIcon(FileApplication.fat.getBlockList(mainView.recentPath), mainView.recentPath);
         });
 
-        this.cancelButton.setOnMouseClicked(event -> stage.close());
+        this.cancelButton.setOnMouseClicked(event -> this.closeStage());
     }
 
     public void tipOpen(String tipString) throws Exception {

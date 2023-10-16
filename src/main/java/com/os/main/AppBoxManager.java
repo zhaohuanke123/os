@@ -32,16 +32,17 @@ public class AppBoxManager {
         CompSet.setImageViewFixSize((ImageView) appButton.getGraphic(), 0.7 * MainController.getInstance().appWidth, 0.7 * MainController.getInstance().appWidth);
         appButton.setTooltip(new Tooltip(toolTipString));
 
-        appBox.getChildren().add(0, appButton);
-        appBox.getChildren().add(0, new Separator());
+        var size = appBox.getChildren().size();
+        appBox.getChildren().add(size, appButton);
+        appBox.getChildren().add(size, new Separator());
 
         appBox.setLayoutX(MainController.getInstance().sceneWidth / 2.0 - appBox.getWidth() / 2.0);
     }
 
     public void removeAppButton(Stage stage) {
         for (int i = 0; i < appButtons.size(); i++) {
-            appBox.getChildren().remove(0);
-            appBox.getChildren().remove(0);
+            appBox.getChildren().remove(appBox.getChildren().size() - 1);
+            appBox.getChildren().remove(appBox.getChildren().size() - 1);
         }
 
         for (int i = 0; i < appButtons.size(); i++) {
@@ -52,8 +53,8 @@ public class AppBoxManager {
         }
 
         for (AppBean appButton : appButtons) {
-            appBox.getChildren().add(0, appButton.appButton);
-            appBox.getChildren().add(0, new Separator());
+            appBox.getChildren().add(appBox.getChildren().size(),appButton.appButton);
+            appBox.getChildren().add(appBox.getChildren().size(),new Separator());
         }
 
         appBox.setLayoutX(MainController.getInstance().sceneWidth / 2.0 - appBox.getWidth() / 2.0);

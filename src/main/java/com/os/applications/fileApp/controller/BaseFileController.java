@@ -15,10 +15,10 @@ public class BaseFileController extends BaseController {
 
     @FXML
     @Override
-   public void closeStage() {
+    public void closeStage() {
         super.closeStage();
 
-        MainController.getInstance().appBoxManager.removeAppButton(this.stage);
+        MainController.getInstance().appBoxManager.removeAppButton(stage);
     }
 
 }
