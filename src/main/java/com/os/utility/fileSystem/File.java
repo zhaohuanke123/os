@@ -33,6 +33,7 @@ public class File extends BaseFile implements Serializable {
 
     public File(String fileName) {
         super(fileName);
+        this.type = "文件";
         this.setOpened(false);
         // 更新父节点的信息
         if (this.hasParent()) {
@@ -59,6 +60,7 @@ public class File extends BaseFile implements Serializable {
 
     public File(String fileName, String location, int diskNum, Folder parent) {
         super(fileName, location, diskNum, parent);
+        this.type = "文件";
 
         content = "";
 

@@ -24,36 +24,6 @@
               prefWidth="392.0" stylesheets="@MainWindow.css">
 
             <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
-            <!-- 关闭按钮-->
-            <Button id="appButton" fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER"
-                    graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#closeWindow" prefHeight="50.0"
-                    prefWidth="65.0" stylesheets="@MainWindow.css">
-                <graphic>
-                    <ImageView fitHeight="39.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/close.png"/>
-                    </ImageView>
-                </graphic>
-                <tooltip>
-                    <Tooltip text="关闭"/>
-                </tooltip>
-            </Button>
-
-            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
-            <!-- 最小化按钮-->
-            <Button id="appButton" fx:id="minimizeButton" alignment="CENTER" contentDisplay="CENTER"
-                    graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="67.0"
-                    prefWidth="54.0" stylesheets="@MainWindow.css">
-                <graphic>
-                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/minimize.png"/>
-                    </ImageView>
-                </graphic>
-                <tooltip>
-                    <Tooltip text="最小化"/>
-                </tooltip>
-            </Button>
-
-            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
             <!--  文件管理器按钮 -->
             <Button id="appButton" fx:id="fileManagerButton" alignment="CENTER" contentDisplay="CENTER"
                     graphicTextGap="0.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="78.0"
@@ -98,6 +68,36 @@
                 </tooltip>
             </Button>
 
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
+            <!-- 最小化按钮-->
+            <Button id="appButton" fx:id="minimizeButton" alignment="CENTER" contentDisplay="CENTER"
+                    graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="67.0"
+                    prefWidth="54.0" stylesheets="@MainWindow.css">
+                <graphic>
+                    <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../img/minimize.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="最小化"/>
+                </tooltip>
+            </Button>
+
+            <Separator id="separator" orientation="VERTICAL" prefHeight="200.0" prefWidth="0.0"/>
+            <!-- 关闭按钮-->
+            <Button id="appButton" fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER"
+                    graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#closeWindow" prefHeight="50.0"
+                    prefWidth="65.0" stylesheets="@MainWindow.css">
+                <graphic>
+                    <ImageView fitHeight="39.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../img/close.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="关闭"/>
+                </tooltip>
+            </Button>
+
         </HBox>
 
         <HBox id="appBox" fx:id="tipBox" alignment="CENTER" layoutX="634.0" layoutY="12.0" prefHeight="86.0"
@@ -116,7 +116,7 @@
                     graphicTextGap="0.0" mnemonicParsing="false" stylesheets="@MainWindow.css">
                 <graphic>
                     <ImageView fitHeight="51.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../img/desktop1.png"/>
+                        <Image url="@../img/desktop.png"/>
                     </ImageView>
                 </graphic>
                 <tooltip>

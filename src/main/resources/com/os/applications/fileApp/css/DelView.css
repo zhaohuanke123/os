@@ -1,15 +1,1 @@
 @import "../../WindowPane.css";
-
-#treeView {
-    -fx-background-color: #F9FAFB;
-    -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12 ;*/
-    /*-fx-background-radius: 0 0  12 12;*/
-}
-
-#flowPane {
-    -fx-background-color: #F9FAFB;
-    -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12 ;*/
-    /*-fx-background-radius: 0 0  12 12;*/
-}

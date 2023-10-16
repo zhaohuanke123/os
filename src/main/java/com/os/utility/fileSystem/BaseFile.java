@@ -41,7 +41,7 @@ public class BaseFile implements Serializable {
         this.space = this.size + "B";
         this.createTime = new Date();
         this.diskNum = diskNum;
-        this.type = "文件夹";
+//        this.type = "文件";
         this.parent = parent;
         this.setNameP();
     }

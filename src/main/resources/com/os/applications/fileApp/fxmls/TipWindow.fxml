@@ -53,7 +53,7 @@
                      <cursor>
                         <Cursor fx:constant="DEFAULT"/>
                      </cursor>
-                     <Image url="@../../../img/minimize0.png"/>
+                     <Image url="@../../../img/minimize.png"/>
                   </ImageView>
                </graphic>
             </Button>
