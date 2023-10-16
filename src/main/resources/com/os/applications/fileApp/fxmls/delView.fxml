@@ -38,7 +38,7 @@
                <graphic>
                   <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                              pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../../../img/minimize0.png"/>
+                     <Image url="@../../../img/minimize.png"/>
                   </ImageView>
                </graphic>
             </Button>

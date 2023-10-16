@@ -46,7 +46,7 @@
                         mnemonicParsing="false" prefHeight="0.0" onMouseClicked="#minimizeStage">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../../../img/minimize0.png"/>
+                            <Image url="@../../../img/minimize.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
