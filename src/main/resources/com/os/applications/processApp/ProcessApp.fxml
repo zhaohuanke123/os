@@ -16,8 +16,8 @@
                 onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>
-            <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
-                  prefWidth="134.0" stylesheets="@./ProcessApp.css" BorderPane.alignment="CENTER">
+            <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT"
+                  prefHeight="40.0" prefWidth="134.0" BorderPane.alignment="CENTER">
                 <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
                        text="进程管理器" HBox.hgrow="ALWAYS">
                     <graphic>
@@ -32,15 +32,9 @@
             </HBox>
         </left>
         <right>
-            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-                  maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT"
+                  nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" BorderPane.alignment="CENTER">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <cursor>
-                    <Cursor fx:constant="DEFAULT"/>
-                </cursor>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
@@ -55,10 +49,6 @@
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
-
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT"/>
-                            </cursor>
                             <Image url="@../../img/minimize.png"/>
                         </ImageView>
                     </graphic>
