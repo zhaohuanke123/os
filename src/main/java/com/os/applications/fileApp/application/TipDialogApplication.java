@@ -42,5 +42,9 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
         super.start(stage);
 
         controller.init(stage, tipString);
+
+        stage.setOnCloseRequest(event -> {
+            controller.closeStage();
+        });
     }
 }

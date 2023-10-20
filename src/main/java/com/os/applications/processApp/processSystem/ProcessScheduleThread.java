@@ -1,6 +1,8 @@
 package com.os.applications.processApp.processSystem;
 
+import com.os.applications.processApp.ProcessAppController;
 import com.os.utility.fileSystem.OccupancyManager;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 import java.util.Random;
@@ -27,6 +29,7 @@ public class ProcessScheduleThread extends Thread {
     public static int[] cDevice;
     public static int residueSlice = 0;
     public static CheckBox[] controlButton = null;
+    public static ProcessAppController processAppController = null;
 
     public void Init() {
         sliceLength = 6;
@@ -55,7 +58,6 @@ public class ProcessScheduleThread extends Thread {
                     var executableFiles = (Vector<?>) executableFileList.clone();
                     int num = random.nextInt(executableFiles.size());
                     ExecutableFile executableFile = (ExecutableFile) executableFiles.get(num);
-                    int processId = processNum;
                     Process newProcess = new Process(processNum, executableFileList.get(num), executableFile.id);
                     creatingProcessList.add(newProcess);
                     allProcessList.add(newProcess);
