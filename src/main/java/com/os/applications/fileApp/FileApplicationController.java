@@ -27,12 +27,10 @@ public class FileApplicationController extends BaseFileController {
     public Label currentPath;
     public TreeView<String> treeView;
     public FlowPane flowPane;
-    public Tab chartTab;
     @FXML
     public TableView<Disk> diskTable;
     @FXML
     public TableView<File> openFile;
-    public Tab systemFileTab;
     public TextArea contentField;
     @FXML
     private TableColumn<?, ?> filePath;

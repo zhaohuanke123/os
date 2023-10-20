@@ -68,18 +68,6 @@ public class BaseController {
         this.stage.setY(event.getScreenY() - this.yOffset);
     }
 
-    // 拖动完成后恢复窗口不透明度
-    @FXML
-    void dragBarDone() {
-        this.stage.setOpacity(1.0);
-    }
-
-    // 鼠标释放后恢复窗口不透明度
-    @FXML
-    void releaseBar() {
-        this.stage.setOpacity(1.0);
-    }
-
     // 调整窗口大小按钮的点击事件处理方法
     @FXML
     void resizeStage() {

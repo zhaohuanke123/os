@@ -12,8 +12,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.fileApp.controller.DeleteDialogController">
    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/DelView.css"
-               onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-               onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+               onMouseDragged="#dragBar" onMousePressed="#pressBar"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
@@ -31,9 +30,8 @@
          </HBox>
       </left>
       <right>
-         <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
-               spacing="10.0" BorderPane.alignment="CENTER">
+         <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT"
+               prefHeight="40.0" prefWidth="55.0" spacing="10.0" BorderPane.alignment="CENTER">
             <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false">
                <graphic>
                   <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
@@ -54,16 +52,13 @@
       </right>
    </BorderPane>
 
-   <AnchorPane id="mainPane" layoutX="8.0" layoutY="47.0" prefHeight="241.0" prefWidth="324.0"
-               stylesheets="@../css/DelView.css"
-               AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
-               AnchorPane.topAnchor="45.0">
-      <Button fx:id="acceptButton" layoutX="158.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
-              text="确认"/>
-      <Button fx:id="cancelButton" layoutX="244.0" layoutY="186.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0"
-              text="取消"/>
-      <Text fx:id="text" layoutX="11.0" layoutY="19.0" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="文本" wrappingWidth="309.0402374267578"
-            AnchorPane.topAnchor="7.0"/>
+   <AnchorPane id="mainPane" layoutX="8.0" layoutY="47.0"
+               prefHeight="180" prefWidth="325">
+      <Text fx:id="text" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15"/>
+      <Button fx:id="acceptButton" layoutX="155.0" layoutY="125.0" mnemonicParsing="false"
+              prefHeight="34.0" prefWidth="68.0" text="确认"/>
+      <Button fx:id="cancelButton" layoutX="245.0" layoutY="125.0" mnemonicParsing="false"
+              prefHeight="34.0" prefWidth="68.0" text="取消"/>
    </AnchorPane>
 </AnchorPane>
