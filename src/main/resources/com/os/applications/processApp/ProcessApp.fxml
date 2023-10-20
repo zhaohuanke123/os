@@ -86,15 +86,17 @@
 
     <!--    包含"当前进程"和"销毁进程"两个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0"
+             AnchorPane.rightAnchor="5.0"
              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
 
         <Tab id="existTab" text="运行进程">
             <AnchorPane fx:id="mainPane" layoutX="10.0" layoutY="47.0" minHeight="0.0" minWidth="0.0" prefHeight="437.0"
                         prefWidth="1008.0" stylesheets="@ProcessApp.css" AnchorPane.bottomAnchor="5.0"
+                        AnchorPane.rightAnchor="5.0"
                         AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="46.0">
                 <TableView fx:id="processTable" layoutX="30.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT"
                            prefHeight="354.0" prefWidth="940.0" stylesheets="@ProcessApp.css"
-                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="52.0"
+                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="102.0"
                            AnchorPane.topAnchor="22.0">
                     <columns>
                         <TableColumn fx:id="processName" prefWidth="75.0" text="进程编号"/>
@@ -110,12 +112,16 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TableView>
-                <CheckBox AnchorPane.bottomAnchor="5.0"
-                          fx:id="continueButton" layoutX="248.0" layoutY="383.0" mnemonicParsing="false"
-                          onMouseClicked="#createSelectByMouse" text="继续新建进程"/>
-                <CheckBox AnchorPane.bottomAnchor="5.0"
-                          fx:id="suspendButton" layoutX="687.0" layoutY="383.0" mnemonicParsing="false"
-                          onMouseClicked="#createSelectByMouse" text="暂停新建进程"/>
+                <VBox fx:id="creatProButtons" alignment="CENTER" stylesheets="@ProcessApp.css"
+                      AnchorPane.rightAnchor="0">
+                    <CheckBox
+                            fx:id="continueButton" mnemonicParsing="false"
+                            onMouseClicked="#createSelectByMouse" text="继续新建进程"/>
+                    <CheckBox
+                            fx:id="suspendButton" mnemonicParsing="false"
+                            onMouseClicked="#createSelectByMouse" text="暂停新建进程"/>
+                </VBox>
+
             </AnchorPane>
         </Tab>
 
@@ -145,9 +151,5 @@
             </AnchorPane>
         </Tab>
     </TabPane>
-
-    <VBox fx:id="creatProButtons" alignment="CENTER" stylesheets="@ProcessApp.css" AnchorPane.rightAnchor="23.0"
-          AnchorPane.topAnchor="45.0">
-    </VBox>
 
 </AnchorPane>
