@@ -1,6 +1,7 @@
 package com.os.applications.processApp;
 
 import com.os.applications.BaseController;
+import com.os.applications.fileApp.FileApplicationController;
 import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
@@ -14,8 +15,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +29,7 @@ import java.util.Vector;
 public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
     public AnchorPane mainPane1;
+    public VBox creatProButtons;
     @FXML
     private TableView<ProcessDetailData> processTable;
     @FXML
@@ -111,8 +115,59 @@ public class ProcessAppController extends BaseController {
 
         //继续或者停止新建
         ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
+        continueButton.setSelected(true);
+
+        for (var i : ProcessScheduleThread.executableFileList) {
+            Button button = new Button(i.getName());
+            button.setDisable(true);
+            Tooltip tooltip = new Tooltip(i.toString());
+            button.setTooltip(tooltip);
+            creatProButtons.getChildren().add(button);
+            creatProButtons.setSpacing(10);
+            button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+                    if (!ProcessScheduleThread.executableFileList.isEmpty()) {
+                        if (ProcessScheduleThread.creatingProcessList.size() < 3) {
+                            Process newProcess = new Process(ProcessScheduleThread.processNum, i, i.id);
+                            ProcessScheduleThread.creatingProcessList.add(newProcess);
+                            ProcessScheduleThread.allProcessList.add(newProcess);
+                            ++ProcessScheduleThread.processNum;
+                            newProcess.Create();
+                        } else {
+                            TipDialogApplication tipWindow = new TipDialogApplication("创建进程失败，创建进程数量已达上限", 500, 500);
+                            try {
+                                tipWindow.start(new Stage());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        continueButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                for (var i : creatProButtons.getChildren()) {
+                    if (i instanceof Button) {
+                        i.setDisable(true);
+                    }
+                }
+            }
+        });
+
+        suspendButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                for (var i : creatProButtons.getChildren()) {
+                    if (i instanceof Button) {
+                        i.setDisable(false);
+                    }
+                }
+            }
+        });
 
         MainController.getInstance().uiThread.processAppController = this;
+        ProcessScheduleThread.processAppController = this;
     }
 
     public void Update() {
