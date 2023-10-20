@@ -11,8 +11,7 @@
             fx:controller="com.os.applications.fileApp.FileApplicationController">
 
 <!--    设置窗口的titleBar-->
-    <BorderPane fx:id="titleBar" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-                onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+    <BorderPane fx:id="titleBar" onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <!--设置窗口的标题和图标-->
         <left>
@@ -72,10 +71,11 @@
         </right>
     </BorderPane>
 
-<!--    包含"文件管理"、"磁盘使用情况"和"系统可执行文件"三个选项-->
+<!--    包含"文件管理"、"磁盘使用情况"、"已打开文件"和"系统可执行文件"四个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE"
              AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0"
+             prefHeight="630.0" prefWidth="900.0">
 
         <Tab id="tab" text="文件管理">
             <AnchorPane>
@@ -116,32 +116,18 @@
             </AnchorPane>
         </Tab>
 
-        <Tab fx:id="chartTab" text="磁盘使用情况">
+        <Tab id="tab" text="磁盘使用情况">
             <Pane>
-                <HBox layoutX="10.0" layoutY="5.0" prefHeight="600">
+                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
                     <TableView fx:id="diskTable">
                         <columns>
-                            <TableColumn prefWidth="70.0" text="磁盘块"
+                            <TableColumn prefWidth="140.0" text="磁盘块"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="70.0" text="索引"
+                            <TableColumn prefWidth="140.0" text="索引"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="90.0" text="类型"
+                            <TableColumn prefWidth="180.0" text="类型"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="150.0" text="内容"
-                                         resizable="false" sortable="false" />
-                        </columns>
-                    </TableView>
-                    <TableView fx:id="openFile">
-                        <columns>
-                            <TableColumn prefWidth="55" text="文件名"
-                                         resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="60" text="打开方式"
-                                         resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="60" text="起始盘块"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="60" text="文件长度"
-                                         resizable="false" sortable="false" />
-                            <TableColumn fx:id="filePath" prefWidth="180" text="文件路径"
+                            <TableColumn prefWidth="300.0" text="内容"
                                          resizable="false" sortable="false" />
                         </columns>
                     </TableView>
@@ -149,7 +135,28 @@
             </Pane>
         </Tab>
 
-        <Tab fx:id="systemFileTab" text="系统可执行文件">
+        <Tab id="tab" text="已打开文件">
+            <Pane>
+                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
+                    <TableView fx:id="openFile">
+                        <columns>
+                            <TableColumn prefWidth="110" text="文件名"
+                                         resizable="false" sortable="false"/>
+                            <TableColumn prefWidth="120" text="打开方式"
+                                         resizable="false" sortable="false"/>
+                            <TableColumn prefWidth="120" text="起始盘块"
+                                         resizable="false" sortable="false" />
+                            <TableColumn prefWidth="120" text="文件长度"
+                                         resizable="false" sortable="false" />
+                            <TableColumn fx:id="filePath" prefWidth="300" text="文件路径"
+                                         resizable="false" sortable="false" />
+                        </columns>
+                    </TableView>
+                </HBox>
+            </Pane>
+        </Tab>
+
+        <Tab text="系统可执行文件">
             <AnchorPane id="mainPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
                         AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
 

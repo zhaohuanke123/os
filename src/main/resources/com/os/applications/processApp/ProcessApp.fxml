@@ -12,8 +12,8 @@
     <opaqueInsets>
         <Insets/>
     </opaqueInsets>
-    <BorderPane fx:id="titleBar" layoutX="40.0" layoutY="40.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-                onMousePressed="#pressBar" onMouseReleased="#releaseBar" stylesheets="@ProcessApp.css"
+    <BorderPane fx:id="titleBar" layoutX="40.0" layoutY="40.0"
+                onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>
             <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"

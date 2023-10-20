@@ -9,8 +9,7 @@
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.fileApp.controller.PropertyController">
    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0"
-               onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-               onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+               onMouseDragged="#dragBar" onMousePressed="#pressBar"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"

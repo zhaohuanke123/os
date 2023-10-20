@@ -1,32 +1,8 @@
 @import "../../WindowPane.css";
 
-/* 设置菜单栏的样式 */
-#menuBar {
+/* 设置菜单栏的背景颜色 */
+#mainPane MenuBar {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-effect: null;
-}
-
-/* 设置菜单项文本标签的样式 */
-.menu-item .label {
-    -fx-text-fill: black;
-}
-
-/* 设置菜单项选中的样式 */
-.menu-item:focused {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* 设置菜单项文本标签选中的样式 */
-.menu-item:focused .label {
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
-}
-
-/* 设置上下文菜单的样式 */
-.context-menu {
-    -fx-background-color: rgba(220, 220, 220, 0.9);
-    -fx-background-radius: 0 5 5 5;
 }
 
 

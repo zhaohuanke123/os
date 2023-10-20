@@ -6,11 +6,12 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane id="topMainPane" stylesheets="@../css/FileView.css" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.applications.fileApp.controller.FileEditController">
+<AnchorPane id="topMainPane" stylesheets="@../css/FileView.css"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.os.applications.fileApp.controller.FileEditController">
    <BorderPane fx:id="titleBar" layoutX="30.0" layoutY="30.0" stylesheets="@../css/FileView.css"
-               onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-               onMousePressed="#pressBar" onMouseReleased="#releaseBar"
+               onMouseDragged="#dragBar" onMousePressed="#pressBar"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
@@ -29,29 +30,20 @@
          </HBox>
       </left>
       <right>
-         <HBox id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+         <HBox id="titleBarR" alignment="CENTER_RIGHT"
+               nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                spacing="10.0" BorderPane.alignment="CENTER">
-            <opaqueInsets>
-               <Insets/>
-            </opaqueInsets>
-            <cursor>
-               <Cursor fx:constant="DEFAULT"/>
-            </cursor>
             <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                     mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0">
                <graphic>
                   <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                              pickOnBounds="true" preserveRatio="true">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT"/>
-                     </cursor>
                      <Image url="@../../../img/minimize.png"/>
                   </ImageView>
                </graphic>
             </Button>
             <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                    mnemonicParsing="false"  prefHeight="0.0">
+                    mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
                              preserveRatio="true">
@@ -70,27 +62,21 @@
          </HBox>
       </right>
    </BorderPane>
-   <AnchorPane id="mainPane" stylesheets="@../css/FileView.css" AnchorPane.bottomAnchor="5.0"
-               AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
-      <Pane id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
-         <VBox id="contentPane" prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/FileView.css">
-
-            <MenuBar fx:id="menuBar" prefHeight="40.0" prefWidth="600.0">
-               <Menu fx:id="fileMenu" mnemonicParsing="false" text="文件">
-                  <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
-                  <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
-                  <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
-               </Menu>
-            </MenuBar>
-
-            <TextArea id="contentField" fx:id="contentField" prefHeight="482.0" prefWidth="600.0"
-                       stylesheets="@../css/FileView.css" wrapText="true">
-               <font>
-                  <Font size="16.0"/>
-               </font>
-            </TextArea>
-         </VBox>
-      </Pane>
+   <AnchorPane id="mainPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0"
+               AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
+      <MenuBar prefHeight="30" AnchorPane.leftAnchor="11" AnchorPane.rightAnchor="11" AnchorPane.topAnchor="0">
+         <Menu mnemonicParsing="false" text="文件">
+            <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
+            <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
+            <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
+         </Menu>
+      </MenuBar>
+      <TextArea id="contentField" fx:id="contentField" wrapText="true"
+                AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
+                AnchorPane.rightAnchor="10" AnchorPane.topAnchor="25">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </TextArea>
    </AnchorPane>
 </AnchorPane>

@@ -28,8 +28,8 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
                 "/com/os/applications/fileApp/fxmls/FileView.fxml",
                 "/com/os/applications/fileApp/res/file.png",
                 "文件",
-                -1,
-                -1
+                500,
+                500
         );
 
         this.file = file;

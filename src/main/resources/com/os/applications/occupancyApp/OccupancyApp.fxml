@@ -10,18 +10,19 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<AnchorPane fx:id="topMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="443.0" prefWidth="798.0" stylesheets="@OccupancyShowApp.css" xmlns="http://javafx.com/javafx"
+<AnchorPane fx:id="topMainPane" prefHeight="443.0" prefWidth="798.0"
+            stylesheets="@OccupancyShowApp.css"
+            xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.occupancyApp.OccupancyAppController">
-    <BorderPane fx:id="titleBar" layoutX="20.0" layoutY="20.0" onDragDone="#dragBarDone" onMouseDragged="#dragBar"
-                onMousePressed="#pressBar" onMouseReleased="#releaseBar" stylesheets="@OccupancyShowApp.css"
+    <BorderPane fx:id="titleBar" layoutX="20.0" layoutY="20.0"
+                onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>
             <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
                   prefWidth="134.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
                 <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
-                       stylesheets="@../processApp/ProcessApp.css" text="占用管理器" HBox.hgrow="ALWAYS">
+                       text="占用管理器" HBox.hgrow="ALWAYS">
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../img/device.png"/>
@@ -34,25 +35,14 @@
             </HBox>
         </left>
         <right>
-            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-                  maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
+            <HBox fx:id="titleBarR" alignment="CENTER_RIGHT"
+                  nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <cursor>
-                    <Cursor fx:constant="DEFAULT"/>
-                </cursor>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0"
-                        stylesheets="@../processApp/ProcessApp.css">
+                        mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
-
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT"/>
-                            </cursor>
                             <Image url="@../../img/help.png"/>
                         </ImageView>
                     </graphic>
@@ -63,10 +53,6 @@
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
-
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT"/>
-                            </cursor>
                             <Image url="@../../img/minimize.png"/>
                         </ImageView>
                     </graphic>
@@ -75,9 +61,7 @@
                         mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0"
                         stylesheets="@../processApp/ProcessApp.css">
                     <graphic>
-                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
-                                   preserveRatio="true">
-
+                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../img/change.png"/>
                         </ImageView>
                     </graphic>
