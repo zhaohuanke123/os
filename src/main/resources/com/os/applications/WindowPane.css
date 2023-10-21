@@ -75,7 +75,6 @@
     -fx-min-width: 35;
     -fx-background-radius: 8;
     -fx-cursor: hand; /* 鼠标悬停时显示手型光标 */
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 3, 0.0, 0, 1);*/
 }
 
 #barIcon:hover {
@@ -97,14 +96,3 @@
     -fx-background-radius: 8;
 
 }
-
-#emptyBarIcon:hover {
-    /*-fx-background-color:#E5E7EB;*/
-    /*-fx-background-radius: 12;*/
-    /*-fx-max-height: 35;*/
-    /*-fx-max-width: 35;*/
-    /*-fx-min-height: 35;*/
-    /*-fx-min-width: 35;*/
-}
-
-
