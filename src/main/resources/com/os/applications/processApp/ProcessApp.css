@@ -5,14 +5,32 @@
     -fx-background-radius: 12;
     -fx-background-color: white;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1em;
     -fx-border-radius: 12;
 }
 
-.tool-bar {
-    -fx-background-color: rgba(255, 255, 255, 1);
-    -fx-background-radius: 22px;
-    -fx-border-radius: 15px;
+
+/* 设置tab顶部的样式 */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+/* 设置tab卡片的样式 */
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+/* 设置tab卡片选中的样式 */
+.tab-pane .tab:selected {
+    -fx-background-color: rgb(103, 157, 238);
+}
+
+/* 设置tab卡片文字的样式 */
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 
@@ -27,7 +45,6 @@
 }
 
 .table-row-cell:filled:hover {
-
     -fx-size: 30;
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
@@ -52,12 +69,3 @@
 #right .table-column {
     -fx-background-color: lightblue;
 }
-
-/*#not-right .table-column:even {*/
-/*    -fx-background-color: white;*/
-/*}*/
-
-/*#not-right .table-column:odd {*/
-/*    -fx-background-color:LightBase;*/
-/*}*/
-

@@ -80,12 +80,12 @@
             <Tab>
                 <graphic>
                     <HBox>
-                        <VBox id="OutBox" fx:id="memoryBox1" alignment="BOTTOM_CENTER"
+                        <VBox id="memoryOutBox" fx:id="memoryBox1" alignment="BOTTOM_CENTER"
                               minHeight="70.0" minWidth="100.0">
                             <Region id="memoryInBox"/>
                         </VBox>
                         <VBox>
-                            <Label id="text1" text="内存(用户区)" minHeight="45" minWidth="170"/>
+                            <Label id="text1" text="内存" minHeight="45" minWidth="170"/>
                             <Separator prefHeight="10" prefWidth="90"/>
                             <Label id="text2" fx:id="memoryText" text="1G/10GB(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
@@ -103,7 +103,7 @@
                     </LineChart>
                     <HBox id="memoryOutBox" fx:id="memoryBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
-                          prefHeight="80" prefWidth="450"/>
+                          prefHeight="80" prefWidth="815"/>
                 </AnchorPane>
             </Tab>
             <Tab>
@@ -132,7 +132,7 @@
                     </LineChart>
                     <HBox id="deviceOutBox" fx:id="deviceBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
-                          prefHeight="80" prefWidth="650"/>
+                          prefHeight="80" prefWidth="815"/>
                 </AnchorPane>
             </Tab>
             <Tab>
@@ -162,7 +162,7 @@
                     </LineChart>
                     <HBox id="diskOutBox" fx:id="diskBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
-                          prefHeight="80" prefWidth="650"/>
+                          prefHeight="80" prefWidth="815"/>
                 </AnchorPane>
             </Tab>
             <Tab>
@@ -191,7 +191,7 @@
                     </LineChart>
                     <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
-                          prefHeight="80" prefWidth="900"/>
+                          prefHeight="80" prefWidth="815"/>
                 </AnchorPane>
             </Tab>
         </TabPane>

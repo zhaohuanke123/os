@@ -74,7 +74,6 @@
         </right>
     </BorderPane>
 
-    <!--    包含"当前进程"和"销毁进程"两个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0"
              AnchorPane.rightAnchor="5.0"
              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
@@ -86,14 +85,14 @@
                         AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="46.0">
                 <TableView fx:id="processTable" layoutX="30.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT"
                            prefHeight="354.0" prefWidth="940.0" stylesheets="@ProcessApp.css"
-                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="152.0"
+                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="150.0"
                            AnchorPane.topAnchor="22.0">
                     <columns>
                         <TableColumn fx:id="processName" prefWidth="75.0" text="进程编号"/>
                         <TableColumn fx:id="processState" prefWidth="75.0" text="进程状态"/>
                         <TableColumn fx:id="whichFile" prefWidth="75.0" text="执行文件"/>
-                        <TableColumn fx:id="havedDevice" prefWidth="104.0" text="设备使用情况"/>
-                        <TableColumn fx:id="havedMemory" minWidth="0.0" prefWidth="124.0" text="内存占用情况"/>
+                        <TableColumn fx:id="havedDevice" prefWidth="104.0" text="使用设备"/>
+                        <TableColumn fx:id="havedMemory" minWidth="0.0" prefWidth="124.0" text="占用内存"/>
                         <TableColumn fx:id="havedPid" prefWidth="101.0" text="进程控制块"/>
                         <TableColumn fx:id="result" prefWidth="109.0" text="当前执行结果"/>
                         <TableColumn fx:id="progressBar" minWidth="0.0" prefWidth="124.0" text="进程完成进度"/>
@@ -129,8 +128,8 @@
                         <TableColumn fx:id="processName1" prefWidth="75.0" text="进程编号"/>
                         <TableColumn fx:id="processState1" prefWidth="75.0" text="进程状态"/>
                         <TableColumn fx:id="whichFile1" prefWidth="75.0" text="执行文件"/>
-                        <TableColumn fx:id="havedDevice1" prefWidth="104.0" text="设备使用情况"/>
-                        <TableColumn fx:id="havedMemory1" minWidth="0.0" prefWidth="124.0" text="内存占用情况"/>
+                        <TableColumn fx:id="havedDevice1" prefWidth="104.0" text="使用设备"/>
+                        <TableColumn fx:id="havedMemory1" minWidth="0.0" prefWidth="124.0" text="占用内存"/>
                         <TableColumn fx:id="havedPid1" prefWidth="101.0" text="进程控制块"/>
                         <TableColumn fx:id="result1" prefWidth="109.0" text="当前执行结果"/>
                         <TableColumn fx:id="progressBar1" minWidth="0.0" prefWidth="124.0" text="进程完成进度"/>
