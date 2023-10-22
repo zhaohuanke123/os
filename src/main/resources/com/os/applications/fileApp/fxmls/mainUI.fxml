@@ -28,7 +28,7 @@
                 </Label>
             </HBox>
         </left>
-        <!--设置3个控制按钮，最小化、最大化/还原、关闭-->
+        <!--设置3个控制按钮，最小化、关闭-->
         <right>
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" BorderPane.alignment="CENTER">
@@ -46,15 +46,6 @@
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../../img/minimize.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-<!--                最大化/还原按钮-->
-                <Button disable="true" id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false" prefHeight="0.0">
-                    <graphic>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../../../img/change.png"/>
                         </ImageView>
                     </graphic>
                 </Button>

@@ -243,13 +243,13 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
                 Disk thisBlock = FileApplication.this.blockList.get(FileApplication.this.ind);
                 Tooltip.install(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
-                ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0.5); " +
+                ((Label) event.getSource()).setStyle("-fx-background-color: rgb(103, 157, 238, 0.5); " +
                         "-fx-background-radius: 12;");
             });
             this.icons[i].setOnMouseExited(event -> {
                 Disk thisBlock = FileApplication.this.blockList.get(FileApplication.this.ind);
                 Tooltip.uninstall(controller.flowPane, new Tooltip(thisBlock.getObject().toString()));
-                ((Label) event.getSource()).setStyle("-fx-background-color: rgba(240,248,255,0);");
+                ((Label) event.getSource()).setStyle("-fx-background-color: transparent;");
             });
             this.icons[i].setOnMouseClicked(event -> {
                 Label src = (Label) event.getSource();

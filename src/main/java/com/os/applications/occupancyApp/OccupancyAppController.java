@@ -33,10 +33,10 @@ import java.util.Properties;
 public class OccupancyAppController extends BaseController {
     //region [FXML comp variables]
     public AnchorPane topMainPane;
-    public Button memoryText;
-    public Button diskText;
-    public Button pcbText;
-    public Button deviceText;
+    public Label memoryText;
+    public Label diskText;
+    public Label pcbText;
+    public Label deviceText;
     public VBox diskBox1;
     public VBox memoryBox1;
     public VBox deviceBox1;
@@ -45,7 +45,6 @@ public class OccupancyAppController extends BaseController {
     public HBox deviceBox2;
     public HBox diskBox2;
     public HBox pcbBox2;
-    public TabPane tabPane;
     public LineChart<String, Number> memoryChart;
     public LineChart<String, Number> deviceChart;
     public LineChart<String, Number> diskChart;
@@ -54,7 +53,7 @@ public class OccupancyAppController extends BaseController {
     private ChartBean[] chartBeans;
 
     private VBox[] boxes1;
-    private Button[] textButtons;
+    private Label[] textLabel;
     private HBox[] boxes2;
 
     //endregion
@@ -64,7 +63,7 @@ public class OccupancyAppController extends BaseController {
         this.stage = stage;
 
         boxes1 = new VBox[]{this.memoryBox1, this.diskBox1, this.deviceBox1, this.pcbBox1};
-        textButtons = new Button[]{this.memoryText, this.diskText, this.deviceText, this.pcbText};
+        textLabel = new Label[]{this.memoryText, this.diskText, this.deviceText, this.pcbText};
         boxes2 = new HBox[]{this.memoryBox2, this.diskBox2, this.deviceBox2, this.pcbBox2};
 
         double height;
@@ -133,10 +132,10 @@ public class OccupancyAppController extends BaseController {
         MainController.getInstance().uiThread.occupancyAppController = this;
 
         chartBeans = new ChartBean[]{
-                new ChartBean(memoryChart, "内存使用情况", "内存使用情况/%", "时间"),
-                new ChartBean(diskChart, "磁盘使用情况", "磁盘使用情况/%", "时间"),
-                new ChartBean(deviceChart, "设备使用情况", "设备使用情况/%", "时间"),
-                new ChartBean(pcbChart, "进程使用情况", "进程使用情况/%", "时间")
+                new ChartBean(memoryChart, "内存使用情况/%", "时间"),
+                new ChartBean(diskChart, "磁盘使用情况/%", "时间"),
+                new ChartBean(deviceChart, "设备使用情况/%", "时间"),
+                new ChartBean(pcbChart, "进程使用情况/%", "时间")
         };
         for (ChartBean chartBean : chartBeans) {
             chartBean.chart.prefWidthProperty().bind(this.topMainPane.widthProperty());
@@ -150,12 +149,12 @@ public class OccupancyAppController extends BaseController {
     }
 
     private void occupancyTextUpdate() {
-        if (textButtons != null) {
+        if (textLabel != null) {
             Platform.runLater(() -> {
                 int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
                 double percent = (double) numOfBusyMemory / (double) OccupancyManager.allMemory.length * 100.0;
                 String result = String.format("%.2f", percent);
-                textButtons[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
+                textLabel[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
 
                 chartBeans[0].addData(MainController.getInstance().uiThread.time,
                         numOfBusyMemory * 100 / OccupancyManager.allMemory.length);
@@ -165,7 +164,7 @@ public class OccupancyAppController extends BaseController {
 
                     percent = (double) numOfBusyDisk / (double) FAT.DISK_NUM * 100.0;
                     result = String.format("%.2f", percent);
-                    textButtons[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
+                    textLabel[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
 
                     chartBeans[1].addData(MainController.getInstance().uiThread.time,
                             numOfBusyDisk * 100 / FAT.DISK_NUM);
@@ -174,7 +173,7 @@ public class OccupancyAppController extends BaseController {
                 int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
                 percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE * 100.0;
                 result = String.format("%.2f", percent);
-                textButtons[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
+                textLabel[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
 
                 chartBeans[2].addData(MainController.getInstance().uiThread.time,
                         busyDeviceNum * 100 / OccupancyManager.All_DEVICE_SIZE);
@@ -183,7 +182,7 @@ public class OccupancyAppController extends BaseController {
                 int pcbSize = OccupancyManager.PCB_SIZE;
                 percent = (double) numOfBusyPcb / (double) pcbSize * 100.0;
                 result = String.format("%.2f", percent);
-                textButtons[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
+                textLabel[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
 
                 chartBeans[3].addData(MainController.getInstance().uiThread.time,
                         numOfBusyPcb * 100 / pcbSize);
@@ -313,11 +312,10 @@ public class OccupancyAppController extends BaseController {
         LineChart<String, Number> chart;
         XYChart.Series<String, Number> dataSeries;
 
-        public ChartBean(LineChart<String, Number> chart, String title, String yLabel, String xLabel) {
+        public ChartBean(LineChart<String, Number> chart, String yLabel, String xLabel) {
             this.chart = chart;
             this.dataSeries = new XYChart.Series<>();
             this.dataSeries.setName(yLabel);
-            this.chart.setTitle(title);
             this.chart.getXAxis().setLabel(xLabel);
             this.chart.getYAxis().setLabel(yLabel);
             chart.getData().add(dataSeries);
