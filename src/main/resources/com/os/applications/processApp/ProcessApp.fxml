@@ -105,8 +105,7 @@
                 <VBox fx:id="creatProButtons" alignment="CENTER" stylesheets="@ProcessApp.css"
                       AnchorPane.rightAnchor="0">
                     <CheckBox
-                            fx:id="continueButton" mnemonicParsing="false"
-                            onMouseClicked="#createSelectByMouse" text="自动新建进程"/>
+                            fx:id="continueButton" mnemonicParsing="false" text="自动新建进程"/>
                 </VBox>
 
             </AnchorPane>
