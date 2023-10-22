@@ -276,6 +276,7 @@ public class OccupancyAppController extends BaseController {
                     boxes2[3].getChildren().get(i).setId("emptyBox");
                 }
 
+                // 新建态
                 for (i = 0; i < MainController.getInstance().uiThread.creatingProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.creatingProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
@@ -283,6 +284,7 @@ public class OccupancyAppController extends BaseController {
                     }
                 }
 
+                // 就绪态
                 for (i = 0; i < MainController.getInstance().uiThread.waitProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.waitProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
@@ -290,6 +292,7 @@ public class OccupancyAppController extends BaseController {
                     }
                 }
 
+                //运行态
                 if (MainController.getInstance().uiThread.runProcess != null) {
                     pcbId = MainController.getInstance().uiThread.runProcess.pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
@@ -297,6 +300,7 @@ public class OccupancyAppController extends BaseController {
                     }
                 }
 
+                // 阻塞态
                 for (i = 0; i < MainController.getInstance().uiThread.blockProcessList.size(); ++i) {
                     pcbId = MainController.getInstance().uiThread.blockProcessList.get(i).pcbID;
                     if (OccupancyManager.checkPCBIndex(pcbId)) {
@@ -321,7 +325,7 @@ public class OccupancyAppController extends BaseController {
             chart.getData().add(dataSeries);
 
             chart.getYAxis().setAutoRanging(false);
-            ((NumberAxis) chart.getYAxis()).setUpperBound(100);
+            ((NumberAxis) chart.getYAxis()).setUpperBound(102);
             ((NumberAxis) chart.getYAxis()).setLowerBound(0);
         }
 
@@ -338,38 +342,32 @@ public class OccupancyAppController extends BaseController {
         super.showDescription();
 
         Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication("占用管理，主要作用是可视化用户区内存、磁盘、设备、PCB的占用情况。" +
-                "1）用户区内存占用可视化：显示内存占用比、内存占用分布情况。" +
-                "2）磁盘占用可视化：显示磁盘占用比、磁盘占用分布情况。" +
-                "3）设备占用可视化：显示设备占用比，设备占用分布情况。" +
-                "4）PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n",
-                500,500);
+        TipDialogApplication tipWindow = new TipDialogApplication("", 500,500);
         try {
             tipWindow.start(stage);
-            Text text = new Text("占用管理，主要作用是可视化用户区内存、磁盘、设备、PCB的占用情况。\n\n");
+            Text text = new Text("占用管理器\n\n");
             text.setFill(Color.RED);
-            text.setFont(Font.font("宋体"
-                    , 25));
+            text.setFont(Font.font("宋体", 25));
             tipWindow.controller.tipTextFlow.getChildren().add(text);
-            text = new Text("1. 用户区内存占用可视化：显示内存占用比、内存占用分布情况。\n");
+
+            text = new Text("1. 显示内存的占用比和已使用内存的分布情况。\n\n");
             text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体"
-                    , 20));
+            text.setFont(Font.font("宋体", 20));
             tipWindow.controller.tipTextFlow.getChildren().add(text);
-            text = new Text("2. 磁盘占用可视化：显示磁盘占用比、磁盘占用分布情况。\n");
+
+            text = new Text("2. 显示设备的占用比和已使用的设备情况。\n\n");
             text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体"
-                    , 20));
+            text.setFont(Font.font("宋体", 20));
             tipWindow.controller.tipTextFlow.getChildren().add(text);
-            text = new Text("3. 设备占用可视化：显示设备占用比，设备占用分布情况。\n");
+
+            text = new Text("3. 显示磁盘的占用比和已使用磁盘的分布情况。\n\n");
             text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体"
-                    , 20));
+            text.setFont(Font.font("宋体", 20));
             tipWindow.controller.tipTextFlow.getChildren().add(text);
-            text = new Text("4. PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n");
+
+            text = new Text("4. 显示PCB的占用比和已使用的PCB情况。\n\n");
             text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体"
-                    , 20));
+            text.setFont(Font.font("宋体", 20));
             tipWindow.controller.tipTextFlow.getChildren().add(text);
         } catch (IOException e) {
             throw new RuntimeException(e);

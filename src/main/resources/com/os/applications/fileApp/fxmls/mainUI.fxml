@@ -62,7 +62,7 @@
         </right>
     </BorderPane>
 
-<!--    包含"文件管理"、"磁盘使用情况"、"已打开文件"和"系统可执行文件"四个选项-->
+<!--    包含"文件管理"、"磁盘使用"、"已打开文件"和"系统可执行文件"四个选项-->
     <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE"
              AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0"
@@ -107,7 +107,7 @@
             </AnchorPane>
         </Tab>
 
-        <Tab id="tab" text="磁盘使用情况">
+        <Tab id="tab" text="磁盘使用">
             <Pane>
                 <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
                     <TableView fx:id="diskTable">
