@@ -55,7 +55,8 @@ public class OccupancyAppController extends BaseController {
     //endregion
     @Override
     public void init(Stage stage) {
-        super.init(stage);
+//        super.init(stage);
+        this.stage = stage;
 
         boxes1 = new VBox[]{this.memoryBox1, this.diskBox1, this.deviceBox1, this.pcbBox1};
         textButtons = new Button[]{this.memoryText, this.diskText, this.deviceText, this.pcbText};
