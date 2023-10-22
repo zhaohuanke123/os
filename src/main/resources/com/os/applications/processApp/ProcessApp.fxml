@@ -86,7 +86,7 @@
                         AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="46.0">
                 <TableView fx:id="processTable" layoutX="30.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT"
                            prefHeight="354.0" prefWidth="940.0" stylesheets="@ProcessApp.css"
-                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="102.0"
+                           AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="152.0"
                            AnchorPane.topAnchor="22.0">
                     <columns>
                         <TableColumn fx:id="processName" prefWidth="75.0" text="进程编号"/>
@@ -104,6 +104,11 @@
                 </TableView>
                 <VBox fx:id="creatProButtons" alignment="CENTER" stylesheets="@ProcessApp.css"
                       AnchorPane.rightAnchor="0">
+<!--                    一个label：调节倍速-->
+                    <Label id="creatProLabel" text="调节倍速" textFill="Black"/>
+                    <Slider fx:id="creatProSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0"
+                            minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true"
+                            value="1.0"/>
                     <CheckBox
                             fx:id="continueButton" mnemonicParsing="false" text="自动新建进程"/>
                 </VBox>

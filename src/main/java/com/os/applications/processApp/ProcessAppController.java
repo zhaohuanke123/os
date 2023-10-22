@@ -30,6 +30,7 @@ public class ProcessAppController extends BaseController {
     public AnchorPane mainPane;
     public AnchorPane mainPane1;
     public VBox creatProButtons;
+    public Slider creatProSlider;
     @FXML
     private TableView<ProcessDetailData> processTable;
     @FXML
@@ -144,6 +145,10 @@ public class ProcessAppController extends BaseController {
                     }
                 }
             }
+        });
+
+        creatProSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            ProcessManager.speed = newValue.intValue();
         });
 
         MainController.getInstance().uiThread.processAppController = this;
