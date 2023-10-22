@@ -106,10 +106,7 @@
                       AnchorPane.rightAnchor="0">
                     <CheckBox
                             fx:id="continueButton" mnemonicParsing="false"
-                            onMouseClicked="#createSelectByMouse" text="继续新建进程"/>
-                    <CheckBox
-                            fx:id="suspendButton" mnemonicParsing="false"
-                            onMouseClicked="#createSelectByMouse" text="暂停新建进程"/>
+                            onMouseClicked="#createSelectByMouse" text="自动新建进程"/>
                 </VBox>
 
             </AnchorPane>

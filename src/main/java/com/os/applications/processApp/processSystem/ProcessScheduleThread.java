@@ -28,7 +28,7 @@ public class ProcessScheduleThread extends Thread {
     public static int[] bDevice;
     public static int[] cDevice;
     public static int residueSlice = 0;
-    public static CheckBox[] controlButton = null;
+    public static CheckBox controlButton = null;
     public static ProcessAppController processAppController = null;
 
     public void Init() {
@@ -51,7 +51,7 @@ public class ProcessScheduleThread extends Thread {
     }
 
     public void CreateProcess() {
-        if (controlButton == null || controlButton.length < 2 || !controlButton[1].isSelected()) {
+        if (controlButton == null || controlButton.isSelected()) {
             if (!executableFileList.isEmpty()) {
                 if (creatingProcessList.size() < 3) {
                     Random random = new Random();

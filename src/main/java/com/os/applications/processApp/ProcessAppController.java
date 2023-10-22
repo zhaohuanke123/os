@@ -68,24 +68,8 @@ public class ProcessAppController extends BaseController {
     private TableColumn<?, ?> progressBar1;
     @FXML
     private CheckBox continueButton;
+
     @FXML
-    private CheckBox suspendButton;
-
-    //继续新建进程/停止新建进程
-    @FXML
-    void createSelectByMouse(MouseEvent event) {
-        this.createSelect((CheckBox) event.getSource());
-    }
-
-    void createSelect(CheckBox checkBox) {
-        CheckBox[] array = new CheckBox[]{this.continueButton, this.suspendButton};
-
-        for (CheckBox box : array) {
-            box.setSelected(checkBox == box);
-        }
-
-        checkBox.setSelected(true);
-    }
 
     //初始化
     @Override
@@ -114,7 +98,7 @@ public class ProcessAppController extends BaseController {
         this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
 
         //继续或者停止新建
-        ProcessScheduleThread.controlButton = new CheckBox[]{this.continueButton, this.suspendButton};
+        ProcessScheduleThread.controlButton = this.continueButton;
         continueButton.setSelected(true);
 
         for (var i : ProcessScheduleThread.executableFileList) {
@@ -153,11 +137,7 @@ public class ProcessAppController extends BaseController {
                         i.setDisable(true);
                     }
                 }
-            }
-        });
-
-        suspendButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+            } else {
                 for (var i : creatProButtons.getChildren()) {
                     if (i instanceof Button) {
                         i.setDisable(false);
@@ -199,11 +179,12 @@ public class ProcessAppController extends BaseController {
         super.showDescription();
 
         Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication("进程管理，主要作用是可视化进程的运行情况. " +
-                "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。[默认时间片为6]。" +
-                " 2）显示当前进程的执行进度，高亮当前执行指令。" +
-                "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
-                "\"\n", 500, 500);
+        TipDialogApplication tipWindow = new TipDialogApplication(
+                "进程管理，主要作用是可视化进程的运行情况。 " +
+                        "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。(默认6)。" +
+                        " 2）显示当前进程的执行进度，高亮当前执行指令。" +
+                        "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
+                        "\n", 500, 500);
         try {
             tipWindow.start(stage);
         } catch (IOException e) {
