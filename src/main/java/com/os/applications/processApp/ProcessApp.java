@@ -18,7 +18,7 @@ public class ProcessApp extends BaseApp<ProcessAppController> {
                 "/com/os/img/process.png",
                 "进程管理器",
                 1100.0,
-                500.0);
+                550.0);
     }
 
     @Override
