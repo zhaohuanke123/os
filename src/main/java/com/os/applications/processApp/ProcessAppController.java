@@ -19,6 +19,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -120,6 +123,11 @@ public class ProcessAppController extends BaseController {
                             newProcess.Create();
                         } else {
                             TipDialogApplication tipWindow = new TipDialogApplication("创建进程失败，创建进程数量已达上限", 500, 500);
+                            Text text = new Text("创建进程失败，创建进程数量已达上限\n");
+                            text.setFill(Color.RED);
+                            text.setFont(Font.font("宋体"
+                                    , 25));
+                            tipWindow.controller.tipTextFlow.getChildren().add(text);
                             try {
                                 tipWindow.start(new Stage());
                             } catch (IOException e) {
@@ -185,13 +193,33 @@ public class ProcessAppController extends BaseController {
 
         Stage stage = new Stage();
         TipDialogApplication tipWindow = new TipDialogApplication(
-                "进程管理，主要作用是可视化进程的运行情况。 " +
+                "进程管理，主要作用是可视化进程的运行情况。" +
                         "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。(默认6)。" +
-                        " 2）显示当前进程的执行进度，高亮当前执行指令。" +
+                        "2）显示当前进程的执行进度，高亮当前执行指令。" +
                         "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
                         "\n", 500, 500);
         try {
             tipWindow.start(stage);
+            Text text = new Text("进程管理，主要作用是可视化进程的运行情况。\n\n");
+            text.setFill(Color.RED);
+            text.setFont(Font.font("宋体"
+                    , 25));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("1. 单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。(默认6)。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("2. 显示当前进程的执行进度，高亮当前执行指令。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("3. 显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

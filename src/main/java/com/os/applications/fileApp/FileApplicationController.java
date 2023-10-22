@@ -16,6 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -115,6 +118,26 @@ public class FileApplicationController extends BaseFileController {
                 500,500);
         try {
             tipWindow.start(stage);
+            Text text = new Text("文件管理，其主要作用是对文件进行操作，以及显示磁盘使用情况。\n\n");
+            text.setFill(Color.RED);
+            text.setFont(Font.font("宋体"
+                    , 25));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("1. 当启动该软件时，会询问是否读取历史数据，若是，则进行读取；若否，则清空之前的数据。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("2. 第一个模块是文件管理页面。在该页面，通过鼠标及键盘操作，可进行对文件的新建、读写、移动、复制、删除、属性查看等操作，可进行对文件夹的新建、删除、移动、复制、属性查看等操作。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("3. 第二个模块是磁盘的使用情况页面。在该页面，显示了磁盘的占用情况：①占用分布图；②占用盘块、索引、类型、内容等信息；③当前打开的文件对应文件名、打开方式、起始盘块、文件长度、文件路径等信息。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

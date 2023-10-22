@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.text.TextFlow?>
 <AnchorPane id="topMainPane" prefHeight="242.0" prefWidth="323.0" stylesheets="@../css/TipWindow.css"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.fileApp.controller.TipDialogController">
@@ -89,6 +90,12 @@
                   <Font size="19.0"/>
                </font>
             </Text>
+            <TextFlow fx:id="tipTextFlow" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0"
+                      textAlignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+               </padding>
+            </TextFlow>
          </center>
       </BorderPane>
    </AnchorPane>

@@ -38,7 +38,7 @@
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT"
                   nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
-                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                <Button id="barIcon"  alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
