@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -475,6 +476,10 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         Stage stage = new Stage();
         TipDialogApplication tipWindow = new TipDialogApplication(tipString);
         tipWindow.start(stage);
+        Text text = new Text(tipString);
+        text.setFill(javafx.scene.paint.Color.RED);
+        text.setFont(javafx.scene.text.Font.font("宋体", 25.0D));
+        tipWindow.controller.tipTextFlow.getChildren().add(text);
     }
 
     public static void fileViewOpen(File file, Disk block) {

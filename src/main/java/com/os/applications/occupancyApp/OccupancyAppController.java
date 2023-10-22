@@ -17,10 +17,14 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,6 +50,7 @@ public class OccupancyAppController extends BaseController {
     public LineChart<String, Number> deviceChart;
     public LineChart<String, Number> diskChart;
     public LineChart<String, Number> pcbChart;
+    public Button DescriptionBtn;
     private ChartBean[] chartBeans;
 
     private VBox[] boxes1;
@@ -55,7 +60,8 @@ public class OccupancyAppController extends BaseController {
     //endregion
     @Override
     public void init(Stage stage) {
-        super.init(stage);
+//        super.init(stage);
+        this.stage = stage;
 
         boxes1 = new VBox[]{this.memoryBox1, this.diskBox1, this.deviceBox1, this.pcbBox1};
         textButtons = new Button[]{this.memoryText, this.diskText, this.deviceText, this.pcbText};
@@ -338,11 +344,35 @@ public class OccupancyAppController extends BaseController {
                 "1）用户区内存占用可视化：显示内存占用比、内存占用分布情况。" +
                 "2）磁盘占用可视化：显示磁盘占用比、磁盘占用分布情况。" +
                 "3）设备占用可视化：显示设备占用比，设备占用分布情况。" +
-                "4）PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n" +
-                "                              ",
+                "4）PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n",
                 500,500);
         try {
             tipWindow.start(stage);
+            Text text = new Text("占用管理，主要作用是可视化用户区内存、磁盘、设备、PCB的占用情况。\n\n");
+            text.setFill(Color.RED);
+            text.setFont(Font.font("宋体"
+                    , 25));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("1. 用户区内存占用可视化：显示内存占用比、内存占用分布情况。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("2. 磁盘占用可视化：显示磁盘占用比、磁盘占用分布情况。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("3. 设备占用可视化：显示设备占用比，设备占用分布情况。\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            text = new Text("4. PCB占用可视化：显示PCB占用比，PCB占用分布情况，以及占用PCB的各进程状态（新建、就绪、运行、阻塞）\n");
+            text.setFill(Color.BLACK);
+            text.setFont(Font.font("宋体"
+                    , 20));
+            tipWindow.controller.tipTextFlow.getChildren().add(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

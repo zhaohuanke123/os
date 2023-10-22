@@ -39,13 +39,13 @@ public class DeleteDialogController extends BaseFileController {
             } else if (res == 1) {
             } else if (res == 2) {
                 try {
-                    DeleteDialogController.this.tipOpen("文件夹不为空");
+                    FileApplication.tipOpen("文件夹不为空");
                 } catch (Exception var6) {
                     System.out.println(Arrays.toString(var6.getStackTrace()));
                 }
             } else {
                 try {
-                    DeleteDialogController.this.tipOpen("文件未关闭");
+                    FileApplication.tipOpen("文件未关闭");
                 } catch (Exception var5) {
                     System.out.println(Arrays.toString(var5.getStackTrace()));
                 }
@@ -59,9 +59,13 @@ public class DeleteDialogController extends BaseFileController {
         this.cancelButton.setOnMouseClicked(event -> this.closeStage());
     }
 
-    public void tipOpen(String tipString) throws Exception {
-        Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication(tipString);
-        tipWindow.start(stage);
-    }
+//    public void tipOpen(String tipString) throws Exception {
+//        Stage stage = new Stage();
+//        TipDialogApplication tipWindow = new TipDialogApplication(tipString);
+//        tipWindow.start(stage);
+//        Text text = new Text(tipString);
+//        text.setFill(javafx.scene.paint.Color.RED);
+//        text.setFont(javafx.scene.text.Font.font("宋体", 25.0D));
+//        tipWindow.controller.tipTextFlow.getChildren().add(text);
+//    }
 }
