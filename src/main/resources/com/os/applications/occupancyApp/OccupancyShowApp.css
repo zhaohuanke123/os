@@ -1,84 +1,76 @@
 @import "../WindowPane.css";
 
+/* 设置tab的样式 */
 #tabPane {
-    -fx-tab-min-height: 22em;
-    -fx-tab-max-height: 22em;
+    -fx-tab-min-height: 25em;
+    -fx-tab-max-height: 25em;
 
-    -fx-tab-min-width: 6em;
-    -fx-tab-max-width: 6em;
+    -fx-tab-min-width: 10em;
+    -fx-tab-max-width: 10em;
 
-
-    -fx-border-radius: 8 8 8 8;
-    -fx-background-radius: 8 8 8 8;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
 }
 
+/*
 .tab .tab-label {
     -fx-background-color: transparent;
     -fx-alignment: center;
     -fx-text-fill: #EBEAF0;
 }
+*/
 
+/* 设置tab卡片的样式 */
 .tab {
-    -fx-background-color: #E5E7EB;
-    -fx-border-insets: 0.0;
-    -fx-border-radius: 8.0;
-    -fx-background-radius: 8 8 8 8;
-    -fx-padding: 0 0 0 0;
+    -fx-background-color: rgb(255, 255, 255, 0.8);
+    -fx-background-radius: 8;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0;
+    -fx-border-radius: 8;
+    -fx-padding: 0;
 }
 
+/* 设置tab卡片选中的样式 */
 .tab:selected {
-    -fx-background-color: #F3F4F6;
-    -fx-border-insets: 0.0;
-    -fx-border-radius: 8.0;
-    -fx-background-radius: 8 8 8 8;
-    -fx-border-width: 2 2 2 2;
-    -fx-border-color: #0058f3;
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-width: 2;
+    -fx-border-color: blue;
 }
 
+/*
 .tab:focused {
     -fx-focus-color: transparent;
-
     -fx-border-radius: 8 8 8 8;
     -fx-background-radius: 8 8 8 8;
 }
+*/
 
+/* 设置tabPane的背景样式 */
 .tab-pane .tab-header-background {
     -fx-background-color: transparent;
-
-    -fx-border-radius: 8 8 8 8;
-    -fx-background-radius: 8 8 8 8;
 }
 
 
-.tab:selected .focus-indicator {
-    -fx-border-color: transparent;
-
-    -fx-border-radius: 8 8 8 8;
-    -fx-background-radius: 8 8 8 8;
-}
-
-
+/* 设置分割线上方文本的样式 */
 #text1 {
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-
-    -fx-font-size: 2em; /* 12 */
+    -fx-font-size: 2em;
     -fx-text-fill: black;
-
+    -fx-alignment: center;
 }
 
+/* 设置分割线上方文本的样式 */
 #text2 {
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-
-    -fx-font-size: 1em; /* 12 */
+    -fx-font-size: 1.1em;
     -fx-text-fill: black;
+    -fx-alignment: center;
 }
 
 /*------------------------------------------------------*/

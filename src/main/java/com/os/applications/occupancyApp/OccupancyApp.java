@@ -17,7 +17,7 @@ public class OccupancyApp extends BaseApp<OccupancyAppController> {
                 "/com/os/img/device.png",
                 "占用管理器",
                 1200.0,
-                530.0);
+                600.0);
     }
 
     @Override

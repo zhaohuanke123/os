@@ -10,7 +10,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<AnchorPane fx:id="topMainPane" prefHeight="443.0" prefWidth="798.0"
+<AnchorPane fx:id="topMainPane"
             stylesheets="@OccupancyShowApp.css"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -38,7 +38,7 @@
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT"
                   nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
-                <Button id="barIcon"  alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
@@ -57,15 +57,6 @@
                         </ImageView>
                     </graphic>
                 </Button>
-<!--                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"-->
-<!--                        mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0"-->
-<!--                        stylesheets="@../processApp/ProcessApp.css">-->
-<!--                    <graphic>-->
-<!--                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                            <Image url="@../../img/change.png"/>-->
-<!--                        </ImageView>-->
-<!--                    </graphic>-->
-<!--                </Button>-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0"
                         stylesheets="@../processApp/ProcessApp.css">
@@ -79,44 +70,30 @@
         </right>
     </BorderPane>
 
-    <AnchorPane layoutX="3.0" layoutY="32.0" prefHeight="640.0" prefWidth="796.0" stylesheets="@OccupancyShowApp.css"
+    <AnchorPane stylesheets="@OccupancyShowApp.css"
                 AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
-                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
-        <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                 minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="384.0" prefWidth="796.0"
-                 side="LEFT" stylesheets="@OccupancyShowApp.css" tabClosingPolicy="UNAVAILABLE"
-                 AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-                 AnchorPane.topAnchor="10.0">
+                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
+        <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT"
+                 side="LEFT" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
+                 AnchorPane.rightAnchor="20" AnchorPane.topAnchor="10">
             <Tab>
                 <graphic>
                     <HBox>
-                        <VBox id="OutBox" fx:id="memoryBox1" alignment="BOTTOM_CENTER" maxHeight="70.0"
-                              maxWidth="100.0" minHeight="70.0" minWidth="100.0" prefHeight="70.0" prefWidth="100.0"
-                              stylesheets="@OccupancyShowApp.css">
-                            <Region id="memoryInBox" prefHeight="19.0" prefWidth="98.0"/>
+                        <VBox id="OutBox" fx:id="memoryBox1" alignment="BOTTOM_CENTER"
+                              minHeight="70.0" minWidth="100.0">
+                            <Region id="memoryInBox"/>
                         </VBox>
-                        <VBox alignment="CENTER" layoutY="1.0" maxHeight="79.0" maxWidth="170.0" minHeight="70.0"
-                              minWidth="170.0" prefHeight="70.0" prefWidth="643.0" AnchorPane.leftAnchor="0.0"
-                              AnchorPane.rightAnchor="0.0">
-                            <Button id="text1" contentDisplay="CENTER" maxHeight="47.0" maxWidth="170.0"
-                                    minHeight="47.0" minWidth="170.0" mnemonicParsing="false" prefHeight="47.0"
-                                    prefWidth="170.0" text="内存(用户区)">
-                                <font>
-                                    <Font size="18.0"/>
-                                </font>
-                            </Button>
-                            <Separator prefHeight="10.0" prefWidth="86.0"/>
-                            <Button id="text2" fx:id="memoryText" maxWidth="170.0" minWidth="170.0"
-                                    mnemonicParsing="false" prefWidth="170.0" text="1G/10GB(10%)"/>
+                        <VBox>
+                            <Label id="text1" text="内存(用户区)" minHeight="45" minWidth="170"/>
+                            <Separator prefHeight="10" prefWidth="90"/>
+                            <Label id="text2" fx:id="memoryText" text="1G/10GB(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
-
                 </graphic>
                 <AnchorPane>
-                    <LineChart fx:id="memoryChart"
-                               layoutX="100" layoutY="1.0"
-                               prefHeight="312.0" prefWidth="1057.0"
-                               stylesheets="@OccupancyShowApp.css">
+                    <LineChart fx:id="memoryChart" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10"
+                               AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                         <xAxis>
                             <CategoryAxis side="BOTTOM"/>
                         </xAxis>
@@ -125,41 +102,27 @@
                         </yAxis>
                     </LineChart>
                     <HBox id="memoryOutBox" fx:id="memoryBox2" alignment="CENTER"
-                          layoutX="100" layoutY="350"
-                          prefWidth="512.0" prefHeight="70.0"
-                          stylesheets="@OccupancyShowApp.css"/>
-
+                          layoutX="70" layoutY="400"
+                          prefHeight="80" prefWidth="450"/>
                 </AnchorPane>
             </Tab>
             <Tab>
                 <graphic>
                     <HBox>
-                        <VBox id="deviceOutBox" fx:id="deviceBox1" alignment="BOTTOM_CENTER" layoutY="207.0"
-                              maxHeight="70.0" maxWidth="100.0" minHeight="70.0" minWidth="100.0" prefHeight="70.0"
-                              prefWidth="100.0" stylesheets="@OccupancyShowApp.css">
-                            <Region id="deviceInBox" prefHeight="19.0" prefWidth="98.0"/>
+                        <VBox id="deviceOutBox" fx:id="deviceBox1" alignment="BOTTOM_CENTER"
+                              minHeight="70" minWidth="100">
+                            <Region id="deviceInBox"/>
                         </VBox>
-                        <VBox alignment="CENTER" layoutY="208.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
-                              minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
-                              AnchorPane.rightAnchor="0.0">
-                            <Button id="text1" contentDisplay="CENTER" maxHeight="47.0" maxWidth="170.0"
-                                    minHeight="47.0" minWidth="170.0" mnemonicParsing="false" prefHeight="47.0"
-                                    prefWidth="170.0" text="设备">
-                                <font>
-                                    <Font size="18.0"/>
-                                </font>
-                            </Button>
-                            <Separator prefHeight="10.0" prefWidth="86.0"/>
-                            <Button id="text2" fx:id="deviceText" maxWidth="170.0" minWidth="170.0"
-                                    mnemonicParsing="false" prefWidth="170.0" text="1/10(10%)"/>
+                        <VBox>
+                            <Label id="text1" text="设备" minHeight="45" minWidth="170"/>
+                            <Separator prefHeight="10" prefWidth="90"/>
+                            <Label id="text2" fx:id="deviceText" text="1/10(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
                 </graphic>
                 <AnchorPane>
-                    <LineChart fx:id="deviceChart"
-                               layoutX="100" layoutY="1.0"
-                               prefHeight="312.0" prefWidth="1057.0"
-                               stylesheets="@OccupancyShowApp.css">
+                    <LineChart fx:id="deviceChart" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10"
+                               AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                         <xAxis>
                             <CategoryAxis side="BOTTOM"/>
                         </xAxis>
@@ -168,42 +131,28 @@
                         </yAxis>
                     </LineChart>
                     <HBox id="deviceOutBox" fx:id="deviceBox2" alignment="CENTER"
-                          layoutX="100" layoutY="350"
-                          prefHeight="70.0" prefWidth="512.0"
-                          stylesheets="@OccupancyShowApp.css"/>
-
+                          layoutX="70" layoutY="400"
+                          prefHeight="80" prefWidth="650"/>
                 </AnchorPane>
             </Tab>
             <Tab>
                 <graphic>
                     <HBox>
-                        <VBox id="diskOutBox" fx:id="diskBox1" alignment="BOTTOM_CENTER" layoutY="104.0"
-                              maxHeight="70.0" maxWidth="100.0" minHeight="70.0" minWidth="100.0" prefHeight="70.0"
-                              prefWidth="100.0" stylesheets="@OccupancyShowApp.css">
-                            <Region id="diskInBox" prefHeight="4.0" prefWidth="98.0"/>
+                        <VBox id="diskOutBox" fx:id="diskBox1" alignment="BOTTOM_CENTER"
+                              minHeight="70" minWidth="100">
+                            <Region id="diskInBox"/>
                         </VBox>
-                        <VBox alignment="CENTER" layoutY="105.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
-                              minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
-                              AnchorPane.rightAnchor="0.0">
-                            <Button id="text1" contentDisplay="CENTER" maxHeight="47.0" maxWidth="170.0"
-                                    minHeight="47.0" minWidth="170.0" mnemonicParsing="false" prefHeight="47.0"
-                                    prefWidth="170.0" text="磁盘">
-                                <font>
-                                    <Font size="18.0"/>
-                                </font>
-                            </Button>
-                            <Separator prefHeight="10.0" prefWidth="86.0"/>
-                            <Button id="text2" fx:id="diskText" maxWidth="170.0" minWidth="170.0"
-                                    mnemonicParsing="false" prefWidth="170.0" text="0/256(0%)"/>
+                        <VBox>
+                            <Label id="text1" text="磁盘" minHeight="45" minWidth="170"/>
+                            <Separator prefHeight="10" prefWidth="90"/>
+                            <Label id="text2" fx:id="diskText" text="0/256(0%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
 
                 </graphic>
                 <AnchorPane>
-                    <LineChart fx:id="diskChart"
-                               layoutX="100" layoutY="1.0"
-                               prefHeight="312.0" prefWidth="1057.0"
-                               stylesheets="@OccupancyShowApp.css">
+                    <LineChart fx:id="diskChart" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10"
+                               AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                         <xAxis>
                             <CategoryAxis side="BOTTOM"/>
                         </xAxis>
@@ -212,42 +161,27 @@
                         </yAxis>
                     </LineChart>
                     <HBox id="diskOutBox" fx:id="diskBox2" alignment="CENTER"
-                          layoutX="100" layoutY="350"
-                          prefHeight="70.0" prefWidth="512.0"
-                          stylesheets="@OccupancyShowApp.css"/>
-
+                          layoutX="70" layoutY="400"
+                          prefHeight="80" prefWidth="650"/>
                 </AnchorPane>
             </Tab>
             <Tab>
                 <graphic>
                     <HBox>
-                        <VBox id="pcbOutBox" fx:id="pcbBox1" alignment="BOTTOM_CENTER" layoutY="307.0"
-                              maxHeight="70.0"
-                              maxWidth="100.0" minHeight="70.0" minWidth="100.0" prefHeight="70.0" prefWidth="100.0"
-                              stylesheets="@OccupancyShowApp.css">
-                            <Region id="pcbInBox" prefHeight="19.0" prefWidth="98.0"/>
+                        <VBox id="pcbOutBox" fx:id="pcbBox1" alignment="BOTTOM_CENTER"
+                              minHeight="70" minWidth="100">
+                            <Region id="pcbInBox"/>
                         </VBox>
-                        <VBox alignment="CENTER" layoutY="308.0" maxHeight="70.0" maxWidth="170.0" minHeight="70.0"
-                              minWidth="170.0" prefHeight="70.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0"
-                              AnchorPane.rightAnchor="0.0">
-                            <Button id="text1" contentDisplay="CENTER" maxHeight="47.0" maxWidth="170.0"
-                                    minHeight="47.0" minWidth="170.0" mnemonicParsing="false" prefHeight="47.0"
-                                    prefWidth="170.0" text="PCB">
-                                <font>
-                                    <Font size="18.0"/>
-                                </font>
-                            </Button>
-                            <Separator prefHeight="10.0" prefWidth="86.0"/>
-                            <Button id="text2" fx:id="pcbText" maxWidth="170.0" minWidth="170.0" mnemonicParsing="false"
-                                    prefWidth="170.0" text="1/10(10%)"/>
+                        <VBox>
+                            <Label id="text1" text="PCB" minHeight="45" minWidth="170"/>
+                            <Separator prefHeight="10" prefWidth="90"/>
+                            <Label id="text2" fx:id="pcbText" text="1/10(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
                 </graphic>
                 <AnchorPane>
-                    <LineChart fx:id="pcbChart"
-                               layoutX="100" layoutY="1.0"
-                               prefHeight="312.0" prefWidth="1057.0"
-                               stylesheets="@OccupancyShowApp.css">
+                    <LineChart fx:id="pcbChart" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10"
+                               AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                         <xAxis>
                             <CategoryAxis side="BOTTOM"/>
                         </xAxis>
@@ -256,10 +190,8 @@
                         </yAxis>
                     </LineChart>
                     <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER"
-                          layoutX="100" layoutY="350"
-                          prefHeight="70.0" prefWidth="512.0"
-                          stylesheets="@OccupancyShowApp.css"/>
-
+                          layoutX="70" layoutY="400"
+                          prefHeight="80" prefWidth="900"/>
                 </AnchorPane>
             </Tab>
         </TabPane>
