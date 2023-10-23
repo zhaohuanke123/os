@@ -21,7 +21,7 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
 
     public PropertyApplication(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap) throws IOException {
         super(
-                "/com/os/applications/fileApp/fxmls/PropertyView.fxml",
+                "/com/os/applications/fileApp/fxmls/Property.fxml",
                 (block.getObject() instanceof Folder) ? "/com/os/applications/fileApp/res/folder.png" : "/com/os/applications/fileApp/res/file.png",
                 "属性",
                 -1,
@@ -87,16 +87,16 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
                     try {
                         FileApplication.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
-                    } catch (Exception var9) {
-                        System.out.println(var9.getMessage());
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
 
                 if (FileApplication.fat.hasName(this.location, newName)) {
                     try {
                         FileApplication.tipOpen("此位置已包含同名文件/文件夹");
-                    } catch (Exception var8) {
-                        System.out.println(var8.getMessage());
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 } else {
                     setNewName(newName);
@@ -125,16 +125,16 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
                     try {
                         FileApplication.tipOpen("合法目录名仅可以使用字母、数字和除“$”、“.”、“/”以外的字符");
                         return;
-                    } catch (Exception var9) {
-                        System.out.println(var9.getMessage());
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
 
                 if (FileApplication.fat.hasName(this.location, newName)) {
                     try {
                         FileApplication.tipOpen("此位置已包含同名文件/文件夹");
-                    } catch (Exception var8) {
-                        System.out.println(var8.getMessage());
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 } else {
                     setNewName(newName);

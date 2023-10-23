@@ -14,7 +14,7 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
 
     public TipDialogApplication(String tipString) {
         super(
-                "/com/os/applications/fileApp/fxmls/TipWindow.fxml",
+                "/com/os/applications/fileApp/fxmls/TipDialog.fxml",
                 "/com/os/applications/fileApp/res/tip.png",
                 "提示",
                 -1,
@@ -27,7 +27,7 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
 
     public TipDialogApplication(String tipString, int width, int height) {
         super(
-                "/com/os/applications/fileApp/fxmls/TipWindow.fxml",
+                "/com/os/applications/fileApp/fxmls/TipDialog.fxml",
                 "/com/os/applications/fileApp/res/tip.png",
                 "提示",
                 width,

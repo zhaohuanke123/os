@@ -161,18 +161,57 @@
 
 /* 设置设备使用情况展示块的样式 */
 #deviceOutBox {
-    -fx-background-color: White;
+    -fx-background-color: white;
     -fx-border-color: #BE185D;
 }
 
 /* 设置磁盘使用情况展示块的样式 */
 #diskOutBox {
-    -fx-background-color: White;
+    -fx-background-color: white;
     -fx-border-color: #6D28D9;
 }
 
 /* 设置pcb使用情况展示块的样式 */
 #pcbOutBox {
-    -fx-background-color: White;
+    -fx-background-color: white;
     -fx-border-color: #1D4ED8;
+}
+
+/*------------------------------------------------------*/
+
+.rec {
+    -fx-padding: 4;
+    -fx-background-color: white;
+     -fx-background-radius: 10;
+}
+
+.rec1 {
+    -fx-fill: #E5E7EB;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 10;
+}
+
+.rec2 {
+    -fx-fill: #34d399;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 10;
+}
+
+.rec3 {
+    -fx-fill: #60A5FA;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 10;
+}
+
+.rec4 {
+    -fx-fill: #fcd34d;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 10;
+}
+
+.lab {
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
 }

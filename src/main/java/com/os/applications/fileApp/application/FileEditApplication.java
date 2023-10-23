@@ -25,7 +25,7 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
 
     public FileEditApplication(Stage stage, File file, Disk block)  {
         super(
-                "/com/os/applications/fileApp/fxmls/FileView.fxml",
+                "/com/os/applications/fileApp/fxmls/FileEdit.fxml",
                 "/com/os/applications/fileApp/res/file.png",
                 "文件",
                 500,
@@ -87,8 +87,6 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
 
         controller.init(this.file, this.stage, this.block);
         maps.put(this.file, this.stage);
-
-        System.out.println(maps.get(this.file));
     }
 
     private void saveContent(String newContent) {

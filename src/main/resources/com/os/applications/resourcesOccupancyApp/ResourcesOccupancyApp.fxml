@@ -10,11 +10,12 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.shape.Rectangle?>
 <AnchorPane fx:id="topMainPane"
-            stylesheets="@OccupancyShowApp.css"
+            stylesheets="@ResourcesOccupancyShowApp.css"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.os.applications.occupancyApp.OccupancyAppController">
+            fx:controller="com.os.applications.resourcesOccupancyApp.ResourcesOccupancyAppController">
     <BorderPane fx:id="titleBar" layoutX="20.0" layoutY="20.0"
                 onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -70,7 +71,7 @@
         </right>
     </BorderPane>
 
-    <AnchorPane stylesheets="@OccupancyShowApp.css"
+    <AnchorPane stylesheets="@ResourcesOccupancyShowApp.css"
                 AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
                 AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
         <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT"
@@ -191,7 +192,25 @@
                     </LineChart>
                     <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
-                          prefHeight="80" prefWidth="815"/>
+                          prefHeight="80" prefWidth="700"/>
+                    <VBox styleClass="rec" layoutX="800" layoutY="340">
+                        <HBox alignment="CENTER">
+                            <Rectangle styleClass="rec1" height="30" width="50"/>
+                            <Label styleClass="lab" prefHeight="30" prefWidth="50" text="空闲" />
+                        </HBox>
+                        <HBox alignment="CENTER">
+                            <Rectangle styleClass="rec2" height="30" width="50"/>
+                            <Label styleClass="lab" prefHeight="30" prefWidth="50" text="就绪态" />
+                        </HBox>
+                        <HBox alignment="CENTER">
+                            <Rectangle styleClass="rec3" height="30" width="50"/>
+                            <Label styleClass="lab" prefHeight="30" prefWidth="50" text="运行态" />
+                        </HBox>
+                        <HBox alignment="CENTER">
+                            <Rectangle styleClass="rec4" height="30" width="50"/>
+                            <Label styleClass="lab" prefHeight="30" prefWidth="50" text="阻塞态" />
+                        </HBox>
+                    </VBox>
                 </AnchorPane>
             </Tab>
         </TabPane>

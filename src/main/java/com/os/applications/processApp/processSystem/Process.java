@@ -70,10 +70,7 @@ public class Process {
         this.state = -1;
         boolean isSucceed = OccupancyManager.retrieveMemory(this.memoryArea);
 
-        System.out.println(this.memoryArea.start + " " + this.memoryArea.end);
-
         if (!isSucceed) {
-            System.out.println("进程销毁失败，进程编号为：" + this.name);
             return false;
         } else {
             OccupancyManager.retrievePcb(this.pcbID);

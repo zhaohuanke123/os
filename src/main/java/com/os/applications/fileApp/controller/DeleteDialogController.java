@@ -40,14 +40,14 @@ public class DeleteDialogController extends BaseFileController {
             } else if (res == 2) {
                 try {
                     FileApplication.tipOpen("文件夹不为空");
-                } catch (Exception var6) {
-                    System.out.println(Arrays.toString(var6.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             } else {
                 try {
                     FileApplication.tipOpen("文件未关闭");
-                } catch (Exception var5) {
-                    System.out.println(Arrays.toString(var5.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             }
 

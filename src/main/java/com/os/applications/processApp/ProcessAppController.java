@@ -174,12 +174,12 @@ public class ProcessAppController extends BaseController {
     private void processTableUpdate() {
 
         Vector<?> updateList = (Vector<?>) ProcessManager.allProcessList.clone();
-        //$$$获取数据
+        //获取数据
         DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, "当前进程");
         Platform.runLater(() ->
                 processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
 
-        //$$$获取数据
+        //获取数据
         DataLoader.processDetailDataLoad(processDetailDataArrayList1, (Vector<Process>) updateList, "销毁进程");
         Platform.runLater(() ->
                 processTable1.setItems(FXCollections.observableArrayList(processDetailDataArrayList1)));
@@ -192,12 +192,7 @@ public class ProcessAppController extends BaseController {
         super.showDescription();
 
         Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication(
-                "进程管理，主要作用是可视化进程的运行情况。" +
-                        "1）单独显示当前运行进程的编号、执行指令、数据寄存器的值、剩余时间片。(默认6)。" +
-                        "2）显示当前进程的执行进度，高亮当前执行指令。" +
-                        "3）显示进程详表，具体包括：进程编号、进程状态、执行文件、设备使用情况、进程控制块、当前执行结果、进程完成进度。" +
-                        "\n", 500, 500);
+        TipDialogApplication tipWindow = new TipDialogApplication("", 500, 500);
         try {
             tipWindow.start(stage);
             Text text = new Text("进程管理器\n\n");

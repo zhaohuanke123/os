@@ -17,7 +17,7 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
 
     public DeleteDialogApplication(FileApplication mainView, Disk block) {
         super(
-                "/com/os/applications/fileApp/fxmls/delView.fxml",
+                "/com/os/applications/fileApp/fxmls/DeleteDialog.fxml",
                 "/com/os/applications/fileApp/res/tip.png",
                 "删除",
                 -1,

@@ -5,10 +5,7 @@ import com.os.utility.fileSystem.OccupancyManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class ProcessScheduleThread extends Thread {
@@ -73,14 +70,12 @@ public class ProcessScheduleThread extends Thread {
             this.CreateProcess();
             Process nowProcess;
             if (runProcessList.isEmpty() && waitProcessList != null && !waitProcessList.isEmpty()) {
-                System.out.println("就绪队列个数：" + waitProcessList.size());
-
                 try {
                     nowProcess = waitProcessList.remove(0);
                     nowProcess.state = 2;
                     runProcessList.add(nowProcess);
-                } catch (Exception var5) {
-                    System.out.println("就绪队列个数：0");
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             }
 
@@ -92,8 +87,8 @@ public class ProcessScheduleThread extends Thread {
 
                     try {
                         TimeUnit.MILLISECONDS.sleep(ProcessManager.slice / ProcessManager.speed);
-                    } catch (InterruptedException var4) {
-                        System.out.println(var4.getMessage());
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
                     }
 
                     if (nowProcess.PC == nowProcess.executableFile.instructionArray.size()) {
