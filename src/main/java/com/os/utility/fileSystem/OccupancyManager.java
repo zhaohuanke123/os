@@ -36,7 +36,7 @@ public class OccupancyManager {
         if (freePcbList != null && !freePcbList.isEmpty()) {
             try {
                 return freePcbList.remove(0);
-            } catch (Exception var1) {
+            } catch (Exception e) {
                 return -1;
             }
         } else {

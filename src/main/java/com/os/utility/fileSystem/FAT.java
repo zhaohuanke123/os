@@ -383,15 +383,15 @@ public class FAT implements Serializable {
             String location = path.substring(0, split);
             String folderName = path.substring(split + 1);
             List<Folder> folders = this.getFolders(location);
-            Iterator<Folder> var6 = folders.iterator();
+            Iterator<Folder> iterator = folders.iterator();
 
             Folder folder;
             do {
-                if (!var6.hasNext()) {
+                if (!iterator.hasNext()) {
                     return null;
                 }
 
-                folder = var6.next();
+                folder = iterator.next();
             } while (!folder.getName().equals(folderName));
 
             return folder;
@@ -399,15 +399,15 @@ public class FAT implements Serializable {
     }
 
     public Path getPath(String path) {
-        var var2 = this.paths.iterator();
+        var iterator = this.paths.iterator();
 
         Path p;
         do {
-            if (!var2.hasNext()) {
+            if (!iterator.hasNext()) {
                 return null;
             }
 
-            p = var2.next();
+            p = iterator.next();
         } while (!p.getPathName().equals(path));
 
         return p;
@@ -552,15 +552,15 @@ public class FAT implements Serializable {
     }
 
     public boolean hasPath(Path path) {
-        Iterator<Path> var2 = this.paths.iterator();
+        Iterator<Path> iterator = this.paths.iterator();
 
         Path p;
         do {
-            if (!var2.hasNext()) {
+            if (!iterator.hasNext()) {
                 return false;
             }
 
-            p = var2.next();
+            p = iterator.next();
         } while (!p.equals(path));
 
         return true;
@@ -568,15 +568,15 @@ public class FAT implements Serializable {
 
     public boolean hasName(String path, String name) {
         Folder thisFolder = this.getFolder(path);
-        var var4 = thisFolder.getChildren().iterator();
+        var iterator = thisFolder.getChildren().iterator();
 
         Object child;
         do {
-            if (!var4.hasNext()) {
+            if (!iterator.hasNext()) {
                 return false;
             }
 
-            child = var4.next();
+            child = iterator.next();
         } while (!child.toString().equals(name));
 
         return true;

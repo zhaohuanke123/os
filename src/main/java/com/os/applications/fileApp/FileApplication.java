@@ -272,9 +272,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 } else if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     try {
                         FileApplication.this.onOpen();
-                    } catch (IOException var4) {
-                        System.out.println(Arrays.toString(var4.getStackTrace()));
-                        System.out.println(Arrays.toString(var4.getStackTrace()));
+                    } catch (IOException e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
                 } else {
                     FileApplication.this.contextMenu2.hide();
@@ -293,14 +292,14 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 if (fat.isOpenedFile(thisBlock)) {
                     try {
                         fileViewOpen((File) thisBlock.getObject(), thisBlock);
-                    } catch (Exception var6) {
-                        System.out.println(Arrays.toString(var6.getStackTrace()));
+                    } catch (Exception e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
                 } else {
                     try {
                         fileViewOpen((File) thisBlock.getObject(), thisBlock);
-                    } catch (Exception var5) {
-                        System.out.println(Arrays.toString(var5.getStackTrace()));
+                    } catch (Exception e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
 
                     fat.addOpenedFile(thisBlock);
@@ -308,8 +307,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             } else {
                 try {
                     tipOpen("文件打开已到上限");
-                } catch (Exception var4) {
-                    System.out.println(Arrays.toString(var4.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             }
         } else {
@@ -333,8 +332,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && controller.currentPath.getText().equals("C:")) {
                 try {
                     tipOpen("根路径最多创建\n8个目录项");
-                } catch (Exception var4) {
-                    System.out.println(Arrays.toString(var4.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
 
             } else {
@@ -342,8 +341,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 if (no == -1) {
                     try {
                         tipOpen("磁盘容量已满，无法创建");
-                    } catch (Exception var5) {
-                        System.out.println(Arrays.toString(var5.getStackTrace()));
+                    } catch (Exception e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
                 } else {
                     controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
@@ -356,8 +355,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             if (((Folder) fat.getDiskBlocks()[2].getObject()).getCatalogNum() > 7 && controller.currentPath.getText().equals("C:")) {
                 try {
                     tipOpen("根路径最多创建\n8个目录项");
-                } catch (Exception var5) {
-                    System.out.println(Arrays.toString(var5.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
 
             } else {
@@ -365,8 +364,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 if (no == -1) {
                     try {
                         tipOpen("磁盘容量已满，无法创建");
-                    } catch (Exception var6) {
-                        System.out.println(Arrays.toString(var6.getStackTrace()));
+                    } catch (Exception e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
                 } else {
                     Folder newFolder = (Folder) fat.getBlock(no).getObject();
@@ -381,8 +380,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         this.openItem.setOnAction((ActionEvent) -> {
             try {
                 this.onOpen();
-            } catch (IOException var3) {
-                System.out.println(Arrays.toString(var3.getStackTrace()));
+            } catch (IOException e) {
+                System.out.println(Arrays.toString(e.getStackTrace()));
             }
 
         });
@@ -391,14 +390,14 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             if (fat.isOpenedFile(thisBlock)) {
                 try {
                     tipOpen("文件未关闭");
-                } catch (Exception var5) {
-                    System.out.println(Arrays.toString(var5.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             } else {
                 try {
                     this.delViewOpen(thisBlock);
-                } catch (Exception var4) {
-                    System.out.println(Arrays.toString(var4.getStackTrace()));
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             }
 
@@ -408,8 +407,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
             try {
                 this.propertyOpen(thisBlock, this.icons[this.ind], this.pathMap);
-            } catch (Exception var4) {
-                System.out.println(Arrays.toString(var4.getStackTrace()));
+            } catch (Exception e) {
+                System.out.println(Arrays.toString(e.getStackTrace()));
             }
 
         });
@@ -432,8 +431,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 if (no == -1) {
                     try {
                         tipOpen("磁盘容量已满，无法粘贴");
-                    } catch (Exception var4) {
-                        System.out.println(Arrays.toString(var4.getStackTrace()));
+                    } catch (Exception e) {
+                        System.out.println(Arrays.toString(e.getStackTrace()));
                     }
                 } else {
                     if (moveFlag) {
@@ -457,8 +456,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
         try {
             propertyApplication = new PropertyApplication(thisBlock, icon, pathMap);
-        } catch (IOException var7) {
-            System.out.println(Arrays.toString(var7.getStackTrace()));
+        } catch (IOException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
 
         if (propertyApplication != null) {
@@ -506,19 +505,19 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public static void loadData() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"));
-            Throwable var2 = null;
+            Throwable e1 = null;
 
             try {
                 fat = (FAT) inputStream.readObject();
-            } catch (Throwable var12) {
-                var2 = var12;
-                throw var12;
+            } catch (Throwable e2) {
+                e1 = e2;
+                throw e2;
             } finally {
-                if (var2 != null) {
+                if (e1 != null) {
                     try {
                         inputStream.close();
-                    } catch (Throwable var11) {
-                        var2.addSuppressed(var11);
+                    } catch (Throwable e3) {
+                        e1.addSuppressed(e3);
                     }
                 } else {
                     inputStream.close();
@@ -538,27 +537,27 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public static void saveData() {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("data"));
-            Throwable var1 = null;
+            Throwable e1 = null;
 
             try {
                 outputStream.writeObject(fat);
-            } catch (Throwable var12) {
-                var1 = var12;
-                throw var12;
+            } catch (Throwable e2) {
+                e1 = e2;
+                throw e2;
             } finally {
-                if (var1 != null) {
+                if (e1 != null) {
                     try {
                         outputStream.close();
-                    } catch (Throwable var11) {
-                        var1.addSuppressed(var11);
+                    } catch (Throwable e3) {
+                        e1.addSuppressed(e3);
                     }
                 } else {
                     outputStream.close();
                 }
 
             }
-        } catch (IOException var15) {
-            System.out.println(Arrays.toString(var15.getStackTrace()));
+        } catch (IOException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
 
     }

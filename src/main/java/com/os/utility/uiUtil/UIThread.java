@@ -29,10 +29,9 @@ public class UIThread extends Thread {
         do {
             try {
                 TimeUnit.MILLISECONDS.sleep(ProcessManager.slice / ProcessManager.speed);
-            } catch (InterruptedException var3) {
-                System.out.println(Arrays.toString(var3.getStackTrace()));
-            }Exception
-
+            } catch (InterruptedException e) {
+                System.out.println(Arrays.toString(e.getStackTrace()));
+            }
             ++this.time;
             this.runProcessList = new Vector<>(ProcessManager.runProcessList);
             this.runProcess = null;
