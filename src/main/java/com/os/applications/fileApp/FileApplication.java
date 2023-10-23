@@ -52,7 +52,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public static boolean clearFlag = false;
 
     public FileApplication() {
-        super("/com/os/applications/fileApp/fxmls/mainUI.fxml",
+        super("/com/os/applications/fileApp/fxmls/FileApp.fxml",
                 "/com/os/applications/fileApp/res/folder.png",
                 "磁盘文件管理系统",
                 -1, -1);
@@ -161,8 +161,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         controller.treeView.setCellFactory((p) -> new TextFieldTreeCellImpl());
 
         for (Path path : fat.getPaths()) {
-            System.out.println(path);
-
             if (path.hasParent() && path.getParent().getPathName().equals(this.rootNode.getValue())) {
                 this.TreeNodeInit(path, this.rootNode);
             }
@@ -289,10 +287,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
     private void onOpen() throws IOException {
         Disk thisBlock = this.blockList.get(this.ind);
-
-        for (Disk block : this.blockList) {
-            System.out.println(block);
-        }
 
         if (thisBlock.getObject() instanceof File) {
             if (fat.getOpenedFiles().size() < 5) {
@@ -483,7 +477,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     }
 
     public static void fileViewOpen(File file, Disk block) {
-        System.out.println("fileViewOpen" + file.isOpened());
         if (file.isOpened()) {
             FileEditApplication.maps.get(file).show();
             FileEditApplication.maps.get(file).setAlwaysOnTop(true);
@@ -499,7 +492,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("fileViewOpen" + file.isOpened());
         }
 
     }
@@ -549,7 +541,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             Throwable var1 = null;
 
             try {
-                System.out.println("正在保存磁盘文件数据");
                 outputStream.writeObject(fat);
             } catch (Throwable var12) {
                 var1 = var12;
@@ -591,7 +582,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                     controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     FileApplication.this.addIcon(fats, pathName);
                     FileApplication.this.recentPath = pathName;
-                    System.out.println(pathName);
                     FileApplication.this.recentNode = TextFieldTreeCellImpl.this.getTreeItem();
                     controller.currentPath.setText(FileApplication.this.recentPath);
                 }

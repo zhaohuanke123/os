@@ -1,6 +1,6 @@
 package com.os.utility.uiUtil;
 
-import com.os.applications.occupancyApp.OccupancyAppController;
+import com.os.applications.resourcesOccupancyApp.ResourcesOccupancyAppController;
 import com.os.applications.processApp.ProcessAppController;
 
 import java.util.*;
@@ -16,7 +16,7 @@ public class UIThread extends Thread {
     public Vector<Process> creatingProcessList;
     public Vector<Process> waitProcessList;
     public Vector<Process> blockProcessList;
-    public OccupancyAppController occupancyAppController = null;
+    public ResourcesOccupancyAppController occupancyAppController = null;
     public ProcessAppController processAppController = null;
     public int time = 0;
 
@@ -31,7 +31,7 @@ public class UIThread extends Thread {
                 TimeUnit.MILLISECONDS.sleep(ProcessManager.slice / ProcessManager.speed);
             } catch (InterruptedException var3) {
                 System.out.println(Arrays.toString(var3.getStackTrace()));
-            }
+            }Exception
 
             ++this.time;
             this.runProcessList = new Vector<>(ProcessManager.runProcessList);

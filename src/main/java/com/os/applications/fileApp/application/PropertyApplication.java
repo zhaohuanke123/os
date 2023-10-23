@@ -21,7 +21,7 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
 
     public PropertyApplication(Disk block, Label icon, Map<Path, TreeItem<String>> pathMap) throws IOException {
         super(
-                "/com/os/applications/fileApp/fxmls/PropertyView.fxml",
+                "/com/os/applications/fileApp/fxmls/Property.fxml",
                 (block.getObject() instanceof Folder) ? "/com/os/applications/fileApp/res/folder.png" : "/com/os/applications/fileApp/res/file.png",
                 "属性",
                 -1,

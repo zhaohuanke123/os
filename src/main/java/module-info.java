@@ -8,8 +8,8 @@ module os {
     exports com.os.applications.fileApp.application;
     opens com.os.applications.fileApp.controller to javafx.fxml;
     exports com.os.applications.fileApp.controller;
-    opens com.os.applications.occupancyApp to javafx.fxml;
-    exports com.os.applications.occupancyApp;
+    opens com.os.applications.resourcesOccupancyApp to javafx.fxml;
+    exports com.os.applications.resourcesOccupancyApp;
     opens com.os.applications.processApp to javafx.fxml;
     exports com.os.applications.processApp;
     opens com.os.dataModels to javafx.fxml;

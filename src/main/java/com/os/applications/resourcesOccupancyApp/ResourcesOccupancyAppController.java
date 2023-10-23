@@ -1,4 +1,4 @@
-package com.os.applications.occupancyApp;
+package com.os.applications.resourcesOccupancyApp;
 
 import com.os.applications.BaseController;
 import com.os.applications.fileApp.FileApplication;
@@ -8,7 +8,6 @@ import com.os.utility.fileSystem.FAT;
 import com.os.utility.fileSystem.OccupancyManager;
 import com.os.utility.uiUtil.CompSet;
 import javafx.application.Platform;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
@@ -16,8 +15,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -28,9 +25,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Properties;
 
-public class OccupancyAppController extends BaseController {
+public class ResourcesOccupancyAppController extends BaseController {
     //region [FXML comp variables]
     public AnchorPane topMainPane;
     public Label memoryText;

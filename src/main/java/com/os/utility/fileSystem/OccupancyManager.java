@@ -34,12 +34,9 @@ public class OccupancyManager {
 
     public static int applyFreePcb() {
         if (freePcbList != null && !freePcbList.isEmpty()) {
-            System.out.println("pcb剩余个数：" + freePcbList.size());
-
             try {
                 return freePcbList.remove(0);
             } catch (Exception var1) {
-                System.out.println("pcb剩余个数：0");
                 return -1;
             }
         } else {
@@ -73,8 +70,6 @@ public class OccupancyManager {
                 for (int j = start; j <= i; ++j) {
                     allMemory[j] = 1;
                 }
-
-                System.out.println("分配内存:" + start + " " + i);
                 return new MemoryArea(start, i);
             }
         }

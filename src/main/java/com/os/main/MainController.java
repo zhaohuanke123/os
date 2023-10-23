@@ -1,7 +1,7 @@
 package com.os.main;
 
 import com.os.applications.fileApp.FileApplication;
-import com.os.applications.occupancyApp.OccupancyApp;
+import com.os.applications.resourcesOccupancyApp.ResourcesOccupancyApp;
 import com.os.applications.processApp.ProcessApp;
 import com.os.utility.fileSystem.FAT;
 import com.os.utility.fileSystem.OccupancyManager;
@@ -15,8 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -99,7 +97,7 @@ public class MainController implements Initializable {
         _instance = this;
 
         appButtonDict.put(ProcessApp.class.getName(), processButton);
-        appButtonDict.put(OccupancyApp.class.getName(), occupancyButton);
+        appButtonDict.put(ResourcesOccupancyApp.class.getName(), occupancyButton);
         appButtonDict.put(FileApplication.class.getName(), fileManagerButton);
 
         appBoxManager = new AppBoxManager(appBox);

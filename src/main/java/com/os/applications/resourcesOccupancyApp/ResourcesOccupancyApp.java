@@ -1,4 +1,4 @@
-package com.os.applications.occupancyApp;
+package com.os.applications.resourcesOccupancyApp;
 
 import com.os.applications.BaseApp;
 import javafx.application.Application;
@@ -6,14 +6,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OccupancyApp extends BaseApp<OccupancyAppController> {
+public class ResourcesOccupancyApp extends BaseApp<ResourcesOccupancyAppController> {
 
     public static void main(String[] args) {
         Application.launch(args);
     }
 
-    public OccupancyApp() {
-        super("/com/os/applications/occupancyApp/OccupancyApp.fxml",
+    public ResourcesOccupancyApp() {
+        super("/com/os/applications/resourcesOccupancyApp/ResourcesOccupancyApp.fxml",
                 "/com/os/img/device.png",
                 "占用管理器",
                 1300.0,

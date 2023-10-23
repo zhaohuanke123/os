@@ -73,14 +73,11 @@ public class ProcessScheduleThread extends Thread {
             this.CreateProcess();
             Process nowProcess;
             if (runProcessList.isEmpty() && waitProcessList != null && !waitProcessList.isEmpty()) {
-                System.out.println("就绪队列个数：" + waitProcessList.size());
-
                 try {
                     nowProcess = waitProcessList.remove(0);
                     nowProcess.state = 2;
                     runProcessList.add(nowProcess);
                 } catch (Exception var5) {
-                    System.out.println("就绪队列个数：0");
                 }
             }
 

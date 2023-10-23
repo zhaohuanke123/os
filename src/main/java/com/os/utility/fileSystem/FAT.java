@@ -175,7 +175,6 @@ public class FAT implements Serializable {
             return -1;
         } else {
             Folder parent = this.getFolder(path);
-            System.out.println("pp" + parent.getDiskNum());
             parent.setCatalogNum(parent.getCatalogNum() + 1);
             if (!path.equals("C:")) {
                 int countBlock;
@@ -188,7 +187,6 @@ public class FAT implements Serializable {
                 this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
-            System.out.println(parent.getCatalogNum() + " 目录项 " + parent.getName());
             num = this.searchEmptyDiskBlock();
             File file = new File(fileName, path, num, parent);
             file.setFlag(1);
@@ -324,8 +322,6 @@ public class FAT implements Serializable {
                     int space2 = this.searchEmptyDiskBlock();
                     this.disks[next].setIndex(space2);
                 }
-
-                System.out.println(thisFile);
             }
         } else if (num < oldNum) {
             for (end = thisFile.getDiskNum(); num > 1; --num) {
@@ -376,8 +372,6 @@ public class FAT implements Serializable {
                 ++n;
             }
         }
-
-        System.out.println("file-length:" + n);
         return List;
     }
 
