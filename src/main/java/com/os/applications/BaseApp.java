@@ -19,10 +19,11 @@ public class BaseApp<T extends BaseController> extends Application {
     protected String TitleName;  // 标题名称
     protected double sceneWidth;  // 场景宽度
     protected double sceneHeight;  // 场景高度
-    protected Parent root;
-    protected FXMLLoader fxmlLoader;
-    public T controller;
+    protected Parent root;  // 根节点
+    protected FXMLLoader fxmlLoader;  // FXML加载器
+    public T controller;  // 控制器
 
+    // 构造函数，用于初始化应用程序的基本信息
     public BaseApp(String fxmlPath, String IconPath, String TitleName, double sceneWidth, double sceneHeight) {
         this.fxmlPath = fxmlPath;
         this.IconPath = IconPath;
@@ -34,7 +35,7 @@ public class BaseApp<T extends BaseController> extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         if (sceneHeight > 0 && sceneWidth > 0) {
-            CompSet.setStageSize(stage, sceneWidth, sceneHeight);
+            CompSet.setStageSize(stage, sceneWidth, sceneHeight);  // 设置舞台的宽度和高度
         }
 
         // 获取FXML文件的URL
@@ -61,12 +62,14 @@ public class BaseApp<T extends BaseController> extends Application {
         controller = fxmlLoader.getController();
 
         // 设置窗口图标
-        setTitleIco(controller, IconPath);
+        setTitleIco(controller, IconPath);  // 设置应用程序的图标
 
         // 禁止窗口调整大小
         stage.setResizable(false);
+
         // 设置场景背景为透明
         scene.setFill(Color.TRANSPARENT);
+
         // 设置窗口样式为透明
         stage.initStyle(StageStyle.TRANSPARENT);
 
@@ -74,18 +77,19 @@ public class BaseApp<T extends BaseController> extends Application {
         stage.show();
 
         // 初始化控制器
-        controller.init(stage);
-        // 调整控制器窗口
-        controller.adaptWindow();
+        controller.init(stage);  // 初始化应用程序控制器
+        controller.adaptWindow();  // 调整控制器窗口
     }
 
+    // 设置窗口图标的私有方法
     private void setTitleIco(BaseController bc, String IconPath) {
         URL location = this.getClass().getResource(IconPath);
         ImageView imageView = new ImageView(String.valueOf(location));
-        CompSet.setImageViewFixSize(imageView, 20, 20);
-        bc.title.setGraphic(imageView);
+        CompSet.setImageViewFixSize(imageView, 20, 20);  // 设置图标视图的大小
+        bc.title.setGraphic(imageView);  // 将图标视图设置为控制器的标题图标
     }
 
+    // 获取窗口图标的方法
     protected ImageView getIco() {
         URL location = this.getClass().getResource(IconPath);
         return new ImageView(String.valueOf(location));
