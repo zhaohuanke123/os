@@ -25,72 +25,82 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class FileApplicationController extends BaseFileController {
-    public TabPane TabP;
-    public Label currentPath;
-    public TreeView<String> treeView;
-    public FlowPane flowPane;
-    @FXML
-    public TableView<Disk> diskTable;
-    @FXML
-    public TableView<File> openFile;
-    public TextArea contentField;
+    public TabPane TabP;  // 选项卡面板
+    public Label currentPath;  // 显示当前路径的标签
+    public TreeView<String> treeView;  // 文件树视图
+    public FlowPane flowPane;  // 文件和文件夹图标的容器
+    public TextArea contentField;  // 显示文件内容的文本区域
+    public static Vector<ExecutableFile> executableFileList;  // 可执行文件列表
+    public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();  // 可执行文件数据列表
+    public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();  // 文件详情数据列表
 
+    @FXML
+    public TableView<Disk> diskTable;  // 显示磁盘信息的表格
+    @FXML
+    public TableView<File> openFile;  // 显示已打开文件信息的表格
+    @FXML
+    private TableView<ExecutableFileData> executableFileTable;  // 显示可执行文件数据的表格
+    @FXML
+    private TableColumn<?, ?> fileName;  // 文件名列
+
+
+    // 关闭窗口事件处理
     @FXML
     public void closeStage() {
         FileApplication.saveData();
         this.stage.close();
     }
 
+    // 选择文件事件处理
     @FXML
     void selectFile() {
         String s = this.executableFileTable.getSelectionModel().getSelectedItem().toString();
         int i = Integer.parseInt(s);
+        // 更新文件内容区域
         this.updateContentField(i);
     }
 
+    // 初始化 FileApp 界面
     @Override
     public void init(Stage stage) {
         super.init(stage);
-
+        // 从进程管理器获取可执行文件列表
         executableFileList = ProcessManager.executableFileList;
+        // 设置文件名列
         this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
+        // 更新可执行文件表
         updateFileTable(this.executableFileTable);
     }
 
-
-    @FXML
-    private TableView<ExecutableFileData> executableFileTable;
-    @FXML
-    private TableColumn<?, ?> fileName;
-
-    public static Vector<ExecutableFile> executableFileList;
-    public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();
-    public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();
-
+    // 更新可执行文件表
     public static void updateFileTable(final TableView<ExecutableFileData> executableFileTable) {
         Platform.runLater(() -> {
+            // 加载可执行文件数据
             DataLoader.fileDataLoad(
                     FileApplicationController.executableFileDataList,
                     FileApplicationController.executableFileList);
-            executableFileTable.setItems(
-                    FXCollections.observableArrayList(
-                            FileApplicationController.executableFileDataList));
+            // 设置为executableFileTable的数据
+            executableFileTable.setItems(FXCollections.observableArrayList(FileApplicationController.executableFileDataList));
         });
     }
 
+    // 更新文件内容区域
     public void updateContentField(final int i) {
         Platform.runLater(() -> {
+            // 加载文件详细数据
             DataLoader.fileDetailDataLoad(
                     FileApplicationController.this.fileDetailDataList,
                     FileApplicationController.executableFileList.get(i));
             StringBuilder stringBuilder = new StringBuilder();
-            for (InstructionData instructionData : FileApplicationController.this.fileDetailDataList) {
+            // 遍历文件详细数据列表，获取指令并构建文本内容
+            for (InstructionData instructionData : FileApplicationController.this.fileDetailDataList)
                 stringBuilder.append(instructionData.getInstruction()).append("\n");
-            }
+            // 将文本内容设置为contentField的文本
             FileApplicationController.this.contentField.setText(stringBuilder.toString());
         });
     }
 
+    // 文件帮助界面的信息
     @FXML
     @Override
     protected void showDescription() {

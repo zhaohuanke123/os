@@ -13,18 +13,19 @@ import java.util.Arrays;
 
 public class DeleteDialogController extends BaseFileController {
     @FXML
-    private Button acceptButton;
+    private Button acceptButton;  // 确定按钮
     @FXML
-    private Button cancelButton;
+    private Button cancelButton;  // 取消按钮
     @FXML
-    private Text text;
-    private Disk block;
+    private Text text;  // 显示文本
+    private Disk block;  // 要删除的磁盘块
 
     public void init(final Stage stage, final FileApplication mainView, String tipString, final Disk block) {
         super.init(stage);
         this.text.setText(tipString);
         this.block = block;
 
+        // 当点击确定按钮时触发的事件
         this.acceptButton.setOnMouseClicked(event -> {
             this.closeStage();
             Path thisPath = null;
@@ -32,39 +33,33 @@ public class DeleteDialogController extends BaseFileController {
                 thisPath = ((Folder) block.getObject()).getPath();
             }
 
+            // 调用 FileApp 中的删除方法
             int res = FileApplication.fat.delete(block);
-            if (res == 0) {
-                mainView.removeNode(mainView.getRecentNode(), thisPath);
-            } else if (res == 1) {
-            } else if (res == 2) {
+            // 删除文件夹成功，移除节点
+            if (res == 0) mainView.removeNode(mainView.getCurrentNode(), thisPath);
+            // 文件夹不为空
+            else if (res == 2) {
                 try {
-                    FileApplication.tipOpen("文件夹不为空");
+                    FileApplication.tipOpen("文件夹不为空!");
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
-            } else {
+            }
+            // 文件未关闭
+            else {
                 try {
-                    FileApplication.tipOpen("文件未关闭");
+                    FileApplication.tipOpen("文件未关闭!");
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             }
 
+            // 清空图标区域并显示更新后的图标
             mainView.controller.flowPane.getChildren().removeAll(mainView.controller.flowPane.getChildren());
-
-            mainView.addIcon(FileApplication.fat.getBlockList(mainView.recentPath), mainView.recentPath);
+            mainView.addIcon(FileApplication.fat.getBlockList(mainView.currentPath));
         });
 
+        // 当点击取消按钮时触发的事件
         this.cancelButton.setOnMouseClicked(event -> this.closeStage());
     }
-
-//    public void tipOpen(String tipString) throws Exception {
-//        Stage stage = new Stage();
-//        TipDialogApplication tipWindow = new TipDialogApplication(tipString);
-//        tipWindow.start(stage);
-//        Text text = new Text(tipString);
-//        text.setFill(javafx.scene.paint.Color.RED);
-//        text.setFont(javafx.scene.text.Font.font("宋体", 25.0D));
-//        tipWindow.controller.tipTextFlow.getChildren().add(text);
-//    }
 }
