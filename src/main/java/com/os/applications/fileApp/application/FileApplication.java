@@ -330,15 +330,14 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         // 判断是否是一个文件
         if (thisBlock.getObject() instanceof File) {
             if (fat.getOpenedFiles().size() < 5) {
-                // 如果文件未打开，标记为打开
-                if (!fat.isOpenedFile(thisBlock)) fat.addOpenedFile(thisBlock);
-
                 // 查看文件内容
                 try {
                     fileViewOpen((File) thisBlock.getObject(), thisBlock);
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
+                // 如果文件未打开，标记为打开
+                if (!fat.isOpenedFile(thisBlock)) fat.addOpenedFile(thisBlock);
             }
             // 打开文件数量已达上限（5），提示用户
             else {
