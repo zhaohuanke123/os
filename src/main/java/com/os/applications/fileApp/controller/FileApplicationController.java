@@ -2,8 +2,8 @@ package com.os.applications.fileApp.controller;
 
 import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
-import com.os.applications.processApp.processSystem.ExecutableFile;
-import com.os.applications.processApp.processSystem.ProcessManager;
+import com.os.applications.processControlApp.processSystem.ExeFile;
+import com.os.applications.processControlApp.processSystem.ProcessManager;
 import com.os.dataModels.ExecutableFileData;
 import com.os.dataModels.InstructionData;
 import com.os.utility.DataLoader;
@@ -30,7 +30,7 @@ public class FileApplicationController extends BaseFileController {
     public TreeView<String> treeView;  // 文件树视图
     public FlowPane flowPane;  // 文件和文件夹图标的容器
     public TextArea contentField;  // 显示文件内容的文本区域
-    public static Vector<ExecutableFile> executableFileList;  // 可执行文件列表
+    public static Vector<ExeFile> executableFileList;  // 可执行文件列表
     public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();  // 可执行文件数据列表
     public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();  // 文件详情数据列表
 
@@ -65,7 +65,7 @@ public class FileApplicationController extends BaseFileController {
     public void init(Stage stage) {
         super.init(stage);
         // 从进程管理器获取可执行文件列表
-        executableFileList = ProcessManager.executableFileList;
+        executableFileList = ProcessManager.exeFileList;
         // 设置文件名列
         this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         // 更新可执行文件表

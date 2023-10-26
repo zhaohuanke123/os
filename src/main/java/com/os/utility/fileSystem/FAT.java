@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.os.applications.processApp.processSystem.ExecutableFile;
+import com.os.applications.processControlApp.processSystem.ExeFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.os.applications.processApp.processSystem.ProcessManager;
+import com.os.applications.processControlApp.processSystem.ProcessManager;
 
 public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -33,14 +33,14 @@ public class FAT implements Serializable {
         this.disks[2].setBegin(true);
 
         int i;
-        for (i = 3; i < 3 + ProcessManager.executableFileList.size(); ++i) {
-            ExecutableFile f = ProcessManager.executableFileList.get(i - 3);
+        for (i = 3; i < 3 + ProcessManager.exeFileList.size(); ++i) {
+            ExeFile f = ProcessManager.exeFileList.get(i - 3);
             this.disks[i] = new Disk(i, -1, "可执行文件", f);
             this.disks[i].allocBlock(-1, "可执行文件", f, true);
             this.disks[i].setBegin(true);
         }
 
-        for (i = 3 + ProcessManager.executableFileList.size(); i < 256; ++i) {
+        for (i = 3 + ProcessManager.exeFileList.size(); i < 256; ++i) {
             this.disks[i] = new Disk(i, 0, "空", null);
         }
 
@@ -98,7 +98,7 @@ public class FAT implements Serializable {
             canName = true;
             folderName = folderName + index;
 
-            for (num = 3 + ProcessManager.executableFileList.size(); num < this.disks.length; ++num) {
+            for (num = 3 + ProcessManager.exeFileList.size(); num < this.disks.length; ++num) {
                 if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件夹")) {
                     parent = (Folder) this.disks[num].getObject();
                     if (path.equals(parent.getLocation()) && folderName.equals(parent.getName())) {
@@ -201,7 +201,7 @@ public class FAT implements Serializable {
                     canName1 = true;
                     fileName = fileName + index;
 
-                    for (newLength = 3 + ProcessManager.executableFileList.size(); newLength < this.disks.length; ++newLength) {
+                    for (newLength = 3 + ProcessManager.exeFileList.size(); newLength < this.disks.length; ++newLength) {
                         if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
                             File file1 = (File) this.disks[newLength].getObject();
                             if (path.equals(file1.getLocation()) && fileName.equals(file1.getName())) {
@@ -239,7 +239,7 @@ public class FAT implements Serializable {
                         canName2 = true;
                         fileName = fileName + index;
 
-                        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+                        for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
                             if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
                                 File file2 = (File) this.disks[i].getObject();
                                 if (path.equals(file2.getLocation()) && fileName.equals(file2.getName())) {
@@ -268,7 +268,7 @@ public class FAT implements Serializable {
     }
 
     public int searchEmptyDiskBlock() {
-        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+        for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
             if (this.disks[i].isFree()) {
                 return i;
             }
@@ -345,7 +345,7 @@ public class FAT implements Serializable {
     public List<Folder> getFolders(String path) {
         List<Folder> list = new ArrayList<>();
 
-        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+        for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
             if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof Folder && ((Folder) this.disks[i].getObject()).getLocation().equals(path)) {
                 list.add((Folder) this.disks[i].getObject());
             }
@@ -358,7 +358,7 @@ public class FAT implements Serializable {
         List<Disk> List = new ArrayList<>();
 
         int n;
-        for (n = 3 + ProcessManager.executableFileList.size(); n < this.disks.length; ++n) {
+        for (n = 3 + ProcessManager.exeFileList.size(); n < this.disks.length; ++n) {
             if (!this.disks[n].isFree() && this.disks[n].getObject() instanceof Folder && ((Folder) this.disks[n].getObject()).getLocation().equals(path) && this.disks[n].getBegin()) {
                 List.add(this.disks[n]);
             }
@@ -366,7 +366,7 @@ public class FAT implements Serializable {
 
         n = 0;
 
-        for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+        for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
             if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && ((File) this.disks[i].getObject()).getLocation().equals(path) && this.disks[i].getBegin()) {
                 List.add(this.disks[i]);
                 ++n;
@@ -443,7 +443,7 @@ public class FAT implements Serializable {
             }
 
             // 清空与该文件关联的磁盘块
-            for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+            for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
                 if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
                     this.disks[i].clearBlock();
                 }
@@ -458,7 +458,7 @@ public class FAT implements Serializable {
             String folderPath = ((Folder) block.getObject()).getLocation() + "\\" + ((Folder) block.getObject()).getName();
             int index = 0;
 
-            for (int i = 3 + ProcessManager.executableFileList.size(); i < this.disks.length; ++i) {
+            for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
                 if (!this.disks[i].isFree()) {
                     Object obj = this.disks[i].getObject();
                     if (this.disks[i].getType().equals("文件夹")) {
