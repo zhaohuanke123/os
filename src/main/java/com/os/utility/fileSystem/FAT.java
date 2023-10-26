@@ -414,44 +414,51 @@ public class FAT implements Serializable {
     }
 
     public int delete(Disk block) {
-        int i;
+        // 删除文件
         if (block.getObject() instanceof File) {
-            if (this.isOpenedFile(block)) {
-                return 3;
-            } else {
-                File thisFile = (File) block.getObject();
-                Folder parent = thisFile.getParent();
-                if (parent != null) {
-                    parent.setCatalogNum(parent.getCatalogNum() - 1);
-                    if (parent.getCatalogNum() % 8 == 0) {
-                        i = parent.getCatalogNum() / 8;
-                    } else {
-                        i = parent.getCatalogNum() / 8 + 1;
-                    }
+            int index;
+            // 如果文件已经打开，返回3表示文件未关闭
+            if (this.isOpenedFile(block)) return 3;
 
-                    this.reallocBlocks(i, this.disks[parent.getDiskNum()]);
-                    parent.removeChildren(thisFile);
+            File thisFile = (File) block.getObject();
+            Folder parent = thisFile.getParent();
+            if (parent != null) {
+                // 减少父文件夹的目录项数量
+                parent.setCatalogNum(parent.getCatalogNum() - 1);
+                if (parent.getCatalogNum() % 8 == 0) index = parent.getCatalogNum() / 8;
+                else index = parent.getCatalogNum() / 8 + 1;
+
+                // 重新分配块
+                this.reallocBlocks(index, this.disks[parent.getDiskNum()]);
+
+                // 从父文件夹中移除子文件
+                parent.removeChildren(thisFile);
+                // 更新父文件夹的大小
+                parent.setSize(getFolderSize(parent));
+                // 更新所有祖先文件夹的大小
+                while (parent.hasParent()) {
+                    parent = parent.getParent();
                     parent.setSize(getFolderSize(parent));
-
-                    while (parent.hasParent()) {
-                        parent = parent.getParent();
-                        parent.setSize(getFolderSize(parent));
-                    }
                 }
-
-                for (i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
-                    if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
-                        this.disks[i].clearBlock();
-                    }
-                }
-
-                return 1;
             }
-        } else {
+
+            // 清空与该文件关联的磁盘块
+            for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
+                if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
+                    this.disks[i].clearBlock();
+                }
+            }
+
+            // 返回1表示文件删除成功
+            return 1;
+        }
+
+        // 删除文件夹
+        else {
             String folderPath = ((Folder) block.getObject()).getLocation() + "\\" + ((Folder) block.getObject()).getName();
             int index = 0;
 
-            for (i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
+            for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
                 if (!this.disks[i].isFree()) {
                     Object obj = this.disks[i].getObject();
                     if (this.disks[i].getType().equals("文件夹")) {
@@ -471,22 +478,26 @@ public class FAT implements Serializable {
             Folder thisFolder = (Folder) block.getObject();
             Folder parent = thisFolder.getParent();
             if (parent != null) {
-                parent.removeChildren(thisFolder);
-                parent.setSize(getFolderSize(parent));
+                // 减少父文件夹的目录项数量
                 parent.setCatalogNum(parent.getCatalogNum() - 1);
+                // 从父文件夹中移除子文件夹
+                parent.removeChildren(thisFolder);
+                // 更新父文件夹的大小
+                parent.setSize(getFolderSize(parent));
 
                 int countBlock;
-                if (parent.getCatalogNum() % 8 == 0) {
-                    countBlock = parent.getCatalogNum() / 8;
-                } else {
-                    countBlock = parent.getCatalogNum() / 8 + 1;
-                }
+                if (parent.getCatalogNum() % 8 == 0) countBlock = parent.getCatalogNum() / 8;
+                else countBlock = parent.getCatalogNum() / 8 + 1;
 
+                // 重新分配块
                 this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
             }
 
-            this.paths.remove(this.getPath(folderPath));
+            // 移除该文件夹的路径，并清空关联的磁盘块
+            this.removePath(this.getPath(folderPath));
             this.disks[index].clearBlock();
+
+            // 返回0表示文件夹删除成功
             return 0;
         }
     }
