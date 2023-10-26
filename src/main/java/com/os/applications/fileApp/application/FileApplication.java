@@ -582,6 +582,11 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             });
         }
 
+        /**
+         *  重写updateItem方法, 重写该方法是为了在编辑时显示TextField, 在非编辑时显示Label
+         * @param item 传入的item
+         * @param empty 是否为空
+         */
         public void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             if (empty) {

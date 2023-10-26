@@ -9,7 +9,7 @@ import com.os.applications.processControlApp.processSystem.ProcessManager;
 import com.os.applications.processControlApp.processSystem.ProcessControlThread;
 import com.os.utility.sceneManager.SceneManager;
 import com.os.utility.uiUtil.CompSet;
-import com.os.utility.uiUtil.UIThread;
+import com.os.utility.uiUtil.UIUpdateThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -77,7 +77,7 @@ public class MainController implements Initializable {
     private final TimeModel timeModel = new TimeModel();
 
     public ProcessControlThread processControlThread = new ProcessControlThread();
-    public UIThread uiThread = new UIThread();
+    public UIUpdateThread uiUpdateThread = new UIUpdateThread();
 
     Scene mainWindowScene = null;
     Stage primaryStage = null;
@@ -242,8 +242,8 @@ public class MainController implements Initializable {
 
     // 初始化ui线程
     private void uiThreadInit() {
-        this.uiThread.init();
-        this.uiThread.start();
+        this.uiUpdateThread.init();
+        this.uiUpdateThread.start();
     }
 
     // 初始化进程线程

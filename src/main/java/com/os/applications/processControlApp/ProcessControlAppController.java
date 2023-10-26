@@ -156,7 +156,7 @@ public class ProcessControlAppController extends BaseController {
             ProcessManager.speed = newValue.intValue();
         });
 
-        MainController.getInstance().uiThread.processControlAppController = this;
+        MainController.getInstance().uiUpdateThread.processControlAppController = this;
         ProcessControlThread.processControlAppController = this;
     }
 

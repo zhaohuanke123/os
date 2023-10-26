@@ -10,7 +10,7 @@ import com.os.applications.processControlApp.processSystem.ExeFile;
 import com.os.applications.processControlApp.processSystem.*;
 import com.os.applications.processControlApp.processSystem.Process;
 
-public class UIThread extends Thread {
+public class UIUpdateThread extends Thread {
     public Vector<Process> runProcessList;
     public Process runProcess = null;
     public Vector<Process> creatingProcessList;
