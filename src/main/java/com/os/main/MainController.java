@@ -2,14 +2,14 @@ package com.os.main;
 
 import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.resourcesOccupancyApp.ResourcesOccupancyApp;
-import com.os.applications.processApp.ProcessApp;
+import com.os.applications.processControlApp.ProcessControlApp;
 import com.os.utility.fileSystem.FAT;
-import com.os.utility.fileSystem.OccupancyManager;
-import com.os.applications.processApp.processSystem.ProcessManager;
-import com.os.applications.processApp.processSystem.ProcessScheduleThread;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
+import com.os.applications.processControlApp.processSystem.ProcessManager;
+import com.os.applications.processControlApp.processSystem.ProcessControlThread;
 import com.os.utility.sceneManager.SceneManager;
 import com.os.utility.uiUtil.CompSet;
-import com.os.utility.uiUtil.UIThread;
+import com.os.utility.uiUtil.UIUpdateThread;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,8 +76,8 @@ public class MainController implements Initializable {
     private Button deskButton;  // 返回桌面按钮
     private final TimeModel timeModel = new TimeModel();
 
-    public ProcessScheduleThread processScheduleThread = new ProcessScheduleThread();
-    public UIThread uiThread = new UIThread();
+    public ProcessControlThread processControlThread = new ProcessControlThread();
+    public UIUpdateThread uiUpdateThread = new UIUpdateThread();
 
     Scene mainWindowScene = null;
     Stage primaryStage = null;
@@ -94,7 +94,7 @@ public class MainController implements Initializable {
     public void init(Scene scene, Stage stage) throws URISyntaxException {
         _instance = this;
 
-        appButtonDict.put(ProcessApp.class.getName(), processButton);
+        appButtonDict.put(ProcessControlApp.class.getName(), processButton);
         appButtonDict.put(ResourcesOccupancyApp.class.getName(), occupancyButton);
         appButtonDict.put(FileApplication.class.getName(), fileManagerButton);
 
@@ -107,7 +107,7 @@ public class MainController implements Initializable {
         this.initBackGround();
         this.iconInit();
         this.timeInit();
-        OccupancyManager.init();
+        ResourcesOccupancyManager.init();
         this.processThreadInit();
         FileApplication.loadData();
         this.uiThreadInit();
@@ -242,15 +242,15 @@ public class MainController implements Initializable {
 
     // 初始化ui线程
     private void uiThreadInit() {
-        this.uiThread.init();
-        this.uiThread.start();
+        this.uiUpdateThread.init();
+        this.uiUpdateThread.start();
     }
 
     // 初始化进程线程
     private void processThreadInit() {
         ProcessManager.init();
-        this.processScheduleThread.Init();
-        this.processScheduleThread.start();
+        this.processControlThread.Init();
+        this.processControlThread.start();
     }
 
     // 返回桌面

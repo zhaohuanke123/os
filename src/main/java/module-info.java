@@ -10,8 +10,8 @@ module os {
     exports com.os.applications.fileApp.controller;
     opens com.os.applications.resourcesOccupancyApp to javafx.fxml;
     exports com.os.applications.resourcesOccupancyApp;
-    opens com.os.applications.processApp to javafx.fxml;
-    exports com.os.applications.processApp;
+    opens com.os.applications.processControlApp to javafx.fxml;
+    exports com.os.applications.processControlApp;
     opens com.os.dataModels to javafx.fxml;
     exports com.os.dataModels;
     opens com.os.utility to javafx.fxml;
@@ -22,8 +22,8 @@ module os {
     exports com.os.utility.fileSystem;
     opens com.os.utility.uiUtil to javafx.fxml;
     exports com.os.utility.uiUtil;
-    opens com.os.applications.processApp.processSystem to javafx.fxml;
-    exports com.os.applications.processApp.processSystem;
+    opens com.os.applications.processControlApp.processSystem to javafx.fxml;
+    exports com.os.applications.processControlApp.processSystem;
     opens com.os.applications.fileApp.fxmls to javafx.fxml;
     opens com.os.applications.fileApp.css to javafx.fxml;
     opens com.os.applications.fileApp.res to javafx.fxml;
@@ -32,6 +32,8 @@ module os {
     opens com.os.utility.sceneManager to javafx.fxml;
     exports com.os;
     opens com.os to javafx.fxml;
-    exports com.os.applications.processApp.models;
-    opens com.os.applications.processApp.models to javafx.fxml;
+    exports com.os.applications.processControlApp.models;
+    opens com.os.applications.processControlApp.models to javafx.fxml;
+    exports com.os.applications.resourcesOccupancyApp.models;
+    opens com.os.applications.resourcesOccupancyApp.models to javafx.fxml;
 }

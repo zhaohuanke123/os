@@ -21,7 +21,7 @@
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <left>
             <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
-                  prefWidth="134.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
+                  prefWidth="134.0" stylesheets="@../processControlApp/ProcessControlApp.css" BorderPane.alignment="CENTER">
                 <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0"
                        text="占用管理器" HBox.hgrow="ALWAYS">
                     <graphic>
@@ -38,7 +38,7 @@
         <right>
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT"
                   nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
-                  spacing="10.0" stylesheets="@../processApp/ProcessApp.css" BorderPane.alignment="CENTER">
+                  spacing="10.0" stylesheets="@../processControlApp/ProcessControlApp.css" BorderPane.alignment="CENTER">
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#showDescription" prefHeight="35.0" prefWidth="35.0">
                     <graphic>
@@ -50,7 +50,7 @@
                 </Button>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" onMouseClicked="#minimizeStage" prefHeight="35.0" prefWidth="35.0"
-                        stylesheets="@../processApp/ProcessApp.css">
+                        stylesheets="@../processControlApp/ProcessControlApp.css">
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
@@ -60,7 +60,7 @@
                 </Button>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="774.0"
                         layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeStage" prefHeight="0.0"
-                        stylesheets="@../processApp/ProcessApp.css">
+                        stylesheets="@../processControlApp/ProcessControlApp.css">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../img/close.png"/>

@@ -1,4 +1,4 @@
-package com.os.utility.fileSystem;
+package com.os.applications.resourcesOccupancyApp.models;
 
 import java.util.Arrays;
 import java.util.Vector;
@@ -6,7 +6,7 @@ import java.util.Vector;
 /**
  * {@code @description:} 占用管理器,用于管理内存、设备、PCB
  */
-public class OccupancyManager {
+public class ResourcesOccupancyManager {
     public static final int MEMORY_SIZE = 512;
     public static final int A_DEVICE_SIZE = 2;
     public static final int B_DEVICE_SIZE = 3;
@@ -54,7 +54,7 @@ public class OccupancyManager {
         freePcbList.add(num);
     }
 
-    public static MemoryArea applyMemory(int num) {
+    public static MemoryBlock applyMemory(int num) {
         int series = 0;
 
         for (int i = 0; i < allMemory.length; ++i) {
@@ -70,19 +70,19 @@ public class OccupancyManager {
                 for (int j = start; j <= i; ++j) {
                     allMemory[j] = 1;
                 }
-                return new MemoryArea(start, i);
+                return new MemoryBlock(start, i);
             }
         }
 
         return null;
     }
 
-    public static boolean retrieveMemory(MemoryArea memoryArea) {
-        if (memoryArea == null) {
+    public static boolean retrieveMemory(MemoryBlock memoryBlock) {
+        if (memoryBlock == null) {
             return false;
         } else {
-            int start = memoryArea.start;
-            int end = memoryArea.end;
+            int start = memoryBlock.start;
+            int end = memoryBlock.end;
 
             for (int i = start; i <= end; ++i) {
                 allMemory[i] = 0;

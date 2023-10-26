@@ -1,6 +1,6 @@
 package com.os.dataModels;
 
-import com.os.applications.processApp.processSystem.Instruction;
+import com.os.applications.processControlApp.processSystem.Instruction;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

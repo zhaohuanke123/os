@@ -1,4 +1,4 @@
-package com.os.applications.processApp;
+package com.os.applications.processControlApp;
 
 import com.os.applications.BaseApp;
 import javafx.application.Application;
@@ -6,15 +6,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ProcessApp extends BaseApp<ProcessAppController> {
+public class ProcessControlApp extends BaseApp<ProcessControlAppController> {
 
     public static void main(String[] args) {
         Application.launch(args);
     }
 
-    public ProcessApp()
+    public ProcessControlApp()
     {
-        super("/com/os/applications/processApp/ProcessApp.fxml",
+        super("/com/os/applications/processControlApp/ProcessControlApp.fxml",
                 "/com/os/img/process.png",
                 "进程管理器",
                 1100.0,

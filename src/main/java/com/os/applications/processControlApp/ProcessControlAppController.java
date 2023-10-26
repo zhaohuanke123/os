@@ -1,13 +1,13 @@
-package com.os.applications.processApp;
+package com.os.applications.processControlApp;
 
 import com.os.applications.BaseController;
 import com.os.applications.fileApp.application.TipDialogApplication;
-import com.os.applications.processApp.models.ProcessDetailData;
+import com.os.applications.processControlApp.models.ProcessData;
 import com.os.main.MainController;
 import com.os.utility.DataLoader;
-import com.os.applications.processApp.processSystem.Process;
-import com.os.applications.processApp.processSystem.ProcessManager;
-import com.os.applications.processApp.processSystem.ProcessScheduleThread;
+import com.os.applications.processControlApp.processSystem.Process;
+import com.os.applications.processControlApp.processSystem.ProcessManager;
+import com.os.applications.processControlApp.processSystem.ProcessControlThread;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -26,15 +26,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class ProcessAppController extends BaseController {
+public class ProcessControlAppController extends BaseController {
     public AnchorPane mainPane;
     public AnchorPane mainPane1;
     public VBox creatProButtons;
     public Slider creatProSlider;
     @FXML
-    private TableView<ProcessDetailData> processTable;
+    private TableView<ProcessData> processTable;
     @FXML
-    private TableView<ProcessDetailData> processTable1;
+    private TableView<ProcessData> processTable1;
     @FXML
     private TableColumn<?, ?> processName;
     @FXML
@@ -99,10 +99,10 @@ public class ProcessAppController extends BaseController {
         this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
 
         //继续或者停止新建
-        ProcessScheduleThread.controlButton = this.continueButton;
+        ProcessControlThread.controlButton = this.continueButton;
         continueButton.setSelected(true);
 
-        for (var i : ProcessScheduleThread.executableFileList) {
+        for (var i : ProcessControlThread.exeFileList) {
             Button button = new Button(i.getName());
             button.setDisable(true);
             Tooltip tooltip = new Tooltip(i.toString());
@@ -111,12 +111,12 @@ public class ProcessAppController extends BaseController {
             creatProButtons.setSpacing(10);
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                    if (!ProcessScheduleThread.executableFileList.isEmpty()) {
-                        if (ProcessScheduleThread.creatingProcessList.size() < 3) {
-                            Process newProcess = new Process(ProcessScheduleThread.processNum, i, i.id);
-                            ProcessScheduleThread.creatingProcessList.add(newProcess);
-                            ProcessScheduleThread.allProcessList.add(newProcess);
-                            ++ProcessScheduleThread.processNum;
+                    if (!ProcessControlThread.exeFileList.isEmpty()) {
+                        if (ProcessControlThread.creatingProcessList.size() < 3) {
+                            Process newProcess = new Process(ProcessControlThread.processNum, i, i.id);
+                            ProcessControlThread.creatingProcessList.add(newProcess);
+                            ProcessControlThread.allProcessList.add(newProcess);
+                            ++ProcessControlThread.processNum;
                             newProcess.Create();
                         } else {
                             TipDialogApplication tipWindow = new TipDialogApplication("创建进程失败，创建进程数量已达上限", 500, 500);
@@ -156,30 +156,30 @@ public class ProcessAppController extends BaseController {
             ProcessManager.speed = newValue.intValue();
         });
 
-        MainController.getInstance().uiThread.processAppController = this;
-        ProcessScheduleThread.processAppController = this;
+        MainController.getInstance().uiUpdateThread.processControlAppController = this;
+        ProcessControlThread.processControlAppController = this;
     }
 
     public void Update() {
         this.processTableUpdate();
     }
 
-    public ArrayList<ProcessDetailData> processDetailDataArrayList = new ArrayList<>();
-    public ArrayList<ProcessDetailData> processDetailDataArrayList1 = new ArrayList<>();
+    public ArrayList<ProcessData> processDataArrayList = new ArrayList<>();
+    public ArrayList<ProcessData> processDataArrayList1 = new ArrayList<>();
 
     //进行数据更新
     private void processTableUpdate() {
 
         Vector<?> updateList = (Vector<?>) ProcessManager.allProcessList.clone();
         //获取数据
-        DataLoader.processDetailDataLoad(processDetailDataArrayList, (Vector<Process>) updateList, "当前进程");
+        DataLoader.processDetailDataLoad(processDataArrayList, (Vector<Process>) updateList, "当前进程");
         Platform.runLater(() ->
-                processTable.setItems(FXCollections.observableArrayList(processDetailDataArrayList)));
+                processTable.setItems(FXCollections.observableArrayList(processDataArrayList)));
 
         //获取数据
-        DataLoader.processDetailDataLoad(processDetailDataArrayList1, (Vector<Process>) updateList, "销毁进程");
+        DataLoader.processDetailDataLoad(processDataArrayList1, (Vector<Process>) updateList, "销毁进程");
         Platform.runLater(() ->
-                processTable1.setItems(FXCollections.observableArrayList(processDetailDataArrayList1)));
+                processTable1.setItems(FXCollections.observableArrayList(processDataArrayList1)));
 
     }
 

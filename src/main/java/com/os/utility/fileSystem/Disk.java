@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-import com.os.applications.processApp.processSystem.ExecutableFile;
+import com.os.applications.processControlApp.processSystem.ExeFile;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -50,8 +50,8 @@ public class Disk implements Serializable {
 
     private void setObjectP() {
         this.objectP.set(this.object == null ? "" : this.object.toString());
-        if (this.object instanceof ExecutableFile) {
-            this.objectP.set(((ExecutableFile) this.object).getName());
+        if (this.object instanceof ExeFile) {
+            this.objectP.set(((ExeFile) this.object).getName());
         }
 
     }
@@ -152,7 +152,7 @@ public class Disk implements Serializable {
         if (object instanceof File) {
             return object.toString();
         } else {
-            return object instanceof Folder ? object.toString() : ((ExecutableFile) object).getName();
+            return object instanceof Folder ? object.toString() : ((ExeFile) object).getName();
         }
     }
 }

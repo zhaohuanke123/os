@@ -1,4 +1,4 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
-import com.os.utility.fileSystem.MemoryArea;
-import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.MemoryBlock;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 
 public class Process {
     public int name;
@@ -17,23 +17,23 @@ public class Process {
     public int PC;
     public int AX;
     public int pcbID;
-    public ExecutableFile executableFile;
+    public ExeFile exeFile;
     public int memory;
-    public MemoryArea memoryArea;
+    public MemoryBlock memoryBlock;
     public int device;
     public int deviceId;
     public int deviceRemainTime;
     public int whichFile;
 
-    public Process(int name, ExecutableFile executableFile, int whichFile) {
+    public Process(int name, ExeFile exeFile, int whichFile) {
         this.name = name;
         this.state = 0;
         this.PC = 0;
         this.AX = 0;
         this.pcbID = -1;
-        this.executableFile = executableFile;
-        this.memory = executableFile.getInstructionArray().size();
-        this.memoryArea = null;
+        this.exeFile = exeFile;
+        this.memory = exeFile.getInstructionArray().size();
+        this.memoryBlock = null;
         this.device = -1;
         this.deviceId = -1;
         this.deviceRemainTime = 0;
@@ -43,7 +43,7 @@ public class Process {
     public void Create() {
         if (this.pcbID == -1) {
             int newPcb;
-            newPcb = OccupancyManager.applyFreePcb();
+            newPcb = ResourcesOccupancyManager.applyFreePcb();
             if (newPcb == -1) {
                 return;
             }
@@ -51,14 +51,14 @@ public class Process {
             this.pcbID = newPcb;
         }
 
-        if (this.memoryArea == null) {
-            MemoryArea newMemoryArea;
-            newMemoryArea = OccupancyManager.applyMemory(this.memory);
-            if (newMemoryArea == null) {
+        if (this.memoryBlock == null) {
+            MemoryBlock newMemoryBlock;
+            newMemoryBlock = ResourcesOccupancyManager.applyMemory(this.memory);
+            if (newMemoryBlock == null) {
                 return;
             }
 
-            this.memoryArea = newMemoryArea;
+            this.memoryBlock = newMemoryBlock;
         }
 
         this.state = 1;
@@ -68,12 +68,12 @@ public class Process {
 
     public boolean Destroy() {
         this.state = -1;
-        boolean isSucceed = OccupancyManager.retrieveMemory(this.memoryArea);
+        boolean isSucceed = ResourcesOccupancyManager.retrieveMemory(this.memoryBlock);
 
         if (!isSucceed) {
             return false;
         } else {
-            OccupancyManager.retrievePcb(this.pcbID);
+            ResourcesOccupancyManager.retrievePcb(this.pcbID);
             isSucceed = ProcessManager.runProcessList.remove(this);
             return isSucceed;
         }
@@ -99,7 +99,7 @@ public class Process {
     public int CPU() {
         this.state = 2;
 
-        Instruction instruction = this.executableFile.instructionArray.get(this.PC);
+        Instruction instruction = this.exeFile.instructionArray.get(this.PC);
         ++this.PC;
 
         if (instruction.category == 0) {
@@ -114,7 +114,7 @@ public class Process {
         } else if (instruction.category == 3) {
             this.device = instruction.operand0;
             this.deviceRemainTime = instruction.operand1;
-            int deviceId = OccupancyManager.applyDevice(this.device); // 尝试申请设备
+            int deviceId = ResourcesOccupancyManager.applyDevice(this.device); // 尝试申请设备
             if (deviceId == -1) { // 申请失败
                 this.Block();
             } else { // 申请成功

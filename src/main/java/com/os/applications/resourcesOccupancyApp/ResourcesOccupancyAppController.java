@@ -5,7 +5,7 @@ import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;
-import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 import com.os.utility.uiUtil.CompSet;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -67,12 +67,12 @@ public class ResourcesOccupancyAppController extends BaseController {
         double percent;
         Region region;
 
-        for (int i = 0; i < OccupancyManager.MEMORY_SIZE; ++i) {
+        for (int i = 0; i < ResourcesOccupancyManager.MEMORY_SIZE; ++i) {
             height = boxes2[0].getHeight();
             width = boxes2[0].getWidth();
 
             region = new Region();
-            percent = (1.0 / OccupancyManager.MEMORY_SIZE);
+            percent = (1.0 / ResourcesOccupancyManager.MEMORY_SIZE);
             CompSet.setCompFixSize(region, percent * width, height);
             this.memoryBox2.getChildren().add(region);
         }
@@ -88,7 +88,7 @@ public class ResourcesOccupancyAppController extends BaseController {
         }
 
         Label label;
-        for (int i = 0; i < OccupancyManager.All_DEVICE_SIZE; ++i) {
+        for (int i = 0; i < ResourcesOccupancyManager.All_DEVICE_SIZE; ++i) {
             height = boxes2[2].getHeight();
             width = boxes2[2].getWidth();
 
@@ -102,7 +102,7 @@ public class ResourcesOccupancyAppController extends BaseController {
                 label.setText("C");
             }
 
-            percent = (1.0 / OccupancyManager.All_DEVICE_SIZE);
+            percent = (1.0 / ResourcesOccupancyManager.All_DEVICE_SIZE);
             label.setPrefSize(percent * width, height);
             label.setMinSize(percent * width, height);
             label.setMaxSize(percent * width, height);
@@ -110,14 +110,14 @@ public class ResourcesOccupancyAppController extends BaseController {
             this.deviceBox2.getChildren().add(label);
         }
 
-        for (int i = 0; i < OccupancyManager.PCB_SIZE; ++i) {
+        for (int i = 0; i < ResourcesOccupancyManager.PCB_SIZE; ++i) {
             height = boxes2[3].getHeight();
             width = boxes2[3].getWidth();
             label = new Label();
             label.setId("emptyBox");
             label.setText(i + "");
 
-            percent = (1.0 / OccupancyManager.PCB_SIZE);
+            percent = (1.0 / ResourcesOccupancyManager.PCB_SIZE);
             label.setPrefSize(percent * width, height);
             label.setMinSize(percent * width, height);
             label.setMaxSize(percent * width, height);
@@ -125,7 +125,7 @@ public class ResourcesOccupancyAppController extends BaseController {
             this.pcbBox2.getChildren().add(label);
         }
 
-        MainController.getInstance().uiThread.occupancyAppController = this;
+        MainController.getInstance().uiUpdateThread.occupancyAppController = this;
 
         chartBeans = new ChartBean[]{
                 new ChartBean(memoryChart, "内存使用情况/%", "时间"),
@@ -147,13 +147,13 @@ public class ResourcesOccupancyAppController extends BaseController {
     private void occupancyTextUpdate() {
         if (textLabel != null) {
             Platform.runLater(() -> {
-                int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
-                double percent = (double) numOfBusyMemory / (double) OccupancyManager.allMemory.length * 100.0;
+                int numOfBusyMemory = ResourcesOccupancyManager.getNumOfBusyMemory();
+                double percent = (double) numOfBusyMemory / (double) ResourcesOccupancyManager.allMemory.length * 100.0;
                 String result = String.format("%.2f", percent);
-                textLabel[0].setText(numOfBusyMemory + "B/" + OccupancyManager.allMemory.length + "B(" + result + "%)");
+                textLabel[0].setText(numOfBusyMemory + "B/" + ResourcesOccupancyManager.allMemory.length + "B(" + result + "%)");
 
-                chartBeans[0].addData(MainController.getInstance().uiThread.time,
-                        numOfBusyMemory * 100 / OccupancyManager.allMemory.length);
+                chartBeans[0].addData(MainController.getInstance().uiUpdateThread.time,
+                        numOfBusyMemory * 100 / ResourcesOccupancyManager.allMemory.length);
 
                 if (FileApplication.fat != null) {
                     int numOfBusyDisk = FileApplication.fat.checkNumOfBusyDisk();
@@ -162,25 +162,25 @@ public class ResourcesOccupancyAppController extends BaseController {
                     result = String.format("%.2f", percent);
                     textLabel[1].setText(numOfBusyDisk + "/" + FAT.DISK_NUM + "(" + result + "%)");
 
-                    chartBeans[1].addData(MainController.getInstance().uiThread.time,
+                    chartBeans[1].addData(MainController.getInstance().uiUpdateThread.time,
                             numOfBusyDisk * 100 / FAT.DISK_NUM);
                 }
 
-                int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
-                percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE * 100.0;
+                int busyDeviceNum = ResourcesOccupancyManager.getBusyDeviceNum();
+                percent = (double) busyDeviceNum / (double) ResourcesOccupancyManager.All_DEVICE_SIZE * 100.0;
                 result = String.format("%.2f", percent);
-                textLabel[2].setText(busyDeviceNum + "/" + OccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
+                textLabel[2].setText(busyDeviceNum + "/" + ResourcesOccupancyManager.All_DEVICE_SIZE + "(" + result + "%)");
 
-                chartBeans[2].addData(MainController.getInstance().uiThread.time,
-                        busyDeviceNum * 100 / OccupancyManager.All_DEVICE_SIZE);
+                chartBeans[2].addData(MainController.getInstance().uiUpdateThread.time,
+                        busyDeviceNum * 100 / ResourcesOccupancyManager.All_DEVICE_SIZE);
 
-                int numOfBusyPcb = 10 - OccupancyManager.freePcbList.size();
-                int pcbSize = OccupancyManager.PCB_SIZE;
+                int numOfBusyPcb = 10 - ResourcesOccupancyManager.freePcbList.size();
+                int pcbSize = ResourcesOccupancyManager.PCB_SIZE;
                 percent = (double) numOfBusyPcb / (double) pcbSize * 100.0;
                 result = String.format("%.2f", percent);
                 textLabel[3].setText(numOfBusyPcb + "/" + pcbSize + "(" + result + "%)");
 
-                chartBeans[3].addData(MainController.getInstance().uiThread.time,
+                chartBeans[3].addData(MainController.getInstance().uiUpdateThread.time,
                         numOfBusyPcb * 100 / pcbSize);
             });
         }
@@ -188,12 +188,12 @@ public class ResourcesOccupancyAppController extends BaseController {
 
     private void occupancyBoxes1Update() {
         if (boxes1 != null) {
-            int numOfBusyMemory = OccupancyManager.getNumOfBusyMemory();
+            int numOfBusyMemory = ResourcesOccupancyManager.getNumOfBusyMemory();
 
             double height = boxes1[0].getHeight() - 2.0;
             double width = boxes1[0].getWidth() - 2.0;
             Region region = (Region) boxes1[0].getChildren().get(0);
-            double percent = (double) numOfBusyMemory / (double) OccupancyManager.MEMORY_SIZE;
+            double percent = (double) numOfBusyMemory / (double) ResourcesOccupancyManager.MEMORY_SIZE;
             CompSet.setCompFixSize(region, width, percent * height);
 
             if (FileApplication.fat != null) {
@@ -205,17 +205,17 @@ public class ResourcesOccupancyAppController extends BaseController {
                 CompSet.setCompFixSize(region, width, percent * height);
             }
 
-            int busyDeviceNum = OccupancyManager.getBusyDeviceNum();
+            int busyDeviceNum = ResourcesOccupancyManager.getBusyDeviceNum();
             height = boxes1[2].getHeight() - 2.0;
             width = boxes1[2].getWidth() - 2.0;
-            percent = (double) busyDeviceNum / (double) OccupancyManager.All_DEVICE_SIZE;
+            percent = (double) busyDeviceNum / (double) ResourcesOccupancyManager.All_DEVICE_SIZE;
             region = (Region) boxes1[2].getChildren().get(0);
             CompSet.setCompFixSize(region, width, percent * height);
 
-            int numOfBusyPcb = OccupancyManager.PCB_SIZE - OccupancyManager.freePcbList.size();
+            int numOfBusyPcb = ResourcesOccupancyManager.PCB_SIZE - ResourcesOccupancyManager.freePcbList.size();
             height = boxes1[3].getHeight() - 2.0;
             width = boxes1[3].getWidth() - 2.0;
-            percent = (double) numOfBusyPcb / (double) OccupancyManager.PCB_SIZE;
+            percent = (double) numOfBusyPcb / (double) ResourcesOccupancyManager.PCB_SIZE;
             region = (Region) boxes1[3].getChildren().get(0);
             CompSet.setCompFixSize(region, width, percent * height);
         }
@@ -225,8 +225,8 @@ public class ResourcesOccupancyAppController extends BaseController {
         if (boxes2 != null) {
             Platform.runLater(() -> {
 
-                for (int memory_index = 0; memory_index < OccupancyManager.MEMORY_SIZE; ++memory_index) {
-                    if (OccupancyManager.allMemory[memory_index] == 0) {
+                for (int memory_index = 0; memory_index < ResourcesOccupancyManager.MEMORY_SIZE; ++memory_index) {
+                    if (ResourcesOccupancyManager.allMemory[memory_index] == 0) {
                         boxes2[0].getChildren().get(memory_index).setId("emptyBox");
                     } else {
                         boxes2[0].getChildren().get(memory_index).setId("memoryInBox1");
@@ -243,24 +243,24 @@ public class ResourcesOccupancyAppController extends BaseController {
                     }
                 }
 
-                for (int a_device_index = 0; a_device_index < OccupancyManager.A_DEVICE_SIZE; ++a_device_index) {
-                    if (OccupancyManager.aDevice[a_device_index] == 0) {
+                for (int a_device_index = 0; a_device_index < ResourcesOccupancyManager.A_DEVICE_SIZE; ++a_device_index) {
+                    if (ResourcesOccupancyManager.aDevice[a_device_index] == 0) {
                         boxes2[2].getChildren().get(a_device_index).setId("emptyBox");
                     } else {
                         boxes2[2].getChildren().get(a_device_index).setId("deviceInBox1");
                     }
                 }
 
-                for (int b_device_index = 0; b_device_index < OccupancyManager.B_DEVICE_SIZE; ++b_device_index) {
-                    if (OccupancyManager.bDevice[b_device_index] == 0) {
+                for (int b_device_index = 0; b_device_index < ResourcesOccupancyManager.B_DEVICE_SIZE; ++b_device_index) {
+                    if (ResourcesOccupancyManager.bDevice[b_device_index] == 0) {
                         boxes2[2].getChildren().get(2 + b_device_index).setId("emptyBox");
                     } else {
                         boxes2[2].getChildren().get(2 + b_device_index).setId("deviceInBox1");
                     }
                 }
 
-                for (int c_device_index = 0; c_device_index < OccupancyManager.C_DEVICE_SIZE; ++c_device_index) {
-                    if (OccupancyManager.cDevice[c_device_index] == 0) {
+                for (int c_device_index = 0; c_device_index < ResourcesOccupancyManager.C_DEVICE_SIZE; ++c_device_index) {
+                    if (ResourcesOccupancyManager.cDevice[c_device_index] == 0) {
                         boxes2[2].getChildren().get(5 + c_device_index).setId("emptyBox");
                     } else {
                         boxes2[2].getChildren().get(5 + c_device_index).setId("deviceInBox1");
@@ -268,38 +268,38 @@ public class ResourcesOccupancyAppController extends BaseController {
                 }
 
                 int i, pcbId;
-                for (i = 0; i < OccupancyManager.PCB_SIZE; ++i) {
+                for (i = 0; i < ResourcesOccupancyManager.PCB_SIZE; ++i) {
                     boxes2[3].getChildren().get(i).setId("emptyBox");
                 }
 
                 // 新建态
-                for (i = 0; i < MainController.getInstance().uiThread.creatingProcessList.size(); ++i) {
-                    pcbId = MainController.getInstance().uiThread.creatingProcessList.get(i).pcbID;
-                    if (OccupancyManager.checkPCBIndex(pcbId)) {
+                for (i = 0; i < MainController.getInstance().uiUpdateThread.creatingProcessList.size(); ++i) {
+                    pcbId = MainController.getInstance().uiUpdateThread.creatingProcessList.get(i).pcbID;
+                    if (ResourcesOccupancyManager.checkPCBIndex(pcbId)) {
                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox0");
                     }
                 }
 
                 // 就绪态
-                for (i = 0; i < MainController.getInstance().uiThread.waitProcessList.size(); ++i) {
-                    pcbId = MainController.getInstance().uiThread.waitProcessList.get(i).pcbID;
-                    if (OccupancyManager.checkPCBIndex(pcbId)) {
+                for (i = 0; i < MainController.getInstance().uiUpdateThread.waitProcessList.size(); ++i) {
+                    pcbId = MainController.getInstance().uiUpdateThread.waitProcessList.get(i).pcbID;
+                    if (ResourcesOccupancyManager.checkPCBIndex(pcbId)) {
                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox1");
                     }
                 }
 
                 //运行态
-                if (MainController.getInstance().uiThread.runProcess != null) {
-                    pcbId = MainController.getInstance().uiThread.runProcess.pcbID;
-                    if (OccupancyManager.checkPCBIndex(pcbId)) {
+                if (MainController.getInstance().uiUpdateThread.runProcess != null) {
+                    pcbId = MainController.getInstance().uiUpdateThread.runProcess.pcbID;
+                    if (ResourcesOccupancyManager.checkPCBIndex(pcbId)) {
                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox2");
                     }
                 }
 
                 // 阻塞态
-                for (i = 0; i < MainController.getInstance().uiThread.blockProcessList.size(); ++i) {
-                    pcbId = MainController.getInstance().uiThread.blockProcessList.get(i).pcbID;
-                    if (OccupancyManager.checkPCBIndex(pcbId)) {
+                for (i = 0; i < MainController.getInstance().uiUpdateThread.blockProcessList.size(); ++i) {
+                    pcbId = MainController.getInstance().uiUpdateThread.blockProcessList.get(i).pcbID;
+                    if (ResourcesOccupancyManager.checkPCBIndex(pcbId)) {
                         boxes2[3].getChildren().get(pcbId).setId("pcbInBox3");
                     }
                 }
