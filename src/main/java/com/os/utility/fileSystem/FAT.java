@@ -444,7 +444,8 @@ public class FAT implements Serializable {
 
             // 清空与该文件关联的磁盘块
             for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
-                if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File && this.disks[i].getObject().equals(thisFile)) {
+                if (!this.disks[i].isFree() && this.disks[i].getObject() instanceof File
+                        && this.disks[i].getObject().equals(thisFile)) {
                     this.disks[i].clearBlock();
                 }
             }
@@ -459,19 +460,23 @@ public class FAT implements Serializable {
             int index = 0;
 
             for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
-                if (!this.disks[i].isFree()) {
-                    Object obj = this.disks[i].getObject();
-                    if (this.disks[i].getType().equals("文件夹")) {
-                        if (((Folder) obj).getLocation().equals(folderPath)) {
-                            return 2;
-                        }
-                    } else if (((File) obj).getLocation().equals(folderPath)) {
+                // 检查当前磁盘块是否被占用
+                if (this.disks[i].isFree()) continue;
+                Object obj = this.disks[i].getObject();
+                if (this.disks[i].getType().equals("文件夹")) {
+                    if (((Folder) obj).getLocation().equals(folderPath)) {
+                        // 返回2表示文件夹不为空
                         return 2;
                     }
+                }
+                else if (((File) obj).getLocation().equals(folderPath)) {
+                    // 返回2表示文件夹不为空
+                    return 2;
+                }
 
-                    if (this.disks[i].getType().equals("文件夹") && this.disks[i].getObject().equals(block.getObject())) {
-                        index = i;
-                    }
+                if (this.disks[i].getType().equals("文件夹")
+                        && this.disks[i].getObject().equals(block.getObject())) {
+                    index = i;
                 }
             }
 

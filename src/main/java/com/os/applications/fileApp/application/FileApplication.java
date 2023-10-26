@@ -13,7 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -21,14 +23,14 @@ import java.net.URL;
 import java.util.*;
 
 public class FileApplication extends BaseApp<FileApplicationController> {
-    public static FAT fat;
+    public static FAT fat;  // 文件分配表
     private TreeItem<String> currentNode;  // 记录当前节点
     private int currentId;  // 记录当前触发事件的索引
-    public static Disk copyBlock;
-    public static boolean copyFlag;
-    public static boolean moveFlag = false;
+    public static Disk copyBlock;  // 记录要复制的磁盘块
+    public static boolean copyFlag;  // 记录是否可以复制
+    public static boolean moveFlag = false;  // 记录是否可以剪切
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
-    private List<Disk> blockList;
+    private List<Disk> blockList;  // 记录磁盘块
     public String currentPath;  // 记录当前路径
     public static File copyFile;  // 记录要复制的文件
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();  // 记录路径和树节点的映射关系
@@ -356,7 +358,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
             // 清空 flowPane
             controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
-
             // 添加新路径下的新图标
             this.addIcon(fat.getBlockList(newPath));
 
@@ -531,8 +532,9 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         Stage stage = new Stage();
         TipDialogApplication tipWindow = new TipDialogApplication(tipString);
         tipWindow.start(stage);
+
         Text text = new Text(tipString);
-        text.setFill(javafx.scene.paint.Color.RED);
+        text.setFill(Color.RED);
         text.setFont(javafx.scene.text.Font.font("宋体", 25.0D));
         tipWindow.controller.tipTextFlow.getChildren().add(text);
     }
