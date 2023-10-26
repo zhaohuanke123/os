@@ -1,10 +1,10 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Vector;
 
-public class ExecutableFile implements Serializable {
+public class ExeFile implements Serializable {
    public int id;
    public Vector<Instruction> instructionArray = new Vector<>();
    public String name;
@@ -13,7 +13,7 @@ public class ExecutableFile implements Serializable {
    private static final long serialVersionUID = 1L;
    public String department = "root";
 
-   public ExecutableFile(int id) {
+   public ExeFile(int id) {
       this.id = id;
       this.name = id + "";
 
@@ -42,7 +42,7 @@ public class ExecutableFile implements Serializable {
       this.instructionArray.add(new Instruction(4));
    }
 
-   public ExecutableFile(int id, Vector<Instruction> instructionArray) {
+   public ExeFile(int id, Vector<Instruction> instructionArray) {
       this.id = id;
       this.instructionArray = instructionArray;
    }

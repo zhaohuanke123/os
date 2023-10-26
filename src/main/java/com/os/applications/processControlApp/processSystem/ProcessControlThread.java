@@ -1,15 +1,14 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
-import com.os.applications.processApp.ProcessAppController;
-import com.os.utility.fileSystem.OccupancyManager;
-import javafx.scene.control.Button;
+import com.os.applications.processControlApp.ProcessControlAppController;
+import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
 import javafx.scene.control.CheckBox;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class ProcessScheduleThread extends Thread {
-    public static Vector<ExecutableFile> executableFileList;
+public class ProcessControlThread extends Thread {
+    public static Vector<ExeFile> exeFileList;
     public static Vector<Integer> freePcbList;
     public static Vector<Process> allProcessList;
     public static Vector<Process> creatingProcessList;
@@ -26,12 +25,12 @@ public class ProcessScheduleThread extends Thread {
     public static int[] cDevice;
     public static int residueSlice = 0;
     public static CheckBox controlButton = null;
-    public static ProcessAppController processAppController = null;
+    public static ProcessControlAppController processControlAppController = null;
 
     public void Init() {
         sliceLength = 6;
         creatingProcessList = ProcessManager.creatingProcessList;
-        executableFileList = ProcessManager.executableFileList;
+        exeFileList = ProcessManager.exeFileList;
         blockProcessList = ProcessManager.blockProcessList;
         waitProcessList = ProcessManager.waitProcessList;
         allProcessList = ProcessManager.allProcessList;
@@ -49,13 +48,13 @@ public class ProcessScheduleThread extends Thread {
 
     public void CreateProcess() {
         if (controlButton == null || controlButton.isSelected()) {
-            if (!executableFileList.isEmpty()) {
+            if (!exeFileList.isEmpty()) {
                 if (creatingProcessList.size() < 3) {
                     Random random = new Random();
-                    var executableFiles = (Vector<?>) executableFileList.clone();
+                    var executableFiles = (Vector<?>) exeFileList.clone();
                     int num = random.nextInt(executableFiles.size());
-                    ExecutableFile executableFile = (ExecutableFile) executableFiles.get(num);
-                    Process newProcess = new Process(processNum, executableFileList.get(num), executableFile.id);
+                    ExeFile exeFile = (ExeFile) executableFiles.get(num);
+                    Process newProcess = new Process(processNum, exeFileList.get(num), exeFile.id);
                     creatingProcessList.add(newProcess);
                     allProcessList.add(newProcess);
                     ++processNum;
@@ -91,7 +90,7 @@ public class ProcessScheduleThread extends Thread {
                         System.out.println(e.getMessage());
                     }
 
-                    if (nowProcess.PC == nowProcess.executableFile.instructionArray.size()) {
+                    if (nowProcess.PC == nowProcess.exeFile.instructionArray.size()) {
                         nowProcess.Destroy();
                         break;
                     }

@@ -1,4 +1,4 @@
-package com.os.utility.fileSystem;
+package com.os.applications.resourcesOccupancyApp.models;
 
 import java.util.Arrays;
 import java.util.Vector;

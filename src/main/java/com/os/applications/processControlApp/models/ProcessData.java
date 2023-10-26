@@ -1,11 +1,11 @@
-package com.os.applications.processApp.models;
+package com.os.applications.processControlApp.models;
 
-import com.os.applications.processApp.processSystem.Process;
+import com.os.applications.processControlApp.processSystem.Process;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;
 
-public class ProcessDetailData {
+public class ProcessData {
     private final StringProperty processName = new SimpleStringProperty();
     private final StringProperty processState = new SimpleStringProperty();
     private final StringProperty whichFile = new SimpleStringProperty();
@@ -107,7 +107,7 @@ public class ProcessDetailData {
         this.havedMemory.set(havedMemory);
     }
 
-    public ProcessDetailData(Process process) {
+    public ProcessData(Process process) {
         this.setProcessName(process.name + "");
         if (process.state == 0) {
             this.setProcessState("新建态");
@@ -158,7 +158,7 @@ public class ProcessDetailData {
         }
 
         this.setResult(process.AX + "");
-        double progress = (double) process.PC / (double) process.executableFile.instructionArray.size();
+        double progress = (double) process.PC / (double) process.exeFile.instructionArray.size();
         this.progressBar.setProgress(progress);
         this.setProgressBar(this.progressBar);
     }

@@ -2,8 +2,8 @@ package com.os.applications.fileApp.controller;
 
 import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
-import com.os.applications.processApp.processSystem.ExecutableFile;
-import com.os.applications.processApp.processSystem.ProcessManager;
+import com.os.applications.processControlApp.processSystem.ExeFile;
+import com.os.applications.processControlApp.processSystem.ProcessManager;
 import com.os.dataModels.ExecutableFileData;
 import com.os.dataModels.InstructionData;
 import com.os.utility.DataLoader;
@@ -52,7 +52,7 @@ public class FileApplicationController extends BaseFileController {
     public void init(Stage stage) {
         super.init(stage);
 
-        executableFileList = ProcessManager.executableFileList;
+        exeFileList = ProcessManager.exeFileList;
         this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         updateFileTable(this.executableFileTable);
     }
@@ -63,7 +63,7 @@ public class FileApplicationController extends BaseFileController {
     @FXML
     private TableColumn<?, ?> fileName;
 
-    public static Vector<ExecutableFile> executableFileList;
+    public static Vector<ExeFile> exeFileList;
     public static ArrayList<ExecutableFileData> executableFileDataList = new ArrayList<>();
     public ArrayList<InstructionData> fileDetailDataList = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class FileApplicationController extends BaseFileController {
         Platform.runLater(() -> {
             DataLoader.fileDataLoad(
                     FileApplicationController.executableFileDataList,
-                    FileApplicationController.executableFileList);
+                    FileApplicationController.exeFileList);
             executableFileTable.setItems(
                     FXCollections.observableArrayList(
                             FileApplicationController.executableFileDataList));
@@ -82,7 +82,7 @@ public class FileApplicationController extends BaseFileController {
         Platform.runLater(() -> {
             DataLoader.fileDetailDataLoad(
                     FileApplicationController.this.fileDetailDataList,
-                    FileApplicationController.executableFileList.get(i));
+                    FileApplicationController.exeFileList.get(i));
             StringBuilder stringBuilder = new StringBuilder();
             for (InstructionData instructionData : FileApplicationController.this.fileDetailDataList) {
                 stringBuilder.append(instructionData.getInstruction()).append("\n");

@@ -1,4 +1,4 @@
-package com.os.utility.fileSystem;
+package com.os.applications.resourcesOccupancyApp.models;
 
 public class MemoryArea {
    public int start;

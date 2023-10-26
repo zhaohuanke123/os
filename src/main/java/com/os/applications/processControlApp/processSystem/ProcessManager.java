@@ -1,11 +1,11 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
-import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
 
 import java.util.Vector;
 
 public class ProcessManager {
-   public static Vector<ExecutableFile> executableFileList = new Vector<>();
+   public static Vector<ExeFile> exeFileList = new Vector<>();
    public static Vector<Process> allProcessList = new Vector<>();
    public static Vector<Process> creatingProcessList = new Vector<>();
    public static Vector<Process> runProcessList = new Vector<>();
@@ -16,13 +16,13 @@ public class ProcessManager {
    public static int processNum = 0;
 
    public static void init() {
-      createRandomExecuteFile(executableFileList, 10);
+      createRandomExecuteFile(exeFileList, 10);
    }
 
-   public static void createRandomExecuteFile(Vector<ExecutableFile> executeFileList, int num) {
+   public static void createRandomExecuteFile(Vector<ExeFile> executeFileList, int num) {
       for(int i = 0; i < num; ++i) {
-         ExecutableFile executableFile = new ExecutableFile(i);
-         executeFileList.add(executableFile);
+         ExeFile exeFile = new ExeFile(i);
+         executeFileList.add(exeFile);
       }
 
    }

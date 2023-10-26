@@ -1,7 +1,7 @@
-package com.os.applications.processApp.processSystem;
+package com.os.applications.processControlApp.processSystem;
 
-import com.os.utility.fileSystem.MemoryArea;
-import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.MemoryArea;
+import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
 
 public class Process {
     public int name;
@@ -17,7 +17,7 @@ public class Process {
     public int PC;
     public int AX;
     public int pcbID;
-    public ExecutableFile executableFile;
+    public ExeFile exeFile;
     public int memory;
     public MemoryArea memoryArea;
     public int device;
@@ -25,14 +25,14 @@ public class Process {
     public int deviceRemainTime;
     public int whichFile;
 
-    public Process(int name, ExecutableFile executableFile, int whichFile) {
+    public Process(int name, ExeFile exeFile, int whichFile) {
         this.name = name;
         this.state = 0;
         this.PC = 0;
         this.AX = 0;
         this.pcbID = -1;
-        this.executableFile = executableFile;
-        this.memory = executableFile.getInstructionArray().size();
+        this.exeFile = exeFile;
+        this.memory = exeFile.getInstructionArray().size();
         this.memoryArea = null;
         this.device = -1;
         this.deviceId = -1;
@@ -99,7 +99,7 @@ public class Process {
     public int CPU() {
         this.state = 2;
 
-        Instruction instruction = this.executableFile.instructionArray.get(this.PC);
+        Instruction instruction = this.exeFile.instructionArray.get(this.PC);
         ++this.PC;
 
         if (instruction.category == 0) {

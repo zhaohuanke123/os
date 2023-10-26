@@ -5,7 +5,7 @@ import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;
-import com.os.utility.fileSystem.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
 import com.os.utility.uiUtil.CompSet;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
