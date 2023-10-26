@@ -65,8 +65,8 @@
    <AnchorPane id="mainPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0"
                AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="43.0">
       <MenuBar prefHeight="30" AnchorPane.leftAnchor="11" AnchorPane.rightAnchor="11" AnchorPane.topAnchor="0">
-         <Menu mnemonicParsing="false" text="文件">
-            <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存 Ctrl+S"/>
+         <Menu mnemonicParsing="false" text="保存">
+            <MenuItem fx:id="saveItem" mnemonicParsing="false" text="保存"/>
             <MenuItem fx:id="save_close" mnemonicParsing="false" text="保存并退出"/>
             <MenuItem fx:id="closeItem" mnemonicParsing="false" text="不保存退出"/>
          </Menu>

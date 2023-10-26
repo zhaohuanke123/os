@@ -2,7 +2,7 @@ package com.os.applications.resourcesOccupancyApp;
 
 import com.os.applications.BaseController;
 import com.os.applications.fileApp.application.FileApplication;
-import com.os.applications.fileApp.application.TipDialogApplication;
+import com.os.applications.fileApp.application.HelpDialogApplication;
 import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;
 import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ResourcesOccupancyAppController extends BaseController {
-    //region [FXML comp variables]
     public AnchorPane topMainPane;
     public Label memoryText;
     public Label diskText;
@@ -338,33 +337,33 @@ public class ResourcesOccupancyAppController extends BaseController {
         super.showDescription();
 
         Stage stage = new Stage();
-        TipDialogApplication tipWindow = new TipDialogApplication("", 500,500);
+        HelpDialogApplication helpWindow = new HelpDialogApplication("", 500,500);
         try {
-            tipWindow.start(stage);
+            helpWindow.start(stage);
             Text text = new Text("占用管理器\n\n");
             text.setFill(Color.RED);
             text.setFont(Font.font("宋体", 25));
-            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            helpWindow.controller.textTitle.getChildren().add(text);
 
             text = new Text("1. 显示内存的占用比和已使用内存的分布情况。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
-            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            helpWindow.controller.textBody.getChildren().add(text);
 
             text = new Text("2. 显示设备的占用比和已使用的设备情况。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
-            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            helpWindow.controller.textBody.getChildren().add(text);
 
             text = new Text("3. 显示磁盘的占用比和已使用磁盘的分布情况。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
-            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            helpWindow.controller.textBody.getChildren().add(text);
 
             text = new Text("4. 显示PCB的占用比和已使用的PCB情况。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
-            tipWindow.controller.tipTextFlow.getChildren().add(text);
+            helpWindow.controller.textBody.getChildren().add(text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

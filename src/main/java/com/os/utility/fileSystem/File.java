@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class File extends BaseFile implements Serializable {
     private int flag; // flag=0表示只读，flag=1表示读写
     private String content;  // 文件内容
-    private boolean isOpen;  // 记录文件是否打开
+    private boolean isOpen = false;  // 记录文件是否打开
     private transient StringProperty flagP = new SimpleStringProperty();  // 文件属性的显示
     private transient StringProperty diskNumP = new SimpleStringProperty();  // 磁盘编号的显示
     private transient StringProperty locationP = new SimpleStringProperty();  // 路径的显示

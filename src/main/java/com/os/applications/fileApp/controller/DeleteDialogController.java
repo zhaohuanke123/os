@@ -46,7 +46,7 @@ public class DeleteDialogController extends BaseFileController {
                 }
             }
             // 文件未关闭
-            else {
+            else if(res == 3) {
                 try {
                     FileApplication.tipOpen("文件未关闭!");
                 } catch (Exception e) {
