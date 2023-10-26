@@ -1,9 +1,7 @@
 package com.os.applications.processApp;
 
 import com.os.applications.BaseController;
-import com.os.applications.fileApp.FileApplicationController;
 import com.os.applications.fileApp.application.TipDialogApplication;
-import com.os.dataModels.InstructionData;
 import com.os.applications.processApp.models.ProcessDetailData;
 import com.os.main.MainController;
 import com.os.utility.DataLoader;
@@ -26,7 +24,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Vector;
 
 public class ProcessAppController extends BaseController {

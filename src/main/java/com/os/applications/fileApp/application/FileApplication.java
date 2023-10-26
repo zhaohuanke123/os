@@ -1,10 +1,7 @@
-package com.os.applications.fileApp;
+package com.os.applications.fileApp.application;
 
 import com.os.applications.BaseApp;
-import com.os.applications.fileApp.application.DeleteDialogApplication;
-import com.os.applications.fileApp.application.FileEditApplication;
-import com.os.applications.fileApp.application.PropertyApplication;
-import com.os.applications.fileApp.application.TipDialogApplication;
+import com.os.applications.fileApp.controller.FileApplicationController;
 import com.os.utility.fileSystem.*;
 import com.os.utility.fileSystem.File;
 import com.os.utility.uiUtil.CompSet;
@@ -25,7 +22,6 @@ import java.util.*;
 
 public class FileApplication extends BaseApp<FileApplicationController> {
     public static FAT fat;
-    private TreeItem<String> rootNode;
     private TreeItem<String> recentNode;
     private int ind;
     public static Disk copyBlock;
@@ -36,8 +32,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public String recentPath;  // 记录当前路径
     public static File copyFile;
     private final Map<Path, TreeItem<String>> pathMap = new HashMap<>();
-    private ObservableList<Disk> disksItem;
-    private ObservableList<File> fileOpened;
     private ContextMenu contextMenu1;  // 文件管理器的右键菜单
     private ContextMenu contextMenu2;  // 文件/目录的右键菜单
     private MenuItem createFileItem;  // 新建文件
@@ -136,8 +130,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         type.setCellValueFactory(new PropertyValueFactory<>("typeP"));
         content.setCellValueFactory(new PropertyValueFactory<>("objectP"));
 
-        this.disksItem = FXCollections.observableArrayList(fat.getDiskBlocks());
-        controller.diskTable.setItems(this.disksItem);
+        ObservableList<Disk> disksItem = FXCollections.observableArrayList(fat.getDiskBlocks());
+        controller.diskTable.setItems(disksItem);
 
         fileName.setCellValueFactory(new PropertyValueFactory<>("NameP"));
         openType.setCellValueFactory(new PropertyValueFactory<>("flagP"));
@@ -145,24 +139,24 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         fileLength.setCellValueFactory(new PropertyValueFactory<>("lengthP"));
         filePath.setCellValueFactory(new PropertyValueFactory<>("locationP"));
 
-        this.fileOpened = fat.getOpenedFiles();
-        controller.openFile.setItems(this.fileOpened);
+        ObservableList<File> fileOpened = fat.getOpenedFiles();
+        controller.openFile.setItems(fileOpened);
     }
 
     private void treeViewInit() {
         URL location = this.getClass().getResource("/com/os/applications/fileApp/res/disk.png");
-        this.rootNode = new TreeItem<>("C:", new ImageView(String.valueOf(location)));
-        CompSet.setImageViewFixSize((ImageView) this.rootNode.getGraphic(), 20.0, 20.0);
+        TreeItem<String> rootNode = new TreeItem<>("C:", new ImageView(String.valueOf(location)));
+        CompSet.setImageViewFixSize((ImageView) rootNode.getGraphic(), 20.0, 20.0);
 
-        this.rootNode.setExpanded(true);
-        this.recentNode = this.rootNode;
-        this.pathMap.put(fat.getPath("C:"), this.rootNode);
-        controller.treeView.setRoot(this.rootNode);
+        rootNode.setExpanded(true);
+        this.recentNode = rootNode;
+        this.pathMap.put(fat.getPath("C:"), rootNode);
+        controller.treeView.setRoot(rootNode);
         controller.treeView.setCellFactory((p) -> new TextFieldTreeCellImpl());
 
         for (Path path : fat.getPaths()) {
-            if (path.hasParent() && path.getParent().getPathName().equals(this.rootNode.getValue())) {
-                this.TreeNodeInit(path, this.rootNode);
+            if (path.hasParent() && path.getParent().getPathName().equals(rootNode.getValue())) {
+                this.TreeNodeInit(path, rootNode);
             }
         }
 

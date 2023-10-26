@@ -1,7 +1,7 @@
-package com.os.applications.fileApp;
+package com.os.applications.fileApp.controller;
 
+import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
-import com.os.applications.fileApp.controller.BaseFileController;
 import com.os.applications.processApp.processSystem.ExecutableFile;
 import com.os.applications.processApp.processSystem.ProcessManager;
 import com.os.dataModels.ExecutableFileData;
@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -35,20 +34,17 @@ public class FileApplicationController extends BaseFileController {
     @FXML
     public TableView<File> openFile;
     public TextArea contentField;
-    @FXML
-    private TableColumn<?, ?> filePath;
 
     @FXML
-    public void closeStage(MouseEvent event) {
+    public void closeStage() {
         FileApplication.saveData();
         this.stage.close();
     }
 
     @FXML
-    void selectFile(MouseEvent event) {
+    void selectFile() {
         String s = this.executableFileTable.getSelectionModel().getSelectedItem().toString();
         int i = Integer.parseInt(s);
-//        this.updateFileDetailTable(i);
         this.updateContentField(i);
     }
 

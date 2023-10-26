@@ -1,7 +1,6 @@
 package com.os.applications.fileApp.controller;
 
-import com.os.applications.fileApp.FileApplication;
-import com.os.applications.fileApp.application.TipDialogApplication;
+import com.os.applications.fileApp.application.FileApplication;
 import com.os.utility.fileSystem.Disk;
 import com.os.utility.fileSystem.Folder;
 import com.os.utility.fileSystem.Path;

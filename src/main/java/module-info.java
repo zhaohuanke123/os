@@ -32,8 +32,6 @@ module os {
     opens com.os.utility.sceneManager to javafx.fxml;
     exports com.os;
     opens com.os to javafx.fxml;
-    exports com.os.applications.fileApp;
-    opens com.os.applications.fileApp to javafx.fxml;
     exports com.os.applications.processApp.models;
     opens com.os.applications.processApp.models to javafx.fxml;
 }

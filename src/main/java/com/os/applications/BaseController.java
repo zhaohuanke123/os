@@ -1,6 +1,5 @@
 package com.os.applications;
 
-import com.os.main.MainController;
 import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,25 +20,26 @@ public class BaseController {
     @FXML
     protected BorderPane titleBar;  // 标题栏界面组件
     @FXML
-    protected HBox titleBarL;
+    protected HBox titleBarL;  // 标题栏左侧部分
     @FXML
-    protected HBox titleBarR;
+    protected HBox titleBarR;  // 标题栏右侧部分
     @FXML
-    public Label title;
+    public Label title;  // 标题标签
     @FXML
-    protected AnchorPane topMainPane;
-
+    protected AnchorPane topMainPane;  // 顶部主面板
 
     // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {
         this.stage = stage;
 
+        // 创建绘图工具
         DrawUtil drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
+
+        // 监听窗口大小变化，根据窗口大小自适应布局
         stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
-        stage.heightProperty().addListener((observable, oldValue, newValue)
-                -> Platform.runLater(this::adaptWindow));
-        this.adaptWindow();
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
+        this.adaptWindow();  // 初始时适应窗口
     }
 
     // 关闭窗口
@@ -107,6 +107,7 @@ public class BaseController {
         this.titleBar.setMinWidth(sw);
     }
 
+    // 将窗口显示在最前
     public void showStageToFront() {
         // 设置窗口始终位于其他窗口之上
         stage.setAlwaysOnTop(true);
@@ -117,7 +118,5 @@ public class BaseController {
     }
 
     @FXML
-    protected void showDescription() {
-
-    }
+    protected void showDescription() {}
 }
