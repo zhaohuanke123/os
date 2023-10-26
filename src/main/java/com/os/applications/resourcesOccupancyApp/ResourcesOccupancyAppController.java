@@ -1,7 +1,7 @@
 package com.os.applications.resourcesOccupancyApp;
 
 import com.os.applications.BaseController;
-import com.os.applications.fileApp.FileApplication;
+import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;

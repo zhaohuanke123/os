@@ -8,7 +8,7 @@
 <AnchorPane id="topMainPane" stylesheets="@../css/FileApp.css"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.os.applications.fileApp.FileApplicationController">
+            fx:controller="com.os.applications.fileApp.controller.FileApplicationController">
 
 <!--    设置窗口的titleBar-->
     <BorderPane fx:id="titleBar" onMouseDragged="#dragBar" onMousePressed="#pressBar"
@@ -139,7 +139,7 @@
                                          resizable="false" sortable="false" />
                             <TableColumn prefWidth="120" text="文件长度"
                                          resizable="false" sortable="false" />
-                            <TableColumn fx:id="filePath" prefWidth="300" text="文件路径"
+                            <TableColumn prefWidth="300" text="文件路径"
                                          resizable="false" sortable="false" />
                         </columns>
                     </TableView>

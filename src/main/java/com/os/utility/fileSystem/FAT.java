@@ -1,6 +1,6 @@
 package com.os.utility.fileSystem;
 
-import com.os.applications.fileApp.FileApplication;
+import com.os.applications.fileApp.application.FileApplication;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

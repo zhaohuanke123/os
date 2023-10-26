@@ -1,7 +1,6 @@
 package com.os.applications.fileApp.application;
 
 import com.os.applications.fileApp.controller.FileEditController;
-import com.os.applications.fileApp.FileApplication;
 import com.os.utility.fileSystem.Disk;
 import com.os.utility.fileSystem.FAT;
 import com.os.utility.fileSystem.File;

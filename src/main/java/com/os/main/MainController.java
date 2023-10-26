@@ -1,6 +1,6 @@
 package com.os.main;
 
-import com.os.applications.fileApp.FileApplication;
+import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.resourcesOccupancyApp.ResourcesOccupancyApp;
 import com.os.applications.processApp.ProcessApp;
 import com.os.utility.fileSystem.FAT;
@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -89,10 +88,9 @@ public class MainController implements Initializable {
     boolean haveChanged = true;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
-    }
-
+    // 初始化各界面元素和线程
     public void init(Scene scene, Stage stage) throws URISyntaxException {
         _instance = this;
 
@@ -115,6 +113,7 @@ public class MainController implements Initializable {
         this.uiThreadInit();
     }
 
+    // 初始化背景图像
     private void initBackGround() {
         this.appWidth = this.mainWindowScene.getHeight() / 15.0;
         this.sceneWidth = this.mainWindowScene.getWidth();
@@ -128,8 +127,9 @@ public class MainController implements Initializable {
         this.background.setVisible(true);
     }
 
+    // 处理窗口关闭按钮点击事件
     @FXML
-    void closeWindow(MouseEvent event) {
+    void closeWindow() {
         FAT.closeAll();
         if (FileApplication.fat != null) {
             FileApplication.saveData();
@@ -140,14 +140,14 @@ public class MainController implements Initializable {
         this.primaryStage.close();
     }
 
+    // 处理最小化窗口按钮点击事件
     @FXML
-    void minimizeWindow(MouseEvent event) {
-
+    void minimizeWindow() {
         minimizeOnShowApp(true);
-
         this.primaryStage.setIconified(true);
     }
 
+    // 根据窗口大小调整各界面元素的大小和位置
     public void adaptWindow() {
         this.MainWindow.setPrefSize(this.mainWindowScene.getWidth(), this.mainWindowScene.getHeight());
 
@@ -163,7 +163,7 @@ public class MainController implements Initializable {
         CompSet.setCompFixSize(this.occupancyButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.occupancyButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
 
-           CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
+        CompSet.setCompFixSize(this.minimizeButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.minimizeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
         CompSet.setCompFixSize(this.closeButton, 1 * this.appWidth, 1 * this.appWidth);
         CompSet.setImageViewFixSize((ImageView) this.closeButton.getGraphic(), this.appWidth * 0.7, this.appWidth * 0.7);
@@ -179,7 +179,9 @@ public class MainController implements Initializable {
         this.tipBox.setLayoutY(0.0);
     }
 
+    // 初始化应用程序图标
     private void iconInit() {
+        // 处理应用程序按钮的点击事件和样式
         appButtonDict.forEach((stageName, button) -> button.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 SceneManager.getInstance().AppStart(stageName);
@@ -264,9 +266,9 @@ public class MainController implements Initializable {
 
     }
 
+    // 最小化或还原所有应用程序窗口
     private void minimizeOnShowApp(Boolean isMinimize) {
         SceneManager.getInstance().setAllStageHideOrShow(isMinimize);
-
         FileApplication.minimizeOnShowApp(isMinimize);
     }
 }

@@ -17,8 +17,6 @@ public class BaseFileController extends BaseController {
     @Override
     public void closeStage() {
         super.closeStage();
-
         MainController.getInstance().appBoxManager.removeAppButton(stage);
     }
-
 }

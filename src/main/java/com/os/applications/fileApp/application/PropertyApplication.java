@@ -1,7 +1,6 @@
 package com.os.applications.fileApp.application;
 
 import com.os.applications.fileApp.controller.PropertyController;
-import com.os.applications.fileApp.FileApplication;
 import com.os.utility.fileSystem.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseDragEvent;
