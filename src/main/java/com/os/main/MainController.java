@@ -4,7 +4,7 @@ import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.resourcesOccupancyApp.ResourcesOccupancyApp;
 import com.os.applications.processControlApp.ProcessControlApp;
 import com.os.utility.fileSystem.FAT;
-import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 import com.os.applications.processControlApp.processSystem.ProcessManager;
 import com.os.applications.processControlApp.processSystem.ProcessControlThread;
 import com.os.utility.sceneManager.SceneManager;
@@ -107,7 +107,7 @@ public class MainController implements Initializable {
         this.initBackGround();
         this.iconInit();
         this.timeInit();
-        OccupancyManager.init();
+        ResourcesOccupancyManager.init();
         this.processThreadInit();
         FileApplication.loadData();
         this.uiThreadInit();

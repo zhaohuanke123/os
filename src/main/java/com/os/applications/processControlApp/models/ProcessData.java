@@ -148,10 +148,10 @@ public class ProcessData {
         }
 
         if (process.state != -1) {
-            if (process.memoryArea == null) {
+            if (process.memoryBlock == null) {
                 this.setHavedMemory("待分配");
             } else {
-                this.setHavedMemory("[" + process.memoryArea.start + "," + process.memoryArea.end + "]");
+                this.setHavedMemory("[" + process.memoryBlock.start + "," + process.memoryBlock.end + "]");
             }
         } else {
             this.setHavedMemory("");

@@ -1,7 +1,7 @@
 package com.os.applications.processControlApp.processSystem;
 
 import com.os.applications.processControlApp.ProcessControlAppController;
-import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 import javafx.scene.control.CheckBox;
 
 import java.util.*;
@@ -39,11 +39,11 @@ public class ProcessControlThread extends Thread {
         slice = ProcessManager.slice;
         speed = ProcessManager.speed;
 
-        freePcbList = OccupancyManager.freePcbList;
-        allMemory = OccupancyManager.allMemory;
-        aDevice = OccupancyManager.aDevice;
-        bDevice = OccupancyManager.bDevice;
-        cDevice = OccupancyManager.cDevice;
+        freePcbList = ResourcesOccupancyManager.freePcbList;
+        allMemory = ResourcesOccupancyManager.allMemory;
+        aDevice = ResourcesOccupancyManager.aDevice;
+        bDevice = ResourcesOccupancyManager.bDevice;
+        cDevice = ResourcesOccupancyManager.cDevice;
     }
 
     public void CreateProcess() {

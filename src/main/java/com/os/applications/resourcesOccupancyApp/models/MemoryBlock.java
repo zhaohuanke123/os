@@ -1,10 +1,10 @@
 package com.os.applications.resourcesOccupancyApp.models;
 
-public class MemoryArea {
+public class MemoryBlock {
    public int start;
    public int end;
 
-   public MemoryArea(int start, int end) {
+   public MemoryBlock(int start, int end) {
       this.start = start;
       this.end = end;
    }

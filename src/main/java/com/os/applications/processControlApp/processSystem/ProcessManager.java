@@ -1,6 +1,6 @@
 package com.os.applications.processControlApp.processSystem;
 
-import com.os.applications.resourcesOccupancyApp.models.OccupancyManager;
+import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 
 import java.util.Vector;
 
@@ -40,7 +40,7 @@ public class ProcessManager {
        for (Process process : allProcessList) {
            if (process.state == 3) {
                if (process.deviceId == -1) {
-                   int deviceId = OccupancyManager.applyDevice(process.device);
+                   int deviceId = ResourcesOccupancyManager.applyDevice(process.device);
                    if (deviceId != -1) {
                        process.deviceId = deviceId;
                    }
@@ -58,7 +58,7 @@ public class ProcessManager {
      */
    public static void useDevice(Process process) {
       if (process.deviceRemainTime == 0) {
-         OccupancyManager.retrieveDevice(process.device, process.deviceId);
+         ResourcesOccupancyManager.retrieveDevice(process.device, process.deviceId);
          process.Awake();
       } else {
          --process.deviceRemainTime;
