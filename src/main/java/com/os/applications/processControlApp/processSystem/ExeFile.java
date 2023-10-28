@@ -19,7 +19,7 @@ public class ExeFile implements Serializable {
 
       // 从4中指令中随机生成指令
       Random random = new Random();
-      int instructionNum = 5 + random.nextInt(20);
+      int instructionNum = 5 + random.nextInt(11);
       this.size = instructionNum;
 
       for(int i = 0; i < instructionNum; ++i) {
