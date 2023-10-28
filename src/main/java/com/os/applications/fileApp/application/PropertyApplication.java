@@ -45,26 +45,33 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
         controller.checkRead.setUserData(0);
         controller.checkWrite.setToggleGroup(this.toggleGroup);
         controller.checkWrite.setUserData(1);
-        this.toggleGroup.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> controller.applyButton.setDisable(false));
+        this.toggleGroup.selectedToggleProperty().addListener(
+                (ov, old_toggle, new_toggle) -> controller.applyButton.setDisable(false));
 
         if (this.block.getObject() instanceof Folder) {
             Folder folder = (Folder) this.block.getObject();
+            controller.nameField.setText(folder.getName());
             controller.textField.setText(folder.getName());
             controller.typeField.setText(folder.getType());
             controller.locField.setText(folder.getLocation());
             controller.spaceField.setText(folder.getSpace());
             controller.timeField.setText(folder.getCreateTime());
+            controller.propertyField.setVisible(false);
+            controller.propertyLabel.setVisible(false);
             this.oldName = folder.getName();
             this.location = folder.getLocation();
-            controller.checkRead.setDisable(true);
-            controller.checkWrite.setDisable(true);
+            controller.checkRead.setVisible(false);
+            controller.checkWrite.setVisible(false);
+            controller.propertyLabel1.setVisible(false);
         } else {
             File file = (File) this.block.getObject();
+            controller.nameField.setText(file.getName());
             controller.textField.setText(file.getName());
             controller.typeField.setText(file.getType());
             controller.locField.setText(file.getLocation());
             controller.spaceField.setText(file.getSpace());
             controller.timeField.setText(file.getCreateTime());
+            controller.propertyField.setText(file.getFlag() == 0 ? "只读" : "读写");
             this.oldName = file.getName();
             this.location = file.getLocation();
             this.toggleGroup.selectToggle(file.getFlag() == 0 ? controller.checkRead : controller.checkWrite);
@@ -109,6 +116,7 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
                 File thisFile = (File) this.block.getObject();
                 int newFlag = this.toggleGroup.getSelectedToggle().getUserData().hashCode();
                 thisFile.setFlag(newFlag);
+                controller.propertyField.setText(newFlag == 0 ? "只读" : "读写");
             }
 
             controller.applyButton.setDisable(true);
@@ -161,6 +169,7 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
         } else {
             ((File) this.block.getObject()).setName(newName);
         }
+        controller.nameField.setText(newName);
     }
 
     private void reLoc(String oldP, String newP, String oldN, String newN, Folder folder) {

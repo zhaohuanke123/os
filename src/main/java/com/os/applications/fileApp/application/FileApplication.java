@@ -5,6 +5,7 @@ import com.os.applications.fileApp.controller.FileApplicationController;
 import com.os.utility.fileSystem.*;
 import com.os.utility.fileSystem.File;
 import com.os.utility.uiUtil.CompSet;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;

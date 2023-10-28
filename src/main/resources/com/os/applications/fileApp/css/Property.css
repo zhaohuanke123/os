@@ -1,5 +1,28 @@
 @import "../../WindowPane.css";
 
+/* 设置tab顶部的样式 */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+/* 设置tab卡片的样式 */
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+/* 设置tab卡片选中的样式 */
+.tab-pane .tab:selected {
+    -fx-background-color: rgb(103, 157, 238);
+}
+
+/* 设置tab卡片文字的样式 */
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
 #flowPane {
     -fx-background-color: #F9FAFB;
     -fx-border-color: transparent;
