@@ -141,8 +141,8 @@
         <Tab text="系统可执行文件">
             <AnchorPane id="mainPane">
                 <TableView fx:id="executableFileTable" onMousePressed="#selectFile"
-                           prefWidth="220" AnchorPane.bottomAnchor="200"
-                           AnchorPane.leftAnchor="20" AnchorPane.topAnchor="100">
+                           prefWidth="220" AnchorPane.bottomAnchor="100"
+                           AnchorPane.leftAnchor="20" AnchorPane.topAnchor="50">
                     <columns>
                         <TableColumn fx:id="fileName" prefWidth="180.0" text="系统可执行文件"
                                      resizable="false" sortable="false"/>

@@ -37,7 +37,7 @@
 /* 设置表格的样式 */
 .table-view {
     -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
+    -fx-table-cell-border-color: white;
     -fx-padding: 20px;
 }
 
@@ -60,6 +60,14 @@
 
 /* 设置表格选中的样式 */
 .table-row-cell:selected {
-    -fx-table-cell-border-color: transparent;
+    -fx-table-cell-border-color: white;
     -fx-text-fill: black;
+}
+
+/* 设置表格每行的样式 */
+.table-row-cell {
+    -fx-pref-height: 40px;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: white;
 }

@@ -51,7 +51,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 "/com/os/applications/fileApp/res/folder.png",
                 "磁盘文件管理系统",
                 800,
-                700);
+                650);
     }
 
     @Override
