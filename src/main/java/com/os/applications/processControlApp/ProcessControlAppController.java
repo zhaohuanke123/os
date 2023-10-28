@@ -32,6 +32,7 @@ public class ProcessControlAppController extends BaseController {
     public AnchorPane mainPane1;
     public VBox createProButtons;
     public Slider creatProSlider;
+    public TableColumn finishTime;
     @FXML
     private TableView<ProcessData> processTable;
     @FXML
@@ -85,7 +86,8 @@ public class ProcessControlAppController extends BaseController {
         this.processState1.setCellValueFactory(new PropertyValueFactory<>("processState"));
         this.whichFile1.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
         this.result1.setCellValueFactory(new PropertyValueFactory<>("result"));
-        this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
+//        this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
+        this.finishTime.setCellValueFactory(new PropertyValueFactory<>("finishTime"));
 
         //继续或者停止新建
         ProcessControlThread.controlButton = this.continueButton;

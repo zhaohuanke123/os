@@ -120,7 +120,8 @@
                         <TableColumn fx:id="processState1" text="进程状态"/>
                         <TableColumn fx:id="whichFile1" text="执行文件"/>
                         <TableColumn fx:id="result1" text="执行结果"/>
-                        <TableColumn fx:id="progressBar1" text="进程完成进度"/>
+<!--                        <TableColumn fx:id="progressBar1" text="进程完成进度"/>-->
+                        <TableColumn fx:id="finishTime" text="完成时间"/>
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
