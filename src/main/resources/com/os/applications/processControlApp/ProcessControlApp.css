@@ -65,11 +65,6 @@
 
 }
 
-
-#right .table-column {
-    -fx-background-color: lightblue;
-}
-
 /* 设置表格的样式 */
 .table-view {
     -fx-background-color: transparent;

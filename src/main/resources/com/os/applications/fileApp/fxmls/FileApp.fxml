@@ -63,15 +63,15 @@
     </BorderPane>
 
 <!--    包含"文件管理"、"磁盘使用"、"已打开文件"和"系统可执行文件"四个选项-->
-    <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE"
-             AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0"
+    <TabPane fx:id="TabP" layoutY="30" tabClosingPolicy="UNAVAILABLE"
+             AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="0"
+             AnchorPane.rightAnchor="0" AnchorPane.topAnchor="45"
              prefHeight="630.0" prefWidth="900.0">
 
         <Tab id="tab" text="文件管理">
             <AnchorPane>
-                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                <VBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10">
                     <HBox>
                         <Label id="recentPath" prefHeight="35.0" prefWidth="80.0"
                                text="当前路径:" textAlignment="CENTER">
@@ -108,62 +108,61 @@
         </Tab>
 
         <Tab id="tab" text="磁盘使用">
-            <Pane>
-                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
+            <AnchorPane>
+                <HBox AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
                     <TableView fx:id="diskTable">
                         <columns>
-                            <TableColumn prefWidth="140.0" text="磁盘块"
+                            <TableColumn prefWidth="150" text="磁盘块"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="140.0" text="索引"
+                            <TableColumn prefWidth="150" text="索引"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="180.0" text="类型"
+                            <TableColumn prefWidth="200" text="类型"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="300.0" text="内容"
+                            <TableColumn prefWidth="300" text="内容"
                                          resizable="false" sortable="false" />
                         </columns>
                     </TableView>
                 </HBox>
-            </Pane>
+            </AnchorPane>
         </Tab>
 
         <Tab id="tab" text="已打开文件">
-            <Pane>
-                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
+            <AnchorPane>
+                <HBox AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
                     <TableView fx:id="openFile">
                         <columns>
-                            <TableColumn prefWidth="110" text="文件名"
+                            <TableColumn prefWidth="125" text="文件名"
                                          resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="120" text="打开方式"
+                            <TableColumn prefWidth="125" text="打开方式"
                                          resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="120" text="起始盘块"
+                            <TableColumn prefWidth="125" text="起始盘块"
                                          resizable="false" sortable="false" />
-                            <TableColumn prefWidth="120" text="文件长度"
+                            <TableColumn prefWidth="125" text="文件长度"
                                          resizable="false" sortable="false" />
                             <TableColumn prefWidth="300" text="文件路径"
                                          resizable="false" sortable="false" />
                         </columns>
                     </TableView>
                 </HBox>
-            </Pane>
+            </AnchorPane>
         </Tab>
 
         <Tab text="系统可执行文件">
-            <AnchorPane id="mainPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
-                        AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
-
+            <AnchorPane id="mainPane">
                 <TableView fx:id="executableFileTable" onMousePressed="#selectFile"
-                           prefWidth="220.0" AnchorPane.bottomAnchor="20.0"
-                           AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
+                           prefWidth="220" AnchorPane.bottomAnchor="200"
+                           AnchorPane.leftAnchor="20" AnchorPane.topAnchor="100">
                     <columns>
-                        <TableColumn fx:id="fileName" prefWidth="180.0" text="可执行文件"
+                        <TableColumn fx:id="fileName" prefWidth="180.0" text="系统可执行文件"
                                      resizable="false" sortable="false"/>
                     </columns>
                 </TableView>
                 <TextArea id="contentField" fx:id="contentField" editable="false"
-                          layoutX="300.0" layoutY="20.0" prefHeight="570.0" prefWidth="550.0"
-                          stylesheets="@../css/FileEdit.css" wrapText="true">
+                          stylesheets="@../css/FileEdit.css" wrapText="true"
+                          AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="40"
+                          AnchorPane.leftAnchor="250" AnchorPane.topAnchor="20">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24"/>
                     </font>
                 </TextArea>
             </AnchorPane>

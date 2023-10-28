@@ -13,7 +13,7 @@
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <HBox fx:id="titleBarL" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0"
-               prefWidth="134.0" stylesheets="@../css/Property.css" BorderPane.alignment="CENTER">
+               prefWidth="134.0" BorderPane.alignment="CENTER">
             <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="194.0" text="属性"
                    HBox.hgrow="ALWAYS">
                <graphic>
@@ -97,12 +97,12 @@
                      <Insets left="8.0"/>
                   </GridPane.margin>
                </Label>
-               <Label text="文件类型：" GridPane.rowIndex="1">
+               <Label text="类型：" GridPane.rowIndex="1">
                   <GridPane.margin>
                      <Insets left="8.0"/>
                   </GridPane.margin>
                </Label>
-               <Label text="位置：" GridPane.rowIndex="2">
+               <Label text="路径：" GridPane.rowIndex="2">
                   <GridPane.margin>
                      <Insets left="8.0"/>
                   </GridPane.margin>
@@ -127,7 +127,6 @@
                <Label fx:id="spaceField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                <Label fx:id="timeField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                <TextField fx:id="textField" prefHeight="26.0" prefWidth="150.0"
-                          stylesheets="@../css/Property.css"
                           GridPane.columnIndex="1"/>
                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <RadioButton fx:id="checkRead" mnemonicParsing="false" prefHeight="5.0" text="只读">
