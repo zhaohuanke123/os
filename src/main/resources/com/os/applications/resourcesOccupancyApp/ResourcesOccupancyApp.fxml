@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -87,7 +85,6 @@
                         </VBox>
                         <VBox>
                             <Label id="text1" text="内存" minHeight="45" minWidth="170"/>
-                            <Separator prefHeight="10" prefWidth="90"/>
                             <Label id="text2" fx:id="memoryText" text="1G/10GB(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
@@ -116,7 +113,6 @@
                         </VBox>
                         <VBox>
                             <Label id="text1" text="设备" minHeight="45" minWidth="170"/>
-                            <Separator prefHeight="10" prefWidth="90"/>
                             <Label id="text2" fx:id="deviceText" text="1/10(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
@@ -145,7 +141,6 @@
                         </VBox>
                         <VBox>
                             <Label id="text1" text="磁盘" minHeight="45" minWidth="170"/>
-                            <Separator prefHeight="10" prefWidth="90"/>
                             <Label id="text2" fx:id="diskText" text="0/256(0%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
@@ -175,7 +170,6 @@
                         </VBox>
                         <VBox>
                             <Label id="text1" text="PCB" minHeight="45" minWidth="170"/>
-                            <Separator prefHeight="10" prefWidth="90"/>
                             <Label id="text2" fx:id="pcbText" text="1/10(10%)" minHeight="30" minWidth="170"/>
                         </VBox>
                     </HBox>
@@ -193,21 +187,17 @@
                     <HBox id="pcbOutBox" fx:id="pcbBox2" alignment="CENTER"
                           layoutX="70" layoutY="400"
                           prefHeight="80" prefWidth="700"/>
-                    <VBox styleClass="rec" layoutX="800" layoutY="340">
+                    <VBox styleClass="rec" layoutX="800" layoutY="370">
                         <HBox alignment="CENTER">
                             <Rectangle styleClass="rec1" height="30" width="50"/>
-                            <Label styleClass="lab" prefHeight="30" prefWidth="50" text="空闲" />
-                        </HBox>
-                        <HBox alignment="CENTER">
-                            <Rectangle styleClass="rec2" height="30" width="50"/>
                             <Label styleClass="lab" prefHeight="30" prefWidth="50" text="就绪态" />
                         </HBox>
                         <HBox alignment="CENTER">
-                            <Rectangle styleClass="rec3" height="30" width="50"/>
+                            <Rectangle styleClass="rec2" height="30" width="50"/>
                             <Label styleClass="lab" prefHeight="30" prefWidth="50" text="运行态" />
                         </HBox>
                         <HBox alignment="CENTER">
-                            <Rectangle styleClass="rec4" height="30" width="50"/>
+                            <Rectangle styleClass="rec3" height="30" width="50"/>
                             <Label styleClass="lab" prefHeight="30" prefWidth="50" text="阻塞态" />
                         </HBox>
                     </VBox>

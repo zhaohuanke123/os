@@ -62,88 +62,82 @@
 
 /* 设置内存展示块的样式 */
 #memoryInBox {
-    -fx-background-color: #10B981;
+    -fx-background-color: rgb(200, 100, 100);
 }
 
 /* 设置已使用内存的样式 */
 #memoryInBox1 {
-    -fx-background-color: #10B981;
+    -fx-background-color: rgb(200, 100, 100);
 }
 
 /* 设置内存折线图的样式 */
 #memoryChart .default-color0.chart-series-line {
-    -fx-stroke: #10B981;
+    -fx-stroke: rgb(200, 100, 100);
 }
 
 /*------------------------------------------------------*/
 
 /* 设置设备展示块的样式 */
 #deviceInBox {
-    -fx-background-color: #F472B6;
+    -fx-background-color: rgb(100, 150, 100);
 }
 
 /* 设置已使用设备的样式 */
 #deviceInBox1 {
-    -fx-background-color: #F472B6;
+    -fx-background-color: rgb(100, 150, 100);
     -fx-border-color: white;
 }
 
 /* 设置设备折线图的样式 */
 #deviceChart .default-color0.chart-series-line {
-    -fx-stroke: #F472B6;
+    -fx-stroke: rgb(100, 150, 100);
 }
 
 /*------------------------------------------------------*/
 
 /* 设置磁盘展示块的样式 */
 #diskInBox {
-    -fx-background-color: #A78BFA;
+    -fx-background-color: rgb(100, 100, 150);
 }
 
 /* 设置已使用磁盘的样式 */
 #diskInBox1 {
-    -fx-background-color: #A78BFA;
+    -fx-background-color: rgb(100, 100, 150);
 }
 
 /* 设置磁盘折线图的样式 */
 #diskChart .default-color0.chart-series-line {
-    -fx-stroke: #A78BFA;
+    -fx-stroke: rgb(100, 100, 150);
 }
 
 /*------------------------------------------------------*/
 
 /* 设置pcb展示块的样式 */
 #pcbInBox {
-    -fx-background-color: #60A5FA;
-}
-
-/* 设置新建态pcb的样式 */
-#pcbInBox0 {
-    -fx-background-color: #E5E7EB;
-    -fx-border-color: white;
+    -fx-background-color: rgb(150, 50, 50);
 }
 
 /* 设置就绪态pcb的样式 */
 #pcbInBox1 {
-    -fx-background-color: #34d399;
+    -fx-background-color: rgb(255, 50, 50);
     -fx-border-color: white;
 }
 
 /* 设置运行态pcb的样式 */
 #pcbInBox2 {
-    -fx-background-color: #60A5FA;
+    -fx-background-color: rgb(50, 255, 50);
     -fx-border-color: white;
 }
 
 /* 设置阻塞态pcb的样式 */
 #pcbInBox3 {
-    -fx-background-color: #fcd34d;
+    -fx-background-color: rgb(50, 50, 255);
     -fx-border-color: white;
 }
 
 /* 设置pcb折线图的样式 */
 #pcbChart .default-color0.chart-series-line {
-    -fx-stroke: #60A5FA;
+    -fx-stroke: rgb(150, 50, 50);
 }
 
 /*------------------------------------------------------*/
@@ -156,59 +150,58 @@
 /* 设置内存使用情况展示块的样式 */
 #memoryOutBox {
     -fx-background-color: white;
-    -fx-border-color: #047857;
+    -fx-border-color: rgb(150, 100, 100);
 }
 
 /* 设置设备使用情况展示块的样式 */
 #deviceOutBox {
     -fx-background-color: white;
-    -fx-border-color: #BE185D;
+    -fx-border-color: rgb(100, 150, 100);
 }
 
 /* 设置磁盘使用情况展示块的样式 */
 #diskOutBox {
     -fx-background-color: white;
-    -fx-border-color: #6D28D9;
+    -fx-border-color: rgb(100, 100, 150);
 }
 
 /* 设置pcb使用情况展示块的样式 */
 #pcbOutBox {
     -fx-background-color: white;
-    -fx-border-color: #1D4ED8;
+    -fx-border-color: rgb(150, 50, 50);
 }
 
 /*------------------------------------------------------*/
 
+/* 设置PCB解释框的样式 */
 .rec {
     -fx-padding: 4;
     -fx-background-color: white;
      -fx-background-radius: 10;
 }
 
+/* 设置PCB就绪态解释框的样式 */
 .rec1 {
-    -fx-fill: #E5E7EB;
+    -fx-fill: rgb(255, 50, 50);
     -fx-stroke: transparent;
     -fx-stroke-width: 10;
 }
 
+/* 设置PCB运行态解释框的样式 */
 .rec2 {
-    -fx-fill: #34d399;
+    -fx-fill: rgb(50, 255, 50);
     -fx-stroke: transparent;
     -fx-stroke-width: 10;
 }
 
+/* 设置PCB阻塞态解释框的样式 */
 .rec3 {
-    -fx-fill: #60A5FA;
+    -fx-fill: rgb(50, 50, 255);
     -fx-stroke: transparent;
     -fx-stroke-width: 10;
 }
 
-.rec4 {
-    -fx-fill: #fcd34d;
-    -fx-stroke: transparent;
-    -fx-stroke-width: 10;
-}
-
+/* 设置PCB解释标签的样式 */
 .lab {
     -fx-background-color: transparent;
     -fx-font-size: 16px;

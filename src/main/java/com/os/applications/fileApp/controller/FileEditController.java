@@ -9,12 +9,9 @@ import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class FileEditController extends BaseFileController {
-//    public MenuBar menuBar;
-//    public Menu fileMenu;
     public MenuItem saveItem;
     public MenuItem save_close;
     public MenuItem closeItem;

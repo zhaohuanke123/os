@@ -30,7 +30,7 @@ import java.util.Vector;
 public class ProcessControlAppController extends BaseController {
     public AnchorPane mainPane;
     public AnchorPane mainPane1;
-    public VBox creatProButtons;
+    public VBox createProButtons;
     public Slider creatProSlider;
     @FXML
     private TableView<ProcessData> processTable;
@@ -43,11 +43,11 @@ public class ProcessControlAppController extends BaseController {
     @FXML
     private TableColumn<?, ?> whichFile;
     @FXML
-    private TableColumn<?, ?> havedDevice;
+    private TableColumn<?, ?> haveDevice;
     @FXML
-    private TableColumn<?, ?> havedMemory;
+    private TableColumn<?, ?> haveMemory;
     @FXML
-    private TableColumn<?, ?> havedPid;
+    private TableColumn<?, ?> havePid;
     @FXML
     private TableColumn<?, ?> result;
     @FXML
@@ -59,12 +59,6 @@ public class ProcessControlAppController extends BaseController {
     @FXML
     private TableColumn<?, ?> whichFile1;
     @FXML
-    private TableColumn<?, ?> havedDevice1;
-    @FXML
-    private TableColumn<?, ?> havedMemory1;
-    @FXML
-    private TableColumn<?, ?> havedPid1;
-    @FXML
     private TableColumn<?, ?> result1;
     @FXML
     private TableColumn<?, ?> progressBar1;
@@ -72,8 +66,6 @@ public class ProcessControlAppController extends BaseController {
     private CheckBox continueButton;
 
     @FXML
-
-    //初始化
     @Override
     public void init(Stage stage) {
         super.init(stage);
@@ -82,20 +74,16 @@ public class ProcessControlAppController extends BaseController {
         this.processName.setCellValueFactory(new PropertyValueFactory<>("processName"));
         this.processState.setCellValueFactory(new PropertyValueFactory<>("processState"));
         this.whichFile.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
-        this.havedDevice.setCellValueFactory(new PropertyValueFactory<>("havedDevice"));
-        this.havedMemory.setCellValueFactory(new PropertyValueFactory<>("havedMemory"));
-        this.havedPid.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
+        this.haveDevice.setCellValueFactory(new PropertyValueFactory<>("havedDevice"));
+        this.haveMemory.setCellValueFactory(new PropertyValueFactory<>("havedMemory"));
+        this.havePid.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
         this.result.setCellValueFactory(new PropertyValueFactory<>("result"));
         this.progressBar.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
-        //this.instruction.setCellValueFactory(new PropertyValueFactory<>("instruction"));
 
         //显示面板
         this.processName1.setCellValueFactory(new PropertyValueFactory<>("processName"));
         this.processState1.setCellValueFactory(new PropertyValueFactory<>("processState"));
         this.whichFile1.setCellValueFactory(new PropertyValueFactory<>("whichFile"));
-        this.havedDevice1.setCellValueFactory(new PropertyValueFactory<>("havedDevice"));
-        this.havedMemory1.setCellValueFactory(new PropertyValueFactory<>("havedMemory"));
-        this.havedPid1.setCellValueFactory(new PropertyValueFactory<>("havedPid"));
         this.result1.setCellValueFactory(new PropertyValueFactory<>("result"));
         this.progressBar1.setCellValueFactory(new PropertyValueFactory<>("progressBar"));
 
@@ -108,8 +96,8 @@ public class ProcessControlAppController extends BaseController {
             button.setDisable(true);
             Tooltip tooltip = new Tooltip(i.toString());
             button.setTooltip(tooltip);
-            creatProButtons.getChildren().add(button);
-            creatProButtons.setSpacing(10);
+            createProButtons.getChildren().add(button);
+            createProButtons.setSpacing(10);
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
                     if (!ProcessControlThread.exeFileList.isEmpty()) {
@@ -139,13 +127,13 @@ public class ProcessControlAppController extends BaseController {
 
         continueButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                for (var i : creatProButtons.getChildren()) {
+                for (var i : createProButtons.getChildren()) {
                     if (i instanceof Button) {
                         i.setDisable(true);
                     }
                 }
             } else {
-                for (var i : creatProButtons.getChildren()) {
+                for (var i : createProButtons.getChildren()) {
                     if (i instanceof Button) {
                         i.setDisable(false);
                     }
@@ -153,9 +141,7 @@ public class ProcessControlAppController extends BaseController {
             }
         });
 
-        creatProSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            ProcessManager.speed = newValue.intValue();
-        });
+        creatProSlider.valueProperty().addListener((observable, oldValue, newValue) -> ProcessManager.speed = newValue.intValue());
 
         MainController.getInstance().uiUpdateThread.processControlAppController = this;
         ProcessControlThread.processControlAppController = this;
@@ -181,7 +167,6 @@ public class ProcessControlAppController extends BaseController {
         DataLoader.processDetailDataLoad(processDataArrayList1, (Vector<Process>) updateList, "销毁进程");
         Platform.runLater(() ->
                 processTable1.setItems(FXCollections.observableArrayList(processDataArrayList1)));
-
     }
 
     @FXML
