@@ -17,12 +17,12 @@
 
 /* 设置tab卡片的样式 */
 .tab-pane .tab {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: rgb(103, 157, 238);
 }
 
 /* 设置tab卡片选中的样式 */
 .tab-pane .tab:selected {
-    -fx-background-color: rgb(103, 157, 238);
+    -fx-background-color: #e6e6e6;
 }
 
 /* 设置tab卡片文字的样式 */
@@ -34,46 +34,10 @@
 }
 
 
-.table-view .column-header,
-.table-view .column-header .filler,
-.table-view .column-header-background .filler {
-    -fx-stroke: transparent;
-    -fx-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-
-}
-
-.table-row-cell:filled:hover {
-    -fx-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-}
-
-.table-view:row-selection {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-fixed-cell-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-
-}
-
-.table-view .table-column {
-    -fx-text-alignment: center;
-    -fx-alignment: CENTER
-
-}
-
-
-#right .table-column {
-    -fx-background-color: lightblue;
-}
-
 /* 设置表格的样式 */
 .table-view {
     -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
+    -fx-table-cell-border-color: white;
     -fx-padding: 20px;
 }
 
@@ -96,8 +60,14 @@
 
 /* 设置表格选中的样式 */
 .table-row-cell:selected {
-    -fx-table-cell-border-color: transparent;
-    -fx-background-color: white;
+    -fx-table-cell-border-color: white;
     -fx-text-fill: black;
-    -fx-font-weight: bold;
+}
+
+/* 设置表格每行的样式 */
+.table-row-cell {
+    -fx-pref-height: 40px;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: white;
 }

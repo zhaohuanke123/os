@@ -23,8 +23,8 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
                 "/com/os/applications/fileApp/fxmls/Property.fxml",
                 (block.getObject() instanceof Folder) ? "/com/os/applications/fileApp/res/folder.png" : "/com/os/applications/fileApp/res/file.png",
                 "属性",
-                -1,
-                -1
+                360,
+                350
         );
 
         this.block = block;

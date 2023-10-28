@@ -50,7 +50,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         super("/com/os/applications/fileApp/fxmls/FileApp.fxml",
                 "/com/os/applications/fileApp/res/folder.png",
                 "磁盘文件管理系统",
-                -1, -1);
+                800,
+                650);
     }
 
     @Override

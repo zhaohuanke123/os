@@ -1,1 +1,13 @@
 @import "../../WindowPane.css";
+
+#aButton {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-border-color: transparent;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-background-insets: 0;
+}
+
+#aButton:hover {
+    -fx-background-color: rgba(255, 255, 255);
+}

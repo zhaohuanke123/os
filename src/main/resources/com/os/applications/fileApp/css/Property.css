@@ -7,12 +7,12 @@
 
 /* 设置tab卡片的样式 */
 .tab-pane .tab {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: rgb(103, 157, 238);
 }
 
 /* 设置tab卡片选中的样式 */
 .tab-pane .tab:selected {
-    -fx-background-color: rgb(103, 157, 238);
+    -fx-background-color: #e6e6e6;
 }
 
 /* 设置tab卡片文字的样式 */
@@ -23,54 +23,26 @@
     -fx-font-weight: bold;
 }
 
-#flowPane {
-    -fx-background-color: #F9FAFB;
-    -fx-border-color: transparent;
-    /*-fx-border-radius: 0 0 12 12 ;*/
-    /*-fx-background-radius: 0 0  12 12;*/
-}
 
 .text-field {
-    -fx-background-color: rgba(53, 89, 119, 0.3);
-    -fx-border-color: transparent;
-}
-
-.text-field .scroll-pane {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.text-field .scroll-pane .viewport {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.text-field .scroll-pane .content {
-    -fx-background-color: transparent;
+    -fx-background-color: rgb(255, 255, 255, 0.9);
     -fx-border-color: transparent;
 }
 
 
-#bButton {
-    -fx-background-color: rgba(53, 89, 119, 0.4);
-    -fx-border-color: rgba(53, 89, 119, 0.2);
-    -fx-background-radius: 12 12 12 12;
-    -fx-border-radius: 12 12 12 12;
+#aLabel {
+    -fx-font-size: 20px;
+}
+
+
+#aButton {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-border-color: transparent;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
     -fx-background-insets: 0;
 }
 
-#bButton:hover {
-    -fx-background-color: rgba(53, 89, 119, 0.6);
-    -fx-border-color: rgba(53, 89, 119, 0.5);
-    -fx-background-radius: 12 12 12 12;
-    -fx-border-radius: 12 12 12 12;
-    -fx-background-insets: 0;
-}
-
-#bButton:pressed {
-    -fx-background-color: rgba(53, 89, 119, 0.6);
-    -fx-border-color: rgba(53, 89, 119, 0.5);
-    -fx-background-radius: 12 12 12 12;
-    -fx-border-radius: 12 12 12 12;
-    -fx-background-insets: 0;
+#aButton:hover {
+    -fx-background-color: rgba(255, 255, 255);
 }

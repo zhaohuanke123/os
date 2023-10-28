@@ -5,7 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane id="topMainPane" stylesheets="@../css/FileApp.css"
+<?import javafx.scene.Cursor?>
+<AnchorPane fx:id="topMainPane" stylesheets="@../css/FileApp.css"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.os.applications.fileApp.controller.FileApplicationController">
@@ -13,6 +14,9 @@
 <!--    设置窗口的titleBar-->
     <BorderPane fx:id="titleBar" onMouseDragged="#dragBar" onMousePressed="#pressBar"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <cursor>
+            <Cursor fx:constant="DEFAULT"/>
+        </cursor>
         <!--设置窗口的标题和图标-->
         <left>
             <HBox fx:id="titleBarL" alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
@@ -28,7 +32,6 @@
                 </Label>
             </HBox>
         </left>
-        <!--设置3个控制按钮，最小化、关闭-->
         <right>
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="55.0"
                   spacing="10.0" BorderPane.alignment="CENTER">
@@ -40,7 +43,6 @@
                         </ImageView>
                     </graphic>
                 </Button>
-<!--                最小化按钮-->
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" prefHeight="0.0" onMouseClicked="#minimizeStage">
                     <graphic>
@@ -49,7 +51,15 @@
                         </ImageView>
                     </graphic>
                 </Button>
-<!--                关闭按钮-->
+                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" onMouseClicked="#resizeStage" prefHeight="0.0">
+                    <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <Image url="@../../../img/change.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
                         mnemonicParsing="false" prefHeight="0.0" onMouseClicked="#closeStage">
                     <graphic>
@@ -63,107 +73,87 @@
     </BorderPane>
 
 <!--    包含"文件管理"、"磁盘使用"、"已打开文件"和"系统可执行文件"四个选项-->
-    <TabPane fx:id="TabP" layoutY="29.0" tabClosingPolicy="UNAVAILABLE"
-             AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0"
-             prefHeight="630.0" prefWidth="900.0">
-
+    <TabPane fx:id="TabP" layoutY="30" tabClosingPolicy="UNAVAILABLE"
+             AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="0"
+             AnchorPane.rightAnchor="0" AnchorPane.topAnchor="45">
+        <cursor>
+            <Cursor fx:constant="DEFAULT"/>
+        </cursor>
         <Tab id="tab" text="文件管理">
             <AnchorPane>
-                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-                    <HBox>
-                        <Label id="recentPath" prefHeight="35.0" prefWidth="80.0"
-                               text="当前路径:" textAlignment="CENTER">
-                            <font>
-                                <Font name="Segue UI Symbol" size="14.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="40.0"/>
-                            </HBox.margin>
-                        </Label>
-                        <Label fx:id="currentPath" prefWidth="700.0" text="C:">
-                            <font>
-                                <Font name="Bell MT" size="16.0"/>
-                            </font>
-                            <padding>
-                                <Insets left="5.0" bottom="5.0" top="5.0"/>
-                            </padding>
-                        </Label>
-                    </HBox>
-                    <HBox alignment="CENTER">
-                        <TreeView fx:id="treeView" prefHeight="520" prefWidth="200">
-                            <HBox.margin>
-                                <Insets top="15.0"/>
-                            </HBox.margin>
-                        </TreeView>
-                        <FlowPane fx:id="flowPane" prefHeight="520" prefWidth="650">
-                            <HBox.margin>
-                                <Insets top="15.0"/>
-                            </HBox.margin>
-                        </FlowPane>
-                    </HBox>
-                </VBox>
+                <Label id="recentPath" text="当前路径:" textAlignment="CENTER"
+                       prefHeight="35" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+                    <font>
+                        <Font name="Segue UI Symbol" size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="currentPath" text="C:" prefHeight="35"
+                       AnchorPane.leftAnchor="90" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+                    <font>
+                        <Font name="Bell MT" size="16.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="5.0" bottom="5.0" top="5.0"/>
+                    </padding>
+                </Label>
+                <TreeView fx:id="treeView" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10"
+                          prefWidth="200" AnchorPane.topAnchor="70"/>
+                <FlowPane fx:id="flowPane" AnchorPane.leftAnchor="220" AnchorPane.bottomAnchor="10"
+                          AnchorPane.rightAnchor="20" AnchorPane.topAnchor="70"/>
             </AnchorPane>
         </Tab>
 
         <Tab id="tab" text="磁盘使用">
-            <Pane>
-                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
-                    <TableView fx:id="diskTable">
-                        <columns>
-                            <TableColumn prefWidth="140.0" text="磁盘块"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="140.0" text="索引"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="180.0" text="类型"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="300.0" text="内容"
-                                         resizable="false" sortable="false" />
-                        </columns>
-                    </TableView>
-                </HBox>
-            </Pane>
+            <AnchorPane>
+                <TableView fx:id="diskTable" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20"
+                           AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+                    <columns>
+                        <TableColumn text="磁盘块" sortable="false" />
+                        <TableColumn text="索引" sortable="false" />
+                        <TableColumn text="类型" sortable="false" />
+                        <TableColumn text="内容" sortable="false" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </AnchorPane>
         </Tab>
 
         <Tab id="tab" text="已打开文件">
-            <Pane>
-                <HBox layoutX="50.0" layoutY="5.0" prefHeight="600">
-                    <TableView fx:id="openFile">
-                        <columns>
-                            <TableColumn prefWidth="110" text="文件名"
-                                         resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="120" text="打开方式"
-                                         resizable="false" sortable="false"/>
-                            <TableColumn prefWidth="120" text="起始盘块"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="120" text="文件长度"
-                                         resizable="false" sortable="false" />
-                            <TableColumn prefWidth="300" text="文件路径"
-                                         resizable="false" sortable="false" />
-                        </columns>
-                    </TableView>
-                </HBox>
-            </Pane>
+            <AnchorPane>
+                <TableView fx:id="openFile" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20"
+                           AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+                    <columns>
+                        <TableColumn text="文件名" sortable="false"/>
+                        <TableColumn text="打开方式" sortable="false"/>
+                        <TableColumn text="起始盘块" sortable="false" />
+                        <TableColumn text="文件长度" sortable="false" />
+                        <TableColumn text="文件路径" sortable="false" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </AnchorPane>
         </Tab>
 
         <Tab text="系统可执行文件">
-            <AnchorPane id="mainPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
-                        AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
-
+            <AnchorPane id="mainPane">
                 <TableView fx:id="executableFileTable" onMousePressed="#selectFile"
-                           prefWidth="220.0" AnchorPane.bottomAnchor="20.0"
-                           AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
+                           prefWidth="220" AnchorPane.bottomAnchor="100"
+                           AnchorPane.leftAnchor="20" AnchorPane.topAnchor="50">
                     <columns>
-                        <TableColumn fx:id="fileName" prefWidth="180.0" text="可执行文件"
+                        <TableColumn fx:id="fileName" prefWidth="180.0" text="系统可执行文件"
                                      resizable="false" sortable="false"/>
                     </columns>
                 </TableView>
                 <TextArea id="contentField" fx:id="contentField" editable="false"
-                          layoutX="300.0" layoutY="20.0" prefHeight="570.0" prefWidth="550.0"
-                          stylesheets="@../css/FileEdit.css" wrapText="true">
+                          stylesheets="@../css/FileEdit.css" wrapText="true"
+                          AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="40"
+                          AnchorPane.leftAnchor="250" AnchorPane.topAnchor="20">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24"/>
                     </font>
                 </TextArea>
             </AnchorPane>

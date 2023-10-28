@@ -9,6 +9,7 @@ import com.os.dataModels.InstructionData;
 import com.os.utility.DataLoader;
 import com.os.utility.fileSystem.Disk;
 import com.os.utility.fileSystem.File;
+import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -70,6 +71,15 @@ public class FileApplicationController extends BaseFileController {
         this.fileName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         // 更新可执行文件表
         updateFileTable(this.executableFileTable);
+
+        // 创建绘图工具
+        DrawUtil drawUtil = new DrawUtil();
+        drawUtil.addDrawFunc(stage, this.topMainPane);
+
+        // 监听窗口大小变化，根据窗口大小自适应布局
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
+        this.adaptWindow();  // 初始时适应窗口
     }
 
     // 更新可执行文件表
