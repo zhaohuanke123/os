@@ -19,4 +19,8 @@ public class PropertyController extends BaseFileController {
    public TextField textField;
    public Button cancelButton;
    public HBox titleBarR;
+   public Label nameField;
+   public Label propertyField;
+   public Label propertyLabel;
+   public Label propertyLabel1;
 }
