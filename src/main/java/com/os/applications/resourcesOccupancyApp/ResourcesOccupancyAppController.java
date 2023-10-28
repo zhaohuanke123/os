@@ -13,7 +13,6 @@ import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -44,7 +43,6 @@ public class ResourcesOccupancyAppController extends BaseController {
     public LineChart<String, Number> deviceChart;
     public LineChart<String, Number> diskChart;
     public LineChart<String, Number> pcbChart;
-    public Button DescriptionBtn;
     private ChartBean[] chartBeans;
 
     private VBox[] boxes1;
@@ -54,7 +52,6 @@ public class ResourcesOccupancyAppController extends BaseController {
     //endregion
     @Override
     public void init(Stage stage) {
-//        super.init(stage);
         this.stage = stage;
 
         boxes1 = new VBox[]{this.memoryBox1, this.diskBox1, this.deviceBox1, this.pcbBox1};

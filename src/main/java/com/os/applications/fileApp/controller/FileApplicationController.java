@@ -2,7 +2,6 @@ package com.os.applications.fileApp.controller;
 
 import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.HelpDialogApplication;
-import com.os.applications.fileApp.application.TipDialogApplication;
 import com.os.applications.processControlApp.processSystem.ExeFile;
 import com.os.applications.processControlApp.processSystem.ProcessManager;
 import com.os.dataModels.ExecutableFileData;
@@ -19,7 +18,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -127,12 +125,12 @@ public class FileApplicationController extends BaseFileController {
             text.setFont(Font.font("宋体", 20));
             helpWindow.controller.textBody.getChildren().add(text);
 
-            text = new Text("3. 已打开文件页面，在该页面显示了当前已打开文件的文件名、打开方式、起始盘块、文件长度、文件路径信息。\n\n");
+            text = new Text("3. 已打开文件页面。在该页面显示了当前已打开文件的文件名、打开方式、起始盘块、文件长度、文件路径信息。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
             helpWindow.controller.textBody.getChildren().add(text);
 
-            text = new Text("4. 系统可执行文件页面，在该页面显示了可执行文件的具体内容，10个可执行文件的内容均为随机生成。\n\n");
+            text = new Text("4. 系统可执行文件页面。在该页面显示了可执行文件的具体内容，10个可执行文件的内容均为随机生成。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
             helpWindow.controller.textBody.getChildren().add(text);

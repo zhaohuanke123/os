@@ -18,9 +18,9 @@ public class FAT implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final int DISK_NUM = 256;
     private static ObservableList<File> openedFiles;  // 记录已打开的文件
-    private Disk[] disks;
+    private final Disk[] disks;
     private final Folder c;
-    private List<Path> paths;
+    private final List<Path> paths;
 
     public FAT() {
         File f1 = new File("FAT", null, 0, null);
@@ -289,7 +289,7 @@ public class FAT implements Serializable {
         return n;
     }
 
-    public boolean reallocBlocks(int num, Disk block) {
+    public void reallocBlocks(int num, Disk block) {
         BaseFile thisFile = (BaseFile) block.getObject();
         int begin = thisFile.getDiskNum();
         int index = this.disks[begin].getIndex();
@@ -308,7 +308,7 @@ public class FAT implements Serializable {
         if (num > oldNum) {
             end = num - oldNum;
             if (this.freeBlocksCount() < end) {
-                return false;
+                return;
             }
 
             next = this.searchEmptyDiskBlock();
@@ -338,8 +338,6 @@ public class FAT implements Serializable {
 
         if (thisFile instanceof File)
             thisFile.setLength(num);
-
-        return true;
     }
 
     public List<Folder> getFolders(String path) {
@@ -527,10 +525,6 @@ public class FAT implements Serializable {
         return DISK_NUM - checkNumOfFreeDisk();
     }
 
-    public void setDiskBlocks(Disk[] disks) {
-        this.disks = disks;
-    }
-
     public Disk getBlock(int index) {
         return this.disks[index];
     }
@@ -539,20 +533,8 @@ public class FAT implements Serializable {
         return openedFiles;
     }
 
-    public void setOpenedFiles(ObservableList<File> openFiles) {
-        openedFiles = openFiles;
-    }
-
     public List<Path> getPaths() {
         return this.paths;
-    }
-
-    public void setPaths(List<Path> paths) {
-        this.paths = paths;
-    }
-
-    public void addPath(Path path) {
-        this.paths.add(path);
     }
 
     public void removePath(Path path) {
@@ -565,21 +547,6 @@ public class FAT implements Serializable {
 
     public void replacePath(Path oldPath, String newName) {
         oldPath.setPathName(newName);
-    }
-
-    public boolean hasPath(Path path) {
-        Iterator<Path> iterator = this.paths.iterator();
-
-        Path p;
-        do {
-            if (!iterator.hasNext()) {
-                return false;
-            }
-
-            p = iterator.next();
-        } while (!p.equals(path));
-
-        return true;
     }
 
     public boolean hasName(String path, String name) {
@@ -633,7 +600,6 @@ public class FAT implements Serializable {
                 n = length / 64;
                 ++n;
             }
-
             return n;
         }
     }

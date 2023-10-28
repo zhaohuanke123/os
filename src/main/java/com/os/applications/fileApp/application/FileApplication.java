@@ -15,7 +15,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -478,7 +477,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             copyFlag = true;
         });
 
-        // 移动菜单项的操作
+        // 剪切菜单项的操作
         this.moveItem.setOnAction((ActionEvent) -> {
             Disk thisBlock = this.blockList.get(this.currentId);
             copyBlock = thisBlock;

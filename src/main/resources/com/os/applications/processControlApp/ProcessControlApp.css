@@ -69,3 +69,35 @@
 #right .table-column {
     -fx-background-color: lightblue;
 }
+
+/* 设置表格的样式 */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 20px;
+}
+
+/* 设置表格标题的样式 */
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: white;
+}
+
+/* 设置表格内容的样式 */
+.table-view .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-text-fill: black;
+}
+
+/* 设置表格文字的样式 */
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+/* 设置表格选中的样式 */
+.table-row-cell:selected {
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
