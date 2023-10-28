@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;
 
+import java.util.Date;
+
 public class ProcessData {
     private final StringProperty processName = new SimpleStringProperty();
     private final StringProperty processState = new SimpleStringProperty();
@@ -13,6 +15,7 @@ public class ProcessData {
     private final StringProperty havedMemory = new SimpleStringProperty();
     private final StringProperty havedPid = new SimpleStringProperty();
     private final StringProperty result = new SimpleStringProperty();
+    private final StringProperty finishTime = new SimpleStringProperty();
     private ProgressBar progressBar = new ProgressBar();
 
     public String getProcessName() {
@@ -161,5 +164,15 @@ public class ProcessData {
         double progress = (double) process.PC / (double) process.exeFile.instructionArray.size();
         this.progressBar.setProgress(progress);
         this.setProgressBar(this.progressBar);
+
+        this.finishTime.set(process.finishTime);
+    }
+
+    public String getFinishTime() {
+        return finishTime.get();
+    }
+
+    public StringProperty finishTimeProperty() {
+        return finishTime;
     }
 }

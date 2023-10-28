@@ -3,6 +3,8 @@ package com.os.applications.processControlApp.processSystem;
 import com.os.applications.resourcesOccupancyApp.models.MemoryBlock;
 import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 
+import java.util.Date;
+
 public class Process {
     public int name;
     /**
@@ -24,6 +26,7 @@ public class Process {
     public int deviceId;
     public int deviceRemainTime;
     public int whichFile;
+    public String finishTime;
 
     public Process(int name, ExeFile exeFile, int whichFile) {
         this.name = name;
@@ -69,6 +72,8 @@ public class Process {
     public boolean Destroy() {
         this.state = -1;
         boolean isSucceed = ResourcesOccupancyManager.retrieveMemory(this.memoryBlock);
+        Date date = new Date();
+        finishTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
         if (!isSucceed) {
             return false;
