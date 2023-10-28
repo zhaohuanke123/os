@@ -56,9 +56,9 @@
                prefHeight="180" prefWidth="325">
       <Text fx:id="text" lineSpacing="8.0" strokeType="OUTSIDE" strokeWidth="0.0"
             AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15"/>
-      <Button fx:id="acceptButton" layoutX="155.0" layoutY="125.0" mnemonicParsing="false"
+      <Button id="aButton" fx:id="acceptButton" layoutX="155.0" layoutY="125.0" mnemonicParsing="false"
               prefHeight="34.0" prefWidth="68.0" text="确认"/>
-      <Button fx:id="cancelButton" layoutX="245.0" layoutY="125.0" mnemonicParsing="false"
+      <Button id="aButton" fx:id="cancelButton" layoutX="245.0" layoutY="125.0" mnemonicParsing="false"
               prefHeight="34.0" prefWidth="68.0" text="取消"/>
    </AnchorPane>
 </AnchorPane>
