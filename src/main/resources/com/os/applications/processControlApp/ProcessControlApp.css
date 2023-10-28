@@ -34,40 +34,9 @@
 }
 
 
-.table-view .column-header,
-.table-view .column-header .filler,
-.table-view .column-header-background .filler {
-    -fx-stroke: transparent;
-    -fx-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-
-}
-
-.table-row-cell:filled:hover {
-    -fx-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-}
-
-.table-view:row-selection {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-fixed-cell-size: 30;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-
-}
-
-.table-view .table-column {
-    -fx-text-alignment: center;
-    -fx-alignment: CENTER
-
-}
-
 /* 设置表格的样式 */
 .table-view {
-    -fx-background-color: transparent;
+    -fx-background-color: red;
     -fx-table-cell-border-color: transparent;
     -fx-padding: 20px;
 }
@@ -92,7 +61,5 @@
 /* 设置表格选中的样式 */
 .table-row-cell:selected {
     -fx-table-cell-border-color: transparent;
-    -fx-background-color: white;
     -fx-text-fill: black;
-    -fx-font-weight: bold;
 }

@@ -69,9 +69,8 @@
         </right>
     </BorderPane>
 
-    <AnchorPane stylesheets="@ResourcesOccupancyShowApp.css"
-                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
-                AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
+    <AnchorPane AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="5"
+                AnchorPane.rightAnchor="5" AnchorPane.topAnchor="50">
         <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT"
                  side="LEFT" tabClosingPolicy="UNAVAILABLE"
                  AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
