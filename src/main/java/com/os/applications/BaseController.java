@@ -94,6 +94,12 @@ public class BaseController {
             // 如果窗口没有最大化，则最大化窗口
             this.stage.setWidth(this.stage.getMaxWidth());
             this.stage.setHeight(this.stage.getMaxHeight());
+
+            // 将窗口移动到左上角
+            this.stage.setX(0);
+            this.stage.setY(0);
+            this.adaptWindow();
+
             if (drawUtil != null)
                 drawUtil.setCanResize(false);
         }

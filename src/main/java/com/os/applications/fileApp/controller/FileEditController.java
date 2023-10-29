@@ -23,7 +23,7 @@ public class FileEditController extends BaseFileController {
         super.init(stage);
 
         // 创建绘图工具
-        DrawUtil drawUtil = new DrawUtil();
+         drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
 
         // 监听窗口大小变化，根据窗口大小自适应布局

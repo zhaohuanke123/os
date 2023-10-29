@@ -73,7 +73,7 @@ public class FileApplicationController extends BaseFileController {
         updateFileTable(this.executableFileTable);
 
         // 创建绘图工具
-        DrawUtil drawUtil = new DrawUtil();
+        drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
         // 监听窗口大小变化，根据窗口大小自适应布局
         stage.widthProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(this::adaptWindow));
