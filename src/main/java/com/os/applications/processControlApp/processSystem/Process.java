@@ -3,6 +3,7 @@ package com.os.applications.processControlApp.processSystem;
 import com.os.applications.resourcesOccupancyApp.models.MemoryBlock;
 import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Process {
@@ -73,7 +74,8 @@ public class Process {
         this.state = -1;
         boolean isSucceed = ResourcesOccupancyManager.retrieveMemory(this.memoryBlock);
         Date date = new Date();
-        finishTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        SimpleDateFormat sdf_hms = new SimpleDateFormat("HH:mm:ss");
+        finishTime = sdf_hms.format(date);
 
         if (!isSucceed) {
             return false;

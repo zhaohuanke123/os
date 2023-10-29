@@ -217,7 +217,7 @@ public class MainController implements Initializable {
     private void timeInit() {
         timeButton1.textProperty().bind(timeModel.time1Property());
         timeButton2.textProperty().bind(timeModel.time2Property());
-        SimpleDateFormat sdf_ymd = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf_ymd = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat sdf_hms = new SimpleDateFormat("HH:mm:ss");
 
         new Thread(() -> {
