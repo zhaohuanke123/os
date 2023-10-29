@@ -9,7 +9,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.shape.Rectangle?>
-<AnchorPane id="topMainPane"
+<AnchorPane fx:id="topMainPane"
             stylesheets="@ResourcesOccupancyShowApp.css"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
