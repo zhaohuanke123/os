@@ -39,6 +39,7 @@ public class FileApplicationController extends BaseFileController {
     public TableView<Disk> diskTable;  // 显示磁盘信息的表格
     @FXML
     public TableView<File> openFile;  // 显示已打开文件信息的表格
+    public Button formatFat;
     @FXML
     private TableView<ExecutableFileData> executableFileTable;  // 显示可执行文件数据的表格
     @FXML

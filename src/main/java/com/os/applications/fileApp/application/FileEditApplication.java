@@ -22,7 +22,7 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
     private final Stage stage;
     public static Map<File, Stage> maps = new HashMap<>();
 
-    public FileEditApplication(Stage stage, File file, Disk block)  {
+    public FileEditApplication(Stage stage, File file, Disk block) {
         super(
                 "/com/os/applications/fileApp/fxmls/FileEdit.fxml",
                 "/com/os/applications/fileApp/res/file.png",
@@ -72,7 +72,7 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
             this.newContent = controller.contentField.getText();
             this.saveContent(this.newContent);
             FAT.removeOpenedFile(this.block);
-            this.stage.close();
+            controller.closeStage();
         });
 
         location = getClass().getResource("/com/os/applications/fileApp/res/close.png");
@@ -81,7 +81,7 @@ public class FileEditApplication extends BaseFileApplication<FileEditController>
         ((ImageView) controller.closeItem.getGraphic()).setFitHeight(15.0);
         controller.closeItem.setOnAction((ActionEvent) -> {
             FAT.removeOpenedFile(this.block);
-            this.stage.close();
+            controller.closeStage();
         });
 
         controller.init(this.file, this.stage, this.block);

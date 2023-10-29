@@ -88,7 +88,7 @@
                     </font>
                 </Label>
                 <Label fx:id="currentPath" text="C:" prefHeight="35"
-                       AnchorPane.leftAnchor="90" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+                       AnchorPane.leftAnchor="90" AnchorPane.rightAnchor="100" AnchorPane.topAnchor="20">
                     <font>
                         <Font name="Bell MT" size="16.0"/>
                     </font>
@@ -96,6 +96,9 @@
                         <Insets left="5.0" bottom="5.0" top="5.0"/>
                     </padding>
                 </Label>
+<!--                一个按钮，用于格式化-->
+                <Button fx:id="formatFat" text="格式化" prefHeight="35" prefWidth="60"
+                        AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20"/>
                 <TreeView fx:id="treeView" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10"
                           prefWidth="200" AnchorPane.topAnchor="70"/>
                 <FlowPane fx:id="flowPane" AnchorPane.leftAnchor="220" AnchorPane.bottomAnchor="10"
