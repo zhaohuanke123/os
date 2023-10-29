@@ -71,7 +71,7 @@
 
     <AnchorPane AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="5"
                 AnchorPane.rightAnchor="5" AnchorPane.topAnchor="50">
-        <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT"
+        <TabPane id="tabPane" nodeOrientation="LEFT_TO_RIGHT"
                  side="LEFT" tabClosingPolicy="UNAVAILABLE"
                  AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
                  AnchorPane.rightAnchor="20" AnchorPane.topAnchor="10">

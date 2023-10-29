@@ -7,6 +7,7 @@ import com.os.main.MainController;
 import com.os.utility.fileSystem.FAT;
 import com.os.applications.resourcesOccupancyApp.models.ResourcesOccupancyManager;
 import com.os.utility.uiUtil.CompSet;
+import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;

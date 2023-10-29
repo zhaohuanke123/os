@@ -412,7 +412,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
-            } else {
+            }
+            else {
                 int no = fat.createFolder(this.currentPath);
                 if (no == -1) {
                     try {
@@ -420,7 +421,8 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                     } catch (Exception e) {
                         System.out.println(Arrays.toString(e.getStackTrace()));
                     }
-                } else {
+                }
+                else {
                     Folder newFolder = (Folder) fat.getBlock(no).getObject();
                     Path newPath = newFolder.getPath();
                     // 清空图标区域并显示更新后的图标

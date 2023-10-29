@@ -12,7 +12,7 @@ public class CompSet {
     }
 
     private static void setStageHeight(Stage stage, double height) {
-        stage.setMaxHeight(MainController.getInstance().sceneHeight);
+        stage.setMaxHeight(MainController.getInstance().sceneHeight - MainController.getInstance().appBox.getHeight());
         stage.setMinHeight(height);
         stage.setHeight(height);
     }

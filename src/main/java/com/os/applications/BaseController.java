@@ -16,6 +16,10 @@ public class BaseController {
     protected Stage stage;  // 窗口对象
     protected double xOffset = 0.0;  // 鼠标拖动时的X偏移
     protected double yOffset = 0.0;  // 鼠标拖动时的Y偏移
+    protected double preX = 0.0;  // 记录最大化前的X坐标
+    protected double preY = 0.0;  // 记录最大化前的Y坐标
+    protected double preWidth = 0.0;  // 记录最大化前的宽度
+    protected double preHeight = 0.0;  // 记录最大化前的高度
 
     @FXML
     protected BorderPane titleBar;  // 标题栏界面组件
@@ -78,19 +82,33 @@ public class BaseController {
         this.haveResize = false;
 
         if (!this.isMax) {
+            // 记录最大化前的坐标
+            this.preX = this.stage.getX();
+            this.preY = this.stage.getY();
+
+            // 记录最大化前的大小
+            this.preWidth = this.stage.getWidth();
+            this.preHeight = this.stage.getHeight();
+
             // 如果窗口没有最大化，则最大化窗口
             this.stage.setWidth(this.stage.getMaxWidth());
             this.stage.setHeight(this.stage.getMaxHeight());
-        } else {
-            // 如果窗口已经最大化，则还原窗口
-            this.stage.setWidth(this.stage.getMinWidth());
-            this.stage.setHeight(this.stage.getMinHeight());
-        }
 
-        // 调整窗口布局
-        this.stage.setX(0.0);
-        this.stage.setY(0.0);
-        this.adaptWindow();
+            // 调整窗口布局
+            this.stage.setX(0.0);
+            this.stage.setY(0.0);
+            this.adaptWindow();
+        }
+        else {
+            // 如果窗口已经最大化，则还原窗口
+            this.stage.setWidth(this.preWidth);
+            this.stage.setHeight(this.preHeight);
+
+            // 恢复最大化前的坐标
+            this.stage.setX(this.preX);
+            this.stage.setY(this.preY);
+            this.adaptWindow();
+        }
 
         // 改变窗口是否最大化的记录
         this.isMax = !this.isMax;

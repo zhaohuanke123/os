@@ -29,18 +29,16 @@ public class DrawUtil {
          double nextY = stage.getY();
          double nextWidth = stage.getWidth();
          double nextHeight = stage.getHeight();
+
          if (this.isRight || this.isBottomRight) {
             nextWidth = x;
          }
-
          if (this.isBottomRight || this.isBottom) {
             nextHeight = y;
          }
-
          if (nextWidth <= this.MIN_WIDTH) {
             nextWidth = this.MIN_WIDTH;
          }
-
          if (nextHeight <= this.MIN_HEIGHT) {
             nextHeight = this.MIN_HEIGHT;
          }
@@ -65,16 +63,17 @@ public class DrawUtil {
             if (x >= width - (double)this.RESIZE_WIDTH) {
                this.isBottomRight = true;
                cursorType = Cursor.SE_RESIZE;
-            } else {
+            }
+            else {
                this.isBottom = true;
                cursorType = Cursor.S_RESIZE;
             }
          }
-      } else if (x >= width - (double)this.RESIZE_WIDTH) {
+      }
+      else if (x >= width - (double)this.RESIZE_WIDTH) {
          this.isRight = true;
          cursorType = Cursor.E_RESIZE;
       }
-
       root.setCursor(cursorType);
    }
 }
