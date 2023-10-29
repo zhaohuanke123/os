@@ -1,17 +1,5 @@
 @import "../../WindowPane.css";
 
-#formatFat {
-    -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-border-color: transparent;
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-    -fx-background-insets: 0;
-}
-
-#formatFat:hover {
-    -fx-background-color: rgba(255, 255, 255);
-}
-
 /* 设置tab顶部的样式 */
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
@@ -47,6 +35,26 @@
     -fx-border-color: black;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+}
+
+
+/* 设置格式化按钮的样式 */
+#formatFat {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-background-radius: 8;
+    -fx-cursor: hand; /* 鼠标悬停时显示手型光标 */
+}
+
+/* 设置格式化按钮悬浮的样式 */
+#formatFat:hover {
+    -fx-background-color: rgba(255, 255, 255, 1);
+    /* 添加一个平滑的背景颜色变化效果 */
+}
+
+/* 设置格式化按钮点击的样式 */
+#formatFat:pressed {
+    -fx-opacity: 0.8;
 }
 
 

@@ -82,13 +82,13 @@
         <Tab id="tab" text="文件管理">
             <AnchorPane>
                 <Label id="recentPath" text="当前路径:" textAlignment="CENTER"
-                       prefHeight="35" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+                       prefHeight="35" AnchorPane.leftAnchor="30" AnchorPane.topAnchor="20">
                     <font>
                         <Font name="Segue UI Symbol" size="14.0"/>
                     </font>
                 </Label>
                 <Label fx:id="currentPath" text="C:" prefHeight="35"
-                       AnchorPane.leftAnchor="90" AnchorPane.rightAnchor="100" AnchorPane.topAnchor="20">
+                       AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="80" AnchorPane.topAnchor="20">
                     <font>
                         <Font name="Bell MT" size="16.0"/>
                     </font>
@@ -97,8 +97,17 @@
                     </padding>
                 </Label>
 <!--                一个按钮，用于格式化-->
-                <Button fx:id="formatFat" text="格式化" prefHeight="35" prefWidth="60"
-                        AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20"/>
+                <Button fx:id="formatFat" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
+                        mnemonicParsing="false" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="10">
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../../../img/delete.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="格式化"/>
+                    </tooltip>
+                </Button>
                 <TreeView fx:id="treeView" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10"
                           prefWidth="200" AnchorPane.topAnchor="70"/>
                 <FlowPane fx:id="flowPane" AnchorPane.leftAnchor="220" AnchorPane.bottomAnchor="10"
