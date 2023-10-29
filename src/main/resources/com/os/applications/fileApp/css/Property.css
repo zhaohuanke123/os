@@ -12,7 +12,12 @@
 
 /* 设置tab卡片选中的样式 */
 .tab-pane .tab:selected {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: rgb(230, 230, 230);
+}
+
+/* 设置tab卡片悬浮的样式 */
+.tab-pane .tab:hover {
+    -fx-background-color: rgb(230, 230, 230, 0.9);
 }
 
 /* 设置tab卡片文字的样式 */

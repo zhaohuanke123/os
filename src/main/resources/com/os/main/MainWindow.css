@@ -3,8 +3,9 @@
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.2em;
-    -fx-text-fill: #1a1918;
+    -fx-font-size: 1.5em;
+    -fx-text-fill: black;
+    -fx-padding: 0;
 }
 
 
@@ -15,7 +16,7 @@
     -fx-border-insets: 1, 1, 1, 1;
 
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.2em; /* 12 */
+    -fx-font-size: 1.2em;
     -fx-text-fill: #828282;
 }
 
