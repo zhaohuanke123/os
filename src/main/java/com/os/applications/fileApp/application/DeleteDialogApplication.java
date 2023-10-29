@@ -10,9 +10,19 @@ import java.io.IOException;
 import javafx.stage.Stage;
 
 public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogController> {
-    private final Disk block;  // 要删除的磁盘块
-    private final String tipString;  // 用于显示的提示信息
-    private final FileApplication mainView;  // 主视图
+    private Disk block;  // 要删除的磁盘块
+    private String tipString;  // 用于显示的提示信息
+    private FileApplication mainView;  // 主视图
+
+    public DeleteDialogApplication() {
+        super(
+                "/com/os/applications/fileApp/fxmls/DeleteDialog.fxml",
+                "/com/os/applications/fileApp/res/tip.png",
+                "删除",
+                -1,
+                -1
+        );
+    }
 
     public DeleteDialogApplication(FileApplication mainView, Disk block) {
         super(
@@ -30,8 +40,7 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
                     "\n类型: " + folder.getType() +
                     "\n大小: " + folder.getSize() + "B" +
                     "\n创建时间: " + folder.getCreateTime();
-        }
-        else {
+        } else {
             File file = (File) block.getObject();
             msg = "名称: " + file.getName() +
                     "\n类型: " + file.getType() +
@@ -49,5 +58,11 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
     public void start(Stage stage) throws IOException {
         super.start(stage);
         controller.init(stage, this.mainView, this.tipString, this.block);
+    }
+
+    public void start(Stage stage, FileApplication mainView) throws IOException {
+        super.start(stage);
+        controller.init(stage, mainView, "是否选择格式化磁盘？");
+        controller.title.setText("格式化磁盘");
     }
 }

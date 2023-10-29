@@ -1,5 +1,6 @@
 package com.os.applications.fileApp.controller;
 
+import com.os.applications.fileApp.application.DeleteDialogApplication;
 import com.os.applications.fileApp.application.FileApplication;
 import com.os.applications.fileApp.application.HelpDialogApplication;
 import com.os.applications.processControlApp.processSystem.ExeFile;
@@ -117,7 +118,7 @@ public class FileApplicationController extends BaseFileController {
         super.showDescription();
 
         Stage stage = new Stage();
-        HelpDialogApplication helpWindow = new HelpDialogApplication("",500,500);
+        HelpDialogApplication helpWindow = new HelpDialogApplication("", 500, 500);
         try {
             helpWindow.start(stage);
             Text text = new Text("文件管理器\n\n");

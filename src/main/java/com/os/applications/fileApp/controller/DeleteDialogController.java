@@ -6,6 +6,7 @@ import com.os.utility.fileSystem.Folder;
 import com.os.utility.fileSystem.Path;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -37,7 +38,7 @@ public class DeleteDialogController extends BaseFileController {
             int res = FileApplication.fat.delete(block);
             // 删除文件夹成功，移除节点
             if (res == 0) mainView.removeNode(mainView.getCurrentNode(), thisPath);
-            // 文件夹不为空
+                // 文件夹不为空
             else if (res == 2) {
                 try {
                     FileApplication.tipOpen("文件夹不为空!");
@@ -46,7 +47,7 @@ public class DeleteDialogController extends BaseFileController {
                 }
             }
             // 文件未关闭
-            else if(res == 3) {
+            else if (res == 3) {
                 try {
                     FileApplication.tipOpen("文件未关闭!");
                 } catch (Exception e) {
@@ -61,5 +62,18 @@ public class DeleteDialogController extends BaseFileController {
 
         // 当点击取消按钮时触发的事件
         this.cancelButton.setOnMouseClicked(event -> this.closeStage());
+    }
+
+    public void init(final Stage stage, FileApplication mainView, String tipString) {
+        super.init(stage);
+
+        this.cancelButton.setOnMouseClicked(event -> this.closeStage());
+        this.acceptButton.setOnMouseClicked(event -> {
+            this.closeStage();
+            mainView.clearData();
+        });
+        text.setText(tipString);
+        text.setFont(javafx.scene.text.Font.font(20));
+        text.setFill(Color.RED);
     }
 }

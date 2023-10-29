@@ -1,6 +1,8 @@
 package com.os.applications.fileApp.application;
 
 import com.os.applications.BaseApp;
+import com.os.applications.BaseController;
+import com.os.applications.fileApp.controller.BaseFileController;
 import com.os.applications.fileApp.controller.FileApplicationController;
 import com.os.utility.fileSystem.*;
 import com.os.utility.fileSystem.File;
@@ -30,6 +32,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     public static boolean copyFlag;  // 记录是否可以复制
     public static boolean moveFlag = false;  // 记录是否可以剪切
     public static Vector<Stage> fileAppAdditionStageList = new Vector<>();
+    public static Vector<BaseController> fileAppAdditionControllerList = new Vector<>();
     private List<Disk> blockList;  // 记录磁盘块
     public String currentPath;  // 记录当前路径
     public static File copyFile;  // 记录要复制的文件
@@ -57,6 +60,24 @@ public class FileApplication extends BaseApp<FileApplicationController> {
     @Override
     public void start(Stage stage) throws IOException {
         super.start(stage);
+        controller.formatFat.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                if (!fat.getOpenedFiles().isEmpty()) {
+                    tipOpen("请关闭所有文件!");
+                    return;
+                }
+
+                for (var fileController : fileAppAdditionControllerList) {
+                    fileController.closeStage();
+                }
+
+                DeleteDialogApplication deleteDialogApplication = new DeleteDialogApplication();
+                deleteDialogApplication.start(new Stage(), FileApplication.this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         // 设置窗口关闭事件处理程序
         stage.setOnCloseRequest((e) -> saveData());
         this.currentPath = "C:";
@@ -241,8 +262,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 // 获取文件夹图标的URL
                 URL location = this.getClass().getResource("/com/os/applications/fileApp/res/folder.png");
                 this.icons[i] = new Label(fName, new ImageView(String.valueOf(location)));
-            }
-            else {
+            } else {
                 fName = ((File) diskList.get(i).getObject()).getName();
                 if (fName.length() > 4) fName = fName.substring(0, 4) + "..";
                 // 获取文件图标的URL
@@ -385,8 +405,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
-            }
-            else {
+            } else {
                 int no = fat.createFile(this.currentPath);
                 if (no == -1) {
                     try {
@@ -394,8 +413,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                     } catch (Exception e) {
                         System.out.println(Arrays.toString(e.getStackTrace()));
                     }
-                }
-                else {
+                } else {
                     // 清空图标区域并显示更新后的图标
                     controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
                     this.addIcon(fat.getBlockList(this.currentPath));
@@ -412,8 +430,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
-            }
-            else {
+            } else {
                 int no = fat.createFolder(this.currentPath);
                 if (no == -1) {
                     try {
@@ -421,8 +438,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                     } catch (Exception e) {
                         System.out.println(Arrays.toString(e.getStackTrace()));
                     }
-                }
-                else {
+                } else {
                     Folder newFolder = (Folder) fat.getBlock(no).getObject();
                     Path newPath = newFolder.getPath();
                     // 清空图标区域并显示更新后的图标
@@ -453,8 +469,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
-            }
-            else {
+            } else {
                 try {
                     this.delViewOpen(thisBlock);
                 } catch (Exception e) {
@@ -571,7 +586,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
     // 加载数据
     public static void loadData() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"))){
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./data"))) {
             fat = (FAT) inputStream.readObject();
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -588,6 +603,19 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         } catch (IOException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
+    }
+
+    public void clearData() {
+        fat = new FAT();
+
+        controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
+        this.currentPath = "C:";
+        // 关闭所有FAT
+        FAT.closeAll();
+        // 初始化树视图
+        this.treeViewInit();
+        // 初始化表格
+        this.tableInit();
     }
 
     public final class TextFieldTreeCellImpl extends TreeCell<String> {
@@ -632,13 +660,11 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             if (empty) {
                 this.setText(null);
                 this.setGraphic(null);
-            }
-            else if (this.isEditing()) {
+            } else if (this.isEditing()) {
                 this.textField.setText(this.getString());
                 this.setText(null);
                 this.setGraphic(this.textField);
-            }
-            else {
+            } else {
                 this.setText(this.getString());
                 this.setGraphic(this.getTreeItem().getGraphic());
             }
