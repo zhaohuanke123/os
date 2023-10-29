@@ -48,7 +48,7 @@ public class MainController implements Initializable {
     @FXML
     private Pane buttonBar;
     @FXML
-    private HBox appBox;
+    public HBox appBox;
     @FXML
     private Button processButton;  // 进程管理按钮
     @FXML

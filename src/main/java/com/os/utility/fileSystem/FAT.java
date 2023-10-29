@@ -86,6 +86,7 @@ public class FAT implements Serializable {
                 ((File) block.getObject()).isOpened();
     }
 
+    // 创建文件夹
     public int createFolder(String path) {
         String folderName;
         boolean canName;
@@ -94,59 +95,62 @@ public class FAT implements Serializable {
         int num;
         Folder parent;
         do {
+            // 生成文件夹名
             folderName = "文件夹";
             canName = true;
             folderName = folderName + index;
 
+            // 遍历磁盘块，检查是否已存在相同路径和文件夹名的文件夹
             for (num = 3 + ProcessManager.exeFileList.size(); num < this.disks.length; ++num) {
                 if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件夹")) {
                     parent = (Folder) this.disks[num].getObject();
                     if (path.equals(parent.getLocation()) && folderName.equals(parent.getName())) {
                         canName = false;
+                        break;
                     }
                 }
             }
-
             ++index;
         } while (!canName);
 
+        // 查找一个可用的磁盘块来存储文件夹内容
         num = this.searchEmptyDiskBlock();
-        if (num == -1) {
-            return -1;
-        } else {
-            parent = this.getFolder(path);
-            if (path.equals("C:")) {
-                parent.setCatalogNum(parent.getCatalogNum() + 1);
-            } else {
-                parent.setCatalogNum(parent.getCatalogNum() + 1);
 
-                int countBlock;
-                if (parent.getCatalogNum() % 8 == 0) {
-                    countBlock = parent.getCatalogNum() / 8;
-                } else {
-                    countBlock = parent.getCatalogNum() / 8 + 1;
-                }
+        // 没有可用的磁盘块，创建文件夹失败
+        if (num == -1) return -1;
 
-                this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
-            }
+        parent = this.getFolder(path);
+        parent.setCatalogNum(parent.getCatalogNum() + 1);
 
-            num = this.searchEmptyDiskBlock();
-            Folder newFolder = new Folder(folderName, path, num, parent);
-            parent.addChildren(newFolder);
+        if(!path.equals("C:")){
+            int countBlock;
+            if (parent.getCatalogNum() % 8 == 0) countBlock = parent.getCatalogNum() / 8;
+            else countBlock = parent.getCatalogNum() / 8 + 1;
 
-            this.disks[num].allocBlock(-1, "文件夹", newFolder, true);
-            Path parentPath = this.getPath(path);
-            Path thisPath = new Path(path + "\\" + folderName, parentPath);
-            if (parentPath != null) {
-                parentPath.addChildren(thisPath);
-            }
-
-            this.paths.add(thisPath);
-            newFolder.setPath(thisPath);
-            return num;
+            // 重新分配磁盘块
+            this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
         }
+
+        // 查找另一个可用的磁盘块，用于存储文件夹内容
+        num = this.searchEmptyDiskBlock();
+
+        Folder newFolder = new Folder(folderName, path, num, parent);
+        parent.addChildren(newFolder);
+
+        // 分配磁盘块以存储文件夹内容
+        this.disks[num].allocBlock(-1, "文件夹", newFolder, true);
+
+        // 创建文件夹路径对象并更新路径树
+        Path parentPath = this.getPath(path);
+        Path thisPath = new Path(path + "\\" + folderName, parentPath);
+        if (parentPath != null) parentPath.addChildren(thisPath);
+
+        this.paths.add(thisPath);
+        newFolder.setPath(thisPath);
+        return num;
     }
 
+    // 创建文件
     public int createFile(String path) {
         String fileName;
         boolean canName;
@@ -154,117 +158,123 @@ public class FAT implements Serializable {
 
         int num;
         do {
+            // 生成文件名
             fileName = "文件";
             canName = true;
             fileName = fileName + index;
 
+            // 遍历磁盘块，检查是否已存在相同路径和文件名的文件
             for (num = 3; num < this.disks.length; ++num) {
                 if (!this.disks[num].isFree() && this.disks[num].getType().equals("文件")) {
                     File file = (File) this.disks[num].getObject();
                     if (path.equals(file.getLocation()) && fileName.equals(file.getName())) {
                         canName = false;
+                        break;
                     }
                 }
             }
-
             ++index;
         } while (!canName);
 
+        // 查找一个可用的磁盘块来存储文件内容
         num = this.searchEmptyDiskBlock();
-        if (num == -1) {
-            return -1;
-        } else {
-            Folder parent = this.getFolder(path);
-            parent.setCatalogNum(parent.getCatalogNum() + 1);
-            if (!path.equals("C:")) {
-                int countBlock;
-                if (parent.getCatalogNum() % 8 == 0) {
-                    countBlock = parent.getCatalogNum() / 8;
-                } else {
-                    countBlock = parent.getCatalogNum() / 8 + 1;
-                }
 
-                this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
-            }
+        // 没有可用的磁盘块，创建文件失败
+        if (num == -1) return -1;
 
-            num = this.searchEmptyDiskBlock();
-            File file = new File(fileName, path, num, parent);
-            file.setFlag(1);
-            if (FileApplication.copyFlag) {
-                file.setContent(FileApplication.copyFile.getContent());
-                boolean canName1;
-                index = 1;
+        // 更新父文件夹的目录项数目
+        Folder parent = this.getFolder(path);
+        parent.setCatalogNum(parent.getCatalogNum() + 1);
 
-                int newLength;
-                do {
-                    fileName = FileApplication.copyFile.getName();
-                    canName1 = true;
-                    fileName = fileName + index;
+        if (!path.equals("C:")) {
+            int countBlock;
+            if (parent.getCatalogNum() % 8 == 0) countBlock = parent.getCatalogNum() / 8;
+            else countBlock = parent.getCatalogNum() / 8 + 1;
 
-                    for (newLength = 3 + ProcessManager.exeFileList.size(); newLength < this.disks.length; ++newLength) {
-                        if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
-                            File file1 = (File) this.disks[newLength].getObject();
-                            if (path.equals(file1.getLocation()) && fileName.equals(file1.getName())) {
-                                canName1 = false;
-                                break;
-                            }
-                        }
-                    }
+            // 重新分配磁盘块
+            this.reallocBlocks(countBlock, this.disks[parent.getDiskNum()]);
+        }
 
-                    ++index;
-                } while (!canName1);
+        // 查找另一个可用的磁盘块，用于存储文件内容
+        num = this.searchEmptyDiskBlock();
+        File file = new File(fileName, path, num, parent);
+        file.setFlag(1);
 
-                file.setName(fileName);
-                newLength = FileApplication.copyFile.getContent().length();
-                int blockCount = blocksCount(newLength);
-                file.setLength(blockCount);
-                file.setContent(FileApplication.copyFile.getContent());
-                file.setSize(getSize(newLength));
-                if (file.hasParent()) {
-                    Folder parent1 = file.getParent();
-                    parent1.setSize(getFolderSize(parent1));
+        // 如果是通过复制操作创建文件，复制源文件的内容和属性
+        if (FileApplication.copyFlag) {
+            file.setContent(FileApplication.copyFile.getContent());
+            boolean canName1;
+            index = 1;
 
-                    while (parent1.hasParent()) {
-                        parent1 = parent1.getParent();
-                        parent1.setSize(getFolderSize(parent1));
-                    }
-                }
+            int newLength;
+            do {
+                fileName = FileApplication.copyFile.getName();
+                canName1 = true;
+                fileName = fileName + index;
 
-                if (FileApplication.moveFlag) {
-                    boolean canName2;
-                    index = 1;
-
-                    while (true) {
-                        fileName = FileApplication.copyFile.getName();
-                        canName2 = true;
-                        fileName = fileName + index;
-
-                        for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
-                            if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
-                                File file2 = (File) this.disks[i].getObject();
-                                if (path.equals(file2.getLocation()) && fileName.equals(file2.getName())) {
-                                    canName2 = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        ++index;
-                        if (canName2) {
-                            file.setName(fileName);
+                for (newLength = 3 + ProcessManager.exeFileList.size(); newLength < this.disks.length; ++newLength) {
+                    if (!this.disks[newLength].isFree() && this.disks[newLength].getType().equals("文件")) {
+                        File file1 = (File) this.disks[newLength].getObject();
+                        if (path.equals(file1.getLocation()) && fileName.equals(file1.getName())) {
+                            canName1 = false;
                             break;
                         }
                     }
                 }
+                ++index;
+            } while (!canName1);
 
-                this.reallocBlocks(blockCount, FileApplication.copyBlock);
+            // 更新文件名、大小等属性
+            file.setName(fileName);
+            newLength = FileApplication.copyFile.getContent().length();
+            int blockCount = blocksCount(newLength);
+            file.setLength(blockCount);
+            file.setContent(FileApplication.copyFile.getContent());
+            file.setSize(getSize(newLength));
+
+            // 更新父文件夹和祖先文件夹的大小属性
+            if (file.hasParent()) {
+                Folder parent1 = file.getParent();
+                parent1.setSize(getFolderSize(parent1));
+
+                while (parent1.hasParent()) {
+                    parent1 = parent1.getParent();
+                    parent1.setSize(getFolderSize(parent1));
+                }
             }
 
-            parent.addChildren(file);
+            if (FileApplication.moveFlag) {
+                boolean canName2;
+                index = 1;
 
-            this.disks[num].allocBlock(-1, "文件", file, true);
-            return num;
+                do {
+                    fileName = FileApplication.copyFile.getName();
+                    canName2 = true;
+                    fileName = fileName + index;
+
+                    for (int i = 3 + ProcessManager.exeFileList.size(); i < this.disks.length; ++i) {
+                        if (!this.disks[i].isFree() && this.disks[i].getType().equals("文件")) {
+                            File file2 = (File) this.disks[i].getObject();
+                            if (path.equals(file2.getLocation()) && fileName.equals(file2.getName())) {
+                                canName2 = false;
+                                break;
+                            }
+                        }
+                    }
+                    ++index;
+                }while(!canName2);
+            }
+
+            // 重新分配磁盘块
+            this.reallocBlocks(blockCount, FileApplication.copyBlock);
         }
+
+        // 将文件添加到其父文件夹
+        parent.addChildren(file);
+
+        // 分配磁盘块以存储文件内容
+        this.disks[num].allocBlock(-1, "文件", file, true);
+        return num;
     }
 
     public int searchEmptyDiskBlock() {
