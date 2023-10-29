@@ -341,7 +341,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
         }
     }
 
-    // 打开文件
+    // 打开文件/文件夹
     private void onOpen() throws IOException {
         // 获取当前选中的磁盘块
         Disk thisBlock = this.blockList.get(this.currentId);
@@ -382,6 +382,11 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             controller.currentPath.setText(newPath);
             this.currentPath = newPath;
             this.currentNode = this.pathMap.get(thisFolder.getPath());
+
+            // 展开当前节点
+            this.currentNode.setExpanded(true);
+            // 选中当前节点
+            this.controller.treeView.getSelectionModel().select(currentNode);
         }
     }
 
