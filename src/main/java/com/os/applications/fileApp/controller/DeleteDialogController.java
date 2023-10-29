@@ -71,6 +71,10 @@ public class DeleteDialogController extends BaseFileController {
         this.acceptButton.setOnMouseClicked(event -> {
             this.closeStage();
             mainView.clearData();
+
+            for (var fileController : FileApplication.fileAppAdditionControllerList) {
+                fileController.closeStage();
+            }
         });
         text.setText(tipString);
         text.setFont(javafx.scene.text.Font.font(20));

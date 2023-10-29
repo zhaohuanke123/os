@@ -67,10 +67,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
                     return;
                 }
 
-                for (var fileController : fileAppAdditionControllerList) {
-                    fileController.closeStage();
-                }
-
                 DeleteDialogApplication deleteDialogApplication = new DeleteDialogApplication();
                 deleteDialogApplication.start(new Stage(), FileApplication.this);
             } catch (Exception e) {
