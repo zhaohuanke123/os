@@ -92,7 +92,7 @@ public class ProcessControlAppController extends BaseController {
         ProcessControlThread.controlButton = this.continueButton;
         continueButton.setSelected(true);
 
-        for (var i : ProcessControlThread.exeFileList) {
+        for (var i : ProcessManager.exeFileList) {
             Button button = new Button(i.getName());
             button.setDisable(true);
             Tooltip tooltip = new Tooltip(i.toString());
@@ -101,12 +101,12 @@ public class ProcessControlAppController extends BaseController {
             createProButtons.setSpacing(10);
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                    if (!ProcessControlThread.exeFileList.isEmpty()) {
-                        if (ProcessControlThread.creatingProcessList.size() < 3) {
-                            Process newProcess = new Process(ProcessControlThread.processNum, i, i.id);
-                            ProcessControlThread.creatingProcessList.add(newProcess);
-                            ProcessControlThread.allProcessList.add(newProcess);
-                            ++ProcessControlThread.processNum;
+                    if (!ProcessManager.exeFileList.isEmpty()) {
+                        if (ProcessManager.creatingProcessList.size() < 3) {
+                            Process newProcess = new Process(ProcessManager.processNum, i, i.id);
+                            ProcessManager.creatingProcessList.add(newProcess);
+                            ProcessManager.allProcessList.add(newProcess);
+                            ++ProcessManager.processNum;
                             newProcess.Create();
                         } else {
                             TipDialogApplication tipWindow = new TipDialogApplication("创建进程失败，创建进程数量已达上限", 500, 500);

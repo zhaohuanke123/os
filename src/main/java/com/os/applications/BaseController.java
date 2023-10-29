@@ -31,13 +31,14 @@ public class BaseController {
     public Label title;  // 标题标签
     @FXML
     protected AnchorPane topMainPane;  // 顶部主面板
+    protected DrawUtil drawUtil;
 
     // 初始化方法，用于设置窗口对象
     public void init(Stage stage) {
         this.stage = stage;
 
         // 创建绘图工具
-        DrawUtil drawUtil = new DrawUtil();
+        drawUtil = new DrawUtil();
         drawUtil.addDrawFunc(stage, this.topMainPane);
 
         // 监听窗口大小变化，根据窗口大小自适应布局
@@ -93,11 +94,8 @@ public class BaseController {
             // 如果窗口没有最大化，则最大化窗口
             this.stage.setWidth(this.stage.getMaxWidth());
             this.stage.setHeight(this.stage.getMaxHeight());
-
-            // 调整窗口布局
-            this.stage.setX(0.0);
-            this.stage.setY(0.0);
-            this.adaptWindow();
+            if (drawUtil != null)
+                drawUtil.setCanResize(false);
         }
         else {
             // 如果窗口已经最大化，则还原窗口
@@ -108,6 +106,9 @@ public class BaseController {
             this.stage.setX(this.preX);
             this.stage.setY(this.preY);
             this.adaptWindow();
+
+            if (drawUtil != null)
+                drawUtil.setCanResize(true);
         }
 
         // 改变窗口是否最大化的记录

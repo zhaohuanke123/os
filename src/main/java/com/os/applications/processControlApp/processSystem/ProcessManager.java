@@ -28,17 +28,34 @@ public class ProcessManager {
     }
 
     public static void checkCreatingProcessList() {
-        for (Process process : allProcessList) {
+//        for (Process process : allProcessList) {
+//            if (process.state == 0) {
+//                process.Create();
+//            }
+//        }
+        for (var i = 0; i < allProcessList.size(); ++i) { // 别改
+            var process = allProcessList.get(i);
             if (process.state == 0) {
                 process.Create();
             }
         }
-
     }
 
     public static void checkBlockProcessList() {
-        for (var i = 0; i < allProcessList.size(); ++i) {
-            var process = allProcessList.get(i);
+//            for (Process process : allProcessList) {
+//                if (process.state == 3) {
+//                    if (process.deviceId == -1) {
+//                        int deviceId = ResourcesOccupancyManager.applyDevice(process.device);
+//                        if (deviceId != -1) {
+//                            process.deviceId = deviceId;
+//                        }
+//                    } else {
+//                        useDevice(process);
+//                    }
+//                }
+//            }
+        for (var i = 0; i < blockProcessList.size(); ++i) {// 别改
+            var process = blockProcessList.get(i);
             if (process.state == 3) {
                 if (process.deviceId == -1) {
                     int deviceId = ResourcesOccupancyManager.applyDevice(process.device);

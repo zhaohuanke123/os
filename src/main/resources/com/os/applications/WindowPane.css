@@ -9,6 +9,13 @@
     -fx-border-radius: 8 8 8 8;
 }
 
+#topMainPaneOnMaxSize {
+    -fx-background-color: rgba(103, 157, 238, 0.9);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 0 0 0 0;
+    -fx-border-radius: 8 8 8 8;
+}
+
 #pane {
     -fx-background-color: rgba(103, 157, 238, 0.9);
     -fx-border-color: rgba(255, 255, 255, 0.15);
