@@ -611,6 +611,7 @@ public class FileApplication extends BaseApp<FileApplicationController> {
 
         controller.flowPane.getChildren().removeAll(controller.flowPane.getChildren());
         this.currentPath = "C:";
+        controller.currentPath.setText(this.currentPath);
         // 关闭所有FAT
         FAT.closeAll();
         // 初始化树视图
