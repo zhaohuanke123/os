@@ -17,7 +17,7 @@ public class HelpDialogApplication extends BaseFileApplication<HelpDialogControl
                 width,
                 height);
 
-        super.toolTip = tipString;
+        super.toolTip = "帮助";
     }
 
     public void start(Stage stage) throws IOException {

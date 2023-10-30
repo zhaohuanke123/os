@@ -79,5 +79,7 @@ public class DeleteDialogController extends BaseFileController {
         text.setText(tipString);
         text.setFont(javafx.scene.text.Font.font(20));
         text.setFill(Color.RED);
+
+
     }
 }

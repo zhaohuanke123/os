@@ -22,6 +22,7 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
                 -1,
                 -1
         );
+        super.toolTip = "提示";
     }
 
     public DeleteDialogApplication(FileApplication mainView, Disk block) {
@@ -51,7 +52,7 @@ public class DeleteDialogApplication extends BaseFileApplication<DeleteDialogCon
         this.mainView = mainView;
         this.block = block;
         this.tipString = msg;
-        super.toolTip = msg;
+        super.toolTip = "提示";
     }
 
     @Override

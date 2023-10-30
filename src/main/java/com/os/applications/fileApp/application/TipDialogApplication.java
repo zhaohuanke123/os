@@ -17,7 +17,7 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
                 -1,
                 -1);
 
-        super.toolTip = tipString;
+        super.toolTip = "提示";
     }
 
     public TipDialogApplication(String tipString, int width, int height) {
@@ -27,7 +27,7 @@ public class TipDialogApplication extends BaseFileApplication<TipDialogControlle
                 width,
                 height);
 
-        super.toolTip = tipString;
+        super.toolTip = "提示";
     }
 
     public void start(Stage stage) throws IOException {

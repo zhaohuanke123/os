@@ -30,6 +30,8 @@ public class PropertyApplication extends BaseFileApplication<PropertyController>
         this.block = block;
         this.icon = icon;
         this.pathMap = pathMap;
+
+        this.toolTip = "属性";
     }
 
     public void start(Stage primaryStage) throws IOException {
