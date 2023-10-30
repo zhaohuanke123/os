@@ -74,8 +74,6 @@ public class FileApplication extends BaseApp<FileApplicationController> {
             }
         });
 
-        // 设置窗口关闭事件处理程序
-        stage.setOnCloseRequest((e) -> saveData());
         this.currentPath = "C:";
         // 关闭所有FAT
         FAT.closeAll();

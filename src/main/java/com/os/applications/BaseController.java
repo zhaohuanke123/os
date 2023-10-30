@@ -1,5 +1,6 @@
 package com.os.applications;
 
+import com.os.applications.fileApp.application.HelpDialogApplication;
 import com.os.utility.uiUtil.DrawUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class BaseController {
     protected boolean haveResize = true;  // 是否允许窗口调整大小
@@ -51,6 +54,10 @@ public class BaseController {
     @FXML
     public void closeStage() {
         this.stage.close();
+
+        if (helpWindow != null &&  helpWindow.controller != null) {
+            helpWindow.controller.closeStage();
+        }
     }
 
     // 最小化窗口
@@ -102,8 +109,7 @@ public class BaseController {
 
             if (drawUtil != null)
                 drawUtil.setCanResize(false);
-        }
-        else {
+        } else {
             // 如果窗口已经最大化，则还原窗口
             this.stage.setWidth(this.preWidth);
             this.stage.setHeight(this.preHeight);
@@ -142,6 +148,28 @@ public class BaseController {
         stage.toFront();
     }
 
+
+    protected HelpDialogApplication helpWindow;  // 帮助对话框应用程序
+    protected boolean isFirstShow = true;  // 是否第一次显示
     @FXML
-    protected void showDescription() {}
+    protected void showDescription() {
+        if (helpWindow == null) {
+            helpWindow = new HelpDialogApplication("", 500, 500);
+        }
+        if (helpWindow.controller == null) {
+            try {
+                helpWindow.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        Stage stage = helpWindow.controller.stage;
+        if (stage.isShowing()) {
+            stage.show();
+            stage.setAlwaysOnTop(true);
+            stage.setIconified(false);
+            stage.toFront();
+        }
+    }
 }

@@ -175,36 +175,19 @@ public class ProcessControlAppController extends BaseController {
     protected void showDescription() {
         super.showDescription();
 
-        Stage stage = new Stage();
-        HelpDialogApplication helpWindow = new HelpDialogApplication("", 500, 500);
-        try {
-            helpWindow.start(stage);
-            Text text = new Text("进程管理器\n\n");
-            text.setFill(Color.RED);
-            text.setFont(Font.font("宋体", 25));
-            helpWindow.controller.textTitle.getChildren().add(text);
+        if (!isFirstShow) return;
+        Text text = new Text("进程管理器\n\n");
+        text.setFill(Color.RED);
+        text.setFont(Font.font("宋体", 25));
+        helpWindow.controller.textTitle.getChildren().add(text);
 
-            text = new Text("1. 显示进程的编号、进程状态、执行文件、使用设备、占用内存、进程控制块、当前执行结果、进程完成进度信息。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("2. 默认情况下自动新建进程，也可以选择手动添加新进程。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("3. 可以自由调节进程运行的速度。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("4. 已完成的进程信息会在另一页显示出来。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        text = new Text("1. 显示进程的编号、进程状态、执行文件、使用设备、占用内存、进程控制块、当前执行结果、进程完成进度信息。\n\n"
+                + "2. 默认情况下自动新建进程，也可以选择手动添加新进程。\n\n"
+                + "3. 可以自由调节进程运行的速度。\n\n"
+                + "4. 已完成的进程信息会在另一页显示出来。\n\n");
+        text.setFill(Color.BLACK);
+        text.setFont(Font.font("宋体", 20));
+        helpWindow.controller.textBody.getChildren().add(text);
+        isFirstShow = false;
     }
 }

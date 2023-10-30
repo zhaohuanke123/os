@@ -1,5 +1,6 @@
 package com.os.applications;
 
+import com.os.applications.fileApp.application.HelpDialogApplication;
 import com.os.utility.uiUtil.CompSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

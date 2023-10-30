@@ -22,6 +22,7 @@ public class BaseFileApplication<T extends BaseController> extends BaseApp<T> {
         // 将窗口置于其他窗口之上
         controller.showStageToFront();
         // 将当前应用程序的窗口添加到应用程序窗口列表中
+
         FileApplication.fileAppAdditionStageList.add(stage);
         FileApplication.fileAppAdditionControllerList.add(controller);
 

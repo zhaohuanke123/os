@@ -329,41 +329,30 @@ public class ResourcesOccupancyAppController extends BaseController {
         }
     }
 
+    @Override
+    public void closeStage() {
+        super.closeStage();
+    }
+
     @FXML
     @Override
     protected void showDescription() {
         super.showDescription();
 
-        Stage stage = new Stage();
-        HelpDialogApplication helpWindow = new HelpDialogApplication("", 500,500);
-        try {
-            helpWindow.start(stage);
+        if (isFirstShow) {
             Text text = new Text("占用管理器\n\n");
             text.setFill(Color.RED);
             text.setFont(Font.font("宋体", 25));
             helpWindow.controller.textTitle.getChildren().add(text);
 
-            text = new Text("1. 显示内存的占用比和已使用内存的分布情况。\n\n");
+            text = new Text("1. 显示内存的占用比和已使用内存的分布情况。\n\n" +
+                    "2. 显示设备的占用比和已使用的设备情况。\n\n" +
+                    "3. 显示磁盘的占用比和已使用磁盘的分布情况。\n\n" +
+                    "4. 显示PCB的占用比和已使用的PCB情况。\n\n");
             text.setFill(Color.BLACK);
             text.setFont(Font.font("宋体", 20));
             helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("2. 显示设备的占用比和已使用的设备情况。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("3. 显示磁盘的占用比和已使用磁盘的分布情况。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-
-            text = new Text("4. 显示PCB的占用比和已使用的PCB情况。\n\n");
-            text.setFill(Color.BLACK);
-            text.setFont(Font.font("宋体", 20));
-            helpWindow.controller.textBody.getChildren().add(text);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            isFirstShow = false;
         }
     }
 }
