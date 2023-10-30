@@ -38,20 +38,11 @@
             <HBox fx:id="titleBarR" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT"
                   prefHeight="40.0" prefWidth="55.0" spacing="10.0" BorderPane.alignment="CENTER">
                 <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
+                        mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" onMouseClicked="#minimizeStage">
                     <graphic>
                         <ImageView id="barIcon" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT"
                                    pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../../img/minimize.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button id="barIcon" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0"
-                        mnemonicParsing="false"  prefHeight="0.0">
-                    <graphic>
-                        <ImageView disable="true" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
-                                   preserveRatio="true">
-                            <Image url="@../../../img/change.png"/>
                         </ImageView>
                     </graphic>
                 </Button>

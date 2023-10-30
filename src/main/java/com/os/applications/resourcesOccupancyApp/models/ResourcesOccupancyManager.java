@@ -54,6 +54,7 @@ public class ResourcesOccupancyManager {
         freePcbList.add(num);
     }
 
+    // 申请内存空间
     public static MemoryBlock applyMemory(int num) {
         int series = 0;
 
@@ -77,6 +78,7 @@ public class ResourcesOccupancyManager {
         return null;
     }
 
+    // 释放内存空间
     public static boolean retrieveMemory(MemoryBlock memoryBlock) {
         if (memoryBlock == null) {
             return false;
