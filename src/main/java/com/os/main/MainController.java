@@ -88,7 +88,8 @@ public class MainController implements Initializable {
     boolean haveChanged = true;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
     // 初始化各界面元素和线程
     public void init(Scene scene, Stage stage) throws URISyntaxException {
@@ -111,6 +112,8 @@ public class MainController implements Initializable {
         this.processThreadInit();
         FileApplication.loadData();
         this.uiThreadInit();
+
+
     }
 
     // 初始化背景图像

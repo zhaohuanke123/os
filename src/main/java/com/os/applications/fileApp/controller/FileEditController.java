@@ -38,7 +38,7 @@ public class FileEditController extends BaseFileController {
     @FXML
     @Override
     public void closeStage() {
-        this.stage.close();
+        super.closeStage();
 
         FileEditApplication.maps.remove(this.file);
         FAT.removeOpenedFile(this.block);
