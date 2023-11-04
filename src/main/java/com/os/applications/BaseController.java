@@ -156,12 +156,13 @@ public class BaseController {
         if (helpWindow == null) {
             helpWindow = new HelpDialogApplication("", 500, 500);
         }
-        if (helpWindow.controller == null) {
+        if (helpWindow.controller == null || !helpWindow.controller.stage.isShowing()) {
             try {
                 helpWindow.start(new Stage());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            isFirstShow = true;
         }
 
         Stage stage = helpWindow.controller.stage;
